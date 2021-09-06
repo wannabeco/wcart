@@ -15,6 +15,7 @@ class BaseDatosRegistro extends CI_Model {
         $this->tableClaveEmpresa           = "app_login"; 
         $this->tablePagosEmpresa           = "app_estadopago"; 
         $this->tableLlamadas               = "app_llamadas"; 
+        $this->tableRelCliente             = "app_clientes_tienda"; 
     }
     public function verificaEmpresa($where,$tabla){
         $this->db->select("*");
@@ -69,6 +70,14 @@ class BaseDatosRegistro extends CI_Model {
 
         $this->db->where($where);
         $this->db->update($this->tablePersonas,$dataInserta);
+        //print_r($this->db->last_query());die();
+        return $this->db->affected_rows();
+    }
+    //registro persona
+    public function actualizaRelacionCliente($dataInserta,$where){
+
+        $this->db->where($where);
+        $this->db->update($this->tableRelCliente,$dataInserta);
         //print_r($this->db->last_query());die();
         return $this->db->affected_rows();
     }

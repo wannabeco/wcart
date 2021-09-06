@@ -560,12 +560,6 @@ class LogicaGeneral  {
             $mensaje .= "<h2>DATOS DEL CLIENTE</h2>";
             $mensaje .= "Nombre: ".$informacionUsuario[0]['nombre']." ".$informacionUsuario[0]['apellido']."<br>";
             $mensaje .= "Teléfonos: ".$informacionUsuario[0]['telefono']." - ".$informacionUsuario[0]['celular']."<br>";
-            // $mensaje .= "Correo Electrónico: ".$informacionUsuario[0]['email']."<br><br>";
-            // $mensaje .= "<h2>DATOS DE LA ENTREGA</h2>";
-            // $mensaje .= "Fecha pedido: ".$pedido['fechaPedido']."<br>";
-            //$mensaje .= "Dirección de entrega: ".$pedido['direccion']."<br>";
-            //$mensaje .= "Persona de contacto: ".$pedido['personaContacto']."<br>";
-            //$mensaje .= "Observación: ".$pedido['observacion']."<br><br>";
             $mensaje .= "<h2>PRODUCTOS SOLICITADOS</h2>";
             $sumaTotal  = 0;
            // echo "sdsdsdssdsdsd";
@@ -858,6 +852,12 @@ class LogicaGeneral  {
     public function getPersonas($where)
     {
         $resultado          = $this->ci->dbGeneral->getInfoPersonas($where);
+        //var_dump($resultado);
+        return $resultado; 
+    }
+    public function getPersonasTienda($where)
+    {
+        $resultado          = $this->ci->dbGeneral->getPersonasTienda($where);
         //var_dump($resultado);
         return $resultado; 
     }

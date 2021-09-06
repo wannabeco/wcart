@@ -77,6 +77,8 @@
                                         <span class="label label-warning">Wompi </span>
                                     <?php }else if( $pedidos['formaPago'] == 5){?>                            
                                         <span class="label label-danger">Stripe</span>
+                                    <?php }else if( $pedidos['formaPago'] == 6){?>                            
+                                        <span class="label label-info">Payment on pick up</span>
                                     <?php }else{?>
                                         <span class="label label-default">Others</span>
                                     <?php }?>

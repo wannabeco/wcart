@@ -445,6 +445,16 @@ class BaseDatosGral extends CI_Model {
         //print_r($this->db->last_query());die();
         return $id->result_array();
     }
+    public function getPersonasTienda($where)
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tablePersonas." p");
+        $this->db->join($this->tableClientesRel." c","c.idPersona=p.idPersona","INNER");
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
     public function getPersonasClientes($where)
     {
         $this->db->select("*");

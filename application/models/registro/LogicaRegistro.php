@@ -180,6 +180,30 @@ class LogicaRegistro  {
         }
         return $respuesta;
     }
+    public function updateTokenFCMTienda($data)
+    {
+        extract($data);
+        //var_dump($data);die();
+        unset($data['idPersona']);
+        unset($data['movil']);
+        $where = array("idPersona"=>$idPersona,"idTienda"=>$idTienda);
+        $dataInsert['FCMTokenTienda'] = $FCMToken;
+        $idPersona = $this->ci->dbRegistro->actualizaRelacionCliente($dataInsert,$where);
+        if($idPersona > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+
+        }
+        return $respuesta;
+    }
 
     public function guardaSeguimiento($data)
     {

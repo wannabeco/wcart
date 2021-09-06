@@ -63,12 +63,16 @@ class Notificaciones extends CI_Controller
     public function sendNotificacionPush()
     {
         //var_dump($_POST);
-        $listaUsuarios              = $this->logica->getPersonas(array('eliminado'=>0,'estado'=>1,'FCMToken !='=>''));
+        $listaUsuarios              = $this->logica->getPersonasTienda(array('p.eliminado'=>0,'p.estado'=>1,'c.FCMTokenTienda !='=>'',"c.idTienda"=>$_SESSION['project']['info']['idTienda']));
+        
+        $infoTienda = $this->logica->getInfoTiendaNew($_SESSION['project']['info']['idTienda']);
+        //access key noti push
+        $fcm_access_key_api = trim($infoTienda['datos'][0]['FCMkey']);
+        //var_dump($listaUsuarios);die();
         $count = 0;
         foreach($listaUsuarios as $lu)
         {
-            sendFCM($_POST['tituloNotificacion'],$_POST['mensajeNotificacion'],$lu['FCMToken']);
-            
+            sendFCM($_POST['tituloNotificacion'],$_POST['mensajeNotificacion'],$lu['FCMTokenTienda'],$fcm_access_key_api);
             //registro la notificacion en la base de datos
             $datosNotificacion['idPersona'] = $lu['idPersona'];
             $datosNotificacion['tipo']      = 'mensaje';

@@ -86,6 +86,8 @@
                             Wompi (<?php echo $infoPedido['entidad']?>)
                         <?php }else if( $infoPedido['formaPago'] == 5){?>                            
                             Stripe (<?php echo $infoPedido['entidad']?>)
+                        <?php }else if( $infoPedido['formaPago'] == 6){?>                            
+                            Payment on pick up
                         <?php }else{?>
                             Otros
                         <?php }?>
@@ -191,43 +193,44 @@
                       
                     </tbody>
                 </table>
-                <?php  if($_SESSION['project']['info']['idPerfil'] == _PERFIL_ADMIN or $_SESSION['project']['info']['idPerfil'] == 2){?>
-                    
-                        
-                            <div class="row">
-                                <div class="col col-lg-12">
-                                    <h2>Gestionar el pedido</h2>
-                                </div>
-                                <div class="col col-lg-3">
-                                    <select name="estadoPago" class="form-control" id="estadoPago" style="padding: 5px 8px">
-                                        <option value="">Estado del pago</option>
-                                        <option value="000" <?php if($infoPedido['estadoPago'] == '000'){ ?> selected <?php }?> >Esperando pago</option>
-                                        <option value="998" <?php if($infoPedido['estadoPago'] == '998'){ ?> selected <?php }?> >Pago realizado</option>
-                                    </select>
-                                </div>
-                                <div class="col col-lg-3">
-                                    <select name="estadoPedido" class="form-control" id="estadoPedido" style="padding: 5px 8px">
-                                        <option value="">Estado del pedido</option>
-                                        <?php foreach($estados  as $est){?>
-                                            <option value="<?php echo $est['idEstadoPedido'] ?>" <?php if($infoPedido['estadoPedido'] == $est['idEstadoPedido']){ ?> selected <?php }?>><?php echo $est['nombreEstadoPedido']?></option>
-                                        <?php }?>
-                                    </select>
-                                </div>
-                                <div class="col col-lg-3" style="margin:20px 0 0 0">
-                                    <input type="hidden" id="idPedido" name="idPedido" value="<?php echo $infoPedido['idPedido'] ?>">
-                                    <input type="button" style="background: #03a9f4 !important;color: #fff !important" name="" ng-click="gestionaPedido()" value="GESTIONAR" class="btn btn-primary">
-                                </div>
-                            <div class="col col-lg-3"  style="margin:20px 0 0 0">
-                                    <a class="btn" target="_blank" style="background: #333 !important;color: #fff !important" href="<?php echo base_url()?>Pedidos/imprimeFacturaTicket/<?php echo $infoPedido['idPedido']?>" class="btn btn-info">VER FACTURA<a>
-                                </div>
-                            </div>
-                            
-                        
-                    
-                <?php } ?>
+               
 
             </div>
         </div>
+
+        <?php  if($_SESSION['project']['info']['idPerfil'] == _PERFIL_ADMIN or $_SESSION['project']['info']['idPerfil'] == 6){?>
+                    
+                        
+                    <div class="row">
+                        <div class="col col-lg-12">
+                            <h2>Gestionar el pedido</h2>
+                        </div>
+                        <div class="col col-lg-3">
+                            <select name="estadoPago" class="form-control" id="estadoPago" style="padding: 5px 8px">
+                                <option value="">Estado del pago</option>
+                                <option value="000" <?php if($infoPedido['estadoPago'] == '000'){ ?> selected <?php }?> >Esperando pago</option>
+                                <option value="998" <?php if($infoPedido['estadoPago'] == '998'){ ?> selected <?php }?> >Pago realizado</option>
+                            </select>
+                        </div>
+                        <div class="col col-lg-3">
+                            <select name="estadoPedido" class="form-control" id="estadoPedido" style="padding: 5px 8px">
+                                <option value="">Estado del pedido</option>
+                                <?php foreach($estados  as $est){?>
+                                    <option value="<?php echo $est['idEstadoPedido'] ?>" <?php if($infoPedido['estadoPedido'] == $est['idEstadoPedido']){ ?> selected <?php }?>><?php echo $est['nombreEstadoPedido']?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="col col-lg-2" style="margin:20px 0 0 0">
+                            <input type="hidden" id="idPedido" name="idPedido" value="<?php echo $infoPedido['idPedido'] ?>">
+                            <input type="button" style="background: #03a9f4 !important;color: #fff !important" name="" ng-click="gestionaPedido()" value="GESTIONAR" class="btn btn-primary">
+                        </div>
+                        <div class="col col-lg-2"  style="margin:20px 0 0 0">
+                                <a class="btn" target="_blank" style="background: #333 !important;color: #fff !important" href="<?php echo base_url()?>Pedidos/imprimeFacturaTicket/<?php echo $infoPedido['idPedido']?>" class="btn btn-info">VER FACTURA<a>
+                        </div>
+                     </div>
+                
+            
+        <?php } ?>
     </div>
     <!-- /.row -->
  </div>

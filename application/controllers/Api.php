@@ -158,7 +158,7 @@ class Api extends CI_Controller
         if(validaInApp($movil))//esta validación me hará consultas más seguras
         {
             //busco la foto con la palabra que envien
-            $respuesta = $this->logicaReg->updateTokenFCM($_POST);
+            $respuesta = $this->logicaReg->updateTokenFCMTienda($_POST);
         }
         else
         {

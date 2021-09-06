@@ -744,12 +744,12 @@ function dataUsuario($usuario)
 	return $result[0];
 }
 //envia notificacion push al celular
-function sendFCM($titulo,$mensaje,$tokenDevice='')
+function sendFCM($titulo,$mensaje,$tokenDevice='',$apiAccessKey="")
 {
 	//$tokenDevice = 'dmJdcJXcRqc:APA91bHiUHLazsHNQt6nhBThj_OY1UgOcV4Q-7bFhe-Zr1CTMRQYTu2zcX6Iy1lJOqYbkLNHmqR-1auD58her-6tJnD45VPGI73CKt-Ffx41GJa8If6P0D9KUrCvMVNKmsiHfRVrKa97';
     $url        = "https://fcm.googleapis.com/fcm/send";
     $token      = $tokenDevice;
-    $serverKey  = _FCM_API_ACCESS_KEY;
+    $serverKey  = $apiAccessKey;
     $title      = $titulo;
     $body       = $mensaje;
     $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default', 'badge' => '1','icon'=>base_url().'res/img/favicon.png');
