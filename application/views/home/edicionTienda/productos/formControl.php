@@ -234,6 +234,21 @@
 
                </div>
 
+               <div class="row">
+                  <div class="col col-lg-12">
+                            <h3 style="margin:0 0 20px 0;font-weight:bold"><?php echo lang("text19.10")?></h3>
+                    </div>
+                  <div class="col col-lg-4 col-md-4">
+                        <div class="form-group  label-floating">
+                            <label class="control-label" for="agotado"><?php echo lang("text19.11")?></label>
+                              <select tabindex="2" id="agotado" name="agotado"  class="form-control">
+                                <option value="No" <?php if(isset($datos['agotado']) && $datos['agotado'] =='No'){ ?>selected<?php } ?>>NOT</option>
+                                <option value="Si" <?php if(isset($datos['agotado']) && $datos['agotado'] =='Si'){ ?>selected<?php } ?>>YES</option>
+                              </select>
+                        </div>
+                    </div>
+               </div>
+
 
 
   

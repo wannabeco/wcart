@@ -150,6 +150,8 @@ $lang['text19.6']				   = "The profile photo could not be loaded, probably the f
 $lang['text19.7']				   = "Photo loads correctly";
 $lang['text19.8']				   = "There is no photo to upload, please select one.";
 $lang['text19.9']				   = "";
+$lang['text19.10']				   = "4. Stock product";
+$lang['text19.11']				   = "¿The product is out of stock?";
 
 //modal variaciones del producto
 $lang['text20']				       = "PRODUCT FEATURES";
