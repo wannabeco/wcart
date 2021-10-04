@@ -255,9 +255,10 @@ class Api extends CI_Controller
 		if(validaInApp($movil))//esta validación me hará consultas más seguras
 		{
 			$post['idPersona'] = $_POST['idPersona'];
+			$post['idTienda']  = $_POST['idTienda'];
 			//busco la foto con la palabra que envien
             $noti = $this->logica->getNotificacionesPersona($post);
-            $unoti = $this->logica->updateNotificacionesPersona(array('estado'=>1),$post);
+            $unoti = $this->logica->updateNotificacionesPersona(array('estado'=>1,'estado'=>$_POST['idTienda'],'idPersona'=>$_POST['idPersona']),$post);
 			echo json_encode($noti);
 		}
 		else
