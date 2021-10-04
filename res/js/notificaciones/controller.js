@@ -15,11 +15,11 @@ project.controller('notificacionesApp', function($scope,$http,$q,constantes,$com
 		var mensajeNotificacion 	= $("#mensajeNotificacion").val();
 		if(tituloNotificacion == "")
 		{
-			constantes.alerta("Atención","Debe escribir un titulo para la notificación",'info',function(){});
+			constantes.alerta("Attention",$("#tituloNotificacion").data("validation"),'info',function(){});
 		}
 		else if(mensajeNotificacion == "")
 		{
-			constantes.alerta("Atención","Debe escribir un mensaje para la notificación",'info',function(){});
+			constantes.alerta("Attention",$("#mensajeNotificacion").data("validation"),'info',function(){});
 		}
 		else
 		{
@@ -28,7 +28,7 @@ project.controller('notificacionesApp', function($scope,$http,$q,constantes,$com
 				var controlador = 	$scope.config.apiUrl+"Notificaciones/sendNotificacionPush";
 				var parametros  = 	$("#formulario").serialize();
 				constantes.consultaApi(controlador,parametros,function(json){
-					constantes.alerta("Atención",json.mensaje,'success',function(){
+					constantes.alerta("Attention",json.mensaje,'success',function(){
 						location.reload();
 					});
 				},'json');

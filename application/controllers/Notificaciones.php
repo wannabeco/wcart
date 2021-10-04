@@ -38,7 +38,7 @@ class Notificaciones extends CI_Controller
                 //sendFCM("App ventas Wannabe","La opción más fácil, económica y rápida de vender tus productos online.","fYJVwh1WFgo:APA91bHzSwXU0oev_V1EVCANzngMitTBzt69EYLAz3vIoFJjIIUEPcO-Agn1tM1sx1qWK45q__zHOgJkbDf7YkmZ8n5Cn3nUOWSQ076zAmEsSsieQNG5o5m3KskLjZbN7qsblcrS1DSd");
                 //info Módulo
                 $infoModulo                 = $this->logica->infoModulo($idModulo);
-                $listaUsuarios              = $this->logica->getPersonas(array('eliminado'=>0,'estado'=>1,'FCMToken !='=>''));
+                $listaUsuarios              = $this->logica->getPersonasTienda(array('p.eliminado'=>0,'p.estado'=>1,'c.FCMTokenTienda !='=>'',"c.idTienda"=>$_SESSION['project']['info']['idTienda']));
                 $opc                        = "home";
                 $salida['titulo']           = lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
                 $salida['centro']           = "notificaciones/home";

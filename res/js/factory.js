@@ -64,7 +64,7 @@ project.factory("constantes", function()
 					html: true,
 				  	confirmButtonColor: "#009688",
   					animation: "slide-from-top",
-					confirmButtonText: "Aceptar",
+					confirmButtonText: "Ok",
 				},
 				function(isConfirm)
 				{
@@ -86,7 +86,7 @@ project.factory("constantes", function()
 				  closeOnConfirm: (close == undefined)?false:true,
   				  showLoaderOnConfirm: true,
   				  animation: "slide-from-top",
-				  confirmButtonText: "Continuar",
+				  confirmButtonText: "Ok",
 				},
 				function(isConfirm){
 					if(isConfirm)

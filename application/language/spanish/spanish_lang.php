@@ -208,6 +208,18 @@ $lang['lbl_cantidad']               = "Cant: ";
 $lang['lbl_total_pedido']           = "TOTAL ORDER: ";
 $lang['lbl_saludo_pedido']          = "Hello, a new product order has arrived with the following information: ";
 
+//modulo de notificaciones push
+$lang['lbl_not_1']                  = "Send PUSH notifications to your clients cell phones";
+$lang['lbl_not_2']                  = "TITLE OF THE NOTICE";
+$lang['lbl_not_3']                  = "NOTIFICATION TEXT";
+$lang['lbl_not_4']                  = "This notification will be sent to";
+$lang['lbl_not_5']                  = "users";
+$lang['lbl_not_6']                  = "You can add emojis to the notification.";
+$lang['lbl_not_7']                  = "See list of emojis.";
+$lang['lbl_not_8']                  = "SEND NOTIFICATION";
+$lang['lbl_not_9']                  = "You must write a title for the notification";
+$lang['lbl_not_10']                  = "You must write a text for the notification";
+
 
 
 ?>

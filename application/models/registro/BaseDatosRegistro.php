@@ -78,7 +78,7 @@ class BaseDatosRegistro extends CI_Model {
 
         $this->db->where($where);
         $this->db->update($this->tableRelCliente,$dataInserta);
-        //print_r($this->db->last_query());die();
+        print_r($this->db->last_query());die();
         return $this->db->affected_rows();
     }
     public function insertaClavePersona($dataInserta){

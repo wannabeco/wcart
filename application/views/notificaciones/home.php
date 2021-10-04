@@ -30,16 +30,16 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="alert alert-primary" role="alert">
-            Envia notificaciones PUSH a los celulares de tus clientes
+            <?php echo lang("lbl_not_1");?>
             </div>
             <form method="post" id="formulario" ng-submit="enviaNotificaciones()">
-                <h4><strong>TITULO DE LA NOTIFICACIÓN</strong></h4>
-                <input type="text" name="tituloNotificacion" id="tituloNotificacion" class="form-control">
-                <h4><strong>TEXTO DE LA NOTIFICACIÓN</strong></h4>
-                <textarea name="mensajeNotificacion" id="mensajeNotificacion"  class="form-control" style="width:100%"></textarea>
-                <p>Esta notificación se enviará a <strong><?php echo count($listaUsuarios)?></strong> usuarios</p>
-                <p>Puedes agregar emojis a la notificacion. <a href="http://www.unicode.org/emoji/charts/full-emoji-list.html#1f610" target="_blank">Ver listado de emojis</a></p>
-                <button class="btn btn-primary" style="float:right;background:#333;color:#fff">ENVIAR NOTIFICACIÓN</button>
+                <h4><strong><?php echo lang("lbl_not_2")?></strong></h4>
+                <input type="text" name="tituloNotificacion" id="tituloNotificacion" data-validation="<?php echo lang("lbl_not_9")?>" class="form-control">
+                <h4><strong><?php echo lang("lbl_not_3")?></strong></h4>
+                <textarea name="mensajeNotificacion" id="mensajeNotificacion"  class="form-control"  data-validation="<?php echo lang("lbl_not_10")?>" style="width:100%"></textarea>
+                <p><?php echo lang("lbl_not_4")?> <strong><?php echo count($listaUsuarios)?></strong> <?php echo lang("lbl_not_5")?></p>
+                <p><?php echo lang("lbl_not_6")?> <a href="http://www.unicode.org/emoji/charts/full-emoji-list.html#1f610" target="_blank"><?php echo lang("lbl_not_7")?></a></p>
+                <button class="btn btn-primary" style="float:right;background:#333;color:#fff"><?php echo lang("lbl_not_8")?></button>
             </form>
         </div>
         <div class="col-lg-6 text-center">
