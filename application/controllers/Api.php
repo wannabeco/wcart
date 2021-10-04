@@ -232,6 +232,7 @@ class Api extends CI_Controller
     	//súper acceso a la app
 		if(validaInApp($movil))//esta validación me hará consultas más seguras
 		{
+			$post['idTienda']  = $_POST['idTienda'];
 			$post['idPersona']  = $_POST['idPersona'];
 			$post['estado']     = 0;
 			//busco la foto con la palabra que envien

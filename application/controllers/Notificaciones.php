@@ -76,6 +76,7 @@ class Notificaciones extends CI_Controller
             sendFCM($_POST['tituloNotificacion'],$_POST['mensajeNotificacion'],$lu['FCMTokenTienda'],$fcm_access_key_api);
             //registro la notificacion en la base de datos
             $datosNotificacion['idPersona'] = $lu['idPersona'];
+            $datosNotificacion['idTienda']  = $_SESSION['project']['info']['idTienda'];
             $datosNotificacion['tipo']      = 'mensaje';
             $datosNotificacion['titulo']    = $_POST['tituloNotificacion'];
             $datosNotificacion['mensaje']   = $_POST['mensajeNotificacion'];
