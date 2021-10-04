@@ -753,7 +753,7 @@ function sendFCM($titulo,$mensaje,$tokenDevice='',$apiAccessKey="")
     $title      = $titulo;
     $body       = $mensaje;
     $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default', 'badge' => '1','icon'=>base_url().'res/img/favicon.png');
-    $arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high','icon'=>base_url().'res/img/favicon.png');
+    $arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high','icon'=>'ic_launcher');
     $json = json_encode($arrayToSend);
     $headers = array();
     $headers[] = 'Content-Type: application/json';
