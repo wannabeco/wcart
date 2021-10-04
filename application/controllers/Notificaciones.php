@@ -68,7 +68,7 @@ class Notificaciones extends CI_Controller
         $infoTienda = $this->logica->getInfoTiendaNew($_SESSION['project']['info']['idTienda']);
         //access key noti push
         $fcm_access_key_api = trim($infoTienda['datos'][0]['FCMkey']);
-        echo $infoTienda['datos'][0]['FCMkey'];die();
+        //echo $infoTienda['datos'][0]['FCMkey'];die();
         //var_dump($listaUsuarios);die();
         $count = 0;
         foreach($listaUsuarios as $lu)
