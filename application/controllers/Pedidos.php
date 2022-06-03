@@ -262,11 +262,14 @@ class Pedidos extends CI_Controller
                 // if($_SESSION['project']['info']['idPerfil'] == _PERFIL_ADMIN)//si es admin debe traer los pedidos solo para el admin
                 // {
                     //tomo los pedidos de todas las personas que sean administradores de ventas
+                    $wherePedido = array();
                     if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
                     {
-                        $wherePedido['p.idTienda']   = $_SESSION['project']['info']['idTienda'];
+                        $wherePedido['p.idTienda'] = $_SESSION['project']['info']['idTienda'];
                     }
+                    
                     $listaPedidos               = $this->logicaPedidos->misPedidos($wherePedido);
+                
                 // }
                 // else
                 // {

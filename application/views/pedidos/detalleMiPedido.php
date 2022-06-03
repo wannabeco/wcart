@@ -224,12 +224,11 @@
                             <input type="hidden" id="idPedido" name="idPedido" value="<?php echo $infoPedido['idPedido'] ?>">
                             <input type="button" style="background: #03a9f4 !important;color: #fff !important" name="" ng-click="gestionaPedido()" value="GESTIONAR" class="btn btn-primary">
                         </div>
+                        <!-- boton imprimir factura
                         <div class="col col-lg-2"  style="margin:20px 0 0 0">
                                 <a class="btn" target="_blank" style="background: #333 !important;color: #fff !important" href="<?php echo base_url()?>Pedidos/imprimeFacturaTicket/<?php echo $infoPedido['idPedido']?>" class="btn btn-info">VER FACTURA<a>
-                        </div>
+                        </div>-->
                      </div>
-                
-            
         <?php } ?>
     </div>
     <!-- /.row -->

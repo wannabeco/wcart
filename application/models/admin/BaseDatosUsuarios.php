@@ -25,6 +25,7 @@ class BaseDatosUsuarios extends CI_Model {
         $this->tableAreas                = "app_areas";
         $this->tableModulos              = "app_modulos";
         $this->tableRelPerfilModulo      = "app_rel_perfil_modulo";
+        $this->tablePedidos              = "app_pedidos";
     }
     public function agregaUsuario($dataInserta)
     {
@@ -70,6 +71,9 @@ class BaseDatosUsuarios extends CI_Model {
         $this->db->join($this->tablePerfiles." p","p.idPerfil=u.idPerfil","INNER");
         $this->db->join($this->tableAreas." a","a.idArea=u.idArea","INNER");
         $this->db->join($this->tableLogin." l","l.idGeneral=u.idPersona","LEFT");
+        if ($_SESSION['project']['info']['idPerfil'] == 6 ){
+        $this->db->join($this->tablePedidos." ped","u.idPersona=ped.idPersona","LEFT");
+        }
         $this->db->group_by('u.idPersona');
         $id = $this->db->get();
         //print_r($this->db->last_query());die();
