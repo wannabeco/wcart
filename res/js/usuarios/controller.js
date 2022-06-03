@@ -203,6 +203,11 @@ project.controller('usuariosApp', function($scope,$http,$q,constantes)
             }
 
        }
+	//boton exportar excel customers o usuarios en administrador
+	$scope.xportExcel=function(){
+		var controlador = 	$scope.config.apiUrl+"Usuarios/xportExcel";
+		document.location = controlador;
+	}
 });
 
 
@@ -341,4 +346,5 @@ project.controller('procesaGuardado', function($scope,$http,$q,constantes)
 			
 		}
 	}
+	
 });

@@ -13,7 +13,9 @@
         <div class="col-lg-12">
             <h1 class="page-header">
                 <?php echo $infoModulo['nombreModulo'] ?> <!--<small>Estructura de las áreas de su empresa</small>-->
-                
+                <?php if ($_SESSION['project']['info']['idPerfil'] == 6){?>
+                <button title="Exportar excel" ng-click="xportExcel()"><i class="fas fa-file-excel"></i></button><!-- boton exportar excel customers o usuarios en administrador-->
+                <?php } ?>
                 <?php if(getPrivilegios()[0]['crear'] == 1){ ?>
                     <div class="btn-group" >
                         <button type="button" class="btn dropdown-toggle"
@@ -61,9 +63,13 @@
                             <!-- <th>AREA</th> -->
                             <!-- <th>CARGO</th> -->
                             <th>PERFIL</th>
-                            <th class="text-center">ACCESO</th>
+                            <?php if ($_SESSION['project']['info']['idPerfil'] == 1 || $_SESSION['project']['info']['idPerfil'] == 2 ){?>
+                             <th class="text-center">ACCESO</th>
+                            <?php }?>
                             <th class="text-center">ESTADO</th>
+                            <?php if ($_SESSION['project']['info']['idPerfil'] == 1 || $_SESSION['project']['info']['idPerfil'] == 2 ){?>
                             <th class="text-center">ACCIONES</th>
+                            <?php }?>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,16 +78,20 @@
                             <td>{{ulist.nombre}} {{ulist.apellido}}</td>
                             <!-- <td>{{ulist.nombreArea}}</td>
                             <td>{{ulist.nombreCargo}}</td> -->
+                            
                             <td>{{ulist.nombrePerfil}}</td>
+                        
+                            <?php if ($_SESSION['project']['info']['idPerfil'] == 1 || $_SESSION['project']['info']['idPerfil'] == 2 ){?>
                             <td class="text-center">
                                <i class="material-icons" ng-if="ulist.clave != null" title="Este usuario posee datos de acceso a la plataforma. Usuario y clave">https</i>
                             </td>
+                            <?php }?>
                             <td align="center">
                                 <span class="label label-success" ng-if="ulist.estadoU==1" value="1" >ACTIVO</span>
                                 <span class="label label-default" ng-if="ulist.estadoU==0" value="0" >INACTIVO</span>
                             </td>
-                            <td  class="text-center">
-
+                            <?php if ($_SESSION['project']['info']['idPerfil'] == 1 || $_SESSION['project']['info']['idPerfil'] == 2 ){?>
+                            <td class="text-center">
                                 <?php if(getPrivilegios()[0]['editar'] == 1){ ?>
                                     <a ng-click="cargaPlantillaControl(ulist.idPersona,1)" title="Editar usuario" class="btn btn-primary btn-fab btn-fab-mini"><i class="material-icons">edit</i></a>
                                     <a ng-click="generaDatosAcceso(ulist.idPersona)" title="Generar datos de acceso" class="btn btn-primary btn-fab btn-fab-mini"><i class="material-icons">https</i></a>
@@ -90,6 +100,7 @@
                                     <a ng-click="borraUsuario(ulist.idPersona)" title="Eliminar"  class="btn btn-danger btn-fab btn-fab-mini btn-xs"><i class="material-icons">delete</i></a>
                                 <?php } ?>
                             </td>
+                            <?php }?>
                         </tr>
                     </tbody>
                 </table>

@@ -128,5 +128,37 @@ class Usuarios extends CI_Controller
 		}
 		echo $this->load->view("admin/adminUsuarios/formControl",$salida,true);
 	}
+	public function xportExcel()
+	{
+		$usuarios	     = $this->logicaUsuarios->infoUsuario();
+		$table           = "";
+		$table .= "<table>";
+			$table .= "<tr>";
+				$table .= "<td>NOMBRES</td>";
+				$table .= "<td>APELLIDOS</td>";
+				$table .= "<td>DIRECCION</td>";
+				$table .= "<td>celular</td>";
+				$table .= "<td>EMAIL</td>";
+			$table .= "</tr>";
+			foreach ($usuarios['datos'] as $u){
+			$table .= "<tr>";
+				$table .= "<td>".$u['nombre']."</td>";
+				$table .= "<td>".$u['apellido']."</td>";
+				$table .= "<td>".$u['direccion']."</td>";
+				$table .= "<td>".$u['celular']."</td>";
+				$table .= "<td>".$u['email']."</td>";
+			$table .= "</tr>";
+			}
+		$table .= "</table>";
+		header("Pragma: public");
+		header("Expires: 0");
+		$filename = "Clientes.xls";
+		header("Content-type: application/x-msdownload");
+		header("Content-Disposition: attachment; filename=$filename");
+		header("Pragma: no-cache");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		echo $table;
+		die();
+	}
 }
 ?>
