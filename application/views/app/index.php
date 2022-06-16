@@ -28,6 +28,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>res/css/fileinput.min.css" rel="stylesheet" media="">
     <!-- Custom Fonts -->
     
+    
+    
         <link rel="stylesheet" href='<?php echo base_url()?>res/css/angular-cps.css' rel='stylesheet' />
         <link rel="stylesheet" href='<?php echo base_url()?>res/css/fullcalendar.css' rel='stylesheet' />
         <link rel="stylesheet" href='<?php echo base_url()?>res/css/fullcalendar.print.css' rel='stylesheet' media='print' />
@@ -86,6 +88,8 @@
     <script src='<?php echo base_url()?>res/js/fullcalendar.min.js'></script>
     <script src='<?php echo base_url()?>res/js/lang-all.js'></script>
     <script type="text/javascript" src="https://www.wannabe.com.co/js/kon.min.js"></script>
+    
+    
     <?php 
         //esta línea me permite insertar archivos de controladores angular js.
         // ver el archivo application/helpers/funciones_helper.php
