@@ -27,7 +27,7 @@
     <link href="<?php echo base_url() ?>res/css/plugins/morris.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>res/css/fileinput.min.css" rel="stylesheet" media="">
     <!-- Custom Fonts -->
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css" rel="stylesheet">
+    
     
     
         <link rel="stylesheet" href='<?php echo base_url()?>res/css/angular-cps.css' rel='stylesheet' />
@@ -88,7 +88,7 @@
     <script src='<?php echo base_url()?>res/js/fullcalendar.min.js'></script>
     <script src='<?php echo base_url()?>res/js/lang-all.js'></script>
     <script type="text/javascript" src="https://www.wannabe.com.co/js/kon.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+    
     
     <?php 
         //esta línea me permite insertar archivos de controladores angular js.
