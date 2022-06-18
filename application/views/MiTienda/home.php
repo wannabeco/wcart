@@ -366,7 +366,7 @@
                                                     <img src="<?php echo (isset($infoTienda['logoTienda'])&& $infoTienda['logoTienda']!= '')?base_url().'assets/uploads/files/'.$infoTienda['idTienda'].'/'.$infoTienda['logoTienda']:'';?>" alt="" style="width: 150px; height: 50px; margin:20px;"><br> 
                                                     <button class="btn btn-primary">
                                                         <input type="file" id="logoTienda" name ="logoTienda"value=""><br>
-                                                    </button> <p style=" position:relative; float:left; left:20px;">El tamaño maximo de la imagen es de 500 px de ancho por 200 px de alto</p><br> 
+                                                    </button> <p style=" position:relative; float:left; left:20px;">El tamaño maximo de la imagen es de 500 px de ancho por 200 px de alto.</p><br> 
                                                     <!-- vista de logo -->
                                                     <div id="visorLogo" style="width: 150px; height: 50px; margin:20px;"> </div>
                                                     <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" id="cargaLogo" name="cargaLogo" ng-click="cargaLogo()">Actualizar Logo</button>   
@@ -389,7 +389,7 @@
                                                                 <input type="file" id="faviconTienda" name ="faviconTienda"value=""><br>
                                                                 
                                                             </button>
-                                                            <p style=" position:relative; float:left; left:20px;">El tamaño maximo de la imagen es de 800 px de ancho por 800 px de alto</p>
+                                                            <p style=" position:relative; float:left; left:20px;">El tamaño maximo de la imagen es de 800 px de ancho por 800 px de alto.</p>
                                                             <br>    
                                                             <!-- vista de logo -->
                                                             <div id="visorFavicon" style="width: 150px; height: 50px; margin:20px;"> </div>
