@@ -102,35 +102,81 @@ class MiTienda extends CI_Controller
 		echo json_encode($actualizaGraficos);
 	}
 	//cargar logos
-	public function procesaDatalogos(){
 	
-		$idTienda = $_POST ['idTienda'];
-
+	public function procesaDatalogos(){
+		
+		extract($_POST);
 		@mkdir('assets/uploads/files/'.$idTienda,0777);
 		
-		$config['upload_path'] = "'assets/uploads/files/'.$idTienda.'/'";
+		$config['upload_path'] = 'assets/uploads/files/'.$idTienda.'/';
+		//echo $config['upload_path'];
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size'] = '1000';
-        $config['max_width']  = '1024';
-        $config['max_height']  = '768';
+        $config['max_size'] = '20000';
+        $config['max_width']  = '500';
+        $config['max_height']  = '200';
         $this->load->library('upload', $config);
-    	$this->upload->initialize($config);  
-    	if ( ! $this->upload->do_upload('logoTienda')) 
+    	$this->upload->initialize($config);
+		//var_dump($config);
+    	if(!$this->upload->do_upload('logoTienda')) 
     	{
-       	 	$error = array('error' => $this->upload->display_errors());
-        	var_dump($error);
+       	 	//$error = array('error' => $this->upload->display_errors());
+        	//var_dump($error);
+			$salida = array("mensaje"=>$this->upload->display_errors(),
+                               "continuar"=>0,
+                               "datos"=>"");
     	}
     	else
     	{
-        	$data = array('upload_data' => $this->upload->data());
-			$ubicacionImagen = $_FILES['file']['tmp_name'];
-			$basename = $_FILES['file']['name'];
-			move_uploaded_file($ubicacionImagen,$config['upload_path'].$basename);
+        	// $data = array('upload_data' => $this->upload->data());
+			// //var_dump($data);
+			// $ubicacionImagen = $_FILES['file']['tmp_name'];
+			// $basename = $_FILES['file']['name'];
+			// move_uploaded_file($ubicacionImagen,$config['upload_path'].$basename);
+				$data 					= $this->upload->data();
+	            $dataLogo['logoTienda']	=	$data['file_name'];
+	            $dataLogo['idTienda']			=	$idTienda;
+
+	            //procedo a actualizar la información del usuario
+	            $salida 	 	=  $this->LogicaMiTienda->actualizaMiTienda($dataLogo);
+			
+		}
+		echo json_encode($salida);
+		
+	}
+	public function procesaDatafavicon(){
+		
+		extract($_POST);
+		@mkdir('assets/uploads/files/'.$idTienda,0777);
+		
+		$config['upload_path'] = 'assets/uploads/files/'.$idTienda.'/';
+		//echo $config['upload_path'];
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '20000';
+        $config['max_width']  = '1000';
+        $config['max_height']  = '1000';
+        $this->load->library('upload', $config);
+    	$this->upload->initialize($config);
+		//var_dump($config);
+    	if(!$this->upload->do_upload('faviconTienda')) 
+    	{
+       	 	//$error = array('error' => $this->upload->display_errors());
+        	//var_dump($error);
+			$salida = array("mensaje"=>$this->upload->display_errors(),
+                               "continuar"=>0,
+                               "datos"=>"");
     	}
-		// $ubicacionImagen = $_FILES['file']['tmp_name'];
-        // $basename = $_FILES['file']['name'];
-        // move_uploaded_file($ubicacionImagen,$config['upload_path'].$basename);
-		// var_dump($basename);
+    	else
+    	{
+				$data 							= $this->upload->data();
+	            $datafavicon['faviconTienda']		=	$data['file_name'];
+	            $datafavicon['idTienda']			=	$idTienda;
+
+	            //procedo a actualizar la información del usuario
+	            $salida 	 	=  $this->LogicaMiTienda->actualizaMiTienda($datafavicon);
+			
+		}
+		echo json_encode($salida);
+		
 	}
 
 	//Actualiza Pagos
@@ -146,8 +192,4 @@ class MiTienda extends CI_Controller
 	
 	}
 }
-
-
-
-
 ?>
