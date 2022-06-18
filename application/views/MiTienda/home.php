@@ -251,14 +251,12 @@
                        <div class="row"  style="padding: 5px">
                             <div  class="col col-lg-12" style="">
                                 <div class="col col-lg-12" id="fondoCabecera" name="fondoCabecera" style=" width: 300px; height:50px; background-color:{{fondocabecera}}; border:2px;">
-                                    <p>
                                         <div class="col col-lg-4">
-                                            <img src="<?php echo (isset($infoTienda['logoTienda'])&& $infoTienda['logoTienda']!= '')?base_url().'assets/uploads/files/'.$infoTienda['idTienda'].'/'.$infoTienda['logoTienda']:'';?>" alt="" style="width: 60px; heigth: 40px;">   
+                                            <img src="<?php echo (isset($infoTienda['logoTienda'])&& $infoTienda['logoTienda']!= '')?base_url().'assets/uploads/files/'.$infoTienda['idTienda'].'/'.$infoTienda['logoTienda']:'';?>" alt="" style="width: 60px; heigth: 40px; margin-top:10px;">   
                                         </div>
                                         <div class="col col-lg-2">
-                                            <i class="fa fa-bars" id="colorText" name="colorText" style="color:{{colortext}}; position:relative; float:left; left:140px; margin-top:8px;"></i>
+                                            <i class="fa fa-bars" id="colorText" name="colorText" style="color:{{colortext}}; position:relative; float:left; left:140px; margin-top:10px;"></i>
                                         </div>
-                                    </p>
                                 </div>
                                 <div class="col col-lg-12" style=" padding:5px; width: 300px; height:400px; background-color:whith; border:2px;">
                                     <div>
