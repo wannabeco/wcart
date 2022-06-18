@@ -170,7 +170,7 @@ class MiTienda extends CI_Controller
 		$config['upload_path'] = 'assets/uploads/files/'.$idTienda.'/';
 		//echo $config['upload_path'];
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size'] = '1';
+        $config['max_size'] = '20000';
         $config['max_width']  = '1000';
         $config['max_height']  = '1000';
         $this->load->library('upload', $config);
