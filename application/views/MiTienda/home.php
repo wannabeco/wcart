@@ -366,15 +366,13 @@
                                                     <img src="<?php echo (isset($infoTienda['logoTienda'])&& $infoTienda['logoTienda']!= '')?base_url().'assets/uploads/files/'.$infoTienda['idTienda'].'/'.$infoTienda['logoTienda']:'';?>" alt="" style="width: 150px; height: 50px; margin:20px;"><br> 
                                                     <button class="btn btn-primary">
                                                         <input type="file" id="logoTienda" name ="logoTienda"value=""><br>
-                                                    </button><br> 
+                                                    </button> <p style=" position:relative; float:left; left:20px;">El tamaño maximo de la imagen es de 500 px de ancho por 200 px de alto.</p><br> 
                                                     <!-- vista de logo -->
                                                     <div id="visorLogo" style="width: 150px; height: 50px; margin:20px;"> </div>
-                                                    
-                                                    <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" id="cargaLogo" name="cargaLogo" ng-click="cargaLogo()">Actualizar Logo</button>
-                                                    
-                                                    <input type="hidden" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">
+                                                    <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" id="cargaLogo" name="cargaLogo" ng-click="cargaLogo()">Actualizar Logo</button>   
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">
                                         </div>
                                     </form>
                                 </div>
@@ -389,16 +387,19 @@
                                                             <img src="<?php echo (isset($infoTienda['faviconTienda'])&& $infoTienda['faviconTienda']!= '')?base_url().'assets/uploads/files/'.$infoTienda['idTienda'].'/'.$infoTienda['faviconTienda']:'';?>" alt="" style="width: 50px; height: 50px; margin:20px;"><br>
                                                             <button class="btn btn-primary">
                                                                 <input type="file" id="faviconTienda" name ="faviconTienda"value=""><br>
-                                                            </button><br>    
+                                                                
+                                                            </button>
+                                                            <p style=" position:relative; float:left; left:20px;">El tamaño maximo de la imagen es de 800 px de ancho por 800 px de alto.</p>
+                                                            <br>    
                                                             <!-- vista de logo -->
                                                             <div id="visorFavicon" style="width: 150px; height: 50px; margin:20px;"> </div>
                                                         </div>
                                                         <div  class="col col-lg-12">
-                                                            <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="cargafavicon()">Actualizar favicon</button>
-                                                            <input type="hidden" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">
+                                                            <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="cargafavicon()">Actualizar favicon</button>   
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <input type="hidden" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">
                                             </div>    
                                         </div>
                                     </form>    

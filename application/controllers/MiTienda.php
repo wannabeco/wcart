@@ -102,35 +102,119 @@ class MiTienda extends CI_Controller
 		echo json_encode($actualizaGraficos);
 	}
 	//cargar logos
-	public function procesaDatalogos(){
 	
-		$idTienda = $_POST ['idTienda'];
-
-		@mkdir('assets/uploads/files/'.$idTienda,0777);
+	public function procesaDatalogos(){
 		
-		$config['upload_path'] = "'assets/uploads/files/'.$idTienda.'/'";
+		extract($_POST);
+		@mkdir('assets/uploads/files/'.$idTienda,0777);
+		$salida=""; 
+		$error ="";
+		$config['upload_path'] = 'assets/uploads/files/'.$idTienda.'/';
+		//echo $config['upload_path'];
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size'] = '1000';
-        $config['max_width']  = '1024';
-        $config['max_height']  = '768';
+        $config['max_size'] = '20000';
+        $config['max_width']  = '500';
+        $config['max_height']  = '200';
         $this->load->library('upload', $config);
-    	$this->upload->initialize($config);  
-    	if ( ! $this->upload->do_upload('logoTienda')) 
-    	{
-       	 	$error = array('error' => $this->upload->display_errors());
-        	var_dump($error);
+    	$this->upload->initialize($config);
+		//var_dump($config);
+    	if(!$this->upload->do_upload('logoTienda')) 
+    	{	
+			
+			$error_sistema = trim(strip_tags($this->upload->display_errors()));
+			// validacion tamano de imagen
+			if($error_sistema == "The image you are attempting to upload doesn't fit into the allowed dimensions."){
+				$error = lang("text_tamano_imagen_logo");
+				$salida = array("mensaje"=>$error,
+                               "continuar"=>0,
+                               "datos"=>"");
+				
+			}
+			//validacion formato de imagen
+			else if($error_sistema == "The filetype you are attempting to upload is not allowed."){
+				$error = lang("text_formato_imagen");
+				$salida = array("mensaje"=>$error,
+                               "continuar"=>0,
+                               "datos"=>"");	
+			}
+			//validacion peso de imagen
+			else if($error_sistema == "The file you are attempting to upload is larger than the permitted size."){
+				$error = lang("text_peso_imagen");
+		 		$salida = array("mensaje"=>$error,
+                            "continuar"=>0,
+                            "datos"=>"");	
+			}
+			
+				// $salida = array("mensaje"=>$error_sistema,
+                //                "continuar"=>0,
+                //                "datos"=>"");
+			
     	}
     	else
     	{
-        	$data = array('upload_data' => $this->upload->data());
-			$ubicacionImagen = $_FILES['file']['tmp_name'];
-			$basename = $_FILES['file']['name'];
-			move_uploaded_file($ubicacionImagen,$config['upload_path'].$basename);
+				$data 					= $this->upload->data();
+	            $dataLogo['logoTienda']	=	$data['file_name'];
+	            $dataLogo['idTienda']			=	$idTienda;
+	            //procedo a actualizar la información del usuario
+	            $salida 	 	=  $this->LogicaMiTienda->actualizaMiTienda($dataLogo);
+			
+		}
+		echo json_encode($salida);
+		
+	}
+	public function procesaDatafavicon(){
+		
+		extract($_POST);
+		@mkdir('assets/uploads/files/'.$idTienda,0777);
+		
+		$config['upload_path'] = 'assets/uploads/files/'.$idTienda.'/';
+		//echo $config['upload_path'];
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '1';
+        $config['max_width']  = '1000';
+        $config['max_height']  = '1000';
+        $this->load->library('upload', $config);
+    	$this->upload->initialize($config);
+		//var_dump($config);
+    	if(!$this->upload->do_upload('faviconTienda')) 
+    	{
+			$salida="";
+			$error ="";
+			$error_sistema = trim(strip_tags($this->upload->display_errors()));
+			//validacion tamano de imagen
+			if($error_sistema== "The image you are attempting to upload doesn't fit into the allowed dimensions."){
+				$error = lang("text_tamano_imagen_favicon");
+				$salida = array("mensaje"=>$error,
+                               "continuar"=>0,
+                               "datos"=>"");
+			}
+			//validacion formato de imagen
+			else if($error_sistema == "The filetype you are attempting to upload is not allowed."){
+				$error = lang("text_formato_imagen");
+				$salida = array("mensaje"=>$error,
+                               "continuar"=>0,
+                               "datos"=>"");	
+			}
+			//validacion peso de imagen
+			else if($error_sistema == "The file you are attempting to upload is larger than the permitted size."){
+				$error = lang("text_peso_imagen");
+		 		$salida = array("mensaje"=>$error,
+                            "continuar"=>0,
+                            "datos"=>"");	
+			}
+			
     	}
-		// $ubicacionImagen = $_FILES['file']['tmp_name'];
-        // $basename = $_FILES['file']['name'];
-        // move_uploaded_file($ubicacionImagen,$config['upload_path'].$basename);
-		// var_dump($basename);
+    	else
+    	{
+				$data 							= $this->upload->data();
+	            $datafavicon['faviconTienda']		=	$data['file_name'];
+	            $datafavicon['idTienda']			=	$idTienda;
+	            //procedo a actualizar la información del usuario
+	            $salida 	 	=  $this->LogicaMiTienda->actualizaMiTienda($datafavicon);
+			
+		}
+		echo json_encode($salida);
+		
 	}
 
 	//Actualiza Pagos
@@ -146,8 +230,4 @@ class MiTienda extends CI_Controller
 	
 	}
 }
-
-
-
-
 ?>

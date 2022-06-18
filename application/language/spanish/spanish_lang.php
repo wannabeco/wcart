@@ -218,8 +218,12 @@ $lang['lbl_not_6']                  = "You can add emojis to the notification.";
 $lang['lbl_not_7']                  = "See list of emojis.";
 $lang['lbl_not_8']                  = "SEND NOTIFICATION";
 $lang['lbl_not_9']                  = "You must write a title for the notification";
-$lang['lbl_not_10']                  = "You must write a text for the notification";
+$lang['lbl_not_10']                 = "You must write a text for the notification";
 
-
+// errores para subir archivos en el modulo mi tienda
+$lang['text_tamano_imagen_logo']       = "Recuerde que el tamaño maximo de la imagen es de 500 px de ancho por 200 px de alto.";
+$lang['text_formato_imagen']           = "El formato de imagen ingresado, no corresponde a .gif, .jpg, .png, .jpeg";
+$lang['text_peso_imagen']              = "Recuerde que el peso maximo del archivo debe de ser de 2 mega bytes. ";
+$lang['text_tamano_imagen_favicon']    = "Recuerde que el tamaño maximo de la imagen es de 800 px de ancho por 800 px de alto.";
 
 ?>

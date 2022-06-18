@@ -219,45 +219,11 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 		var controlador 		= 	$scope.config.apiUrl+"MiTienda/getGraficos";
 
 		var disenoTienda			=	$("#disenoTienda").val();
-		// var fondoCabecera			=	$("#fondoCabecera").val();
-		// var colorText				=	$("#colorText").val();
-		// var fondoTabs				=	$("#fondoTabs").val();
-		// var colortextTabs			=	$("#colortextTabs").val();
-		// var fondointerno			=	$("#fondointerno").val();
-		// var colortextinterno		=	$("#colortextinterno").val();
-		// var colorTextoBotones		=	$("#colorTextoBotones").val();
-		// var fondoBotoninterno		=	$("#fondoBotoninterno").val();
 
 		if(disenoTienda == ''){
 		 	constantes.alerta("Atención","Debe de seleccionar un dise&ntilde;o para la tienda","info",function(){});
 		 }
-		// else if(fondoCabecera == ''){
-		// 	constantes.alerta("Atención","Debe de ingresar un color valido para el fondo cabecera","info",function(){});
-		// }
-		// else if(colorText == ''){
-		// 	constantes.alerta("Atención","Debe de ingresar un color valido para el texto de la cabecera","info",function(){});
-		// }
-		// else if(fondoTabs == ''){
-		// 	constantes.alerta("Atención","Debe de ingresar un color valido para el fondo del tabs","info",function(){});
-		// }
-		// else if(colortextTabs == ''){
-		// 	constantes.alerta("Atención","Debe de ingresar un color valido las tabs","info",function(){});
-		// }
-		// else if(fondointerno == ''){
-		// 	constantes.alerta("Atención","Debe de ingresar un color valido para el fondo interno","info",function(){});
-		// }
-		// else if(colortextinterno == ''){
-		// 	constantes.alerta("Atención","Debe de ingresar un color valido para el texto interno","info",function(){});
-		// }
-		// else if(backgroundBotones == ''){
-		// 	constantes.alerta("Atención","Debe de ingresar un color valido para el fondo del boton","info",function(){});
-		// }
-		// else if(fondoBotoninterno == ''){
-		// 	constantes.alerta("Atención","Debe de ingresar un color valido para el fondo del boton","info",function(){});
-		// }
-		// else if(colorTextoBotones == ''){
-		// 	constantes.alerta("Atención","Debe de ingresar un color valido para el texto del boton","info",function(){});
-		// }
+		
 		 else{
 			constantes.confirmacion("Confirmación!","Los colores que acaba de ingresar son correctos?, desea continuar?","info",function(){
 				
@@ -295,56 +261,53 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 		});
 	});
 	//cargar logo
-	// $scope.cargaLogo= function(){
-	// 	const $inputArchivos = document.querySelector('#logoTienda'),
-    //   		$enviar = document.querySelector('#cargaLogo');
-    //   		// $estado = document.querySelector('#estado');
-
-	// 		$cargaLogo.addEventListener($('#cargaLogo').click, async ()=>{
-    
-  	// 	  	const subirArchivos = $inputArchivos.files;
-    // 		if(subirArchivos < 0){
-    //     		return;
-    // 		}
-    // 		const formData = new FormData();
-    // 			for (const archivo of subirArchivos){
-    //     	formData.append("cargaLogo[]", archivo);
-    // 		}
-    // 		//$estado.textContent = "archivos enviados";
-   	// 		 const respuestaRaw =await fetch("MiTienda/procesaDatalogos",{
-    //    		 method: "POST",
-    //    		 body: formData,
-    // 		});
-    // 		const respuesta = respuestaRaw.json();
-    // 		console.log({respuesta});
-    // 		$inputArchivos.value = null;
-    // 		//$estado.textContent = "archivos enviados";
-
-	// 	});
-	// }
 	$scope.cargaLogo = function(){
-		var controlador 		= 	$scope.config.apiUrl+"MiTienda/procesaDatalogos";
-		var logoTienda			=	$("#logoTienda").val();
+
+		
+		var logoTienda			= $("#logoTienda").val();
 
 		if(logoTienda == ''){
 			constantes.alerta("Atención","Debe de seleccionar una imagen para poder guardar	","info",function(){});
 		}
 		else{
 			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, desea continuar?","info",function(){
-				var controlador = $scope.config.apiUrl+"MiTienda/procesaDatalogos";
-				var parametros  = $("#datalogos").serialize();
-				constantes.consultaApi(controlador,parametros,function(json){
-					if(json.continuar == 1)
+			var idTienda	=   $('#idTienda').val();
+			
+            var formData 	=   new FormData($("#datalogos")[0]);
+            var controlador = 	$scope.config.apiUrl+"MiTienda/procesaDatalogos"; 
+            //hacemos la petición ajax  
+            parametros	=	formData;
+				$.ajax({
+					url: controlador,  
+					type: 'POST',
+					data: parametros,
+					dataType:"json",
+					cache: false,
+					contentType: false,
+					processData: false,
+					beforeSend: function(){
+								
+					},
+                //una vez finalizado correctamente
+					success: function(json)
 					{
-						constantes.alerta("Atención",json.mensaje,"success",function(){
-							location.reload();
-						})
+						//var_dum(idTienda);
+						if(json.continuar == 1)
+						{
+							constantes.alerta("Atención",json.mensaje,"success",function(){
+								location.reload();
+							})
+						}
+						else
+						{
+							constantes.alerta("Atención",json.mensaje,"error",function(){})
+						}    
+					},
+					//si ha ocurrido un error
+					error: function(){
+						
 					}
-					else
-					{
-						constantes.alerta("Atención",json.mensaje,"error",function(){})
-					}
-				});
+            	});
 			});
 		}
 	}
@@ -366,32 +329,57 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 	});
 	//cargar favicon
 	$scope.cargafavicon = function(){
-		var controlador 		= 	$scope.config.apiUrl+"MiTienda/dataFavicon";
 
-		var faviconTienda			=	$("#faviconTienda").val();
+		
+		var faviconTienda			= $("#faviconTienda").val();
+
 		if(faviconTienda == ''){
-			constantes.alerta("Atención","Debe de seleccionar un favicon para poder guardar","info",function(){});
+			constantes.alerta("Atención","Debe de seleccionar una imagen para poder guardar	","info",function(){});
 		}
 		else{
 			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, desea continuar?","info",function(){
-				var controlador = $scope.config.apiUrl+"MiTienda/procesaDatafavicon";
-				var parametros  = $("#dataTienda").serialize();
-				constantes.consultaApi(controlador,parametros,function(json){
-					if(json.continuar == 1)
+			var idTienda	=   $('#idTienda').val();
+			
+            var formData 	=   new FormData($("#dataFavicon")[0]);
+            var controlador = 	$scope.config.apiUrl+"MiTienda/procesaDatafavicon"; 
+            //hacemos la petición ajax  
+            parametros	=	formData;
+				$.ajax({
+					url: controlador,  
+					type: 'POST',
+					data: parametros,
+					dataType:"json",
+					cache: false,
+					contentType: false,
+					processData: false,
+					beforeSend: function(){
+								
+					},
+                //una vez finalizado correctamente
+					success: function(json)
 					{
-						constantes.alerta("Atención",json.mensaje,"success",function(){
-							location.reload();
-						})
+						//var_dum(idTienda);
+						if(json.continuar == 1)
+						{
+							constantes.alerta("Atención",json.mensaje,"success",function(){
+								location.reload();
+							})
+						}
+						else
+						{
+							constantes.alerta("Atención",json.mensaje,"error",function(){})
+						}    
+					},
+					//si ha ocurrido un error
+					error: function(){
+						
 					}
-					else
-					{
-						constantes.alerta("Atención",json.mensaje,"error",function(){})
-					}
-				});
+            	});
 			});
 		}
 	}
 	
+	//actualiza pagos
 	$scope.getActualizaPago =function(){
 
 		var idTienda			= $('#idTienda').val();
