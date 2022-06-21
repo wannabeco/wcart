@@ -53,12 +53,14 @@ class MiTienda extends CI_Controller
 				$infoTipoTienda	      	       = $this->LogicaMiTienda->infoTipoTienda();
 				$infopaises					   = $this->LogicaMiTienda->infopaises();
 				$infoDisenoTienda			   = $this->LogicaMiTienda->infoDisenoTienda();
+				$infocategorias			   	   = $this->LogicaMiTienda->infocategorias($_SESSION['project']['info']['idTienda']);
 				$opc 				           = "home";
 				$salida['titulo']              = lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
 				$salida['centro'] 	           = "MiTienda/home";
 				$salida['infoTienda'] 	       = $infoTienda[0];
 				$salida['infoTipoTienda'] 	   = $infoTipoTienda;
 				$salida['infopaises'] 	       = $infopaises;
+				$salida['infocategorias'] 	   = $infocategorias;
 				$salida['infoDisenoTienda']	   = $infoDisenoTienda;
 				//var_dump($infoTienda[0]); die;
 				$salida['infoModulo']          = $infoModulo[0];
@@ -77,32 +79,32 @@ class MiTienda extends CI_Controller
 			header('Location:'.base_url()."login");
 		}
 	}
+	//consulta paises
 	public function getPaises(){
 		$infopaises = $this->LogicaMiTienda->infopaises($_POST['ID_PAIS']);
 		echo json_encode($infopaises);
 	}
+	//consulta departamentos
 	public function getDepartamentos(){
-		
 		$infodepartamentos	= $this->LogicaMiTienda->infodepartamentos($_POST['idPais']);
 		echo json_encode($infodepartamentos);
 	}
+	//consulta ciudades
 	public function getCiudades(){
-		
 		$infociudades	= $this->LogicaMiTienda->infociudades($_POST['idPais'], $_POST['idDepartamentos']);
 		echo json_encode($infociudades);
 	}
+	//consulta datos tienda
 	public function procesaDataTienda(){
-		
 		$actualizaMiTienda	= $this->LogicaMiTienda->actualizaMiTienda($_POST);
 		echo json_encode($actualizaMiTienda);
 	}
+	//consulta datos graficos
 	public function procesaDataGrafico(){
-		
 		$actualizaGraficos	= $this->LogicaMiTienda->actualizaMiTienda($_POST);
 		echo json_encode($actualizaGraficos);
 	}
 	//cargar logos
-	
 	public function procesaDatalogos(){
 		
 		extract($_POST);
@@ -128,7 +130,6 @@ class MiTienda extends CI_Controller
 				$salida = array("mensaje"=>$error,
                                "continuar"=>0,
                                "datos"=>"");
-				
 			}
 			//validacion formato de imagen
 			else if($error_sistema == "The filetype you are attempting to upload is not allowed."){
@@ -144,11 +145,6 @@ class MiTienda extends CI_Controller
                             "continuar"=>0,
                             "datos"=>"");	
 			}
-			
-				// $salida = array("mensaje"=>$error_sistema,
-                //                "continuar"=>0,
-                //                "datos"=>"");
-			
     	}
     	else
     	{
@@ -157,7 +153,6 @@ class MiTienda extends CI_Controller
 	            $dataLogo['idTienda']			=	$idTienda;
 	            //procedo a actualizar la información del usuario
 	            $salida 	 	=  $this->LogicaMiTienda->actualizaMiTienda($dataLogo);
-			
 		}
 		echo json_encode($salida);
 		
@@ -214,17 +209,12 @@ class MiTienda extends CI_Controller
 			
 		}
 		echo json_encode($salida);
-		
 	}
-
 	//Actualiza Pagos
 	public function procesaDataPagos(){
-		
-		$getActualizaPago	= $this->LogicaMiTienda->actualizaMiTienda($_POST);
+		$getActualizaPago	= $this->LogicaMiTienda->actualizaPagos($_POST);
 		echo json_encode($getActualizaPago);
 	}
-	
-
 	public function cargaPlantillaModal()
 	{
 	
