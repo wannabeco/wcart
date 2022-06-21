@@ -28,6 +28,15 @@ class LogicaMiTienda  {
         $infoTienda=$this->ci->dbMiTienda->infoTienda($where);
         return $infoTienda;
     }
+    //info cateforias
+    public function infocategorias($idTienda){
+        $where['idTienda'] = $idTienda;
+        $where['idEstado'] = 1;
+        $infocategorias=$this->ci->dbMiTienda->infocategorias($where);
+        //var_dump($infocategorias);
+        return $infocategorias;
+        
+    }
     //info tipo
     public function infoTipoTienda(){
         $where['eliminado'] = 0;
@@ -59,7 +68,6 @@ class LogicaMiTienda  {
         $ciudades=$this->ci->dbMiTienda->infociudades($where);
         return $ciudades;
     }
-    //insertar logos
     
     //actualiza datos tienda
     public function actualizaMiTienda($data)
@@ -81,6 +89,32 @@ class LogicaMiTienda  {
                                "continuar"=>0,
                                "datos"=>"");
 
+        }
+        return $respuesta;
+    }
+    //actualiza datos pagos
+    public function actualizaPagos($data)
+    {
+        extract($data);
+        if($pagoEfectivo == 'no' && $pagoDatafono== 'no' && $pagoRecoger == 'no' && $pagoPayu == 'no' && $pagoWompi =='no' && $pagoStripe =='no'){
+            $data['pagosActivos']= 0;
+        }else{
+            $data['pagosActivos']= 1;
+        }
+        $where = array("idTienda"=>$idTienda);
+        unset($data['idTienda']);
+        $idTienda = $this->ci->dbMiTienda->actualizaMiTienda($data,$where);
+        if($idTienda > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
         }
         return $respuesta;
     }

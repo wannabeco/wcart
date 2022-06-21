@@ -31,21 +31,20 @@
         </div>
     </div> 
     <!--barra tabs-->
-   <ul class="nav nav-pills" style="background:#222222;">
-        <li class="active">
-            <a data-toggle="tab" href="#datos" style="color:#ffffff;">Datos  </a>
+   <ul class="nav nav-pills" style="background:#333333; color:#333333;};">
+        <li class="active" style=" margin:0px; border-radius: 0px;">
+            <a data-toggle="tab" href="#datos" style=" border-radius: 0px; color:#ffffff;">Datos  </a>
         </li>
-        <li>
-            <a data-toggle="tab" href="#diseno" style="color:#ffffff;"> Dise&ntilde;o </a>
+        <li style=" margin:0px;">
+            <a data-toggle="tab" href="#diseno" style="color:#ffffff; border-radius: 0px; margin:0px;"> Dise&ntilde;o </a>
         </li>
-        <li>
-            <a data-toggle="tab" href="#logos" style="color:#ffffff;"> Logos </a>
+        <li style=" margin:0px;">
+            <a data-toggle="tab" href="#logos" style="color:#ffffff; border-radius: 0px; margin:0px;"> Logos </a>
         </li>
-        <li>
-            <a data-toggle="tab" href="#pagos"style="color:#ffffff;"> Pagos</a>
+        <li style=" margin:0px;">
+            <a data-toggle="tab" href="#pagos" style="color:#ffffff; border-radius: 0px; margin:0px;"> Pagos</a>
         </li>
     </ul>
-
     <div class="tab-content">
         <!--Actualizar datos de tienda-->
         <div id="datos" class="tab-pane fade in active">
@@ -248,44 +247,40 @@
                 <!--primer celular-->
                 <div class="col col-lg-5 col-md-5">
                     <div class="col col-lg-12 col-md-12" style="border-right:1px solid #E1E1E1">
-                       <div class="row"  style="padding: 5px">
+                       <div class="row"  style="padding: 5px;">
                             <div  class="col col-lg-12" style="">
-                                <div class="col col-lg-12" id="fondoCabecera" name="fondoCabecera" style=" width: 300px; height:50px; background-color:{{fondocabecera}}; border:2px;">
+                                <div class="col col-lg-12" id="fondoCabecera" name="fondoCabecera" style=" width: 350px; height:50px; background-color:{{fondocabecera}};">
                                         <div class="col col-lg-4">
-                                            <img src="<?php echo (isset($infoTienda['logoTienda'])&& $infoTienda['logoTienda']!= '')?base_url().'assets/uploads/files/'.$infoTienda['idTienda'].'/'.$infoTienda['logoTienda']:'';?>" alt="" style="width: 60px; heigth: 40px; margin-top:10px;">   
+                                            <img src="<?php echo (isset($infoTienda['logoTienda'])&& $infoTienda['logoTienda']!= '')?base_url().'assets/uploads/files/'.$infoTienda['idTienda'].'/'.$infoTienda['logoTienda']:'';?>" alt="" style="width: 100%; margin-top:10px;">   
                                         </div>
                                         <div class="col col-lg-2">
-                                            <i class="fa fa-bars" id="colorText" name="colorText" style="color:{{colortext}}; position:relative; float:left; left:140px; margin-top:10px;"></i>
+                                            <i class="fa fa-bars" id="colorText" name="colorText" style="color:{{colortext}}; position:relative; float:left; left:170px; margin-top:10px;"></i>
                                         </div>
                                 </div>
-                                <div class="col col-lg-12" style=" padding:5px; width: 300px; height:400px; background-color:whith; border:2px;">
+                                <div class="col col-lg-12" style=" padding:5px; width: 350px; height:400px; background-color:whith; border:2px;  border:2px; overflow: scroll;">
                                     <div>
                                         <h3 style="position:relative; float:left; left:20px;">Categorias</h3>
-                                        <div id="fondoBotoninterno" name="fondoBotoninterno" style="position:relative; float:left; left:60px; margin-top:10px; width: 80px; height:40px; border:2px {{fondoBotoninterno}}; border-radius:10px; background:{{fondoBotoninterno}};"><i class="fa fa-shopping-cart" style=" padding:10px; color:{{ColorTextoBoton}};"> ADD</i></div>
+                                        <div id="fondoBotoninterno" name="fondoBotoninterno" style="position:relative; float:left; left:60px; margin-top:10px; width: 80px; height:40px; border:2px {{fondoBotoninterno}}; border-radius:10px; background:{{fondoBotoninterno}};"><i class="fa fa-shopping-cart" style=" padding:10px; color:{{ColorTextoBoton}};"> ADD</i></div><br>
                                     </div>
                                     <div ng-if="disenoTienda=='lineas'">
-                                        <div style=" float:left; left:5px; margin:10px; width: 300px; height:90px; border:1px;">
-                                            <div style=" float:left; margin:10px; width: 260px; height:80px; border:2px solid; border-radius:10px;"></div>
-                                        </div>
-                                        <div style=" float:left; left:5px; margin:10px; width: 300px; height:90px; border:1px;">
-                                            <div style=" float:left; margin:10px; width: 260px; height:80px; border:2px solid; border-radius:10px;"></div>
-                                        </div>
-                                        <div style=" float:left; left:5px; margin:10px; width: 300px; height:90px; border:1px;">
-                                            <div style=" float:left; margin:10px; width: 260px; height:80px; border:2px solid; border-radius:10px;"></div>
-                                        </div>
+                                    <?php foreach ($infocategorias as $categorias){?>
+                                            <div style=" float:left; width: 100%; height:90px; margin:0 2% 20px 0; border-radius:10px;  background-image:url(../../res/img/trans.png), url(<?php echo (isset($categorias['foto'])&& $categorias['foto']!= '')?base_url().'assets/uploads/files/'.$categorias['idTienda'].'/'.$categorias['foto']:'';?>); background-size:cover; ">
+                                               <h4> <center><strong style="position:relative; color:#ffffff; top:25px;"><?php echo $categorias['nombreProducto']?></strong></h4></center>
+                                            </div>
+
+                                    <?php } ?>   
                                     </div>
                                     <div ng-if="disenoTienda=='cuadros'">
-                                        <div style=" float:left; left:5px; width: 300px; height:150px; border:1px;">
-                                            <div style=" float:left; margin:10px; width: 130px; height:130px; border:2px solid; border-radius:10px;"></div>
-                                            <div style=" float:left; margin:10px; width: 130px; height:130px; border:2px solid; border-radius:10px;"></div>
-                                        </div>
-                                        <div style=" float:left; left:5px; width: 300px; height:150px; border:1px;">
-                                            <div style=" float:left; margin:10px; width: 130px; height:130px; border:2px solid; border-radius:10px;"></div>
-                                            <div style=" float:left; margin:10px; width: 130px; height:130px; border:2px solid; border-radius:10px;"></div>
-                                        </div>
+                                        <div style="width: 100%; height: 150px; margin-top:50px;">    
+                                            <?php foreach ($infocategorias as $categorias){?>
+                                                <div style="position:relative; float:left; margin:10px; width: 140px; height:130px; border-radius:10px; background-image:url(../../res/img/trans.png), url(<?php echo (isset($categorias['foto'])&& $categorias['foto']!= '')?base_url().'assets/uploads/files/'.$categorias['idTienda'].'/'.$categorias['foto']:'';?>); background-size:cover; ">
+                                                    <h5><strong style="position:relative; color:#ffffff; left:10px; top:90px;"><?php echo $categorias['nombreProducto']?></strong></h5>
+                                                </div>    
+                                            <?php } ?>
+                                        </div> 
                                 </div>
                             </div> 
-                            <div class="col col-lg-12" id="fondoTabs" name="fondoTabs" style=" padding:5px; width: 300px; height:50px; background-color:{{fondoTabs}}; border:2px;">
+                            <div class="col col-lg-12" id="fondoTabs" name="fondoTabs" style=" padding:5px; width: 350px; height:50px; background-color:{{fondoTabs}}; border:2px;">
                                 <p  id="colortextTabs" name="colortextTabs" style="color:{{colortextTabs}};">
                                     <i class="fa fa-home col col-lg-4" style=" padding:15px; position:relative; float:left; left:30px;"></i>
                                 </p>
@@ -305,7 +300,7 @@
                     <div class="col col-lg-12 col-md-12" style="border-right:1px solid #E1E1E1">
                        <div class="row"  style="padding: 5px;">
                             <div  class="col col-lg-12" style="">
-                                <div class="col col-lg-12" id="fondointerno" name="fondointerno" style=" width: 300px; height:80px; background-color:{{fondointerno}}; border:2px;">
+                                <div class="col col-lg-12" id="fondointerno" name="fondointerno" style=" width: 350px; height:80px; background-color:{{fondointerno}}; border:2px;">
                                     <i class="fa fa-arrow-left" id="colortextinterno" name="colortextinterno" style="color:{{colortextinterno}}; padding:10px; float:left;"></i>
                                     <h5 id="colortextinterno" name="colortextinterno" style="color:{{colortextinterno}};"><strong>TECNOLOGY</strong></h5>
                                     <h6 id="colortextinterno" name="colortextinterno" style="color:{{colortextinterno}}; position:relative; margin-top:5px; padding:10px; float:left;">CAMARAS</h6>
@@ -313,31 +308,31 @@
                                     <h6 id="colortextinterno" name="colortextinterno" style="color:{{colortextinterno}}; position:relative; margin-top:5px; padding:10px; float:left;">LAPTOPS</h6>
                                     <h6 id="colortextinterno" name="colortextinterno" style="color:{{colortextinterno}}; position:relative; margin-top:5px; padding:10px; float:left;">PHONES</h6>
                                 </div>
-                                <div class="col col-lg-12" style=" padding:5px; width: 300px; height:370px; background-color:whith; border:2px;">
+                                <div class="col col-lg-12" style=" padding:5px; width: 350px; height:370px; background-color:whith; border:2px;">
                                     <div>
                                         <div style=" float:left; left:5px; margin:10px; width: 300px; height:90px; border:1px;">
-                                            <div style=" float:left; margin:10px; width: 260px; height:80px; border:2px solid; border-radius:10px;"></div>
+                                            <div style=" float:left; left:20px; margin:10px; width:100%; height:90px; border:2px solid; border-radius:10px;"></div>
                                         </div>
                                         <div style=" float:left; left:5px; margin:10px; width: 300px; height:90px; border:1px;">
-                                            <div style=" float:left; margin:10px; width: 260px; height:80px; border:2px solid; border-radius:10px;"></div>
+                                            <div style=" float:left; left:20px; margin:10px; width: 100%; height:90px; border:2px solid; border-radius:10px;"></div>
                                         </div>
                                         <div style=" float:left; left:5px; margin:10px; width: 300px; height:90px; border:1px;">
-                                            <div style=" float:left; margin:10px; width: 260px; height:80px; border:2px solid; border-radius:10px;"></div>
+                                            <div style=" float:left; left:20px; margin:10px; width: 100%; height:90px; border:2px solid; border-radius:10px;"></div>
                                         </div>
                                     </div>
                                     
                                 </div> 
-                                <div class="col col-lg-12" style=" padding:5px; width: 300px; height:50px; background-color:{{fondoTabs}}; border:2px;">
-                                    <p style="color:{{colortextTabs}};">
-                                        <i class="fa fa-home" style=" padding:15px; position:relative; float:left; left:30px;"></i>
-                                    </p>
-                                    <p style="color:{{colortextTabs}};">
-                                        <i class="fa fa-shopping-cart" style="padding:5px; position:relative; float:left; left:80px;"></i>
-                                    </p>
-                                    <p style="color:{{colortextTabs}};">
-                                        <i class="fa fa-bell" style="padding:5px; position:relative; float:left; left:150px;"></i>
-                                    </p>
-                                </div>
+                                <div class="col col-lg-12" id="fondoTabs" name="fondoTabs" style=" padding:5px; width: 350px; height:50px; background-color:{{fondoTabs}}; border:2px;">
+                                <p  id="colortextTabs" name="colortextTabs" style="color:{{colortextTabs}};">
+                                    <i class="fa fa-home col col-lg-4" style=" padding:15px; position:relative; float:left; left:30px;"></i>
+                                </p>
+                                <p id="colortextTabs" name="colortextTabs" style="color:{{colortextTabs}};">
+                                    <i class="fa fa-shopping-cart col col-lg-4" style="padding:5px; position:relative; float:left; left:50px;"></i>
+                                </p>
+                                <p id="colortextTabs" name="colortextTabs" style="color:{{colortextTabs}};">
+                                    <i class="fa fa-bell col col-lg-4" style="padding:5px; position:relative; float:left; left:50px;"></i>
+                                </p>
+                            </div>  
                                 <div  class="col col-lg-12 text-center">
                                         <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="getGraficos()">Actulizar graficos</button>
                                         
@@ -493,3 +488,9 @@
             </div>    
         </div>
     </div>
+    <style>
+        .nav-pills > li a:hover{
+            background:#337AB7;
+            color:#ffffff;
+        }
+    </style>

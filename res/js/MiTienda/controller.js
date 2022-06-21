@@ -395,6 +395,7 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 		var pagoStripe 		 	= ($('#pagoStripe').is(':checked'))?'si':'no';
 		var stripe_key			= $('#stripe_key').val();
 		var nombreTransaccion	= $('#nombreTransaccion').val();
+
 		if (pagoPayu=='si' && payu_apikey == ''){
 			constantes.alerta("Atención","Debe de ingresar el Payu key","info",function(){});
 		}
@@ -409,7 +410,8 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 		}
 		else if(pagoStripe == 'si' && stripe_key == ''){
 			constantes.alerta("Atención","Debe de ingresar el Stripe key","info",function(){});
-		}else{
+		}
+		else{
 			constantes.confirmacion("Confirmación!","Las formas de pago que acaba de seleccionar son correctos?, desea continuar?","info",function(){
 				var variables = {idTienda:idTienda, pagoEfectivo:pagoEfectivo, pagoDatafono:pagoDatafono, pagoRecoger:pagoRecoger, pagoPayu:pagoPayu, payu_apikey:payu_apikey, payu_id_cuenta:payu_id_cuenta, payu_id_mercado:payu_id_mercado,pagoWompi:pagoWompi, wompi_public_key:wompi_public_key, pagoStripe:pagoStripe, stripe_key:stripe_key,nombreTransaccion:nombreTransaccion};
 				var controlador = $scope.config.apiUrl+"MiTienda/procesaDataPagos";

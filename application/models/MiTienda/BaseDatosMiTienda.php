@@ -24,6 +24,7 @@ if (!defined('BASEPATH'))
         private $tablePaises                 =   "";
         private $tableDepartamentos          =   "";
         private $tableCiudades               =   "";
+        private $categorias                  =   "";
     
         public function __construct() 
         {
@@ -35,6 +36,7 @@ if (!defined('BASEPATH'))
             $this->tablePaises              = "app_paises";
             $this->tableDepartamentos       = "app_departamentos";
             $this->tableCiudades            = "app_ciudades";
+            $this->categorias               ="app_productos";
     
         }
         //copear y pegar este query las veces que sea necesario para hacer una inserción, recordar cambiar el nombre
@@ -59,6 +61,16 @@ if (!defined('BASEPATH'))
             $this->db->select("*");
             $this->db->where($where);
             $this->db->from($this->tableTiendas);
+            $id = $this->db->get();
+            //print_r($this->db->last_query());die();
+            return $id->result_array();
+        }
+        //categorias
+        public function infocategorias($where="")
+        {
+            $this->db->select("*");
+            $this->db->where($where);
+            $this->db->from($this->categorias);
             $id = $this->db->get();
             //print_r($this->db->last_query());die();
             return $id->result_array();
