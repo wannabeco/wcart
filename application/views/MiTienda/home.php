@@ -382,6 +382,7 @@
                                                                 <input type="file" id="faviconTienda" name ="faviconTienda"value=""><br>
                                                                 
                                                             </button>
+                                                            
                                                             <p style=" position:relative; float:left; left:20px;">El tamaño maximo de la imagen es de 800 px de ancho por 800 px de alto.</p>
                                                             <br>    
                                                             <!-- vista de logo -->

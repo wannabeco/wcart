@@ -57,6 +57,7 @@
                     <thead>
                         <tr>
                             <th>PRODUCT</th>
+                            <th class="text-center">QUALIFICATION</th>
                             <th class="text-center">FEATURES</th>
                             <th class="text-center">CATEGORY</th>
                             <th class="text-center">SUBCATEGORY</th>
@@ -70,6 +71,9 @@
                                 <img src="<?php echo base_url()?>assets/uploads/files/<?php echo $_SESSION['project']['info']['idTienda']?>/{{prod.fotoPresentacion}}" width="50px" alt="">
                                 <strong>{{prod.nombrePresentacion}}</strong><br>
                                 <!-- <small>Valor unitario: ${{prod.valorPresentacion|number}}</small> -->
+                            </td>
+                            <td id="estrella{{prod.idPresentacion}}" style="vertical-align: middle" class="text-center">
+                                    {{pintastrellas(prod.puntos, prod.votantes, prod.idPresentacion)}}
                             </td>
                             <td style="vertical-align: middle" class="text-center">
                                 <?php if(getPrivilegios()[0]['editar'] == 1){ ?>
@@ -85,6 +89,9 @@
                             <td  class="text-center">
                                 <?php if(getPrivilegios()[0]['editar'] == 1){ ?>
                                     <a ng-click="cargaPlantillaControlProductos(prod.idPresentacion,1)" title="Editar" class="btn btn-primary btn-fab btn-fab-mini"><i class="material-icons">edit</i></a>
+                                <?php }?>
+                                <?php if(getPrivilegios()[0]['ver'] == 1){ ?>
+                                    <a ng-click="cargaPlantillaComentarios(prod.idPresentacion,1)" title="Comentarios del producto" class="btn btn-primary btn-fab btn-fab-mini"><i class="material-icons">chat</i></a>    
                                 <?php }?>
                                 <?php if(getPrivilegios()[0]['borrar'] == 1){ ?>
                                     <a ng-click="eliminarProducto(prod.idPresentacion)" title="Eliminar"  class="btn btn-danger btn-fab btn-fab-mini btn-xs"><i class="material-icons">delete</i></a>

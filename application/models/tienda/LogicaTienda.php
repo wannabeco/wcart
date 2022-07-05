@@ -201,11 +201,9 @@ class LogicaTienda  {
 	        }
 	        else
 	        {
-                //como si se carga la info de la foto proceso a actualizarla en la tabla de la tienda
                 $data = $this->ci->upload->data();
 	            $dataActualiza[$fotoACargar]	=	$data['file_name'];
 	            $where['idTienda']		=	$idTienda;
-	            //procedo a actualizar la información del usuario
 	            $procesaFoto 	 	=  $this->ci->dbTienda->actualizaTienda($dataActualiza,$where);
                 $salida = array("mensaje"=>"Foto cargada con éxito","continuar"=>1);
             }
@@ -215,5 +213,29 @@ class LogicaTienda  {
             $salida = array("mensaje"=>"No viene la foto del ".$fotoACargar,"continuar"=>0);
         }
         return $salida;
+    }
+    //Get comentarios
+    public function infoComentarios($where){
+        $infoComentario=$this->ci->dbTienda->infoComentarios($where);
+        return $infoComentario;
+    }
+    //eliminar el comentario
+    public function eliminarComentario($where,$dataActualiza,$idPresentacion,$votantes,$puntos){
+
+        $eliminado=$this->ci->dbTienda->eliminarComentario($where,$dataActualiza);
+
+        if($eliminado=1){
+            $eliminado=$this->ci->dbTienda->eliminarVoto($where,$dataActualiza);
+            if($eliminado=1){
+                $wherePuntos['idPresentacion']      =$idPresentacion;
+                $dataActualizaPuntos['puntos']      = $puntos;
+                $dataActualizaPuntos['votantes']    = $votantes;
+                $eliminado=$this->ci->dbTienda->quitarPuntos($wherePuntos,$dataActualizaPuntos);
+            }
+            else{
+                $eliminado=0;
+            }
+        }
+        return $eliminado;
     }
  }

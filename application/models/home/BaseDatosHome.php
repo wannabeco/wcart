@@ -313,6 +313,7 @@ class BaseDatosHome extends CI_Model {
         //print_r($this->db->last_query());die();
         return $this->db->affected_rows();
     }
+
 }
 
 ?>
