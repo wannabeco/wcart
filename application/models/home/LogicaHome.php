@@ -709,4 +709,6 @@ class LogicaHome  {
         }
         return $salida;
     }
+    
+    
  }

@@ -314,6 +314,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 			$scope.$apply();
 		},'json');
 	}
+	//editar
 	$scope.cargaPlantillaControlProductos = function(idPresentacion,edita)
 	{
 		$('#modalUsuarios').modal("show");
@@ -342,7 +343,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 			$(".ocultaPorNoVariacion").show();
 		}
 	}
-
+	
 	$scope.uploadPic = function(archivo,caja,imagen,preloader)
 	{
 
@@ -684,5 +685,58 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		}
 		
 	}
-
+	//comentarios
+	$scope.cargaPlantillaComentarios = function(idPresentacion,ver)
+	{
+		$('#modalUsuarios').modal("show");
+		var controlador = 	$scope.config.apiUrl+"GestionTienda/cargaPlantillaComentarios";
+		var parametros  = 	"ver="+ver+"&idPresentacion="+idPresentacion;
+		constantes.consultaApi(controlador,parametros,function(json){
+			$("#modalCrea").html(json.html);
+			$scope.compileAngularElement("#formulario");
+		},'json');
+	}
+	//estrellas
+	$scope.pintastrellas =function(puntos, votantes, idPresentacion){
+		var resultado = Math.round(puntos/votantes, 0);
+		var estrellas = "";
+		if (puntos == '0' && votantes == '0'){
+			estrellas += '<i title="Sin calificación" class="far fa-star text-primary"></i>';
+			estrellas += '<i title="Sin calificación" class="far fa-star text-primary"></i>';
+			estrellas += '<i title="Sin calificación" class="far fa-star text-primary"></i>';
+			estrellas += '<i title="Sin calificación" class="far fa-star text-primary"></i>';
+			estrellas += '<i title="Sin calificación" class="far fa-star text-primary"></i>';
+		}else{
+			for(i = 1;i<=resultado; i++){
+				estrellas += '<i title="Calificación: '+resultado+'" class="fas fa-star text-primary"></i>';
+			}
+			var estrellaBlancas = 5 - resultado;
+			for(a = 1;a <= estrellaBlancas; a++){
+				estrellas += '<i title="Calificación: '+resultado+'" class="far fa-star text-primary"></i>';
+			}
+		}
+		$('#estrella'+idPresentacion).html(estrellas);
+	}
+	//eliminar comentarios
+	$scope.eliminarComentario = function(idComentario,idPresentacion,votantes,puntos,calificacion)
+	{
+		constantes.confirmacion("Attention","Está a punto de eliminar el comentario,¿Desea continuar?","info",function(){
+			var controlador = 	$scope.config.apiUrl+"GestionTienda/eliminarComentario";
+			var parametros  = 	{idComentario:idComentario, idPresentacion:idPresentacion, votantes:votantes, puntos:puntos, calificacion:calificacion}
+			constantes.consultaApi(controlador,parametros,function(json){
+				if(json.continuar == 1)
+				{
+					constantes.alerta("Attention!",json.mensaje,"success",function(){
+						location.reload();
+					});
+				}
+				else
+				{
+					constantes.alerta("Attention!",json.mensaje,"danger",function(){
+					});
+				}
+			},'json');
+		});
+	}
+	
 });

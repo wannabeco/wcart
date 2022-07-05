@@ -519,5 +519,71 @@ class GestionTienda extends CI_Controller
 	    }
         echo json_encode($salida);
 	}
+	//comentarios de los productos
+	public function cargaPlantillaComentarios()
+	{
+		extract($_POST);
+		
+		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+		{
+			$where['idTienda']   = $_SESSION['project']['info']['idTienda'];
+		}
+		$where['idEstado']   = 1;
+		$categorias	     = $this->logicaHome->getCategorias($where); 
+
+		$salida["selects"]   = array("categorias"=>$categorias['datos']);
+		$idComentario= "";
+		if($ver == 1)
+		{	
+			//busca la info de la categoria
+			$infoProducto	       		= $this->logicaHome->infoProducto(array("idPresentacion"=>$idPresentacion));
+			$infoComentarios			= $this->logicaTienda->infoComentarios(array('com.idPresentacion'=>$idPresentacion, 'com.estado' => '1', 'com.eliminado' => '0'));
+			//var_dump($infoComentarios);
+			$salida["titulo"] 	        = lang("text18");
+			$salida["datos"]  	        = $infoProducto['datos'][0];
+			$salida["idPresentacion"]   = $idPresentacion;
+			$salida["infoComentarios"]	= $infoComentarios;
+			$salida["persistencia"]  	= 0;
+			$salida["ver"]  	 		= $ver;
+			$salida["labelBtn"]  		= lang("text18");
+			$vista = $this->load->view("home/edicionTienda/productos/comentarios",$salida,true);
+			$respuesta = array("json"=>$infoProducto['datos'][0],"html"=>$vista);
+		}
+		echo json_encode($respuesta);
+	}
+	//procesa comentarios
+	public function infoComentarios()
+	{
+		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+		{
+			$_POST['id']   = $_SESSION['project']['info']['idTienda'];
+		}
+        $salida 	 	=  $this->logicaHome->infoComentarios($_POST);   
+        echo json_encode($salida);
+	}
+	//elimina comentario
+	public function eliminarComentario()
+    {
+		extract($_POST);
+		$dataActualiza['eliminado']     	= 1;
+		$where['idComentario']        		= $idComentario;
+		$votantes							= $votantes - 1;
+		$puntos								= $puntos - $calificacion;
+		$resultado = $this->logicaTienda->eliminarComentario($where,$dataActualiza,$idPresentacion,$votantes,$puntos);
+			if($resultado > 0)
+			{		
+				$salida = array("mensaje"=>"El comentario se la eliminado de manera corecta",
+								"datos"=>$resultado,
+								"continuar"=>1);
+			}
+			else
+			{
+				$salida = array("mensaje"=>"No se ha podido eliminar el comentario, intente de nuevo más tarde",
+								"datos"=>array(),
+								"continuar"=>0);
+			}
+			echo json_encode($salida);
+    }
+	
 
 }
