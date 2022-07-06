@@ -62,7 +62,6 @@ class MiTienda extends CI_Controller
 				$salida['infopaises'] 	       = $infopaises;
 				$salida['infocategorias'] 	   = $infocategorias;
 				$salida['infoDisenoTienda']	   = $infoDisenoTienda;
-				//var_dump($infoTienda[0]); die;
 				$salida['infoModulo']          = $infoModulo[0];
 				$this->load->view("app/index",$salida);
 			}
@@ -213,6 +212,11 @@ class MiTienda extends CI_Controller
 	//Actualiza Pagos
 	public function procesaDataPagos(){
 		$getActualizaPago	= $this->LogicaMiTienda->actualizaPagos($_POST);
+		echo json_encode($getActualizaPago);
+	}
+	//actualiza mantenimiento
+	public function procesaDataMantenimiento(){
+		$getActualizaPago	= $this->LogicaMiTienda->actualizaMantenimiento($_POST);
 		echo json_encode($getActualizaPago);
 	}
 	public function cargaPlantillaModal()

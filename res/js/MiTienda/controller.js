@@ -431,6 +431,38 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 			});
 		}
 	}
+	//actualiza mantenimiento
+	$scope.getmantenimiento =function(){
+
+		var idTienda				= $('#idTienda').val();
+		var manteminiento	 		= ($('#manteminiento').is(':checked'))?1:0;
+		var mensajeMantenimiento	= $('#mensajeMantenimiento').val();
+		console.log(mensajeMantenimiento);
+		if (manteminiento=='1' && mensajeMantenimiento == ''){
+			constantes.alerta("Atención","Debe de ingresar motivo de por el cual la aplicación estará en mantenimiento","info",function(){});
+		}else if(manteminiento=='0' && mensajeMantenimiento != ''){
+			constantes.alerta("Atención","La opción de mantenimiento debe de estar en estado activo","info",function(){});
+		}
+		else{
+			constantes.confirmacion("Confirmación!","Desea poner la aplicacion en modo mantenimiento?, desea continuar?","info",function(){
+				var variables = {idTienda:idTienda, manteminiento:manteminiento, mensajeMantenimiento:mensajeMantenimiento};
+				var controlador = $scope.config.apiUrl+"MiTienda/procesaDataMantenimiento";
+				var parametros  = variables;
+				constantes.consultaApi(controlador,parametros,function(json){
+					if(json.continuar == 1)
+					{
+						constantes.alerta("Atención",json.mensaje,"success",function(){
+							location.reload();
+						})
+					}
+					else
+					{
+						constantes.alerta("Atención",json.mensaje,"error",function(){})
+					}
+				});
+			});
+		}
+	}
 	
 
 });
