@@ -607,7 +607,7 @@ class Api extends CI_Controller
                 "amount" => 100 * $_POST['totalCompra'],
                 "currency" => "USD",
                 "source" => $_POST['source']['source']['id'],
-                "description" => "Pago en stripe" 
+                "description" => $infoTienda['datos'][0]['nombreTransaccion'] 
         ]);
         
         //en la variable $charge irá la información del pago si fue exitoso o no
