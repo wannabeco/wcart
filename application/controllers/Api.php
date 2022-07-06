@@ -1358,5 +1358,23 @@ class Api extends CI_Controller
         $infoTienda         = $this->logica->getInfoTiendaNew($idTienda);
         echo json_encode($infoTienda, JSON_UNESCAPED_UNICODE);
     }
+    public function insertaComentario()
+    {
+        extract($_POST);
+        if(validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+            extract($_POST);
+            $infoTienda         = $this->logica->insertaComentario($_POST);
+            echo json_encode($infoTienda, JSON_UNESCAPED_UNICODE);
+		}
+		else
+		{
+			$respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+		}
+    }
 }
 ?>

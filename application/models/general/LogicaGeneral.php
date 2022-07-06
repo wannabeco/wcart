@@ -961,4 +961,66 @@ class LogicaGeneral  {
         }
         return $respuesta;
     }
+
+    public function insertaComentario($post)
+    {
+        extract($post);
+        $dataComentario['idTienda']         = $idTienda;
+        $dataComentario['idPresentacion']   = $idPresentacion;
+        $dataComentario['idUsuario']        = $idPersona;
+        $dataComentario['comentario']       = $comentario;
+        $dataComentario['ip']               = getIP();
+        $dataComentario['fechaComentario']  = date("Y-m-d H:m:s");
+        $dataComentario['estado']           = 1;
+        $dataComentario['eliminado']        = 0;
+        //lo primero que hago es insertar el comentario
+        $insertaComentario = $this->ci->dbGeneral->insertaComentario($dataComentario);
+        if($insertaComentario > 0)
+        {
+            //procedo a relacionar en la tabla de comentarios lo que ha insertado el usuario
+            $dataRel['idTienda']         = $idTienda;
+            $dataRel['idPresentacion']   = $idPresentacion;
+            $dataRel['idComentario']     = $insertaComentario;
+            $dataRel['idUsuario']        = $idPersona;
+            $dataRel['calificacion']     = $calificacion;
+            $dataRel['estado']           = 1;
+            $dataRel['eliminado']        = 0;
+            $relUsuario = $this->ci->dbGeneral->relacionVotoUsuario($dataRel);
+            if($relUsuario > 0)
+            {
+                //obtengo la información de la prenda antes de insertarla, esto porque puede que en el momento que este procesando alguien más haya sumado un voto
+                $infoPresentacion = $this->ci->dbGeneral->getPresentacionesProducto(array("pre.idPresentacion"=>$idPresentacion));
+                //armo lo que voy a actualizar
+                $dataPresentacion['puntos']     = ($infoPresentacion[0]['puntos'] + $calificacion);
+                $dataPresentacion['votantes']   = ($infoPresentacion[0]['votantes'] + 1);
+                //acualizo
+                $actualizaProducto = $this->ci->dbGeneral->actualizoPresentacion($dataPresentacion,array("idPresentacion"=>$idPresentacion));
+                if($actualizaProducto > 0)
+                {
+                    //actualizo el producto para sumarle los votos
+                    $respuesta = array("mensaje"=>"Your rating and comment have been successfully saved. Thank you very much!",
+                                        "continuar"=>1,
+                                        "datos"=>array()); 
+                }  
+                else
+                {
+                    //actualizo el producto para sumarle los votos
+                    $respuesta = array("mensaje"=>"No se ha podido actualizar la prenda",
+                                        "continuar"=>0,
+                                        "datos"=>array()); 
+
+                }
+            }
+         
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"No existen tiendas",
+                              "continuar"=>0,
+                              "datos"=>"");    
+
+        }
+        return $respuesta;
+
+    }
  }
