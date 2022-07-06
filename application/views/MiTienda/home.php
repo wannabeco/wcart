@@ -44,6 +44,9 @@
         <li style=" margin:0px;">
             <a data-toggle="tab" href="#pagos" style="color:#ffffff; border-radius: 0px; margin:0px;"> Pagos</a>
         </li>
+        <li style=" margin:0px;">
+            <a data-toggle="tab" href="#mantenimiento" style="color:#ffffff; border-radius: 0px; margin:0px;"> Mantenimiento</a>
+        </li>
     </ul>
     <div class="tab-content">
         <!--Actualizar datos de tienda-->
@@ -481,6 +484,39 @@
                             </div>
                             <div  class="col col-lg-12">
                                 <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="getActualizaPago()">Actualizar Pagos</button>
+                            </div>
+                            <input type="hidden" id="idTienda" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">               
+                        </form>    
+                    </div>
+                </div>
+            </div>    
+        </div>
+        <!-- mantenimiento -->
+        <div id="mantenimiento" class="tab-pane fade">
+            <div class="row">
+                <div class="col col-lg-12 col-md-12">
+                    <div class="row">
+                        <center><H2><strong>Estado de la app movil</strong></H2></center>
+                        <br>
+                        <form role="form" name="DataEstado" id="DataEstado" ng-submit="procesaDataEstado()">
+                            <div class="col col-lg-12" style="border-right:1px solid #E1E1E1">
+                                <p style="font-size:16px;">La aplicación entrará en un estado de off line, para que se puedan realizar los cambios pertinentes por el administrador.</p>
+                            </div><br>
+                            <div class="col col-lg-4" style="border-right:1px solid #E1E1E1">
+                                <div class="">
+                                    <label style="color:#222222;" class="col col-lg-12"><i class="fa fa-cogs" style="margin:30px;"></i>  Manteminiento
+                                        <input type="checkbox" value="si" name="manteminiento" id="manteminiento" <?php if($infoTienda['manteminiento'] == 1){ echo "checked";} else {echo"checbox";} ?> style="float:right;width: 20px;height: 20px; margin:30px;">
+                                    </label>   
+                                </div>
+                            </div>
+                            <div class="col col-lg-8" style="border-right:1px solid #E1E1E1">
+                                <textarea class="form-control col col-lg-8" placeholder="Motivo por el cual se va a realizar el mantenimiento"  name="mensajeMantenimiento" id="mensajeMantenimiento" style="width: 100%; <?php //if($infoTienda['manteminiento'] == 0){ echo "display:none;";}?>"><?php echo (isset($infoTienda['mensajeMantenimiento']))?$infoTienda['mensajeMantenimiento']:''; ?></textarea>
+                            </div><br><br>
+                            <div class="col col-lg-12" style="border-right:1px solid #E1E1E1">
+                                <p style="font-size:16px;">Recuerde que la aplicación móvil al estar en estado mantenimiento, ninguno de los usuarios no podrán realizar compra o pedido.</p>
+                            </div><br>
+                            <div  class="col col-lg-12">
+                                <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="getmantenimiento()">Actualizar Estado</button>
                             </div>
                             <input type="hidden" id="idTienda" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">               
                         </form>    

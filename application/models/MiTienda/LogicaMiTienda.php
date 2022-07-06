@@ -118,4 +118,26 @@ class LogicaMiTienda  {
         }
         return $respuesta;
     }
+    //actualiza mantenimiento
+    public function actualizaMantenimiento($data)
+    {
+        extract($data);
+    
+        $where = array("idTienda"=>$idTienda);
+        unset($data['idTienda']);
+        $idTienda = $this->ci->dbMiTienda->actualizaMiTienda($data,$where);
+        if($idTienda > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
 }
