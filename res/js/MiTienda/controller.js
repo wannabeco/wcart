@@ -439,7 +439,9 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 		var mensajeMantenimiento	= $('#mensajeMantenimiento').val();
 		console.log(mensajeMantenimiento);
 		if (manteminiento=='1' && mensajeMantenimiento == ''){
+
 			constantes.alerta("Atención","Debe de ingresar motivo de por el cual la aplicación estará en mantenimiento","info",function(){});
+		
 		}
 		else{
 			constantes.confirmacion("Confirmación!","Desea poner la aplicacion en modo mantenimiento?, desea continuar?","info",function(){
