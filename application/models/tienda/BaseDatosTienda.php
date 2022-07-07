@@ -51,7 +51,7 @@ class baseDatosTienda extends CI_Model {
         $this->db->where($where);
         $this->db->from($this->tableComentarios." com");
         $this->db->join($this->tablePersonas." pro","com.idUsuario = pro.idPersona","INNER");
-        $this->db->join($this->tableVotos." vo","com.idUsuario = vo.idUsuario","INNER");
+        $this->db->join($this->tableVotos." vo","com.idComentario= vo.idComentario","INNER");
         $this->db->join($this->tableProductos." prod","com.idPresentacion = prod.idPresentacion","INNER");
         $this->db->order_by("fechaComentario","DESC");
         $id = $this->db->get();
