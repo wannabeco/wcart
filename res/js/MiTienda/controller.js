@@ -444,8 +444,8 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 		
 		}
 		else{
-			if( mantenimiento = 1){
-				constantes.confirmacion("Confirmación!","Desea poner la aplicacion en modo offline?, desea continuar?","info",function(){
+			if(manteminiento == '1'){
+				constantes.confirmacion("Confirmación!","Desea poner la aplicacion en modo off line?","info",function(){
 					var variables = {idTienda:idTienda, manteminiento:manteminiento, mensajeMantenimiento:mensajeMantenimiento};
 					var controlador = $scope.config.apiUrl+"MiTienda/procesaDataMantenimiento";
 					var parametros  = variables;
@@ -464,7 +464,7 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 				});
 			}
 			else{
-				constantes.confirmacion("Confirmación!","Desea poner la aplicacion en modo offline, desea continuar?","info",function(){
+				constantes.confirmacion("Confirmación!","Desea poner la aplicacion en modo on line","info",function(){
 					var variables = {idTienda:idTienda, manteminiento:manteminiento, mensajeMantenimiento:mensajeMantenimiento};
 					var controlador = $scope.config.apiUrl+"MiTienda/procesaDataMantenimiento";
 					var parametros  = variables;
