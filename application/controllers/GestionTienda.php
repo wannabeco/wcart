@@ -584,6 +584,14 @@ class GestionTienda extends CI_Controller
 			}
 			echo json_encode($salida);
     }
+	//actualizar productos
+	public function cargaPlantillaactualizaProductos()
+	{	
+		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+		{
+			$where['idTienda']   = $_SESSION['project']['info']['idTienda'];
+		}
+	}
 	
 
 }

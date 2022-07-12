@@ -23,7 +23,10 @@
                         <ul class="dropdown-menu">
                           
                             <li role="separator" class="divider"></li><li class="dropdown-header"><?php echo lang("lblSeleccioneOpc") ?></li>
-                            <li><a class="btn" ng-click="cargaPlantillaControlProductos('',0)"><i class="fa fa-fw fa-plus"></i> Nuevo producto</a></li>
+                            <li><a class="btn" ng-click="cargaPlantillaControlProductos('',0)" style="float:left;"><i class="fa fa-fw fa-plus"></i> Nuevo producto</a></li>
+                            <li><a class="btn" ng-click="cargaPlantillaactualizaProductos('',0)" style="float:left;"><i class="fa fa-refresh"></i> Actualiza productos</a></li>
+                            <li><a class="btn" ng-click="cargaPlantillaControlProductos('',0)" style="float:left;"><i class="fa fa-cloud-upload"></i> Carga de productos masivos</a></li>
+                            <li><a class="btn" ng-click="cargaPlantillaControlProductos('',0)" style="float:left;"><i class="fa fa-file-image-o"></i> Carga de imagenes</a></li>
                         </ul>
                     </div>
                 <?php } ?>
