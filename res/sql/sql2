@@ -1,0 +1,2 @@
+-- campo para agregar en la tabla de fotos temporales
+ALTER TABLE app_fotos_temp ADD idTienda varchar(100) NOT NULL;
