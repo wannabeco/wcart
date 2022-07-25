@@ -276,6 +276,8 @@ class GestionTienda extends CI_Controller
 		}
 		$where['p.idEstado']   = 1;
 		$categorias	     = $this->logicaHome->getProductosAnidados($where);
+		//voy aca.
+		//var_dump($categorias);die();
 		echo json_encode($categorias);
 	}
 
@@ -584,6 +586,422 @@ class GestionTienda extends CI_Controller
 			}
 			echo json_encode($salida);
     }
+	//actualizar productos
+	public function cargaPlantillaActualizaProductos()
+	{
+		extract($_POST);
+		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+		{
+			$where['idTienda']   = $_SESSION['project']['info']['idTienda'];
+		}
+		$where['idEstado']   	= 1;
+		$categorias	     		= $this->logicaHome->getCategorias($where); 
+		$salida["selects"]   	= array("categorias"=>$categorias['datos']);
+		$idComentario= "";
+		//var_dump($ver);die();
+		if($ver == '1')
+		{	
+			//busca la info de la categoria
+			$infoProducto	       		= $this->logicaHome->infoProducto($where);
+			//$infoComentarios			= $this->logicaTienda->actualizaProductos($where);
+			$salida["titulo"] 	        = lang("text18");
+			$salida["datos"]  	        = $infoProducto['datos'][0];
+			$salida["idPresentacion"]   = $idPresentacion;
+			//$salida["infoComentarios"]	= $infoComentarios;
+			$salida["persistencia"]  	= 0;
+			$salida["ver"]  	 		= $ver;
+			$salida["labelBtn"]  		= lang("text18");
+			$vista = $this->load->view("home/edicionTienda/productos/actualizaProductos",$salida,true);
+			$respuesta = array("json"=>$infoProducto['datos'][0],"html"=>$vista);
+		}
+		echo json_encode($respuesta);
+	}
+	public function procesaDatacsv(){
+		extract($_POST);
+		//var_dump($_FILES);die();
+		@mkdir('assets/uploads/actualizacion/');
+		$salida=""; 
+		$error ="";
+		$config['upload_path'] = 'assets/uploads/actualizacion/';
+		//var_dump($config);die();
+        $config['allowed_types'] = 'csv';
+        $config['max_size'] 	 = '100000';
+        $this->load->library('upload', $config);
+    	$this->upload->initialize($config);
+		//var_dump($config);die();
+    	if(!$this->upload->do_upload('csv_file')){
+			$error_sistema = trim(strip_tags($this->upload->display_errors()));
+			$salida = array("mensaje"=>$error_sistema,
+                            "continuar"=>0,
+                            "datos"=>"");
+		}
+    	else{		
+			$data 							= $this->upload->data();
+	        //leer archivo csv, permisos de escritura y array para guardar
+			$file = 'assets/uploads/actualizacion/'.$data['file_name'];
+			$openfile = fopen($file, "r");
+			$cabecera = fgetcsv($openfile, 0,',');
+			//se limpia cabecera
+			$cabeceralimpia = explode(';',explode('\n',$cabecera[0])[0]);
+			$ValidacionCabecera = array('codigoProducto','nombrePresentacion','marca','descripcionpres','nuevo','descuento','agotado','valorPresentacion','valorAntes');
+			$errorcampos = 0;
+			$erroresdeCampos= "";
+			//recorre la cabecera y hace comparacion con validacion de cabecera
+			foreach($cabeceralimpia as $infcabecera){
+				if(!in_array($infcabecera, $ValidacionCabecera)){
+					$errorcampos++;
+					$erroresdeCampos.=$infcabecera.", ";
+				}
+			}
+			if($errorcampos == 0){
+					$arreglodata = array();
+				while (($line = fgetcsv($openfile, 0, ';')) !== FALSE) {
+						$datos = explode(';',explode('\n',$line[0])[0]);
+						array_push($arreglodata,$datos);		
+				}
+				fclose($openfile);
+				$salida2 = array();
+				//se recorre el arreglo
+				foreach($arreglodata as $infoProductos){
+					for($i=0; $i<count($cabeceralimpia);$i++){
+						$cadena = str_replace('','',trim($infoProductos[$i]));
+						$final[$cabeceralimpia[$i]]= $cadena;					
+					}
+					array_push($salida2,$final);
+				}
+				$conProductosRegistrados = 0;
+				$conProductosNoRegistrados = 0;
+				$noActualizados = array();
+				//recorrido de registros.
+				foreach($salida2 as $newData){
+				$where['codigoProducto'] = $newData['codigoProducto'];
+				$where['idTienda']   = $_SESSION['project']['info']['idTienda'];
+				$newData2 = $newData;
+				unset($newData['codigoProducto']);
+				$proceso 	 	=  $this->logicaTienda->actualizaProductos($where,$newData);//guardado de registros
+					if($proceso == '1'){
+						$conProductosRegistrados++;
+					}
+					else{
+						$conProductosNoRegistrados++;
+						array_push($noActualizados,$newData2);
+					}
+				}
+				//se inicia session, para hacer ejecuion de excel
+				if(count($noActualizados)>0){
+					$_SESSION['noActualizados'] = $noActualizados;
+				}
+				$salida = array("mensaje"=>"Se actualizaron ".$conProductosRegistrados. " productos, no se actualizaron ".$conProductosNoRegistrados." productos",
+							"continuar"=>1,
+							"datos"=>$noActualizados);			
+			} 
+			else{
+				$salida = array("mensaje"=>"El formato de excel esta erroneo, los siguientes campos no se encontraron en el archivo: ".$erroresdeCampos." por favor verifique",
+							"continuar"=>0,
+							"datos"=>"");
+			}
+			
+		echo json_encode($salida);
+	}
+}//exportar excel de datos no actualizados
+public function datosexcel(){
+	//var_dump($_SESSION['noActualizados']);die();
+		$table           = "";
+		$table .= "<table>";
+			$table .= "<tr>";
+				$table .= "<td>codigoProducto</td>";
+				$table .= "<td>nombrePresentacion</td>";
+				$table .= "<td>marca</td>";
+				$table .= "<td>descripcionpres</td>";
+				$table .= "<td>nuevo</td>";
+				$table .= "<td>descuento</td>";
+				$table .= "<td>agotado</td>";
+				$table .= "<td>valorPresentacion</td>";
+				$table .= "<td>valorAntes</td>";
+			$table .= "</tr>";
+			foreach ($_SESSION['noActualizados']  as $u){
+			$table .= "<tr>";
+				$table .= "<td>".$u['codigoProducto']."</td>";
+				$table .= "<td>".$u['nombrePresentacion']."</td>";
+				$table .= "<td>".$u['marca']."</td>";
+				$table .= "<td>".$u['descripcionpres']."</td>";
+				$table .= "<td>".$u['nuevo']."</td>";
+				$table .= "<td>".$u['descuento']."</td>";
+				$table .= "<td>".$u['agotado']."</td>";
+				$table .= "<td>".$u['valorPresentacion']."</td>";
+				$table .= "<td>".$u['valorAntes']."</td>";
+			$table .= "</tr>";
+			}
+		$table .= "</table>";
+		unset($_SESSION['noActualizados']);//se cierra sesion de la ejecucion de excel
+		header("Pragma: public");
+		header("Expires: 0");
+		$filename = "registros_no_actualizados.xls";
+		header("Content-type: application/x-msdownload");
+		header("Content-Disposition: attachment; filename=$filename");
+		header("Pragma: no-cache");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		echo $table;
+		die();
+}
+// carga de plantilla productos masivos
+	public function cargaPlantillaProductosMasivos()
+	{
+		extract($_POST);
+		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+		{
+			$where['idTienda']   = $_SESSION['project']['info']['idTienda'];
+		}
+		$where['idEstado']   	= 1;
+		$categorias	     		= $this->logicaHome->getCategorias($where); 
+		$salida["selects"]   	= array("categorias"=>$categorias['datos']);
+		$idComentario= "";
+		//var_dump($ver);die();
+		if($ver == '1')
+		{	
+			//busca la info de la categoria
+			$infoProducto	       		= $this->logicaHome->infoProducto($where);
+			$salida["titulo"] 	        = lang("text18");
+			$salida["datos"]  	        = $infoProducto['datos'][0];
+			$salida["idPresentacion"]   = $idPresentacion;
+			$salida["persistencia"]  	= 0;
+			$salida["ver"]  	 		= $ver;
+			$salida["labelBtn"]  		= lang("text18");
+			$vista = $this->load->view("home/edicionTienda/productos/ProductosMasivos",$salida,true);
+			$respuesta = array("json"=>$infoProducto['datos'][0],"html"=>$vista);
+		}
+		echo json_encode($respuesta);
+	}
+	//productos masivos
+	public function procesaProductosMasivoscsv(){
+		extract($_POST);
+		//var_dump($_POST);die();
+		@mkdir('assets/uploads/crearProductos/');
+		$salida=""; 
+		$error ="";
+		$config['upload_path'] = 'assets/uploads/crearProductos/';
+		//var_dump($config);die();
+        $config['allowed_types'] = 'csv';
+        $config['max_size'] 	 = '100000';
+        $this->load->library('upload', $config);
+    	$this->upload->initialize($config);
+		//var_dump($config);die();
+    	if(!$this->upload->do_upload('csv_file')){
+			$error_sistema = trim(strip_tags($this->upload->display_errors()));
+			$salida = array("mensaje"=>$error_sistema,
+                            "continuar"=>0,
+                            "datos"=>"");
+		}
+    	else{		
+			$data 							= $this->upload->data();
+	        //leer archivo csv, permisos de escritura y array para guardar
+			$file = 'assets/uploads/crearProductos/'.$data['file_name'];
+			$openfile = fopen($file, "r");
+			$cabecera = fgetcsv($openfile, 0,';');
+			//se limpia cabecera
+			$cabeceralimpia = $cabecera;
+			$ValidacionCabecera = array('codigoProducto','nombrePresentacion','marca','fotoPresentacion','foto2','foto3','foto4','foto5','descripcionpres','valorPresentacion','valorAntes','nuevo','descuento','agotado');
+			$errorcampos = 0;
+			$erroresdeCampos= "";
+			//recorre la cabecera y hace comparacion con validacion de cabecera
+			foreach($cabeceralimpia as $infcabecera){
+				if(!in_array($infcabecera, $ValidacionCabecera)){	
+					$errorcampos++;
+					$erroresdeCampos.=$infcabecera.", ";
+				}
+			}
+			if($errorcampos == 0){
+					$arreglodata = array();
+				while (($line = fgetcsv($openfile, 0,';')) !== FALSE) {
+						array_push($arreglodata,$line);
+				}
+				fclose($openfile);
+				$salida2 = array();
+				//se recorre el arreglo
+				foreach($arreglodata as $infoProductos){
+					for($i=0; $i<count($cabeceralimpia);$i++){
+						$cadena = str_replace('','',trim($infoProductos[$i]));
+						$final[$cabeceralimpia[$i]]= $cadena;					
+					}
+					array_push($salida2,$final);
+				}
+				$conProductosRegistrados = 0;
+				$conProductosNoRegistrados = 0;
+				$noRegistrado = array();
+				//recorrido de registros.
+				foreach($salida2 as $newData){
+				$newData['idProducto'] 		= $_POST['idProducto'];
+				$newData['idTienda']   		= $_SESSION['project']['info']['idTienda'];
+				$newData['idSubcategoria'] 	= $_POST['idSubcategoria'];
+				$newData2 = $newData;
+				$proceso 	 	=  $this->logicaTienda->insetProductos($newData);//guardado de registros
+					if($proceso > 0 ){
+						$conProductosRegistrados++;
+					}
+					else{
+						$conProductosNoRegistrados++;
+						array_push($noRegistrado,$newData2);
+					}
+				}
+				//se inicia session, para hacer ejecuion de excel
+				if(count($noRegistrado)>0){
+					$_SESSION['noRegistrado'] = $noRegistrado;
+				}
+				$salida = array("mensaje"=>"Se registraron ".$conProductosRegistrados. " productos, no se registraron ".$conProductosNoRegistrados." productos",
+							"continuar"=>1,
+							"datos"=>$noRegistrado);			
+			} 
+			else{
+				$salida = array("mensaje"=>"El formato de excel esta erroneo, los siguientes campos no se encontraron en el archivo: ".$erroresdeCampos." por favor verifique",
+							"continuar"=>0,
+							"datos"=>"");
+			}
+			
+		echo json_encode($salida);
+	}
 	
+}//exportar excel de datos no actualizados
+public function datosexcelmasivo(){
+	//var_dump($_SESSION['noActualizados']);die();
+		$table           = "";
+		$table .= "<table>";
+			$table .= "<tr>";
+				$table .= "<td>codigoProducto</td>";
+				$table .= "<td>nombrePresentacion</td>";
+				$table .= "<td>marca</td>";
+				$table .= "<td>fotoPresentacion</td>";
+				$table .= "<td>foto2</td>";
+				$table .= "<td>foto3</td>";
+				$table .= "<td>foto4</td>";
+				$table .= "<td>foto5</td>";
+				$table .= "<td>descripcionpres</td>";
+				$table .= "<td>nuevo</td>";
+				$table .= "<td>descuento</td>";
+				$table .= "<td>agotado</td>";
+				$table .= "<td>valorPresentacion</td>";
+				$table .= "<td>valorAntes</td>";
+			$table .= "</tr>";
+			foreach ($_SESSION['noRegistrado']  as $u){
+			$table .= "<tr>";
+				$table .= "<td>".$u['codigoProducto']."</td>";
+				$table .= "<td>".$u['nombrePresentacion']."</td>";
+				$table .= "<td>".$u['marca']."</td>";
+				$table .= "<td>".$u['fotoPresentacion']."</td>";
+				$table .= "<td>".$u['foto2']."</td>";
+				$table .= "<td>".$u['foto3']."</td>";
+				$table .= "<td>".$u['foto4']."</td>";
+				$table .= "<td>".$u['foto5']."</td>";
+				$table .= "<td>".$u['descripcionpres']."</td>";
+				$table .= "<td>".$u['nuevo']."</td>";
+				$table .= "<td>".$u['descuento']."</td>";
+				$table .= "<td>".$u['agotado']."</td>";
+				$table .= "<td>".$u['valorPresentacion']."</td>";
+				$table .= "<td>".$u['valorAntes']."</td>";
+			$table .= "</tr>";
+			}
+		$table .= "</table>";
+		unset($_SESSION['noRegistrado']);//se cierra sesion de la ejecucion de excel
+		header("Pragma: public");
+		header("Expires: 0");
+		$filename = "registros_no_actualizados.xls";
+		header("Content-type: application/x-msdownload");
+		header("Content-Disposition: attachment; filename=$filename");
+		header("Pragma: no-cache");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		echo $table;
+		die();
+}
+public function cargaPlantillaCargaFotos()
+    {
+        extract($_POST);
+        if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+        {
+            $where['idTienda']   = $_SESSION['project']['info']['idTienda'];
+        }
+        $where['idEstado']      = 1;
+        $categorias             = $this->logicaHome->getCategorias($where); 
+        $salida["selects"]      = array("categorias"=>$categorias['datos']);
+        $idComentario= "";
+        //var_dump($ver);die();
+        if($ver == '1')
+        {   
+            //busca la info de la categoria
+            $infoProducto               = $this->logicaHome->infoProducto($where);
+            $salida["titulo"]           = lang("text18");
+            $salida["datos"]            = $infoProducto['datos'][0];
+            $salida["idPresentacion"]   = $idPresentacion;
+            $salida["persistencia"]     = 0;
+            $salida["ver"]              = $ver;
+            $salida["labelBtn"]         = lang("text18");
+            $vista = $this->load->view("home/edicionTienda/productos/cargaFotos",$salida,true);
+            $respuesta = array("json"=>$infoProducto['datos'][0],"html"=>$vista);
+        }
+        echo json_encode($respuesta);
+    }
+    //cargar imagenes
+    public function procesaDataimagenes(){
+		extract($_POST);
+		$data = array();
+		$archivosNoCargados= 0;
+		$archivosCargados= 0;
+		$filesCount = count($_FILES['imagenes']['name']);
+        for($i = 0; $i < $filesCount; $i++){
+            $_FILES['imagene']['name'] 	= $_FILES['imagenes']['name'][$i];
+            $_FILES['imagene']['type'] 	= $_FILES['imagenes']['type'][$i];
+            $_FILES['imagene']['tmp_name'] = $_FILES['imagenes']['tmp_name'][$i];
+			$_FILES['imagene']['error'] = $_FILES['imagenes']['error'][$i];
+			$_FILES['imagene']['size'] = $_FILES['imagenes']['size'][$i];
 
+			$idTienda	=   $_SESSION['project']['info']['idTienda'];
+			@mkdir('assets/uploads/files/'.$idTienda,0777);
+			$config['upload_path'] = 'assets/uploads/files/'.$idTienda.'/';
+			//echo $config['upload_path'];
+        	$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['overwrite'] = true;
+        	$this->load->library('upload', $config);
+    		$this->upload->initialize($config);
+			if(!$this->upload->do_upload('imagene')) 
+			{
+				$salida="";
+				$error ="";
+				$error_sistema = trim(strip_tags($this->upload->display_errors()));
+				//validacion tamano de imagen
+				if($error_sistema== "The image you are attempting to upload doesn't fit into the allowed dimensions."){
+					$error = lang("text_tamano_imagen_favicon");
+					$salida = array("mensaje"=>$error,
+								"continuar"=>0,
+								"datos"=>"");
+				}
+				//validacion formato de imagen
+				else if($error_sistema == "The filetype you are attempting to upload is not allowed."){
+					$error = lang("text_formato_imagen");
+					$salida = array("mensaje"=>$error,
+								"continuar"=>0,
+								"datos"=>"");	
+				}
+				//validacion peso de imagen
+				else if($error_sistema == "The file you are attempting to upload is larger than the permitted size."){
+					$error = lang("text_peso_imagen");
+					$salida = array("mensaje"=>$error,
+								"continuar"=>0,
+								"datos"=>"");	
+				}
+				$archivosNoCargados++;
+			}
+			else
+			{
+					$data 							= 	$this->upload->data();
+					$dataImagen['foto']				=	$data['file_name'];
+					$dataImagen['rutaFoto']			=	$config['upload_path'] = 'assets/uploads/files/'.$idTienda.'/'.$data['file_name'];
+					$dataImagen['idTienda']			=   $_SESSION['project']['info']['idTienda'];
+					$salida 	 	=  $this->logicaTienda->inserimagenes($dataImagen);	
+					$archivosCargados++;
+			}
+			$salida = array("mensaje"=>"Las imagenes se han cargado correctamente: ".$archivosCargados." archivos, no se han cargado ".$archivosNoCargados." archivos.",
+							"continuar"=>1,
+							"datos"=>"");	
+		}
+    	
+		echo json_encode($salida);
+	}
 }

@@ -238,4 +238,19 @@ class LogicaTienda  {
         }
         return $eliminado;
     }
+    //carga archivo excel
+    public function actualizaProductos($where,$dataActualiza){
+        $actualizaProductos=$this->ci->dbTienda->actualizaProductos($where,$dataActualiza);
+        return $actualizaProductos;
+    }
+    //insert productos desde excel
+    public function insetProductos($dataInsert){
+        $insetProductos=$this->ci->dbTienda->inserProductos($dataInsert);
+        return $insetProductos;
+    }
+    //insert imagenes a la tabla app_fotos_temp
+    public function inserimagenes($dataImagen){
+        $insetProductos=$this->ci->dbTienda->inserimagenes($dataImagen);
+        return $insetProductos;
+    }
  }

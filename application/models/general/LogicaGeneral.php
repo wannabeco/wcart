@@ -961,7 +961,6 @@ class LogicaGeneral  {
         }
         return $respuesta;
     }
-
     public function insertaComentario($post)
     {
         extract($post);
@@ -1011,7 +1010,7 @@ class LogicaGeneral  {
 
                 }
             }
-         
+
         }
         else
         {

@@ -685,7 +685,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		}
 		
 	}
-	//comentarios
+	//plantilla comentarios
 	$scope.cargaPlantillaComentarios = function(idPresentacion,ver)
 	{
 		$('#modalUsuarios').modal("show");
@@ -738,5 +738,203 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 			},'json');
 		});
 	}
-	
+	//plantilla actualiza producto
+	$scope.cargaPlantillaActualizaProductos = function(idPresentacion,ver)
+	{
+		$('#modalUsuarios').modal("show");
+		var controlador = 	$scope.config.apiUrl+"GestionTienda/cargaPlantillaActualizaProductos";
+		var parametros  = 	"ver="+ver+"&idPresentacion="+idPresentacion;
+		constantes.consultaApi(controlador,parametros,function(json){
+			$("#modalCrea").html(json.html);
+			$scope.compileAngularElement("#formulario");
+		},'json');
+	}
+	//carga archivo CSV
+	$scope.cargaCSV = function(){
+		var csv_file			= $("#csv_file").val();
+		//console.log(csv_file);
+		if(csv_file == ''){
+			constantes.alerta("Atención","Debe de seleccionar un archivo con extencion CSV para poder guardar","info",function(){});
+		}
+		else{
+			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, desea continuar?","info",function(){
+			var idTienda	=   $('#idTienda').val();
+            var formData 	=   new FormData($("#formulario")[0]);
+            var controlador = 	$scope.config.apiUrl+"GestionTienda/procesaDatacsv"; 
+            //hacemos la petición ajax  
+            parametros	=	formData;
+				$.ajax({
+					url: controlador,  
+					type: 'POST',
+					data: parametros,
+					dataType:"json",
+					cache: false,
+					contentType: false,
+					processData: false,
+					beforeSend: function(){
+					},
+                //una vez finalizado correctamente
+					success: function(json)
+					{
+
+						if(json.continuar == 1)
+						{
+							constantes.alerta("Atención",json.mensaje,"success",function(){
+								setTimeout(function(){
+									if(json.datos.length > 0){
+										constantes.alerta("Atención","Al presionar OK se descargará los productos no actualizados","success",function(){ 
+											var excelProductos = $scope.config.apiUrl+"GestionTienda/datosexcel";
+											document.location  = excelProductos;
+										})
+									}
+								},500);
+							})
+						}
+						else
+						{
+							constantes.alerta("Atención",json.mensaje,"error",function(){})
+						}    
+					},
+					//si ha ocurrido un error
+					error: function(){
+					}
+            	});
+			});
+		}
+	}
+	//carga de plantilla para productos masivos
+	$scope.cargaPlantillaProductosMasivos = function(idPresentacion,ver)
+	{
+		$('#modalUsuarios').modal("show");
+		var idTienda	=   $('#idTienda').val();
+		var controlador = 	$scope.config.apiUrl+"GestionTienda/cargaPlantillaProductosMasivos";
+		var parametros  = 	"ver="+ver+"&idPresentacion="+idPresentacion;
+		constantes.consultaApi(controlador,parametros,function(json){
+			$("#modalCrea").html(json.html);
+			$scope.compileAngularElement("#formulario");
+		},'json');
+	}
+	//carga de productos masivos
+	$scope.cargaProductosMasivos 	= function(){
+		var csv_file				= $("#csv_file").val();
+		var idProducto				= $('#idProducto').val();
+		var idSubcategoria			= $('#idSubcategoria').val();
+		//console.log(csv_file);
+		if(idProducto == ''){
+			constantes.alerta("Attention!","Debe de seleccionar una categoria para el carge de los productos","info",function(){});
+		}
+		else if(idSubcategoria == ''){
+			constantes.alerta("Attention!","Debe de seleccionar una subcategoria para el carge de los productos","info",function(){});
+		}
+		else if(csv_file == ''){
+			constantes.alerta("Atención","Debe de seleccionar un archivo con extencion CSV para poder guardar","info",function(){});
+		}
+		else{
+			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, desea continuar?","info",function(){
+			var idTienda				= $('#idTienda').val();
+			var idProducto				= $('#idProducto').val();
+			var idSubcategoria			= $('#idSubcategoria').val();
+            var formData 	=   new FormData($("#formulario")[0]);
+            var controlador = 	$scope.config.apiUrl+"GestionTienda/procesaProductosMasivoscsv"; 
+            //hacemos la petición ajax  
+            parametros	=	formData;
+				$.ajax({
+					url: controlador,  
+					type: 'POST',
+					data: parametros,
+					dataType:"json",
+					cache: false,
+					contentType: false,
+					processData: false,
+					beforeSend: function(){
+					},
+                //una vez finalizado correctamente
+					success: function(json)
+					{
+						if(json.continuar == 1)
+						{
+							constantes.alerta("Atención",json.mensaje,"success",function(){
+								setTimeout(function(){
+									if(json.datos.length > 0){
+										constantes.alerta("Atención","Al presionar OK se descargará los productos no Registrados","success",function(){ 
+											var excelProductos = $scope.config.apiUrl+"GestionTienda/datosexcelmasivo";
+											document.location  = excelProductos;
+										})
+									}
+								},500);
+								location.reload();
+							})
+							
+						}
+						
+						else
+						{
+							constantes.alerta("Atención",json.mensaje,"error",function(){
+							})
+						}    
+					},
+					//si ha ocurrido un error
+					error: function(){
+					}
+            	});
+			});
+		}
+	}
+	//carga de plantilla de imagenes masivas
+    $scope.cargaPlantillaCargaFotos = function(idPresentacion,ver)
+    {
+        $('#modalUsuarios').modal("show");
+        var idTienda    =   $('#idTienda').val();
+        var controlador =   $scope.config.apiUrl+"GestionTienda/cargaPlantillaCargaFotos";
+        var parametros  =   "ver="+ver+"&idPresentacion="+idPresentacion;
+        constantes.consultaApi(controlador,parametros,function(json){
+            $("#modalCrea").html(json.html);
+            $scope.compileAngularElement("#formulario");
+        },'json');
+    }
+    //cargue de imagenes masivas
+    $scope.cargarImagenes = function(){
+		var imagenes			= $("#imagenes").val();
+		if(imagenes == ''){
+			constantes.alerta("Atención","Debe de seleccionar una imagen para poder guardar	","info",function(){});
+		}
+		else{
+			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, desea continuar?","info",function(){
+			var idTienda	=   $('#idTienda').val();
+            var formData 	=   new FormData($("#formulario")[0]);
+            var controlador = 	$scope.config.apiUrl+"GestionTienda/procesaDataimagenes"; 
+            //hacemos la petición ajax  
+            parametros	=	formData;
+				$.ajax({
+					url: controlador,  
+					type: 'POST',
+					data: parametros,
+					dataType:"json",
+					cache: false,
+					contentType: false,
+					processData: false,
+					beforeSend: function(){
+					},
+                //una vez finalizado correctamente
+					success: function(json)
+					{
+						//var_dum(idTienda);
+						if(json.continuar == 1)
+						{
+							constantes.alerta("Atención",json.mensaje,"success",function(){
+								location.reload();
+							})
+						}
+						else
+						{
+							constantes.alerta("Atención",json.mensaje,"error",function(){})
+						}    
+					},
+					//si ha ocurrido un error
+					error: function(){
+					}
+            	});
+			});
+		}
+	}
 });

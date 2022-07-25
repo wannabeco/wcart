@@ -15,6 +15,7 @@ class baseDatosTienda extends CI_Model {
         $this->tableComentarios             = "app_comentarios";
         $this->tableProductos               = "app_presentacion_producto";
         $this->tableVotos                   = "app_votos";
+        $this->tableImagenes                = "app_fotos_temp";
     }
     public function getInfoTienda($where)
     {
@@ -67,6 +68,14 @@ class baseDatosTienda extends CI_Model {
         $id = $this->db->get();
         //print_r($this->db->last_query());die();
         return $id->result_array();
+    }
+    //actualiza productos excel
+    public function actualizaProductos($where,$dataActualiza)
+    {
+        $this->db->where($where);
+        $this->db->update($this->tableProductos,$dataActualiza);
+        //print_r($this->db->last_query());die();
+        return $this->db->affected_rows();
     }
     //actualiza comentarios
     public function actualizaComentarios($dataInserta,$where)
@@ -141,6 +150,20 @@ class baseDatosTienda extends CI_Model {
         $this->db->update($this->tableProductos,$dataActualiza);
         //print_r($this->db->last_query());die();
         return $this->db->affected_rows();
+    }
+    //inserta productos
+    public function inserProductos($dataInserta)
+    {
+        $this->db->insert($this->tableProductos,$dataInserta);
+        //print_r($this->db->last_query());die();
+        return $this->db->insert_id();
+    }
+    //inserta en la base de datos app_fotos_temp
+    public function inserimagenes($dataImagen)
+    {
+        $this->db->insert($this->tableImagenes,$dataImagen);
+        //print_r($this->db->last_query());die();
+        return $this->db->insert_id();
     }
 }
 
