@@ -71,8 +71,6 @@ class BaseDatosGral extends CI_Model {
         $this->tableTiendas             = "app_tiendas";
         $this->tableCaracteristicas     = "app_variaciones";
         $this->tableClientesRel         = "app_clientes_tienda";
-        $this->tableComentarios         = "app_comentarios";
-        $this->tableVotos               = "app_votos";
     }
     public function getVariablesGlobales()
     {
@@ -96,7 +94,7 @@ class BaseDatosGral extends CI_Model {
     }
     public function getPresentacionesProducto($where=array(),$campo='')
     {
-        $this->db->select("*,IF(puntos=0,'0',ROUND(puntos/votantes)) calificacion,".$campo);
+        $this->db->select("*,".$campo);
         if(count($where) > 0)
         {
             $this->db->where($where);
@@ -727,25 +725,6 @@ class BaseDatosGral extends CI_Model {
         $this->db->insert($this->tableClientesRel,$dataInserta);
         //print_r($this->db->last_query());die();
         return $this->db->insert_id();
-    }
-    public function insertaComentario($dataInserta)
-    {
-        $this->db->insert($this->tableComentarios,$dataInserta);
-        //print_r($this->db->last_query());die();
-        return $this->db->insert_id();
-    }
-    public function relacionVotoUsuario($dataInserta)
-    {
-        $this->db->insert($this->tableVotos,$dataInserta);
-        //print_r($this->db->last_query());die();
-        return $this->db->insert_id();
-    }
-    public function actualizoPresentacion($dataInserta,$where)
-    {
-        $this->db->where($where);
-        $this->db->update($this->tablePresentaciones,$dataInserta);
-        //print_r($this->db->last_query());die();
-        return $this->db->affected_rows();
 
     }
 }
