@@ -654,10 +654,9 @@ class GestionTienda extends CI_Controller
 				}
 			}
 			if($errorcampos == 0){
-					$arreglodata = array();
-				while (($line = fgetcsv($openfile, 0, ';')) !== FALSE) {
-						$datos = explode(';',explode('\n',$line[0])[0]);
-						array_push($arreglodata,$datos);		
+				$arreglodata = array();
+				while (($line = fgetcsv($openfile, 0,';')) !== FALSE) {
+						array_push($arreglodata,$line);
 				}
 				fclose($openfile);
 				$salida2 = array();
