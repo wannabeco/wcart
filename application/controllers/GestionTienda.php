@@ -954,6 +954,7 @@ public function cargaPlantillaCargaFotos()
 			$idTienda	=   $_SESSION['project']['info']['idTienda'];
 			@mkdir('assets/uploads/files/'.$idTienda,0777);
 			$config['upload_path'] = 'assets/uploads/files/'.$idTienda.'/';
+			$config['max_size'] 	 = '100000';
 			//echo $config['upload_path'];
         	$config['allowed_types'] = 'gif|jpg|png|jpeg';
 			$config['overwrite'] = true;
