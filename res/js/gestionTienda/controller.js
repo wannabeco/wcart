@@ -279,6 +279,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		$scope.config 			=  configLogin;//configuración global
 		$.material.init();
 		$scope.consultarProductos();
+		$("#imagenes").fileinput({'showUpload':false, 'previewFileType':'any'});
 		//inicializo los botones de las fotos
 		$('#botonfoto1').click(function(){
 			$('#fotoFile1').click();
