@@ -11,8 +11,8 @@
                     <div class="file-select" id="src-file1" >
                         <input type="file" id="imagenes" name ="imagenes[]" multiple value=""><br>
                     </div><br>
-                    <p style=" position:relative; float:left; left:20px; margin-top:20px;"> 
-                        Antes de realizar el cargue de fotos automaticos, asegurate de estar en los siguientes extenciones: <strong>.JPG, .PNG, .GIF, .JPEG</strong>.
+                    <p style=" position:relative; float:left; left:20px; margin-top:20px; rigth:20px; width: 95%;" class="col-md-12 text-justify"> 
+                        Antes de realizar el cargue de fotos automaticos, asegurate de estar en los siguientes extenciones: <strong>.JPG, .PNG, .GIF, .JPEG</strong>, es importante recordar que solo se pueden un maximo de 10 archivos por carga.
                     </p><br> 
                     <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" id="cargarImagenes" name="cargarImagenes" ng-click="cargarImagenes()">Cargar imagenes</button>   
                 </div>
