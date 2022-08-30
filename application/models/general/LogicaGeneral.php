@@ -1022,4 +1022,51 @@ class LogicaGeneral  {
         return $respuesta;
 
     }
+    //8 nuevas presentaciones
+    public function getInfoPresentacionNew($idTienda)
+    {
+        $resultado = $this->ci->dbGeneral->getInfoPresentacionNew(array("idTienda"=>$idTienda));
+        $respuesta = array("mensaje"=>"Infotmacion de los nuevos productos",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
+        return $respuesta; 
+    }
+    //get comentarios
+    public function getInforComentarios($where=array())
+    {
+        $noti = $this->ci->dbGeneral->getInforComentarios($where);
+        if(count($noti) > 0)
+        {
+            $respuesta = array("mensaje"=>"Listado de Comentarios",
+                              "continuar"=>1,
+                              "datos"=>$noti);            
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"No existen Comentarios",
+                              "continuar"=>0,
+                              "datos"=>"");    
+
+        }
+        return $respuesta;
+    }
+    //get ciudades
+    public function getInfoCiudades($where=array())
+    {
+        $noti = $this->ci->dbGeneral->getInfoCiudades($where);
+        if(count($noti) > 0)
+        {
+            $respuesta = array("mensaje"=>"Listado de Ciudades",
+                              "continuar"=>1,
+                              "datos"=>$noti);            
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"No existen Ciudades",
+                              "continuar"=>0,
+                              "datos"=>"");    
+
+        }
+        return $respuesta;
+    }
  }

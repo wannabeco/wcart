@@ -1358,6 +1358,7 @@ class Api extends CI_Controller
         $infoTienda         = $this->logica->getInfoTiendaNew($idTienda);
         echo json_encode($infoTienda, JSON_UNESCAPED_UNICODE);
     }
+    //insert comentarios
     public function insertaComentario()
     {
         extract($_POST);
@@ -1376,5 +1377,61 @@ class Api extends CI_Controller
             echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
 		}
     }
+    //get comentarios
+    public function getInforComentarios()
+    {
+        extract($_POST);
+    	//súper acceso a la app
+		if(validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+			$post['idTienda']           = $_POST['idTienda'];
+			$post['idPresentacion']     = $_POST['idPresentacion'];
+			$post['estado']             = 1;
+			//busco la foto con la palabra que envien
+			$noti = $this->logica->getInforComentarios($post);
+			echo json_encode($noti);
+		}
+		else
+		{
+			$respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+		}    
+    }
+    //informacion 8 nueva  presentacion 
+    public function infoPresentacionNew()
+    {
+        extract($_POST);
+        $infoTienda         = $this->logica->getInfoPresentacionNew($idTienda);
+        echo json_encode($infoTienda, JSON_UNESCAPED_UNICODE);
+    }
+    //ciudades
+    public function getInforCiudades()
+    {
+        extract($_POST);
+    	//súper acceso a la app
+		if(validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+			$post['idTienda']           = $_POST['idTienda'];
+			$post['ID_PAIS']            = $_POST['ID_PAIS'];
+			$post['ID_DPTO']            = $_POST['ID_DPTO'];
+            $post['ID_CIUDAD']          = $_POST['ID_CIUDAD'];
+
+			//busco la foto con la palabra que envien
+			$noti = $this->logica->getInfoCiudades($post);
+			echo json_encode($noti);
+		}
+		else
+		{
+			$respuesta = array("mensaje"=>"Acceso no admitido a consulta de ciudades.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+		}    
+    }
+    
 }
 ?>

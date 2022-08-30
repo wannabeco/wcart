@@ -748,6 +748,40 @@ class BaseDatosGral extends CI_Model {
         return $this->db->affected_rows();
 
     }
+    //informcion de las presentaiones nuevas
+    public function getInfoPresentacionNew($where=array())
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tablePresentaciones);
+        $this->db->where(array("nuevo"== 'Si'));
+        $this->db->where(array("estado"=>1));
+        $this->db->order_by("fecha","DESC");
+        $this->db->limit(8);
+        $id = $this->db->get();
+        print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+    //get info comentarios
+    public function getInforComentarios($where)
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tableNotificaciones);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+    //get info ciudades
+    public function getInfoCiudades($where)
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tableCiudad);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
 }
 
 ?>
