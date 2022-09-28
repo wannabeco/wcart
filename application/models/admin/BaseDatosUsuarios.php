@@ -26,6 +26,8 @@ class BaseDatosUsuarios extends CI_Model {
         $this->tableModulos              = "app_modulos";
         $this->tableRelPerfilModulo      = "app_rel_perfil_modulo";
         $this->tablePedidos              = "app_pedidos";
+        $this->tableTiposDoc             = "app_tipos_doc";
+
     }
     public function agregaUsuario($dataInserta)
     {
@@ -62,7 +64,7 @@ class BaseDatosUsuarios extends CI_Model {
     }
     public function infoUsuario($where="")
     {
-        $this->db->select("u.*,u.estado as estadoU,p.nombrePerfil,a.nombreArea,l.*");
+        $this->db->select("u.*,u.estado as estadoU,p.nombrePerfil,a.nombreArea,D.nombreTpoDoc,t.NOMBRE,C.NOMBRE,l.*");
         if(count($where) > 0)
         {
             $this->db->where($where);
@@ -70,13 +72,16 @@ class BaseDatosUsuarios extends CI_Model {
         $this->db->from($this->tablePersonas." u");
         $this->db->join($this->tablePerfiles." p","p.idPerfil=u.idPerfil","INNER");
         $this->db->join($this->tableAreas." a","a.idArea=u.idArea","INNER");
+        $this->db->join($this->tableTiposDoc." D","D.idTipoDoc=u.tipoDocumento","INNER");
+        $this->db->join($this->tableDeptos." t","t.ID_DPTO=u.departamento","INNER");
+        $this->db->join($this->tableCiudad." C","C.ID_CIUDAD=u.ciudad","INNER");
         $this->db->join($this->tableLogin." l","l.idGeneral=u.idPersona","LEFT");
         if ($_SESSION['project']['info']['idPerfil'] == 6 ){
         $this->db->join($this->tablePedidos." ped","u.idPersona=ped.idPersona","LEFT");
         }
         $this->db->group_by('u.idPersona');
         $id = $this->db->get();
-        //print_r($this->db->last_query());die();
+        print_r($this->db->last_query());die();
         return $id->result_array();
     }    
 }

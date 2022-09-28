@@ -245,7 +245,7 @@ class LogicaRegistro  {
         $verificoMailEnEmpresa = $this->verificaEmpresa(trim($email),"email","empresas");
         if(count($verificoMailEnEmpresa) > 0)//la empresa existe y no debo permitirle el registro
         {
-            $respuesta = array("mensaje"=>"El correo electrónico que intenta registrar pertenece a una cuenta empresarial, por favor verifique.",
+            $respuesta = array("mensaje"=>"El correo electr&oacute;nico que intenta registrar pertenece a una cuenta empresarial, por favor verifique.",
                             "continuar"=>0,
                             "datos"=>"");
         }
@@ -255,7 +255,7 @@ class LogicaRegistro  {
             $verificoPersonaMail = $this->verificaEmpresa($email,"email","personas");
             if(count($verificoPersonaMail) > 0 && $email != '')
             {  
-                $respuesta = array("mensaje"=>"El correo electrónico que ingresó ya se encuentra registrado, por favor verifíquelo o pruebe con otro.",
+                $respuesta = array("mensaje"=>"El correo electrónico que ingresó; ya se encuentra registrado, por favor verifíquelo o pruebe con otro.",
                             "continuar"=>0,
                             "datos"=>"");
             }
@@ -301,8 +301,8 @@ class LogicaRegistro  {
                         //inserto la clave
                         $idLogin                        = $this->ci->dbRegistro->insertaClavePersona($dataInsertClave);
                         if($idLogin > 0)
-                        {
-                            $envioMail  =   sendMail($email,"Registro exitoso","Se ha realizado el registro de su cuenta personal en la plataforma de Hoteles AR");
+                        {   //se realiza l envio de email, hacer cambio de empresa a la que se ha realizado el registro
+                            //$envioMail  =   sendMail($email,"Registro exitoso","Se ha realizado el registro de su cuenta personal en la plataforma de Hoteles AR");
                             
                                 $respuesta = array("mensaje"=>"Su registro se ha llevado a cabo de manera exitosa.",
                                     "continuar"=>1,

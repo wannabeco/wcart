@@ -12,7 +12,7 @@
 
    Este archivo es el controlador que realizara al cuál se harán los llamados desde las url en la página o en los procesos AJAX que se utilicen.
 */
-ini_set("display_errors",0);
+ini_set("display_errors",1);
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
@@ -41,6 +41,7 @@ class Api extends CI_Controller
         $this->load->model("registro/LogicaRegistro", "logicaReg");
         $this->load->model("admin/LogicaUsuarios", "logicaUsuarios");
         $this->load->model("pedidos/LogicaPedidos", "logicaPedidos");
+        $this->load->model("tienda/logicaTienda", "logicaTienda");//aqui se llama la logica para crear una nueva tiendas
        	$this->load->helper('language');//mantener siempre.
     	$this->lang->load('spanish');//mantener siempre.
         $this->load->library('Excel',"excel");
@@ -115,9 +116,18 @@ class Api extends CI_Controller
 		if(validaInApp($movil))//esta validación me hará consultas más seguras
 		{
 			$post['usuario'] 	= $email;
-			//busco la foto con la palabra que envien
+
+            if($email === ''){
+                $respuesta = array("mensaje"=>"Por favor ingrese un correo electronico.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);    
+            }
+            else{
+                //busco la foto con la palabra que envien
 			$logueo = $this->logicaLogin->cambioClave($post);
 			echo json_encode($logueo, JSON_UNESCAPED_UNICODE);
+            }
 		}
 		else
 		{
@@ -210,7 +220,7 @@ class Api extends CI_Controller
 	    	{
 				$post['ID_PAIS'] 	= '057';
 				$post['ID_DPTO'] 	= $depto;
-				$group = false;
+				$group = true;
 	    	}
 
 			//busco la foto con la palabra que envien
@@ -471,7 +481,7 @@ class Api extends CI_Controller
     {
         extract($_POST);
         //echo $idPerfil;
-
+        //var_dump($_POST);die();
         //súper acceso a la app
         if(isset($movil) && validaInApp($movil))//esta validación me hará consultas más seguras
         {
@@ -683,7 +693,7 @@ class Api extends CI_Controller
         echo json_encode($configuracion); 
     }
     public function procesoPagoOnline($idPedido,$proveedor,$idTienda)
-    {
+    {   
         $infoPedido         = $this->logicaPedidos->getPedidos(array("idPedido"=>($idPedido)));
         $productosPedido    = $this->logicaPedidos->productosPedidos(array("d.idPedido"=>($idPedido)));
         $infoTienda         = $this->logica->getInfoTiendaNew($idTienda);
@@ -875,7 +885,7 @@ class Api extends CI_Controller
     	//súper acceso a la app
 		if(validaInApp($movil))//esta validación me hará consultas más seguras
 		{
-			//$post['idPersona'] 	= $idusuario;
+			$post['idPersona'] 	= $idusuario;
 			//busco la foto con la palabra que envien
 			$logueo = $this->logicaUsuarios->infoUsuario($idusuario);
 			echo json_encode($logueo);
@@ -953,12 +963,12 @@ class Api extends CI_Controller
                             "datos"=>$salidaArray); 
         echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
     }
-
+    //mis pedidos, se actualiza $misPedidos = $this->logicaPedidos->misPedidos($quere); se asigna p a p.idpersona
     public function misPedidos()
     {
         extract($_POST);
-        $where = array("idPersona"=>$idPersona,"idTienda"=>$idTienda);
-        $misPedidos = $this->logicaPedidos->misPedidos($quere);
+        $where = array("p.idPersona"=>$idPersona,"p.idTienda"=>$idTienda);
+        $misPedidos = $this->logicaPedidos->misPedidos($where);
         echo json_encode($misPedidos);
     }
 
@@ -1233,15 +1243,16 @@ class Api extends CI_Controller
 
     public function eliminaItemTemporal()
     {
-        $where['idPedidoTemp']      = $_POST['idItem'];
-        $respuesta = $this->logicaPedidos->eliminaItemTemporal($where);
+        $where['idPedidoTemp']              = $_POST['idItem'];
+        $dataActualiza['eliminado']         = 1;
+        $respuesta = $this->logicaPedidos->eliminaItemTemporal($where,$dataActualiza);
         echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
     }
-
+    
     public function getPedidoTemporal()
     {
-        $where = array("identificador"=>$_POST['identificador'],"idTienda"=>$_POST['idTienda']);
-        $respuesta = $this->logicaPedidos->getPedidoTemporal($identificador);
+        $where = array("identificador"=>$_POST['identificador'],"d.idTienda"=>$_POST['idTienda'],"d.eliminado"=>0);
+        $respuesta = $this->logicaPedidos->getPedidoTemporal($where);
         echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
     }
 
@@ -1384,9 +1395,7 @@ class Api extends CI_Controller
     	//súper acceso a la app
 		if(validaInApp($movil))//esta validación me hará consultas más seguras
 		{
-			$post['idTienda']           = $_POST['idTienda'];
 			$post['idPresentacion']     = $_POST['idPresentacion'];
-			$post['estado']             = 1;
 			//busco la foto con la palabra que envien
 			$noti = $this->logica->getInforComentarios($post);
 			echo json_encode($noti);
@@ -1400,13 +1409,30 @@ class Api extends CI_Controller
             echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
 		}    
     }
+
     //informacion 8 nueva  presentacion 
     public function infoPresentacionNew()
     {
         extract($_POST);
-        $infoTienda         = $this->logica->getInfoPresentacionNew($idTienda);
-        echo json_encode($infoTienda, JSON_UNESCAPED_UNICODE);
+        //súper acceso a la app
+        if(validaInApp($movil))//esta validación me hará consultas más seguras
+        {
+            $post['idTienda']           = $_POST['idTienda'];
+            $post['idEstado']           = $_POST['idEstado'];
+            $post['nuevo']              = $_POST['nuevo'];
+            $infoNew         = $this->logica->getInfoPresentacionNew($post);
+            echo json_encode($infoNew);
+        }
+        else{
+            
+            $respuesta = array("mensaje"=>"Acceso no admitido a consultar los 8 primeros productos.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
+        }
+        
     }
+
     //ciudades
     public function getInforCiudades()
     {
@@ -1414,14 +1440,12 @@ class Api extends CI_Controller
     	//súper acceso a la app
 		if(validaInApp($movil))//esta validación me hará consultas más seguras
 		{
-			$post['idTienda']           = $_POST['idTienda'];
-			$post['ID_PAIS']            = $_POST['ID_PAIS'];
+			//$post['ID_PAIS']            = $_POST['ID_PAIS'];
 			$post['ID_DPTO']            = $_POST['ID_DPTO'];
-            $post['ID_CIUDAD']          = $_POST['ID_CIUDAD'];
 
 			//busco la foto con la palabra que envien
-			$noti = $this->logica->getInfoCiudades($post);
-			echo json_encode($noti);
+			$res = $this->logica->getInfoCiudades($post);
+			echo json_encode($res);
 		}
 		else
 		{
@@ -1432,6 +1456,76 @@ class Api extends CI_Controller
             echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
 		}    
     }
-    
+    //get tiendas por url amigable
+    public function infoTiendaUrl()
+    {   
+        extract($_POST);
+        if(validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+        $post['urlAmigable']            = $_POST['urlAmigable'];
+        $infoTienda         = $this->logica->infoTiendaUrl($post);
+        echo json_encode($infoTienda, JSON_UNESCAPED_UNICODE);
+        }
+        else{
+            $respuesta = array("mensaje"=>"Acceso no admitido a consultar la tienda por url.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+        }
+    }
+    // consultar tipo de documento
+    public function InfoDocumentos()
+    {
+        extract($_POST);
+        if(validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+            $infoDocumento         = $this->logica->InfoDocumentos();
+            echo json_encode($infoDocumento, JSON_UNESCAPED_UNICODE);
+        }
+        else{
+            $respuesta = array("mensaje"=>"Acceso no admitido a consultar los documentos.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+        }
+    }
+    //crear nueva tienda
+    public function crearTienda()
+    {
+        extract($_POST);
+        if(validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+            extract($_POST);
+            $crearTienda         = $this->logicaTienda->crearTienda($_POST,$_FILES);
+            echo json_encode($crearTienda, JSON_UNESCAPED_UNICODE);
+		}
+		else
+		{
+			$respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+		}
+    }
+    // informacion de los tipos de tienda
+    public function infoTipoTienda(){
+        extract($_POST);
+        if(validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+            $infoTipoTienda         = $this->logica->infoTipoTienda();
+            echo json_encode($infoTipoTienda, JSON_UNESCAPED_UNICODE);
+        }
+        else{
+            $respuesta = array("mensaje"=>"Acceso no admitido a consultar los documentos.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+        }
+    }
+
 }
 ?>

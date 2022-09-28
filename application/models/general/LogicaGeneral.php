@@ -300,7 +300,7 @@ class LogicaGeneral  {
         $pedido['codigoPedido'] = generacodigo(10);
         $pedido['formaPago']    = $post['formaPago'];
         $pedido['idTienda']       = $post['idTienda'];
-        
+        //$pedido['eliminado']       = 0;
         $pedido['estadoPago']     = (isset($post['estadoPago']))?$post['estadoPago']:"";
         $pedido['transactionId']  = (isset($post['transactionId']))?$post['transactionId']:"";
         $pedido['reference_pol']  = (isset($post['reference_pol']))?$post['reference_pol']:"";
@@ -908,7 +908,7 @@ class LogicaGeneral  {
 
     public function getInfoTiendaNew($idTienda)
     {
-        $resultado = $this->ci->dbGeneral->getInfoTienda(array("idTienda"=>$idTienda));
+        $resultado = $this->ci->dbGeneral->getInfoTiendaNew(array("t.idTienda"=>$idTienda));
         $respuesta = array("mensaje"=>"Info tienda",
                               "continuar"=>1,
                               "datos"=>$resultado);   
@@ -1022,17 +1022,19 @@ class LogicaGeneral  {
         return $respuesta;
 
     }
+
     //8 nuevas presentaciones
-    public function getInfoPresentacionNew($idTienda)
+    public function getInfoPresentacionNew($where)
     {
-        $resultado = $this->ci->dbGeneral->getInfoPresentacionNew(array("idTienda"=>$idTienda));
+        $resultado = $this->ci->dbGeneral->getInfoPresentacionNew($where);
         $respuesta = array("mensaje"=>"Infotmacion de los nuevos productos",
                               "continuar"=>1,
                               "datos"=>$resultado);   
         return $respuesta; 
     }
+
     //get comentarios
-    public function getInforComentarios($where=array())
+    public function getInforComentarios($where)
     {
         $noti = $this->ci->dbGeneral->getInforComentarios($where);
         if(count($noti) > 0)
@@ -1046,12 +1048,11 @@ class LogicaGeneral  {
             $respuesta = array("mensaje"=>"No existen Comentarios",
                               "continuar"=>0,
                               "datos"=>"");    
-
         }
         return $respuesta;
     }
     //get ciudades
-    public function getInfoCiudades($where=array())
+    public function getInfoCiudades($where)
     {
         $noti = $this->ci->dbGeneral->getInfoCiudades($where);
         if(count($noti) > 0)
@@ -1067,6 +1068,34 @@ class LogicaGeneral  {
                               "datos"=>"");    
 
         }
+        return $respuesta;
+    }
+    //info tienda por ciudades
+    public function infoTiendaUrl($where)
+    {
+        //extract($post);
+        $resultado = $this->ci->dbGeneral->infoTiendaUrl($where);
+        $respuesta = array("mensaje"=>"Info tienda por url",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
+        return $respuesta; 
+    }
+    // tipo de documento
+    public function InfoDocumentos(){
+        $where['estado']        = 1;
+        $resultado = $this->ci->dbGeneral->InfoDocumentos($where);
+        $respuesta = array("mensaje"=>"Informacion de tipo documentos",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
+        return $respuesta;
+    }
+    // tipo tienda
+    public function infoTipoTienda(){
+        $where['eliminado']        = 0;
+        $resultado = $this->ci->dbGeneral->infoTipoTienda($where);
+        $respuesta = array("mensaje"=>"Informacion del tipo tienda disponible",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
         return $respuesta;
     }
  }
