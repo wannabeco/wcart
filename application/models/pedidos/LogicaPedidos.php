@@ -156,9 +156,9 @@ class LogicaPedidos  {
         $dataPagos = $this->ci->dbPedidos->updatePedidoTemporal($where,$dataActualiza);
         return $dataPagos;
     }
-    public function eliminaItemTemporal($where=array())
+    public function eliminaItemTemporal($where=array(),$dataActualiza=array())
     {
-        $dataPedidos = $this->ci->dbPedidos->eliminaItemTemporal($where);
+        $dataPedidos = $this->ci->dbPedidos->updatePedidoTemporal($where,$dataActualiza);
         return $dataPedidos;
     }
     public function pedidoTemporal($post)

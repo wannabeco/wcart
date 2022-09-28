@@ -20,10 +20,12 @@ class BaseDatosGral extends CI_Model {
     private $tableInfoPago               =   "";
     private $tableEmpresas               =   "";
     private $tablePersonas               =   "";
+    private $tableTiposDoc               =   "";
     public function __construct() 
     {
         parent::__construct();
         $this->load->database();
+        $this->tablePais                 = "app_paises";
         $this->tableDeptos               = "app_departamentos"; 
         $this->tableCiudad               = "app_ciudades"; 
         $this->tableMails                = "app_mails";
@@ -73,6 +75,7 @@ class BaseDatosGral extends CI_Model {
         $this->tableClientesRel         = "app_clientes_tienda";
         $this->tableComentarios         = "app_comentarios";
         $this->tableVotos               = "app_votos";
+        $this->tipoTienda               = "app_tipo_tienda";
     }
     public function getVariablesGlobales()
     {
@@ -746,6 +749,100 @@ class BaseDatosGral extends CI_Model {
         $this->db->update($this->tablePresentaciones,$dataInserta);
         //print_r($this->db->last_query());die();
         return $this->db->affected_rows();
+
+    }
+    //informcion de las presentaiones nuevas
+    public function getInfoPresentacionNew($where)
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tablePresentaciones);
+        $this->db->order_by("fecha","DESC");
+        $this->db->limit(8);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+
+    //get info comentarios
+    public function getInforComentarios($where)
+    {   
+        $this->db->select("*,p.NOMBRE nombre,p.Apellido apellido");
+        if(count($where)  > 0)
+        {
+            $this->db->where($where);
+        }
+        $this->db->where($where);
+        $this->db->from($this->tableComentarios. " c");
+        $this->db->join($this->tablePersonas." p"," p.idPersona = c.idUsuario" , "INNER");
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+
+    //get info ciudades
+    public function getInfoCiudades($where)
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tableCiudad);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+    //informacion de la tienda
+    public function getInfoTiendaNew($where=array())
+    {
+        $this->db->select("*,p.NOMBRE pais,d.NOMBRE departamento,c.NOMBRE ciudad");
+        if(count($where)  > 0)
+        {
+            $this->db->where($where);
+        }
+        $this->db->from($this->tableTiendas." t");
+        $this->db->join($this->tablePais." p","p.ID_PAIS = t.idPais", "INNER");
+        $this->db->join($this->tableDeptos." d", "d.ID_DPTO = t.idDepartamento and t.idPais=d.ID_PAIS", "INNER");
+        $this->db->join($this->tableCiudad." c", "c.ID_CIUDAD = t.idCiudad and c.ID_DPTO = t.idDepartamento and c.ID_PAIS=t.idPais", "INNER");
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+
+    //get info tienda por url
+    public function infoTiendaUrl($where=array())
+    {
+        $this->db->select("*");
+        if(count($where)  > 0)
+        {
+            $this->db->where($where);
+        }
+        $this->db->from($this->tableTiendas);
+        $id = $this->db->get();
+        // print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+
+    // consultar todos los tipos de documento
+    public function InfoDocumentos($where){
+
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tableTiposDoc);
+        // $this->db->order_by("nombreTipoDoc","ASC");
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+
+    }
+    //se consulta la informacion de la tipo tienda
+    public function infoTipoTienda($where){
+
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tipoTienda);
+        $this->db->order_by("nombreTipoTienda","ASC");
+        $id = $this->db->get();
+        // print_r($this->db->last_query());die();
+        return $id->result_array();
 
     }
 }

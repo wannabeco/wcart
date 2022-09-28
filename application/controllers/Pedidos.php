@@ -660,8 +660,9 @@ class Pedidos extends CI_Controller
 
     //Para los pagos de PAYU
     public function respuestaPago()
-    {
-        //var_dump($_SESSION['confirma']);
+    {   
+        session_start();
+        //var_dump($_SESSION['confirma']);die();
         extract($_SESSION['confirma']);
 
         

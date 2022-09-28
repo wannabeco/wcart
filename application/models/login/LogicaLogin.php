@@ -209,7 +209,7 @@ class LogicaLogin  {
                 $_SESSION['project']['info']  = $infoEmpresa[0];
                 $_SESSION['project']['login'] = $dataLogin;
                 auditoria("INICIODESESION","Ha ingresado al sistema el usuario ".$infoEmpresa[0]['nombre']." ".$infoEmpresa[0]['apellido']." | ".$infoEmpresa[0]['idPersona']);
-                $respuesta = array("mensaje"=>"Bienvenido<br><strong>".$infoEmpresa[0]['nombre']." ".$infoEmpresa[0]['apellido']."</strong>",
+                $respuesta = array("mensaje"=>"Bienvenido <br><strong>".$infoEmpresa[0]['nombre']." ".$infoEmpresa[0]['apellido']."</strong>",
                                    "continuar"=>1,
                                    "zona"=>2,
                                    "datos"=>$infoEmpresa[0]); 
