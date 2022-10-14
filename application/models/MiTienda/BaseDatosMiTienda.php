@@ -25,7 +25,7 @@ if (!defined('BASEPATH'))
         private $tableDepartamentos          =   "";
         private $tableCiudades               =   "";
         private $categorias                  =   "";
-    
+
         public function __construct() 
         {
             parent::__construct();
@@ -36,7 +36,7 @@ if (!defined('BASEPATH'))
             $this->tablePaises              = "app_paises";
             $this->tableDepartamentos       = "app_departamentos";
             $this->tableCiudades            = "app_ciudades";
-            $this->categorias               ="app_productos";
+            $this->categorias               = "app_productos";
     
         }
         //copear y pegar este query las veces que sea necesario para hacer una inserción, recordar cambiar el nombre

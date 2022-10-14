@@ -113,7 +113,7 @@ class BaseDatosPedidos extends CI_Model {
         $this->db->where($where);
         $this->db->from($this->tablePedidosTmp);
         $id = $this->db->get();
-        //print_r($this->db->last_query());die();
+        // print_r($this->db->last_query());die();
         return $id->result_array();
     }
     public function getInfoRemitentes($where=array())

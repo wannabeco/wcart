@@ -45,6 +45,7 @@ class Api extends CI_Controller
        	$this->load->helper('language');//mantener siempre.
     	$this->lang->load('spanish');//mantener siempre.
         $this->load->library('Excel',"excel");
+        $this->load->model("home/BaseDatosHome","dbHome");//logica home, para obtener lo banner
     }
 
     /*
@@ -759,9 +760,11 @@ class Api extends CI_Controller
         extract($_POST);
         //súper acceso a la app
         if(validaInApp($movil))//esta validación me hará consultas más seguras
-        {
+        {   
+            $where['b.idTienda'] 	    = $idTienda;
+            $where['b.idEstado'] 	    = $estado;
             //traigo los banners para la app
-            $bannersHome = $this->logica->getBannersHome(array('b.idEstado'=>1));
+            $bannersHome = $this->logica->getBannersHome($where);
             echo json_encode($bannersHome);
         }
         else
@@ -1525,6 +1528,29 @@ class Api extends CI_Controller
 
             echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
         }
+    }
+    //se obtiene la informacion de solo los banner
+    public function getBanners()
+    {
+        extract($_POST);
+        //súper acceso a la app
+        if(validaInApp($movil))//esta validación me hará consultas más seguras
+        {   
+            $where['idTienda'] 	    = $idTienda;
+            $where['idEstado'] 	     = $estado;
+            //traigo los banners para la app
+            $bannersHome = $this->dbHome->getBanner($where);
+            echo json_encode($bannersHome);
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+        }
+
     }
 
 }

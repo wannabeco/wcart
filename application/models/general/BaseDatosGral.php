@@ -86,9 +86,10 @@ class BaseDatosGral extends CI_Model {
         //print_r($this->db->last_query());die();
         return $id->result_array();
     }
-    public function getBannersHome()
+    public function getBannersHome($where)
     {
         $this->db->select("*");
+        $this->db->where($where);
         $this->db->from($this->tableBanners." b");
         $this->db->join($this->tablePresentaciones." p",'p.idPresentacion=b.idPresentacion','LEFT');
         $this->db->join($this->tableSubcategorias." s",'s.idSubcategoria=p.idSubcategoria','LEFT');
