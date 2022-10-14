@@ -392,7 +392,7 @@ class GestionTienda extends CI_Controller
 			$_POST['idTienda']   = $_SESSION['project']['info']['idTienda'];
 		}
         //procedo a actualizar la información del usuario
-        $salida 	 	=  $this->logicaHome->procesaProductos($_POST);   
+        $salida 	 	=  $this->logicaHome->procesaProductos($_POST);
         echo json_encode($salida);
 	}
 
@@ -466,7 +466,8 @@ class GestionTienda extends CI_Controller
 	}
 
 	public function cargaFoto()
-	{
+	{	
+		$idTienda= "";
 		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
 		{
 			$idTienda 			 = $_SESSION['project']['info']['idTienda'];
@@ -1003,5 +1004,228 @@ public function cargaPlantillaCargaFotos()
 		}
     	
 		echo json_encode($salida);
+	}
+
+	//modulo banner
+	public function bannerTienda($idModulo)	
+	{
+		//valido que haya una sesión de usuario, si no existe siempre lo enviaré al login
+		if(validaIngreso())
+		{
+			$estadoTienda = estadoTiendaAdmin();
+			if($estadoTienda['mostrar'] == 1)
+			{
+				/*******************************************************************************************/
+				/* ESTA SECCIÓN DE CÓDIGO  ES MUY IMPORTANTE YA QUE ES LA QUE CONTROLARÁ EL MÓDULO VISITADO*/
+				/*******************************************************************************************/
+				//si no se declara está variable en cada inicio del módulo no se podrán consultar los privilegios
+				$_SESSION['moduloVisitado']		=	$idModulo;
+				//antes de pintar la plantilla del módulo valido si hay permisos de ver ese módulo para evitar que ingresen al módulo vía URL
+				if(getPrivilegios()[0]['ver'] == 1)
+				{ 
+					//info Módulo
+					$infoModulo	      	   = $this->logica->infoModulo($idModulo);
+					$opc 				   = "home";
+					$salida['titulo']      = lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
+					$salida['centro'] 	   = "home/edicionTienda/bannerTienda/home";
+					$salida['infoModulo']  = $infoModulo[0];
+					$this->load->view("app/index",$salida);
+				}
+				else
+				{
+					$opc 				   = "home";
+					$salida['titulo']      = lang("titulo")." - Área Restringida";
+					$salida['centro'] 	   = "error/areaRestringida";
+					$this->load->view("app/index",$salida);
+				}
+			}
+			else
+			{
+				$opc = "home";
+				$salida['titulo'] 	  	= "Licencia expirada";
+				$salida['dataLicencia'] = $estadoTienda;
+				$salida['centro'] 		= "app/homeCaducidad";
+				$this->load->view("app/index",$salida);
+			}
+		}
+		else
+		{
+			header('Location:'.base_url()."login");
+		}
+	}
+	//getBanner
+	public function getbanner()
+	{
+		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+		{
+			$where['idTienda']   = $_SESSION['project']['info']['idTienda'];
+		}
+		$where['idEstado']   = 1;
+		$banners	     = $this->logicaHome->getBanner($where);
+		echo json_encode($banners);
+	}
+
+	//crear nuevo banner
+	public function plantillaCreaBanner()
+	{
+		$idBanner 		= "";
+		$categoria		= "";
+		$subcategoria 	= "";
+		$persistencia	= "";
+		extract($_POST);
+		$salida["selects"]   = array();
+		
+		//select de categorias
+		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+		{
+			$where['idTienda']   = $_SESSION['project']['info']['idTienda'];
+		}
+		$where['idEstado']   = 1;
+		$categorias	     = $this->logicaHome->getCategorias($where);
+		$salida["selects"]['categorias'] = $categorias['datos'];
+
+		if($edita == 1)
+		{	
+			//busca la info de la categoria
+			$infoBanner	     = $this->logicaHome->infoBanner($idBanner);
+			$salida["titulo"] 	 = lang("text26");
+			$salida["datos"]  	 = $infoBanner['datos'][0];
+			$salida["idBanner"]  = $idBanner;
+			$salida["persistencia"]  = 0;
+			$salida["edita"]  	 = $edita;
+			$salida["labelBtn"]  = lang("btn_guardar");
+		}
+		else
+		{
+			$salida["titulo"] 	 = lang("text25");
+			$salida["datos"] 	 = array();
+			$salida["edita"]  	 = $edita;
+			$salida["idBanner"]  = $idBanner;
+			$salida["persistencia"]  = 0;
+			$salida["labelBtn"]  = lang("reg_btn_crea");
+		}
+		echo $this->load->view("home/edicionTienda/bannerTienda/formControl",$salida,true);
+	}
+
+	public function getSubcategoriasba()
+	{
+		extract($_POST);
+		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+		{
+			$where['idTienda']   = $_SESSION['project']['info']['idTienda'];
+		}
+		$where['idProducto']   = $categoria;
+		$where['idEstado']     = 1;
+
+		$listaSubcat = $this->logicaHome->getSubcategorias($where);
+		$salida["data"] 	 	= $listaSubcat['datos'];
+		$salida["persistencia"] = $persistencia;
+		echo $this->load->view("home/edicionTienda/bannerTienda/selectSubcat",$salida,true);
+	}
+	//proceso de productos
+
+	public function getProductosTotal()
+	{
+		extract($_POST);
+		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+		{
+			$where['idTienda']   = $_SESSION['project']['info']['idTienda'];
+		}
+		$where['idProducto']   		= $categoria;
+		$where['idSubcategoria']	= $subcategoria;
+		$where['idEstado']     		= 1;
+
+		$listaProductos = $this->logicaHome->getProductosTotal($where);
+		$salida["data"] 	 	= $listaProductos['datos'];
+		$salida["persistencia"] = $persistencia;
+		$salida["productos"] = $listaProductos['datos'];
+		echo $this->load->view("home/edicionTienda/bannerTienda/selectProductos",$salida,true);
+	}
+
+
+	//carga foto banner
+	public function cargaFotoBanner()
+	{	
+		$idTienda= "";
+		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+		{
+			$idTienda 			 = $_SESSION['project']['info']['idTienda'];
+		}
+
+		extract($_POST);
+		
+		if(isset($_FILES) && $_FILES[$caja]['name'] != "")
+		{
+			@mkdir('assets/uploads/files/'.$idTienda,0777);
+
+			$config['upload_path'] 	 	= 'assets/uploads/files/'.$idTienda.'/';
+	        $config['allowed_types'] 	= 'gif|jpg|png|webp';
+	        $config['max_size'] 	 	= '5000';
+            $config['min_width']     	= '1920';
+            $config['min_height']    	= '600';
+			$config['max_width']  		= '1920';
+        	$config['max_height']  		= '600';
+	        $config['encrypt_name']  	= TRUE;
+	        $file_element_name 		 	= $caja;	
+	        $this->load->library('upload', $config);
+
+	        if(!$this->upload->do_upload($file_element_name))//si no carga
+	        {
+				$salida = array("mensaje"=>lang("text42"),
+								"continuar"=>0,
+								"urlCompleta"=>"",
+								"foto"=>"",
+								"datos"=>"");  
+	        }
+	        else //si carga
+	        {
+				
+	            $data 					= $this->upload->data();
+				//inserto la foto en la tabla de fotos temporales porque es probable que el usuario se arrepienta y no termine de crar el producto, entonces la foto quedara en el server ocupando espacio
+				//al ponerla en esta tabla se puede correr un cron revisando que fotos en esta tablano fueron amarradas al producto y borrarlas.
+				$fotoTemp		 = $this->logicaTienda->insertaFotoTemp(array("foto"=>$data['file_name'],"rutaFoto"=>"assets/uploads/files/".$idTienda."/".$data['file_name']));  
+
+	            $salida = array("mensaje"=>lang("text19.7"),
+            				    "continuar"=>1,
+								"urlCompleta"=>base_url()."assets/uploads/files/".$idTienda."/".$data['file_name'],
+								"foto"=>$data['file_name'],
+            				    "datos"=>$data['file_name']);  	
+	        }
+	    }
+	    else
+	    {
+			$salida = array("mensaje"=>lang("text19.8"),
+							"continuar"=>0,
+							"urlCompleta"=>"",
+							"foto"=>"",
+							"datos"=>""); 
+
+	    }
+        echo json_encode($salida);
+	}
+
+	//procesa de banner
+	public function procesaBanner()
+	{
+		extract($_POST);
+		
+		$_POST['idTienda']   = $_SESSION['project']['info']['idTienda'];
+		$banners	     = $this->logicaHome->procesaBanner($_POST);
+		echo json_encode($banners);
+	}
+	//ordena Banner
+	public function ordenaBanner()
+	{	
+		$_POST['idTienda']   = $_SESSION['project']['info']['idTienda'];
+		$proceso	     = $this->logicaHome->ordenaBanner($_POST);
+		echo json_encode($proceso);
+	}
+	// eliminar banner
+	public function eliminaBanner()
+	{
+		$_POST['idTienda']   = $_SESSION['project']['info']['idTienda'];
+		// $_POST['idBanner']
+		$categorias	     = $this->logicaHome->eliminaBanner($_POST);
+		echo json_encode($categorias);
 	}
 }

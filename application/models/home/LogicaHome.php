@@ -709,6 +709,196 @@ class LogicaHome  {
         }
         return $salida;
     }
-    
+    // info de banner
+    public function infoBanner($idBanner)
+    {
+        $where['idBanner'] = $idBanner;
+        if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
+        {
+            $where['idTienda']   = $_SESSION['project']['info']['idTienda'];
+        }
+        $resultado = $this->ci->dbHome->getBanner($where);
+        if(count($resultado) > 0)
+        {
+            $salida = array("mensaje"=>"Info de banners",
+                            "datos"=>$resultado,
+                            "continuar"=>1);
+        }
+        else
+        {
+            $salida = array("mensaje"=>"No existe la banners seleccionados",
+                            "datos"=>array(),
+                            "continuar"=>0);
+        }
+        return $salida;
+    }
+
+    //procesa crar o actualizar banner
+    public function procesaBanner($post)
+    {   
+        extract($post);
+        // $idTienda       = "";
+        $tipoLink       = "";
+        $linkBanner     = "";
+        $idCategoria    = "";
+        $idSubcategoria = "";
+        $idPresentacion = "";
+        
+
+        // var_dump($post);die();
+        if($edita == 0)//agrega
+        {
+            unset($post['edita']);
+            unset($post['idBanner']);
+            $post['idTienda']           = mb_strtoupper($post['idTienda']);
+            $post['tituloBanner']       = mb_strtoupper($post['tituloBanner']);
+            //var_dump($post);die();
+            $resultado = $this->ci->dbHome->procesaBanner($post);
+            if($resultado > 0)
+            {
+                $salida =   "";
+                $salida =   array("mensaje"=>lang("lbl_alert_exito"),
+                                "datos"=>$resultado,
+                                "continuar"=>1);
+            }
+            else
+            {
+                $salida =   array("mensaje"=>"No se ha podido crear el banner, intente de nuevo más tarde",
+                                "datos"=>array(),
+                                "continuar"=>0);
+            }
+        }
+        else//actualiza
+        {
+            if($post["tipoLink"] === "producto"){
+
+                $where['idBanner']                  = $idBanner;
+                $dataActualiza['tituloBanner']      = mb_strtoupper($post['tituloBanner']);
+                $dataActualiza['fotoBanner']        = $post['fotoBanner'];   
+                $dataActualiza['tipoLink']          = $tipoLink;
+                $dataActualiza['linkBanner']        = $linkBanner;
+                $dataActualiza['idCategoria']       = $post['idCategoria'];
+                $dataActualiza['idSubcategoria']    = $post['idSubcategoria'];
+                $dataActualiza['idPresentacion']    = $post['idPresentacion'];
+
+                $resultado = $this->ci->dbHome->actualizaBanner($where,$dataActualiza);
+                if($resultado > 0)
+                {
+                    $salida =   array("mensaje"=>lang("lbl_alert_exito_edita"),
+                                    "datos"=>$resultado,
+                                    "continuar"=>1);
+                }
+                else
+                {
+                    $salida =   array("mensaje"=>"No se ha podido actualizar el banner, intente de nuevo más tarde",
+                                    "datos"=>array(),
+                                    "continuar"=>0);
+                }
+
+            }
+            else if($post["tipoLink"] == "url"){
+
+                $where['idBanner']                  = $idBanner;
+                $dataActualiza['tituloBanner']      = mb_strtoupper($post['tituloBanner']);
+                $dataActualiza['fotoBanner']        = $post['fotoBanner'];   
+                $dataActualiza['tipoLink']          = $post['tipoLink'];
+                $dataActualiza['linkBanner']        = $post['linkBanner'];
+                $dataActualiza['idCategoria']       = $idCategoria;
+                $dataActualiza['idSubcategoria']    = $idSubcategoria;
+                $dataActualiza['idPresentacion']    = $idPresentacion;
+                $resultado = $this->ci->dbHome->actualizaBanner($where,$dataActualiza);
+                if($resultado > 0)
+                {
+                    $salida =   array("mensaje"=>lang("lbl_alert_exito_edita"),
+                                    "datos"=>$resultado,
+                                    "continuar"=>1);
+                }
+                else
+                {
+                    $salida =   array("mensaje"=>"No se ha podido actualizar el banner, intente de nuevo más tarde",
+                                    "datos"=>array(),
+                                    "continuar"=>0);
+                }
+            }
+        }
+        return $salida;
+    }
+    //se consulta los banner
+    public function getBanner($where=array())
+    {
+        $resultado = $this->ci->dbHome->getBanner($where);
+        if(count($resultado) > 0)
+        {
+            $salida = array("mensaje"=>"Banner consultados",
+                            "datos"=>$resultado,
+                            "continuar"=>1);
+        }
+        else
+        {
+            $salida = array("mensaje"=>"No hay banner creados",
+                            "datos"=>array(),
+                            "continuar"=>0);
+        }
+        return $salida;
+    }
+    //se elimina el banner
+    public function eliminaBanner($post)
+    {
+        $dataActualiza['idEstado'] = 0;
+        $resultado = $this->ci->dbHome->eliminaBanner($post,$dataActualiza);
+        if($resultado > 0)
+        {
+            $salida = array("mensaje"=>lang("lbl_alert_exito_elimina"),
+                            "datos"=>$resultado,
+                            "continuar"=>1);
+        }
+        else
+        {
+            $salida = array("mensaje"=>"No se ha podido eliminar la categoría, intente de nuevo más tarde",
+                            "datos"=>array(),
+                            "continuar"=>0);
+        }
+        return $salida;
+    }
+    //se ordenan los banner
+    public function ordenaBanner($post)
+    {
+        extract($post);
+        $dataActualiza['orden']     = $orden;
+        $where['idBanner']          = $id;
+        $resultado = $this->ci->dbHome->ordenaBanner($where,$dataActualiza);
+        if($resultado > 0)
+        {
+            //actualio todas las variaciones que tenga el producto
+            $salida = array("mensaje"=>"Orden realizado",
+                            "datos"=>$resultado,
+                            "continuar"=>1);
+        }
+        else
+        {
+            $salida = array("mensaje"=>"Orden no realizado",
+                            "datos"=>array(),
+                            "continuar"=>0);
+        }
+        return $salida;
+    }
+    //se obtienen todos los productos de la tienda
+    public function getProductosTotal($where=array())
+    {
+        $resultado = $this->ci->dbHome->getProductosTotal($where);
+        if(count($resultado) > 0)
+        {
+            $salida = array("mensaje"=>"presentaciones consultados",
+                            "datos"=>$resultado,
+                            "continuar"=>1);
+        }
+        else
+        {
+            $salida = array("mensaje"=>"No hay presentaciones consultadas",
+                            "datos"=>array(),
+                            "continuar"=>0);
+        }
+        return $salida;
+    }
     
  }

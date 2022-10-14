@@ -1148,7 +1148,7 @@ class Parametrizacion extends CI_Controller
 						$crud->unset_clone();
 						
 						$output = $crud->render();
-						
+						//var_dump($crud);die();
 					}catch(Exception $e){
 						show_error($e->getMessage().' --- '.$e->getTraceAsString());
 					}

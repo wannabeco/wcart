@@ -938,4 +938,248 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 			});
 		}
 	}
+
+	//
+	$scope.Banners	=	[];
+	$scope.Banner 	= "";
+	$scope.initBanner = function()
+	{
+		$scope.config 			=  configLogin;//configuración global
+		$.material.init();
+		$scope.getbanner();
+		$('#botonfoto3').click(function(){
+			$('#fotoFile3').click();
+		});
+
+		setTimeout(function(){
+			$("#tableBanner").sortable({
+				handle:'.seleccionador',
+				revert:true,  
+				axis: "y",
+				tolerance: "pointer",
+				dropOnEmpty:true,
+				icon:'move',
+				stop:function(){
+					let orden = 1;
+					$.each($(".ordenador"),function(){
+						var el = $(this);
+						$scope.ordenaBanner(el.data('id'),orden)
+						orden++;
+					})
+				}
+			});
+		},1000);
+
+	}
+
+	// $compile.initBannermodal =function ()
+	// {
+	// 	$scope.config 			=  configLogin;//configuración global
+	// 	$.material.init();
+
+	// 	$('#botonfoto3').click(function(){
+	// 		$('#fotoFile3').click();
+	// 	});
+	// }
+
+	//odenar banner
+	$scope.ordenaBanner = function(id,orden)
+	{
+		var controlador = 	$scope.config.apiUrl+"GestionTienda/ordenaBanner";
+		var parametros  = 	{id:id,orden:orden};
+		//console.log(parametros);
+		constantes.consultaApi(controlador,parametros,function(json){},'json');
+	}
+
+	// se obtinen lo banners
+	$scope.getbanner = function()
+	{
+		var controlador = 	$scope.config.apiUrl+"GestionTienda/getbanner";
+		var parametros  = 	{};
+		constantes.consultaApi(controlador,parametros,function(json){
+			$scope.Banners = json.datos;
+			$scope.$apply();
+		},'json');
+	}
+
+	$scope.cambiaElemento =function()
+	{
+		var tipolink = $('#tipoLink').val();
+
+		if(tipolink == 'url'){
+			$('.elementos').hide();
+			$('.link').show();
+		}
+		else{
+			$('.elementos').hide();
+			$('.productos').show();
+		}
+	} 
+
+	//procesa banner
+	$scope.tipoLink = "";
+	$scope.procesaBanner = function(edita,confirm)
+	{	
+		var tituloBanner 	= $("#tituloBanner").val();
+		var fotoBanner 		= $("#fotoBanner").val();
+		var tipoLink		= $('#tipoLink').val();
+		var linkBanner		= $("#linkBanner").val();
+		var idPresentacion	= $("idPresentacion").val();
+
+		if(tituloBanner == "")
+		{
+			constantes.alerta("Attention","El nombre del banner es requerido","info",function(){});
+		}
+		// else if(fotoBanner == "" && fotoBanner2 == "")
+		// {
+		// 	constantes.alerta("Attention","por favor seleccione una foto para el banner","info",function(){});
+		// }
+		else if(tipoLink === "")
+		{
+			constantes.alerta("Attention","Seleccione tipo de Banner","info",function(){});
+		}
+		else if(tipoLink === 'url' & linkBanner == ''){
+			constantes.alerta("Attention","La url a la cual pertenece el banner es requerido","info",function(){});
+		}
+		else if(tipoLink === 'producto' & idPresentacion == ''){
+			constantes.alerta("Attention","Seleccione un producto","info",function(){});
+		}
+		
+		{
+			var mensajeConfirma = confirm;
+
+			constantes.confirmacion(confirm,"","info",function()
+			{
+				var controlador = configLogin.apiUrl+"GestionTienda/procesaBanner";
+				var parametros  = $("#formulario").serialize();
+				var parametros  = parametros+"&edita="+edita;
+				constantes.consultaApi(controlador,parametros,function(json){
+					if(json.continuar == 1)
+					{
+						constantes.alerta("Attention",json.mensaje,"success",function(){
+							location.reload();
+						});
+					}	
+					else
+					{
+						constantes.alerta("Attention",json.mensaje,"danger",function(){
+							location.reload();
+						});
+					}
+
+				},'json');
+			});
+			
+		}
+	}
+	//carga foto de banner
+	$scope.uploadFoto = function(archivo,caja,imagen,preloader)
+	{
+
+		var file = document.getElementById(archivo).files[0];
+		var formData 	=   new FormData();
+		formData.append(caja, file);
+		formData.append("caja", caja);
+
+		var controlador = 	$scope.config.apiUrl+"GestionTienda/cargaFotoBanner"; 
+		//hacemos la petición ajax  
+		parametros	=	formData;
+		$.ajax({
+			url: controlador,  
+			type: 'POST',
+			data: parametros,
+			dataType:"json",
+			cache: false,
+			contentType: false,
+			processData: false,
+			beforeSend: function(){
+				$("#"+preloader).show();
+				$("#botonProcesar").attr("disabled","disabled");
+						
+			},
+			//una vez finalizado correctamente
+			success: function(json)
+			{
+				if(json.continuar == 1)
+				{
+					$("#"+imagen).prop("src",json.urlCompleta);
+					$("#"+caja).val(json.foto);
+					$("#"+preloader).hide();
+					$("#botonProcesar").removeAttr("disabled");
+				}
+				else
+				{
+					$("#"+preloader).hide();
+					constantes.alerta("",json.mensaje,"info",function(){});
+				}
+			},
+			//si ha ocurrido un error
+			error: function(){
+				
+			}
+		});
+	}
+
+	$scope.buscarSubCategorias = function(persist)
+    {
+        var categoria = $("#idProducto").val();
+        var controlador = configLogin.apiUrl+"GestionTienda/getSubcategoriasba";
+		var parametros  = {categoria:categoria,persistencia:persist};
+		constantes.consultaApi(controlador,parametros,function(json){
+			$("#subcaSel").html(json)
+
+		},'');
+    }
+
+	$scope.getProductos =function(subca){
+		var categoria 	= $("#idProducto").val();
+		var subcategoria = $("#idSubcategoria").val();
+        var controlador = configLogin.apiUrl+"GestionTienda/getProductosTotal";
+		var parametros  = {categoria:categoria,subcategoria:subcategoria,subcategorias:subca,persistencia:subca};
+		constantes.consultaApi(controlador,parametros,function(json){
+			$("#productosSel").html(json)
+
+		},'');
+
+	}
+
+	//funcion para cargar modal crear y ediatar
+	$scope.cargaPlantillaControlBanner = function(idBanner,edita)
+	{
+		$('#modalUsuarios').modal("show");
+		var controlador = 	$scope.config.apiUrl+"GestionTienda/plantillaCreaBanner";
+		var parametros  = 	"edita="+edita+"&idBanner="+idBanner;
+		constantes.consultaApi(controlador,parametros,function(json){
+			$("#modalCrea").html(json);
+			//actualiza el DOM
+			$scope.compileAngularElement("#formulario");
+		},'');
+	}
+
+	//eliminar banner
+	$scope.eliminaBanner = function(idBanner,confirm)
+	{
+		constantes.confirmacion(confirm,"","info",function()
+		{
+			var parametros  = $("#formulario").serialize();
+			var controlador = 	$scope.config.apiUrl+"GestionTienda/eliminaBanner";
+			var parametros  = 	{idBanner:idBanner};
+			constantes.consultaApi(controlador,parametros,function(json){
+				if(json.continuar == 1)
+				{
+					constantes.alerta("Attention",json.mensaje,"success",function(){
+						location.reload();
+					});
+				}	
+				else
+				{
+					constantes.alerta("Attention",json.mensaje,"danger",function(){
+						//location.reload();
+					});
+				}
+
+			},'json');
+		});
+	}
+
 });

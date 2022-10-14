@@ -39,6 +39,7 @@ class BaseDatosHome extends CI_Model {
         $this->tableTiendas              = "app_tiendas";
         $this->tablePedidoTemporal       = "app_pedido_temporal";
         $this->tableVariaciones          = "app_variaciones";
+        $this->tableBanner               = "app_banners";
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -312,6 +313,59 @@ class BaseDatosHome extends CI_Model {
         $this->db->update($this->tableVariaciones,$dataActualiza);
         //print_r($this->db->last_query());die();
         return $this->db->affected_rows();
+    }
+    //gat banner
+    public function getBanner($where="")
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tableBanner);
+        $this->db->order_by("orden","ASC");
+        $id = $this->db->get();
+        // print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+    //se agrega el banner
+    public function procesaBanner($dataInserta)
+    {
+        $this->db->insert($this->tableBanner,$dataInserta);
+        //print_r($this->db->last_query());die();
+        return $this->db->insert_id();
+    }
+    //actualiza banner
+    public function actualizaBanner($where,$dataActualiza)
+    {
+        $this->db->where($where);
+        $this->db->update($this->tableBanner,$dataActualiza);
+        //print_r($this->db->last_query());die();
+        return $this->db->affected_rows();
+    }
+    //se elimina el danner
+    public function eliminaBanner($where,$dataActualiza)
+    {
+        $this->db->where($where);
+        $this->db->update($this->tableBanner,$dataActualiza);
+        //print_r($this->db->last_query());die();
+        return $this->db->affected_rows();
+    }
+    //ordena Banner
+    public function ordenaBanner($where,$dataActualiza)
+    {
+        $this->db->where($where);
+        $this->db->update($this->tableBanner,$dataActualiza);
+       // print_r($this->db->last_query());die();
+        return $this->db->affected_rows();
+    }
+    //gat banner
+    public function getProductosTotal($where="")
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tableProductos);
+        $this->db->order_by("nombrePresentacion","ASC");
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
     }
 
 }

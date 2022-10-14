@@ -182,7 +182,7 @@ $lang['text38']				       = "Transaction ID";
 $lang['text39']				       = "Order code";
 $lang['text40']				       = "Payment method";
 $lang['text41']				       = "Total";
-
+$lang['text42']				       = "You will be able to choose from your computer the necessary photographs to accompany your product. These photos must be in PNG, JPG or GIF format, must not exceed 5 MB and must keep the size ratio of 1920 X 600 exact (Perfect Square).";
 
 //mensajes de transacciones de las pasarelas de pago
 
