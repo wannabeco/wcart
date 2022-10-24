@@ -900,5 +900,23 @@ class LogicaHome  {
         }
         return $salida;
     }
+    //informacion de todos los productos por idTienda
+    public function getAllPresentaciones($where=array())
+    {
+        $resultado = $this->ci->dbHome->getAllPresentaciones($where);
+        if(count($resultado) > 0)
+        {
+            $salida = array("mensaje"=>"Todos las presentaciones fueron consultadas",
+                            "datos"=>$resultado,
+                            "continuar"=>1);
+        }
+        else
+        {
+            $salida = array("mensaje"=>"No hay presentaciones consultadas",
+                            "datos"=>array(),
+                            "continuar"=>0);
+        }
+        return $salida;
+    }
     
  }

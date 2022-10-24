@@ -64,7 +64,7 @@ class BaseDatosUsuarios extends CI_Model {
     }
     public function infoUsuario($where="")
     {
-        $this->db->select("u.*,u.estado as estadoU,p.nombrePerfil,a.nombreArea,D.nombreTpoDoc,t.NOMBRE,C.NOMBRE,l.*");
+        $this->db->select("u.*,u.estado as estadoU,p.nombrePerfil,a.nombreArea,D.nombreTipoDoc,t.NOMBRE,C.NOMBRE,l.*");
         if(count($where) > 0)
         {
             $this->db->where($where);
@@ -81,7 +81,7 @@ class BaseDatosUsuarios extends CI_Model {
         }
         $this->db->group_by('u.idPersona');
         $id = $this->db->get();
-        print_r($this->db->last_query());die();
+        //print_r($this->db->last_query());die();
         return $id->result_array();
     }    
 }
