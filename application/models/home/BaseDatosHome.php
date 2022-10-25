@@ -367,6 +367,16 @@ class BaseDatosHome extends CI_Model {
         //print_r($this->db->last_query());die();
         return $id->result_array();
     }
+    public function getAllPresentaciones($where="")
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tableProductos);
+        $this->db->order_by("nombrePresentacion","ASC");
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
 
 }
 

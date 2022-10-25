@@ -1217,9 +1217,17 @@ class Api extends CI_Controller
     }
 
     public function agregaPedidoTemporal()
-    {   
-        $respuesta = $this->logicaPedidos->pedidoTemporal($_POST);
+    {   extract($_POST);
+        if(validaInApp($movil)){
+            $respuesta = $this->logicaPedidos->pedidoTemporal($_POST);
+            echo json_encode($respuesta);
+        }
+        else{
+            $respuesta = array("mensaje"=>"Pedidos del usuario",
+                          "continuar"=>1,
+                          "datos"=>$salida); 
         echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
+        }
     }
     public function gestionaPedidoRecibido()
     {
@@ -1399,6 +1407,7 @@ class Api extends CI_Controller
 		if(validaInApp($movil))//esta validación me hará consultas más seguras
 		{
 			$post['idPresentacion']     = $_POST['idPresentacion'];
+            $post['p.eliminado']          =$_POST['eliminado'];
 			//busco la foto con la palabra que envien
 			$noti = $this->logica->getInforComentarios($post);
 			echo json_encode($noti);
@@ -1552,6 +1561,25 @@ class Api extends CI_Controller
         }
 
     }
-
+    //todos las presentaciones por idTienda
+    public function getAllPresentaciones(){
+        extract($_POST);
+        //súper acceso a la app
+        if(validaInApp($movil))//esta validación me hará consultas más seguras
+        {   
+            $where['idTienda'] 	    = $idTienda;
+            $where['idEstado'] 	    = $idEstado;
+            //traigo los banners para la app
+            $bannersHome = $this->dbHome->getAllPresentaciones($where);
+            echo json_encode($bannersHome);
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+        }
+    }
 }
 ?>
