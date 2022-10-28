@@ -6,25 +6,29 @@ class LogicaUsuarios  {
         $this->ci = &get_instance();
         $this->ci->load->model("admin/BaseDatosUsuarios","dbUsuarios");
         $this->ci->load->model("login/BaseDatosLogin","dbLogin");
-    } 
+    }
     public function infoUsuario($idPersona="")
     {
         $where = array();
         if($idPersona != "")
         {
-            $where['u.idPersona']    = $idPersona;
+            $where['u.idPersona']    = $idPersona;    
         }
         $where['u.eliminado'] = 0;
         //Valido el perfil de la sesion del usuario logueado para ver si es un admin de ventas, si es un admin ventas le traigo 
         //solo las vendedoras que son de su equipo de trabajo.
         // if(isset($_SESSION['project']) && $_SESSION['project']['info']['idPerfil'] == _PERFIL_ADMIN_VENTAS)
         // {
-        //     $where['u.idPadre'] = $_SESSION['project']['info']['idPersona'];
-        // }
-        if ($_SESSION['project']['info']['idPerfil'] == 6 ){
-            $where['ped.idTienda'] = $_SESSION['project']['info']['idTienda'];
+            //     $where['u.idPadre'] = $_SESSION['project']['info']['idPersona'];
+            // }
+        if ($_SESSION['project']['info']['idPerfil'] == 1){
+            // $where['u.idPerfil'] =! 1;
+            $dataUsuario                  = $this->ci->dbUsuarios->getinfoUsuario($where);
         }
-        $dataUsuario                  = $this->ci->dbUsuarios->infoUsuario($where);
+        else if ($_SESSION['project']['info']['idPerfil'] == 6 ){
+            $where['ped.idTienda'] = $_SESSION['project']['info']['idTienda'];
+            $dataUsuario                  = $this->ci->dbUsuarios->infoUsuario($where);
+        }
         if(count($dataUsuario) > 0)
         {
             $respuesta = array("mensaje"=>"Información del usuarios consultada.",

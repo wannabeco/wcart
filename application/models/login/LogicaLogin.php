@@ -61,7 +61,15 @@ class LogicaLogin  {
     {
         //extraigo el post en variables
         extract($data);
+        //var_dump($data);die();
         //verifico en la tabla de login el usuario y la clave
+        if(isset($idPerfil)){
+            $select["p.idPerfil"]     =   trim($idPerfil);
+            
+        }else{
+            $select["p.idPerfil !="]     =   trim(_PERFIL_COMPRADOR);
+
+        }
         $select["usuario"]     =   trim($usuario);
         $select["clave"]       =   sha1(trim($clave));
         //inserto los datos básicos de la empresa
