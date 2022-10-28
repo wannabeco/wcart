@@ -1217,17 +1217,19 @@ class Api extends CI_Controller
     }
 
     public function agregaPedidoTemporal()
-    {   extract($_POST);
+    {   
+        extract($_POST);
         if(validaInApp($movil)){
             $respuesta = $this->logicaPedidos->pedidoTemporal($_POST);
             echo json_encode($respuesta);
         }
         else{
-            $respuesta = array("mensaje"=>"Pedidos del usuario",
-                          "continuar"=>1,
-                          "datos"=>$salida); 
+            $respuesta = array("mensaje"=>"Acceso no admitido",
+                          "continuar"=>0,
+                          "datos"=>""); 
+            }
+            
         echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
-        }
     }
     public function gestionaPedidoRecibido()
     {
