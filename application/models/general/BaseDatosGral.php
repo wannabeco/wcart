@@ -755,9 +755,10 @@ class BaseDatosGral extends CI_Model {
     //informcion de las presentaiones nuevas
     public function getInfoPresentacionNew($where)
     {
-        $this->db->select("*");
+        $this->db->select("*,IF(puntos=0,'0',ROUND(puntos/votantes)) calificacion,");
         $this->db->where($where);
-        $this->db->from($this->tablePresentaciones);
+        $this->db->from($this->tablePresentaciones." pre");
+        $this->db->join($this->tableProductos." pro","pre.idProducto = pro.idProducto","INNER");
         $this->db->order_by("fecha","DESC");
         $this->db->limit(8);
         $id = $this->db->get();

@@ -1,7 +1,8 @@
 <?php
-session_start();
+// session_start();
 //require("application/config/constants.php");
-$_SESSION['confirma'] = $_GET;
-//var_dump($_SESSION['confirma']);die();
-echo "<script>document.location = '".$_SESSION['base_url']."Pedidos/respuestaPago'</script>";
+$ruta = "http://localhost/wcart/";
+extract($_GET);
+var_dump($_GET);die();
+echo "<script>document.location = '".$ruta."Pedidos/respuestaPago'</script>";
 ?>

@@ -12,7 +12,7 @@
 
    Este archivo es el controlador que realizara al cuál se harán los llamados desde las url en la página o en los procesos AJAX que se utilicen.
 */
-ini_set("display_errors",1);
+ini_set("display_errors",0);
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
@@ -1217,18 +1217,20 @@ class Api extends CI_Controller
     }
 
     public function agregaPedidoTemporal()
-    {   extract($_POST);
+    {   
+        extract($_POST);
         if(validaInApp($movil)){
             $respuesta = $this->logicaPedidos->pedidoTemporal($_POST);
-            echo json_encode($respuesta);
+            // echo json_encode($respuesta);
         }
         else{
             $respuesta = array("mensaje"=>"Pedidos del usuario",
                           "continuar"=>1,
                           "datos"=>$salida); 
+            }
         echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
-        }
     }
+
     public function gestionaPedidoRecibido()
     {
         extract($_POST);
@@ -1255,8 +1257,8 @@ class Api extends CI_Controller
     public function eliminaItemTemporal()
     {
         $where['idPedidoTemp']              = $_POST['idItem'];
-        $dataActualiza['eliminado']         = 1;
-        $respuesta = $this->logicaPedidos->eliminaItemTemporal($where,$dataActualiza);
+        // $dataActualiza['eliminado']         = 1;
+        $respuesta = $this->logicaPedidos->eliminaItemTemporal($where);
         echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
     }
     
@@ -1429,8 +1431,8 @@ class Api extends CI_Controller
         //súper acceso a la app
         if(validaInApp($movil))//esta validación me hará consultas más seguras
         {
-            $post['idTienda']           = $_POST['idTienda'];
-            $post['idEstado']           = $_POST['idEstado'];
+            $post['pre.idTienda']           = $_POST['idTienda'];
+            $post['pre.idEstado']           = $_POST['idEstado'];
             $post['nuevo']              = $_POST['nuevo'];
             $infoNew         = $this->logica->getInfoPresentacionNew($post);
             echo json_encode($infoNew);
@@ -1580,6 +1582,28 @@ class Api extends CI_Controller
                               "datos"=>""); 
             echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
         }
+    }
+    
+    //informacion del usuario por id
+    public function getUsuario()
+    {
+        extract($_POST);
+        //súper acceso a la app
+        if(validaInApp($movil))//esta validación me hará consultas más seguras
+        {   
+            $where['idPersona'] 	    = $idPersona;
+            $where['eliminado'] 	    = $eliminado;
+            //traigo los banners para la app
+            $respuesta = $this->dbHome->getUsuario($where);
+            // echo json_encode($respuesta);
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+        }
+        echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
     }
 }
 ?>

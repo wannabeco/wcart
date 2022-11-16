@@ -62,7 +62,7 @@
                                 <td>{{ulist.nombreCargo}}</td> -->
                                 <!-- <td style="vertical-align: middle"></td> -->
                                 <td style="vertical-align: middle" align="center">
-                                    Q<?php echo number_format($pedidos['valor'],0,',','.') ?>
+                                    $ <?php echo number_format($pedidos['valor'],0,',','.') ?>
                                 </td>
                                 <td style="vertical-align: middle" class="text-center">
                                   

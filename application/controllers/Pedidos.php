@@ -1,15 +1,12 @@
 <?php
 /*
-
 	("`-''-/").___....''"`-._
       `6_ 6  )   `-.  (     ).`-.__.`) 
       (_Y_.)'  ._   )  `._ `. ``-..-'
     _..`..'_..-_/  /..'_.' ,'
    (il),-''  (li),'  ((!.-'
-
    Desarrollado por @orugal
    https://github.com/orugal
-
    Controlador pedidos
 */
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -593,7 +590,7 @@ class Pedidos extends CI_Controller
         //debo actualizar la informacon del pedido con lo que me retorno payu
         $dataInserta['estadoPago']      = $state_pol;
         $dataInserta['transactionId']   = $transaction_id;
-        $dataInserta['reference_pol']   = $reference_pol;
+        $dataInserta['reference_pol']   = $reference_pol."000";
         $dataInserta['valor']           = $value;
         $dataInserta['moneda']          = $currency;
         $dataInserta['entidad']         = $payment_method;
@@ -660,53 +657,52 @@ class Pedidos extends CI_Controller
 
     //Para los pagos de PAYU
     public function respuestaPago()
-    {   
-        session_start();
-        //var_dump($_SESSION['confirma']);die();
-        extract($_SESSION['confirma']);
+    {
+        extract($_GET);
+        //var_dump($_GET);die();
 
         
-        $infoPedido     = $this->logicaPedidos->getPedidos(array("codigoPedido"=>$referenceCode));
+        $infoPedido     = $this->logicaPedidos->getPedidos(array("codigoPedido"=>$_GET['referenceCode']));
         $infoTienda     = $this->logica->getInfoTiendaNew($infoPedido[0]['tienda']);
 
         //var_dump($_SESSION['confirma']);
         $ApiKey             = $infoTienda['datos'][0]['payu_apikey'];
 
-        $merchant_id        = $_SESSION['confirma']['merchantId'];
-        $referenceCode      = $_SESSION['confirma']['referenceCode'];
-        $TX_VALUE           = $_SESSION['confirma']['TX_VALUE'];
+        $merchant_id        = $_GET['merchantId'];
+        $referenceCode      = $_GET['referenceCode'];
+        $TX_VALUE           = $_GET['TX_VALUE'];
         $New_value          = number_format($TX_VALUE, 1, '.', '');
-        $currency           = $_SESSION['confirma']['currency'];
-        $transactionState   = $_SESSION['confirma']['transactionState'];
+        $currency           = $_GET['currency'];
+        $transactionState   = $_GET['transactionState'];
         $firma_cadena       = "$ApiKey~$merchant_id~$referenceCode~$TX_VALUE~$currency";
         $firmacreada        = md5($firma_cadena);
         //echo $firmacreada;
-        $firma              = $_SESSION['confirma']['signature'];
-        $reference_pol      = $_SESSION['confirma']['reference_pol'];
-        $cus                = $_SESSION['confirma']['cus'];
-        $extra1             = $_SESSION['confirma']['description'];
-        $pseBank            = $_SESSION['confirma']['pseBank'];
-        $lapPaymentMethod   = $_SESSION['confirma']['lapPaymentMethod'];
-        $transactionId      = $_SESSION['confirma']['transactionId'];
+        $firma              = $_GET['signature'];
+        $reference_pol      = $_GET['reference_pol'];
+        $cus                = $_GET['cus'];
+        $extra1             = $_GET['description'];//confirmar con farez
+        $pseBank            = $_GET['pseBank'];
+        $lapPaymentMethod   = $_GET['lapPaymentMethod'];
+        $transactionId      = $_GET['transactionId'];
 
-        if ($_SESSION['confirma']['transactionState'] == 4 ) {
+        if ($_GET['transactionState'] == 4 ) {
             $estadoTx = lang("trans_aprobada");
             $claseLabel = "label-default";
         }
-        else if ($_SESSION['confirma']['transactionState'] == 6 ) {
+        else if ($_GET['transactionState'] == 6 ) {
             $estadoTx = lang("trans_rechazada");
             $claseLabel = "label-danger";
         }
-        else if ($_SESSION['confirma']['transactionState'] == 104 ) {
+        else if ($_GET['transactionState'] == 104 ) {
             $estadoTx = "Error";
             $claseLabel = "label-danger";
         }
-        else if ($_SESSION['confirma']['transactionState'] == 7 ) {
+        else if ($_GET['transactionState'] == 7 ) {
             $estadoTx = lang("trans_pendiente");
             $claseLabel = "label-warning";
         }
         else {
-            $estadoTx=$_SESSION['confirma']['mensaje'];
+            $estadoTx=$_GET['mensaje'];
             $claseLabel = "";
         }
 
@@ -765,7 +761,6 @@ class Pedidos extends CI_Controller
         $condicion['periodoPago']   = trim($infoPeriodo[0]['periodoPago']);
         $infoPagos                  = $this->ladminis->getPagos($condicion);
         $infoPagosTotal             = $this->ladminis->getPagosNoßGroupWhereIn($condicion,$listaPagos);
-
         //debo insertar esta transacción en la tabla de pedidos de PAYU, pero primero debo verificar que no esté creado ya para evitar duplicidad
         //verifico
         $condiVerifica['idPago']    = trim($referenceCode);
@@ -803,7 +798,6 @@ class Pedidos extends CI_Controller
             $dataInsertaPago['idPedido']    = $verificacion[0]['idPedido'];
             $actualizoPagos                 = $this->ladminis->actualizaPagoWhereIn($dataInsertaPago,$listaPagos);
         }
-
         $salida['estadoTx']         =   $estadoTx;
         $salida['ApiKey']           =   $ApiKey;
         $salida['merchant_id']      =   $merchant_id;
@@ -821,7 +815,6 @@ class Pedidos extends CI_Controller
         $salida['pseBank']          =   $pseBank;
         $salida['lapPaymentMethod'] =   $lapPaymentMethod;
         $salida['transactionId']    =   $transactionId;
-
         $opc                   = "home";
         $salida['titulo']      = "Respuesta de pago";
         $salida['centro']      = "administrativos/cargaPagos/respuestaPago";
