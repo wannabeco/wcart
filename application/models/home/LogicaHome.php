@@ -918,5 +918,23 @@ class LogicaHome  {
         }
         return $salida;
     }
+    // informacion de usuario por id
+    public function getUsuario($where=array())
+    {
+        $resultado = $this->ci->dbHome->getUsuario($where);
+        if(count($resultado) > 0)
+        {
+            $salida = array("mensaje"=>"Informacion consultada",
+                            "datos"=>$resultado,
+                            "continuar"=>1);
+        }
+        else
+        {
+            $salida = array("mensaje"=>"No hay informacion disponible",
+                            "datos"=>array(),
+                            "continuar"=>0);
+        }
+        return $salida;
+    }
     
  }

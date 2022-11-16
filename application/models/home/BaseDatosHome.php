@@ -40,6 +40,10 @@ class BaseDatosHome extends CI_Model {
         $this->tablePedidoTemporal       = "app_pedido_temporal";
         $this->tableVariaciones          = "app_variaciones";
         $this->tableBanner               = "app_banners";
+        $this->tableTiposDoc             = "app_tipos_doc";
+        $this->tablePersonas             = "app_personas";
+        $this->tableDeptos               = "app_departamentos"; 
+        $this->tableCiudad               = "app_ciudades"; 
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -377,6 +381,18 @@ class BaseDatosHome extends CI_Model {
         //print_r($this->db->last_query());die();
         return $id->result_array();
     }
+    public function getUsuario($where="")
+    {
+        $this->db->select("u.*,u.estado as estadoU,D.nombreTipoDoc,t.NOMBRE as nombreDet,C.NOMBRE as nombreCid");
+        $this->db->where($where);
+        $this->db->from($this->tablePersonas." u");
+        $this->db->join($this->tableTiposDoc." D","D.idTipoDoc=u.tipoDocumento","INNER");
+        $this->db->join($this->tableDeptos." t","t.ID_DPTO=u.departamento","INNER");
+        $this->db->join($this->tableCiudad." C","C.ID_CIUDAD=u.ciudad","INNER");
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    } 
 
 }
 

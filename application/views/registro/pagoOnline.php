@@ -2,7 +2,7 @@
         $referencia = $infoPedido['codigoPedido'];
     ?>
 <div class="container"><br>
-<center><img src="<?php echo base_url()?>assets/uploads/files/<?php echo $infoTienda['logoTienda']?>" width="50%"></center><br>
+<center><img src="<?php echo base_url()?>assets/uploads/files/<?php echo $infoTienda['idTienda']?>/<?php echo $infoTienda['logoTienda']?>" width="50%"></center><br>
 <h3 class="text-center"><strong><?php echo lang("text35")?></strong></h3><br>
 <table class="table table-striped">
     <thead>
@@ -57,8 +57,8 @@
                 <input name="signature"  id="signature"   type="hidden"  value="<?php echo $llave?>">
                 <input name="test"          type="hidden"  value="<?php echo $infoTienda['payu_test'] ?>" >
                 <input name="buyerEmail"    type="hidden"  value="<?php echo $infoPedido['email']?>" >
-                <input name="responseUrl"    type="hidden"  value="<?php echo base_url().$infoTienda['payu_link_resp']?>" >
-                <input name="confirmationUrl"    type="hidden"  value="<?php echo base_url().$infoTienda['payu_link_confirm']?>" > 
+                <input name="responseUrl"    type="hidden"  value="<?php echo base_url()._PAYU_LINK_RESP?>" >
+                <input name="confirmationUrl"    type="hidden"  value="<?php echo base_url()._PAYU_LINK_CONFIRM?>" > 
                 <button type="submit" class="btn btn-primary" style="background:#000;color:#fff"><?php echo lang("text30")?></button>               
             </form><br><br>
         <img src="<?php echo base_url()?>/res/img/payuPagos.jpg" width="100%" alt="">
@@ -70,12 +70,12 @@
         <center>
             <form action="https://checkout.wompi.co/p/" method="GET">
                 <!-- OBLIGATORIOS -->
-                <input type="hidden" name="public-key" value="<?php echo $infoTienda['wompi_public_key']?>" />
+                <input type="hidden" name="public-key" value="<?php echo base_url()._WOMPI_PUBLIC_KEY?>" />
                 <input type="hidden" name="currency" value="COP" />
                 <input type="hidden" name="amount-in-cents" value="<?php echo number_format($infoPedido['valor'],0,'','')?>00" />
                 <input type="hidden" name="reference" value="<?php echo $referencia?>" />
                 <!-- OPCIONALES -->
-                <input type="hidden" name="redirect-url" value="<?php echo base_url().$infoTienda['wompi_confirm']?>" />
+                <input type="hidden" name="redirect-url" value="<?php echo base_url()._WOMPI_LINK_CONFIRM?>" />
                 <button type="submit" class="btn btn-primary" style="background:#000;color:#fff"><?php echo lang("text30")?></button>
         </form><br><br>
         <img src="<?php echo base_url()?>/res/img/pagos-seguros-por-wompi.png" width="80%" alt="">
