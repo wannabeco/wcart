@@ -1224,10 +1224,13 @@ class Api extends CI_Controller
             // echo json_encode($respuesta);
         }
         else{
-            $respuesta = array("mensaje"=>"Pedidos del usuario",
-                          "continuar"=>1,
-                          "datos"=>$salida); 
+
+            $respuesta = array("mensaje"=>"Acceso no admitido",
+                          "continuar"=>0,
+                          "datos"=>""); 
             }
+            
+
         echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
     }
 
