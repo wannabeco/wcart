@@ -590,7 +590,7 @@ class Pedidos extends CI_Controller
         //debo actualizar la informacon del pedido con lo que me retorno payu
         $dataInserta['estadoPago']      = $state_pol;
         $dataInserta['transactionId']   = $transaction_id;
-        $dataInserta['reference_pol']   = $reference_pol."000";
+        $dataInserta['reference_pol']   = $reference_pol;
         $dataInserta['valor']           = $value;
         $dataInserta['moneda']          = $currency;
         $dataInserta['entidad']         = $payment_method;
