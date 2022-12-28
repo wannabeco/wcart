@@ -44,9 +44,12 @@ class GestionTienda extends CI_Controller
 			}
 			else
 			{
-				$opc = "home";
+				$idTienda 				= $_SESSION['project']['info']['idTienda'];
+				$infoTienda     		= $this->logica->getInfoTiendaNew($idTienda);
+				$opc 					= "home";
 				$salida['titulo'] 	  	= "Licencia expirada";
 				$salida['dataLicencia'] = $estadoTienda;
+				$salida['infoTienda']   = $infoTienda;
 				$salida['centro'] 		= "app/homeCaducidad";
 				$this->load->view("app/index",$salida);
 			}
@@ -149,9 +152,12 @@ class GestionTienda extends CI_Controller
 			}
 			else
 			{
-				$opc = "home";
+				$idTienda 				= $_SESSION['project']['info']['idTienda'];
+				$infoTienda     		= $this->logica->getInfoTiendaNew($idTienda);
+				$opc 					= "home";
 				$salida['titulo'] 	  	= "Licencia expirada";
 				$salida['dataLicencia'] = $estadoTienda;
+				$salida['infoTienda']   = $infoTienda;
 				$salida['centro'] 		= "app/homeCaducidad";
 				$this->load->view("app/index",$salida);
 			}
@@ -199,11 +205,7 @@ class GestionTienda extends CI_Controller
 			}
 			else
 			{
-				$opc = "home";
-				$salida['titulo'] 	  	= "Licencia expirada";
-				$salida['dataLicencia'] = $estadoTienda;
-				$salida['centro'] 		= "app/homeCaducidad";
-				$this->load->view("app/index",$salida);
+				header('Location:'.base_url()."pagoMembresia/pagoMembresia");
 			}
 		}
 		else
@@ -1041,11 +1043,7 @@ public function cargaPlantillaCargaFotos()
 			}
 			else
 			{
-				$opc = "home";
-				$salida['titulo'] 	  	= "Licencia expirada";
-				$salida['dataLicencia'] = $estadoTienda;
-				$salida['centro'] 		= "app/homeCaducidad";
-				$this->load->view("app/index",$salida);
+				header('Location:'.base_url()."pagoMembresia/pagoMembresia");
 			}
 		}
 		else
@@ -1227,5 +1225,13 @@ public function cargaPlantillaCargaFotos()
 		// $_POST['idBanner']
 		$categorias	     = $this->logicaHome->eliminaBanner($_POST);
 		echo json_encode($categorias);
+	}
+
+	public function plantillaModalInfo()
+	{
+			$salida["titulo"] 	 = lang("text25");
+			//$salida["persistencia"]  = 0;
+			$salida["labelBtn"]  = lang("reg_btn_crea");
+		echo $this->load->view("app/modalINfo",$salida,true);
 	}
 }

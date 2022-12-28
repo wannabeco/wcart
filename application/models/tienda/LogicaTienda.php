@@ -49,6 +49,7 @@ class LogicaTienda  {
     public function crearTienda($post,$files)
     {
         extract($post);
+        //var_dump($post);die();
         //valido la información de correo para ver si la tienda ya existe
         $validoCorreoNegocio = $this->ci->dbTienda->getInfoTienda(array("correoTienda"=>$correoTienda,"idEstado"=>1));
         if(count($validoCorreoNegocio) > 0)
@@ -82,83 +83,111 @@ class LogicaTienda  {
                     }
                     else
                     {
-                        $dataInsertaTienda['nombreTienda']          = $nombreTienda;
-                        $dataInsertaTienda['idTipoTienda']          = $idTipoTienda;
+                        $dataInsertaTienda['nombreTienda']          = $post['nombreTienda'];
+                        $dataInsertaTienda['idTipoTienda']          = $post['idTipoTienda'];
                         $dataInsertaTienda['idPais']                = '057';
-                        $dataInsertaTienda['idDepartamento']        = $idDepartamento;
-                        $dataInsertaTienda['idCiudad']              = $idCiudad;
-                        $dataInsertaTienda['direccionTienda']       = $direccionTienda;
-                        $dataInsertaTienda['telefonoTienda']        = $telefonoTienda;
-                        $dataInsertaTienda['correoTienda']          = $correoTienda;
-                        $dataInsertaTienda['celularTienda']         = $celularTienda;
-                        $dataInsertaTienda['urlAmigable']           = $urlAmigable;
-                        $dataInsertaTienda['urlFacebook']           = $urlFacebook;
-                        $dataInsertaTienda['urlInstagram']          = $urlInstagram;
-                        $dataInsertaTienda['urlLinkedin']           = $urlLinkedin;
-                        $dataInsertaTienda['urlTwitter']            = $urlTwitter;
-                        $dataInsertaTienda['idEstado']              = 1;
+                        $dataInsertaTienda['idDepartamento']        = $post['idDepartamento'];
+                        $dataInsertaTienda['idCiudad']              = $post['idCiudad'];
+                        $dataInsertaTienda['direccionTienda']       = $post['direccionTienda'];
+                        $dataInsertaTienda['telefonoTienda']        = $post['telefonoTienda'];
+                        $dataInsertaTienda['correoTienda']          = $post['correoTienda'];
+                        $dataInsertaTienda['celularTienda']         = $post['celularTienda'];
+                        $dataInsertaTienda['faviconTienda']         = "";
+                        $dataInsertaTienda['logoTienda']            = "";
+                        $dataInsertaTienda['urlAmigable']           = str_replace(' ', '-', $post['urlAmigable']);
+                        $dataInsertaTienda['urlFacebook']           = $post['urlFacebook'];
+                        $dataInsertaTienda['urlInstagram']          = $post['urlInstagram'];
+                        $dataInsertaTienda['urlLinkedin']           = $post['urlLinkedin'];
+                        $dataInsertaTienda['urlTwitter']            = $post['urlTwitter'];
                         $dataInsertaTienda['paquete']               = 'mensual';
-                        $dataInsertaTienda['estadoFunciona']        = 'demo';
-                        $dataInsertaTienda['fechaCaducidad']        = sumaMeses(date("Y-m-d H:i:s"),3,0,'+');
+                        $dataInsertaTienda['estadoFunciona']        = 'normal';
+                        $dataInsertaTienda['fechaIngreso']          = date('Y-m-d');
+                        $dataInsertaTienda['fechaInicioMembresia']  = date('Y-m-d');
+                        $dataInsertaTienda['fechaCaducidad']        = date('Y-m-d',strtotime($fecha_actual."- 1 days"));
+                        $dataInsertaTienda['currency']              = "$";
+                        $dataInsertaTienda['mensajeMantenimiento']  = "En este momento nos encontramos trabajando para ti en unos momentos volveremos a estar al 100% gracias por tu comprensión";
+                        $dataInsertaTienda['idEstado']              = 1;
                         //proceso a crear la tienda
                         $idNuevaTienda = $this->ci->dbTienda->crearTienda($dataInsertaTienda);
                         if($idNuevaTienda > 0)//la tienda se crea
-                        {
-                            //proceso a crear el propietario
-                            $dataTendero['nombre']      = $nombre;
-                            $dataTendero['apellido']    = $apellido;
-                            $dataTendero['email']       = $email;
-                            $dataTendero['celular']     = $celular;
-                            $dataTendero['idPerfil']    = 6;
-                            $dataTendero['idTienda']    = $idNuevaTienda;
-                            //inserto la data del tendero
-                            $idTendero = $this->ci->dbTienda->creaTendero($dataTendero);
-                            if($idTendero > 0)//si el tendero se crea
-                            {
-                                //inserto el usuario y la clave del tendero
-                                $dataInsertClave['idGeneral']   =   $idTendero;
-                                $dataInsertClave['tipoLogin']   =   2;//tipo Empresa
-                                $dataInsertClave['usuario']     =   $email;
-                                $dataInsertClave['clave']       =   sha1($rclave);
-                                $dataInsertClave['clave64']     =   base64_encode($rclave);
-                                $dataInsertClave['cambioClave'] =   0;
-                                //inserto la clave
-                                $idLogin                        = $this->ci->dbRegistro->insertaClaveEmpresa($dataInsertClave);
-                                //luego de esto proceso a subir las fotos, para ello crearé funciones
-                                if($idLogin > 0)
+                        {   
+                            @mkdir('assets/uploads/files/'.$idNuevaTienda,0777);
+                            if($dataInsertaTienda['logoTienda'] == ""){
+                                //se copia logo de provicional
+                                $origen= "assets/uploads/files/19.png";
+                                $destino = "assets/uploads/files/".$idNuevaTienda."/f19.jpeg";
+                                copy($origen,$destino);
+                                $dataInserta['logoTienda'] = "f19.jpeg";
+                                $where['idTienda'] = $idNuevaTienda;
+                                $ActualizaTienda = $this->ci->dbTienda->actualizaTienda($dataInserta,$where);
+                            if($dataInsertaTienda['faviconTienda'] == ""){
+                                //se copia favicon de provicional
+                                $origen1= "assets/uploads/files/favicon.png";
+                                $destino1 = "assets/uploads/files/".$idNuevaTienda."/favicon.png";
+                                copy($origen1,$destino1);
+                                    $dataInserta['faviconTienda'] = "avicon.png";
+                                    $where['idTienda'] = $idNuevaTienda;
+                                    $ActualizaTienda = $this->ci->dbTienda->actualizaTienda($dataInserta,$where);
+                                //proceso a crear el propietario
+                                $dataTendero['nombre']      = $nombre;
+                                $dataTendero['apellido']    = $apellido;
+                                $dataTendero['email']       = $email;
+                                $dataTendero['celular']     = $celular;
+                                $dataTendero['idPerfil']    = 6;
+                                $dataTendero['idTienda']    = $idNuevaTienda;
+                                //inserto la data del tendero
+                                $idTendero = $this->ci->dbTienda->creaTendero($dataTendero);
+                                if($idTendero > 0)//si el tendero se crea
                                 {
-                                    //proceso a subir las fotos que el usuario haya cargado
-                                    //logo
-                                    $cargaLogo   = $this->cargaFotosTienda($files,"logoTienda",$idNuevaTienda,$idTendero);
-                                    //si viene el banner lo cargo
-                                    if(isset($files) && $files['bannerTienda']['name'] != "")
-                                    {
-                                        $cargaBanner = $this->cargaFotosTienda($files,"bannerTienda",$idNuevaTienda,$idTendero);
+                                        //inserto el usuario y la clave del tendero
+                                        $dataInsertClave['idGeneral']   =   $idTendero;
+                                        $dataInsertClave['tipoLogin']   =   2;//tipo Empresa
+                                        $dataInsertClave['usuario']     =   $email;
+                                        $dataInsertClave['clave']       =   sha1($rclave);
+                                        $dataInsertClave['clave64']     =   base64_encode($rclave);
+                                        $dataInsertClave['cambioClave'] =   0;
+                                        //inserto la clave
+                                        $idLogin                        = $this->ci->dbRegistro->insertaClaveEmpresa($dataInsertClave);
+                                        //luego de esto proceso a subir las fotos, para ello crearé funciones
+                                        if($idLogin > 0)
+                                        {
+                                            $salida = array("mensaje"=>"La tienda ha sido creada de manera correcta","continuar"=>1,"datos"=>array("idTienda"=>$idNuevaTienda,"idTendero"=>$idTendero));
+                                            $cargaLogo   = $this->cargaFotosTienda($files,"logoTienda",$idNuevaTienda,$idTendero);
+                                            //si viene el banner lo cargo
+                                            if(isset($files) && $files['bannerTienda']['name'] != "")
+                                            {
+                                                $cargaBanner = $this->cargaFotosTienda($files,"bannerTienda",$idNuevaTienda,$idTendero);
+                                            }
+                                            
+                                            if($cargaLogo['continuar'] == 1)
+                                            {
+                                                $salida = array("mensaje"=>"La tienda ha sido creada de manera correcta","continuar"=>1,"datos"=>array("idTienda"=>$idNuevaTienda,"idTendero"=>$idTendero));
+                                            }
+                                            else
+                                            {
+                                                $salida = array("mensaje"=>"La tienda ha sido creada de manera correcta","continuar"=>1,"datos"=>array("idTienda"=>$idNuevaTienda,"idTendero"=>$idTendero));
+                                                // $salida = $cargaLogo;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            $salida = array("mensaje"=>"La data del login del propietario no pudo ser creada, por favor intente de nuevo más tarde.","continuar"=>0,"datos"=>array());
+                                        }
+                                    }
+                                    else{
+                                        $salida = array("mensaje"=>"La data no pudo ser creada, por favor intente de nuevo más tarde.","continuar"=>0,"datos"=>array());
                                     }
 
-                                    if($cargaLogo['continuar'] == 1)
-                                    {
-                                        $salida = array("mensaje"=>"La tienda ha sido creada de manera correcta!","continuar"=>1,"datos"=>array("idTienda"=>$idNuevaTienda,"idTendero"=>$idTendero));
-                                    }
-                                    else
-                                    {
-                                        $salida = $cargaLogo;
-                                    }
                                 }
-                                else
-                                {
-                                    $salida = array("mensaje"=>"La data del login del propietario no pudo ser creada, por favor intente de nuevo más tarde., por favor intente de nuevo más tarde","continuar"=>0,"datos"=>array());
-                                }
-
                             }
                             else
                             {
-                                $salida = array("mensaje"=>"La data del propietario de la tienda no se ha podido registrar, por favor intente más tarde, por favor intente de nuevo más tarde","continuar"=>0,"datos"=>array());
+                                $salida = array("mensaje"=>"La data del propietario de la tienda no se ha podido registrar, por favor intente de nuevo más tarde.","continuar"=>0,"datos"=>array());
                             }
                         }
                         else
                         {
-                            $salida = array("mensaje"=>"La tienda no ha podido ser creada, por favor intente de nuevo más tarde","continuar"=>0,"datos"=>array());
+                            $salida = array("mensaje"=>"La tienda no ha podido ser creada.","continuar"=>0,"datos"=>array());
 
                         }
                     }

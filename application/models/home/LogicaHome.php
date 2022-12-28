@@ -422,9 +422,11 @@ class LogicaHome  {
     public function procesaSubCategoria($post)
     {
         extract($post);
+        //var_dump($post);die();
         if($edita == 0)//agrega
         {
             unset($post['edita']);
+            unset($post['idSubcategoria']);
             $post['nombreSubcategoria'] = mb_strtoupper($post['nombreSubcategoria']);
             $resultado = $this->ci->dbHome->agregaSubCategoria($post);
             if($resultado > 0)
@@ -508,6 +510,8 @@ class LogicaHome  {
         {
             unset($post['edita']);
             unset($post['fotoActual']);
+            unset($post['descuento']);
+            unset($post['idPresentacion']);
             $post['nombrePresentacion'] = mb_strtoupper($post['nombrePresentacion']);
             $resultado = $this->ci->dbHome->agregaProducto($post);
             if($resultado > 0)

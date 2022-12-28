@@ -143,47 +143,63 @@ class Pedidos extends CI_Controller
     public function pedidosEntrantes($idModulo)
     {
         if(validaIngreso())
-        {
-            /*******************************************************************************************/
-            /* ESTA SECCIÓN DE CÓDIGO  ES MUY IMPORTANTE YA QUE ES LA QUE CONTROLARÁ EL MÓDULO VISITADO*/
-            /*******************************************************************************************/
-            //si no se declara está variable en cada inicio del módulo no se podrán consultar los privilegios
-            $_SESSION['moduloVisitado']     =   $idModulo;
-            //antes de pintar la plantilla del módulo valido si hay permisos de ver ese módulo para evitar que ingresen al módulo vía URL
-            if(getPrivilegios()[0]['ver'] == 1)
-            { 
-                unset($_SESSION['refPedido']);//elimino el codigo temporal del pedido
-                unset($_SESSION['pedido']);//elimino el array del pedido
-                //info Módulo
-                $infoModulo                 = $this->logica->infoModulo($idModulo);
-                $listadoDeEstados           = $this->logica->getEstadosPedido();
+        {   
+			$estadoTienda = estadoTiendaAdmin();
+            var_dump($estadoTienda);die();
+			if($estadoTienda['mostrar'] == 1)
+			{
+				/*******************************************************************************************/
+                /* ESTA SECCIÓN DE CÓDIGO  ES MUY IMPORTANTE YA QUE ES LA QUE CONTROLARÁ EL MÓDULO VISITADO*/
+                /*******************************************************************************************/
+                //si no se declara está variable en cada inicio del módulo no se podrán consultar los privilegios
+                $_SESSION['moduloVisitado']     =   $idModulo;
+                //antes de pintar la plantilla del módulo valido si hay permisos de ver ese módulo para evitar que ingresen al módulo vía URL
+                if(getPrivilegios()[0]['ver'] == 1)
+                { 
+                    unset($_SESSION['refPedido']);//elimino el codigo temporal del pedido
+                    unset($_SESSION['pedido']);//elimino el array del pedido
+                    //info Módulo
+                    $infoModulo                 = $this->logica->infoModulo($idModulo);
+                    $listadoDeEstados           = $this->logica->getEstadosPedido();
 
-                //$listaPedidos               = $this->logicaPedidos->misPedidos(array("p.idPersona"=>$_SESSION['project']['info']['idPersona']));
-                if($_SESSION['project']['info']['idPerfil'] == _PERFIL_ADMIN)//si es admin debe traer los pedidos solo para el admin
-                {
-                    $listaPedidos               = $this->logicaPedidos->misPedidos();
+                    //$listaPedidos               = $this->logicaPedidos->misPedidos(array("p.idPersona"=>$_SESSION['project']['info']['idPersona']));
+                    if($_SESSION['project']['info']['idPerfil'] == _PERFIL_ADMIN)//si es admin debe traer los pedidos solo para el admin
+                    {
+                        $listaPedidos               = $this->logicaPedidos->misPedidos();
+                    }
+                    else
+                    {
+                        $listaPedidos               = $this->logicaPedidos->misPedidos();
+                    }
+                    //var_dump($listaPedidos);
+                    //die($_SESSION['project']['info']['idPerfil']);
+                    $opc                        = "home";
+                    $salida['titulo']           = lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
+                    $salida['estados']          = $listadoDeEstados;       
+                    $salida['centro']           = "pedidos/homeMisPedidos";
+                    $salida['infoModulo']       = $infoModulo[0];
+                    $salida['listaPedidos']     = $listaPedidos;
+                    $this->load->view("app/index",$salida);
                 }
                 else
                 {
-                    $listaPedidos               = $this->logicaPedidos->misPedidos();
+                    $opc                   = "home";
+                    $salida['titulo']      = lang("titulo")." - Área Restringida";
+                    $salida['centro']      = "error/areaRestringida";
+                    $this->load->view("app/index",$salida);
                 }
-                //var_dump($listaPedidos);
-                //die($_SESSION['project']['info']['idPerfil']);
-                $opc                        = "home";
-                $salida['titulo']           = lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
-                $salida['estados']          = $listadoDeEstados;       
-                $salida['centro']           = "pedidos/homeMisPedidos";
-                $salida['infoModulo']       = $infoModulo[0];
-                $salida['listaPedidos']     = $listaPedidos;
-                $this->load->view("app/index",$salida);
-            }
-            else
-            {
-                $opc                   = "home";
-                $salida['titulo']      = lang("titulo")." - Área Restringida";
-                $salida['centro']      = "error/areaRestringida";
-                $this->load->view("app/index",$salida);
-            }
+			}
+			else
+			{
+				$idTienda 				= $_SESSION['project']['info']['idTienda'];
+				$infoTienda     		= $this->logica->getInfoTiendaNew($idTienda);
+				$opc 					= "home";
+				$salida['titulo'] 	  	= "Licencia expirada";
+				$salida['dataLicencia'] = $estadoTienda;
+				$salida['infoTienda']   = $infoTienda;
+				$salida['centro'] 		= "app/homeCaducidad";
+				$this->load->view("app/index",$salida);
+			}
         }
         else
         {
@@ -240,8 +256,11 @@ class Pedidos extends CI_Controller
     public function misPedidos($idModulo)
     {
         if(validaIngreso())
-        {
-            /*******************************************************************************************/
+        {   
+            $estadoTienda = estadoTiendaAdmin();
+			if($estadoTienda['mostrar'] == 1)
+			{
+				/*******************************************************************************************/
             /* ESTA SECCIÓN DE CÓDIGO  ES MUY IMPORTANTE YA QUE ES LA QUE CONTROLARÁ EL MÓDULO VISITADO*/
             /*******************************************************************************************/
             //si no se declara está variable en cada inicio del módulo no se podrán consultar los privilegios
@@ -289,6 +308,11 @@ class Pedidos extends CI_Controller
                 $salida['centro']      = "error/areaRestringida";
                 $this->load->view("app/index",$salida);
             }
+			}
+			else
+			{
+				header('Location:'.base_url()."pagoMembresia/pagoMembresia");
+			}
         }
         else
         {

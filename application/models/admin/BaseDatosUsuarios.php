@@ -98,7 +98,18 @@ class BaseDatosUsuarios extends CI_Model {
         //print_r($this->db->last_query());die();
         return $id->result_array();
         
-    }   
+    }
+    //informacion de usuario por el id
+    public function getinformaUsuario($idUsuario)
+    {   
+        $where['idPersona']=$idUsuario;
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tablePersonas);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
 }
 
 ?>

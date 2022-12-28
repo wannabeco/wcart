@@ -16,6 +16,9 @@
                 
              
             </h1>
+            <button type="button" class="btn">
+                        <a href="" style="font-size: 18px; color:black; text-decoration:none; font-size: 14px;">Tutorial</a>
+                    </button>
             <ol class="breadcrumb">
                 <li>
                     <a href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home</a>

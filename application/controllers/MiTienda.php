@@ -38,6 +38,7 @@ class MiTienda extends CI_Controller
 		//valido que haya una sesión de usuario, si no existe siempre lo enviaré al login
 		if(validaIngreso())
 		{
+			$estadoTienda = estadoTiendaAdmin();
 			/*******************************************************************************************/
 			/* ESTA SECCIÓN DE CÓDIGO  ES MUY IMPORTANTE YA QUE ES LA QUE CONTROLARÁ EL MÓDULO VISITADO*/
 			/*******************************************************************************************/
@@ -61,6 +62,7 @@ class MiTienda extends CI_Controller
 				$salida['infoTipoTienda'] 	   = $infoTipoTienda;
 				$salida['infopaises'] 	       = $infopaises;
 				$salida['infocategorias'] 	   = $infocategorias;
+				$salida['estadoTienda']		   = $estadoTienda['mostrar'];
 				$salida['infoDisenoTienda']	   = $infoDisenoTienda;
 				$salida['infoModulo']          = $infoModulo[0];
 				$this->load->view("app/index",$salida);
@@ -107,7 +109,7 @@ class MiTienda extends CI_Controller
 	public function procesaDatalogos(){
 		
 		extract($_POST);
-		@mkdir('assets/uploads/files/'.$idTienda,0777);
+		//@mkdir('assets/uploads/files/'.$idTienda,0777);
 		$salida=""; 
 		$error ="";
 		$config['upload_path'] = 'assets/uploads/files/'.$idTienda.'/';
@@ -159,7 +161,7 @@ class MiTienda extends CI_Controller
 	public function procesaDatafavicon(){
 		
 		extract($_POST);
-		@mkdir('assets/uploads/files/'.$idTienda,0777);
+		//@mkdir('assets/uploads/files/'.$idTienda,0777);
 		
 		$config['upload_path'] = 'assets/uploads/files/'.$idTienda.'/';
 		//echo $config['upload_path'];

@@ -1,4 +1,4 @@
-<div class="container-fluid" ng-controller="pedidos" ng-init="misPedidosInit()" id="contenedorUsuarios">
+<div class="container-fluid" ng-controller="pedidos" ng-init="misPedidosInit()" id="contenedorUsuarios" data-infoTienda ='<?php echo $infoTienda;?>'>
 <div id="modalUsuarios" class="modal fade" role="dialog"  data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content" id="modalCrea">

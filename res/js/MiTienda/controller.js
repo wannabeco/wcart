@@ -485,7 +485,9 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 			
 		}
 	}
-	
+	$scope.click =function(){
+		window.location.assign($scope.config.apiUrl+"pagoMembresia/pagoMembresia"); 
+	}
 
 });
 

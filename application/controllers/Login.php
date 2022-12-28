@@ -66,23 +66,37 @@ class Login extends CI_Controller
             echo json_encode($respuesta); 
 		}
 	}
-	public function verificaIngreso()
-	{
-		//súper acceso a la app
-		if(validaInApp("web"))//esta validación me hará consultas más seguras
-		{
-			//busco la foto con la palabra que envien
-			$logueo = $this->logicaLogin->getLoginUsuario($_POST);
-			echo json_encode($logueo);
+	public function verificaIngreso($usuario="", $clave="")
+	{	
+		if($usuario!= "" && $clave != ""){
+			$post['usuario'] = $usuario;
+			$post['clave'] = $clave;
+			
+				$logueo = $this->logicaLogin->getLoginUsuario($post);
+				if($logueo['continuar']==1){
+					echo "<script> document.location='".base_url('App')."'</script>";
+				}
+				else{
+					echo "<script> document.location='".base_url('login')."'</script>";
+				}
 		}
-		else
-		{
-			$respuesta = array("mensaje"=>"Acceso no admitido.",
-                              "continuar"=>0,
-                              "datos"=>""); 
+		else{
+			//súper acceso a la app
+			if(validaInApp("web"))//esta validación me hará consultas más seguras
+			{
+				//busco la foto con la palabra que envien
+				$logueo = $this->logicaLogin->getLoginUsuario($_POST);
+				echo json_encode($logueo);
+			}
+			else
+			{
+				$respuesta = array("mensaje"=>"Acceso no admitido.",
+								"continuar"=>0,
+								"datos"=>""); 
 
-            echo json_encode($respuesta); 
-		}	
+				echo json_encode($respuesta); 
+			}	
+		}
 	}
 
 	public function cambioClave()

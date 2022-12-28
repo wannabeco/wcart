@@ -27,6 +27,11 @@
             <li class="active">
                  Perfil de tienda
             </li>
+            <li>
+                <button type="button" class="btn">
+                    <a href="" style="font-size: 18px; color:black; text-decoration:none; font-size: 14px;">Tutorial</a>
+                </button>
+            </li>
         </ol>
         </div>
     </div> 
@@ -46,6 +51,9 @@
         </li>
         <li style=" margin:0px;">
             <a data-toggle="tab" href="#mantenimiento" style="color:#ffffff; border-radius: 0px; margin:0px;"> Mantenimiento</a>
+        </li>
+        <li style=" margin:0px;">
+            <a data-toggle="tab" href="#Membresia" style="color:#ffffff; border-radius: 0px; margin:0px;"> Membresía</a>
         </li>
     </ul>
     <div class="tab-content">
@@ -152,9 +160,16 @@
                                         </div>
                                     </div>
                                     <div  class="col col-lg-12">
+                                        <?php if($estadoTienda == 1){ ?>
                                         <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" id="DatosBasicos" ng-click="getdatos()">ACTUALIZAR DATOS BASICOS</button>
                                         <p class="help-block"></p>
                                         <input type="hidden" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">
+                                        <?php }else { ?>
+                                            <div class="alert alert-danger p-4" role="alert">
+                                                <i class="fa fa-info-circle" aria-hidden="true"></i> Los cambios en tu método de pago se aplican a los cargos por renovación y suscripción.
+                                                <button type="submit" class="btn-raised btn-primary" style="position:relative; float:right; right:20px;" data-toggle="tab" href="#Membresia" >Actualiza tu Membresía</button>
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </form>    
@@ -336,15 +351,24 @@
                                     <i class="fa fa-bell col col-lg-4" style="padding:5px; position:relative; float:left; left:50px;"></i>
                                 </p>
                             </div>  
-                                <div  class="col col-lg-12 text-center">
-                                        <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="getGraficos()">Actulizar graficos</button>
-                                        
-                                    </div>    
+                                   
                             </div>
                         </div>
                     </div>
                 </div>
             <div>
+            <div  class="col col-lg-12 text-center">
+                <?php if($estadoTienda == 1){ ?>
+                    <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="getGraficos()">Actulizar graficos</button>
+                    <p class="help-block"></p>
+                    <input type="hidden" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">
+                    <?php }else { ?>
+                    <div class="alert alert-danger p-4" role="alert">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> Los cambios en tu método de pago se aplican a los cargos por renovación y suscripción.
+                        <button type="submit" class="btn-raised btn-primary" style="position:relative; float:right; right:20px;" data-toggle="tab" href="#Membresia" >Actualiza tu Membresía</button>
+                    </div>
+                <?php } ?>        
+            </div> 
         </div>
     </div>            
         <!--actualizar logos-->
@@ -365,7 +389,16 @@
                                                     </button><br> <p style=" position:relative; float:left; left:20px;">El tamaño maximo de la imagen es de 500 px de ancho por 200 px de alto.</p><br> 
                                                     <!-- vista de logo -->
                                                     <div id="visorLogo" style="width: 150px; height: 50px; margin:20px;"> </div>
-                                                    <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" id="cargaLogo" name="cargaLogo" ng-click="cargaLogo()">Actualizar Logo</button>   
+                                                    <?php if($estadoTienda == 1){ ?>
+                                                        <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" id="cargaLogo" name="cargaLogo" ng-click="cargaLogo()">Actualizar Logo</button>   
+                                                        <p class="help-block"></p>
+                                                        <input type="hidden" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">
+                                                        <?php }else { ?>
+                                                        <div class="alert alert-danger p-4" role="alert">
+                                                            <i class="fa fa-info-circle" aria-hidden="true"></i> Los cambios en tu método de pago se aplican a los cargos <br> por renovación y suscripción.
+                                                         <button type="submit" class="btn-raised btn-primary" style="position:relative; float:right; right:20px;" data-toggle="tab" href="#Membresia" >Actualiza tu Membresía</button>
+                                                        </div>
+                                                    <?php } ?> 
                                                 </div>
                                             </div>
                                             <input type="hidden" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">
@@ -392,7 +425,16 @@
                                                             <div id="visorFavicon" style="width: 150px; height: 50px; margin:20px;"> </div>
                                                         </div>
                                                         <div  class="col col-lg-12">
+                                                        <?php if($estadoTienda == 1){ ?>
                                                             <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="cargafavicon()">Actualizar favicon</button>   
+                                                            <p class="help-block"></p>
+                                                            <input type="hidden" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">
+                                                            <?php }else { ?>
+                                                            <div class="alert alert-danger p-4" role="alert">
+                                                                <i class="fa fa-info-circle" aria-hidden="true"></i> Los cambios en tu método de pago se aplican a los cargos <br> por renovación y suscripción.
+                                                                <button type="submit" class="btn-raised btn-primary" style="position:relative; float:right; right:20px;" data-toggle="tab" href="#Membresia" >Actualiza tu Membresía</button>
+                                                            </div>
+                                                        <?php } ?> 
                                                         </div>
                                                     </div>
                                                 </div>
@@ -438,9 +480,9 @@
                                     <label style="color:#222222;" class="col col-lg-12"><br>
                                         <i class="fa fa-wallet"></i><img src="../../res/fotos/wannabe/PAYU_LOGO_LIME.png" style="width: 90px; height: 40px;" alt="">
                                         <input type="checkbox" value="si" name="pagoPayu" id="pagoPayu" ng-click="payu()"<?php if($infoTienda['pagoPayu'] == "si"){ echo "checked";}?> style="float:right;width: 20px;height: 20px;"><br>
-                                        <input type="text" class="input-group-addon" placeholder="Payu key" value="<?php echo (isset($infoTienda['payu_apikey']))?$infoTienda['payu_apikey']:''; ?>" id="payu_apikey" name="payu_apikey" style="width: 250px; <?php if($infoTienda['pagoPayu'] != "si"){ echo "display:none;";}?>" ><br>
-                                        <input type="text" class="input-group-addon" placeholder="Payu id cuenta" value="<?php echo (isset($infoTienda['payu_id_cuenta']))?$infoTienda['payu_id_cuenta']:''; ?>" id="payu_id_cuenta" name="payu_id_cuenta" style="width: 250px; <?php if($infoTienda['pagoPayu'] != "si"){ echo "display:none;";}?>"><br>
-                                        <input type="text" class="input-group-addon" placeholder="Payu id mercado" value="<?php echo (isset($infoTienda['payu_id_mercado']))?$infoTienda['payu_id_mercado']:''; ?>" id="payu_id_mercado" name="payu_id_mercado" style="width: 250px; <?php if($infoTienda['pagoPayu'] != "si"){ echo "display:none;";}?>;">
+                                        <input type="text" class="input-group-addon" placeholder="API KEY" value="<?php echo (isset($infoTienda['payu_apikey']))?$infoTienda['payu_apikey']:''; ?>" id="payu_apikey" name="payu_apikey" style="width: 250px; <?php if($infoTienda['pagoPayu'] != "si"){ echo "display:none;";}?>" ><br>
+                                        <input type="text" class="input-group-addon" placeholder="Cuenta" value="<?php echo (isset($infoTienda['payu_id_cuenta']))?$infoTienda['payu_id_cuenta']:''; ?>" id="payu_id_cuenta" name="payu_id_cuenta" style="width: 250px; <?php if($infoTienda['pagoPayu'] != "si"){ echo "display:none;";}?>"><br>
+                                        <input type="text" class="input-group-addon" placeholder="Merchant ID" value="<?php echo (isset($infoTienda['payu_id_mercado']))?$infoTienda['payu_id_mercado']:''; ?>" id="payu_id_mercado" name="payu_id_mercado" style="width: 250px; <?php if($infoTienda['pagoPayu'] != "si"){ echo "display:none;";}?>;">
                                     </label>
                                 </div>
                                 <label style="padding:5px;color:#222222;">
@@ -483,7 +525,16 @@
                                 </div>  
                             </div>
                             <div  class="col col-lg-12">
-                                <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="getActualizaPago()">Actualizar Pagos</button>
+                            <?php if($estadoTienda == 1){ ?>
+                                <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="getActualizaPago()">Actualizar Pagos</button>                         
+                                <p class="help-block"></p>
+                                <input type="hidden" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">
+                                <?php }else { ?>
+                                <div class="alert alert-danger p-4" role="alert">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i> Los cambios en tu método de pago se aplican a los cargos por renovación y suscripción.
+                                    <button type="submit" class="btn-raised btn-primary" style="position:relative; float:right; right:20px;" data-toggle="tab" href="#Membresia" >Actualiza tu Membresía</button>
+                                </div>
+                            <?php } ?> 
                             </div>
                             <input type="hidden" id="idTienda" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">               
                         </form>    
@@ -516,10 +567,62 @@
                                 <p style="font-size:16px;">Recuerde que la aplicación móvil al estar en estado mantenimiento, ninguno de los usuarios no podrán realizar compra o pedido.</p>
                             </div><br>
                             <div  class="col col-lg-12">
-                                <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="getmantenimiento()">Actualizar Estado</button>
+                            <?php if($estadoTienda == 1){ ?>
+                                <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="getmantenimiento()">Actualizar Estado</button>                           
+                                <p class="help-block"></p>
+                                <input type="hidden" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">
+                                <?php }else { ?>
+                                <div class="alert alert-danger p-4" role="alert">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i> Los cambios en tu método de pago se aplican a los cargos por renovación y suscripción.
+                                    <button type="submit" class="btn-raised btn-primary" style="position:relative; float:right; right:20px;" data-toggle="tab" href="#Membresia" >Actualiza tu Membresía</button>
+                                </div>
+                            <?php } ?> 
                             </div>
                             <input type="hidden" id="idTienda" name="idTienda" value="<?php echo (isset($infoTienda['idTienda']))?$infoTienda['idTienda']:''; ?>">               
                         </form>    
+                    </div>
+                </div>
+            </div>    
+        </div>
+        <!-- membrecia -->
+        <div id="Membresia" class="tab-pane fade">
+            <div class="row">
+                <div class="col col-lg-12 col-md-12">
+                    <div class="row">
+                    <center><H2><strong>Informacion de tu plan</strong></H2></center><br><br>
+                        <?php if($infoTienda['mesGratis'] == '0'){ ?>
+                            <div class="col-md-12">
+                                <div class="alert alert-primary col-md-6" role="alert">
+                                    No contamos con un plan disponible aun
+                                </div>
+                            <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px; top:100px;" ng-click="click()">Actualizar tu plan</button>
+                            </div>
+                        <?php } else{ if($infoTienda['Plan'] == 'movil'){
+                            //var_dump($infoTienda);die();
+                            ?>
+                            <!--columna de la izquierda -->
+                            <div class="col-md-6">
+                                <div class="alert alert-success" role="alert">
+                                    <h3>Actual mente cuentas con un plan de app movil, el cual tiene fecha de caducidad el dia: <?php  echo date('d,m,Y',strtotime( $infoTienda['fechaCaducidad'])); ?></h3>
+                                </div>
+                            </div>
+                            <!--columna de la derecha -->
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px; top:100px;" ng-click="click()">Actualizar tu plan</button>
+                            </div>
+                            <?php } if($infoTienda['Plan'] == 'movil y web'){ ?>
+                                <!--columna de la izquierda -->
+                                <div class="col-md-6">
+                                    <div class="alert alert-success" role="alert">
+                                        <h3>Actual mente cuentas con un plan de app movil y pagina web, el cual tiene fecha de caducidad el dia: <?php  echo date('d,m,Y',strtotime( $infoTienda['fechaCaducidad'])); ?></h3>
+                                    </div>
+                                </div>
+                                <!--columna de la derecha -->
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px; top:100px;" ng-click="click()">Actualizar tu plan</button>
+                                </div>
+                            <?php } }?>
+                    
                     </div>
                 </div>
             </div>    

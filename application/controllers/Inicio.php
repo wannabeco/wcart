@@ -45,7 +45,7 @@ class Inicio extends CI_Controller
 	{
 		if($_SESSION['project']['info']['idPerfil'] == 6)//admin de la tienda
         {
-			$infoTienda = $this->logica->getInfoTienda($_SESSION['project']['info']['idTienda']);
+			$infoTienda = $this->logica->getInfoTiendaNew($_SESSION['project']['info']['idTienda']);
         }
         else
         {

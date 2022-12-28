@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-lg-12">
             <br>
-            <center><img src="<?php echo base_url()?>assets/uploads/files/<?php echo $infoTienda['logoTienda']?>" width="50%"></center><br>
+            <center><img src="<?php echo base_url()?>assets/uploads/files/<?php echo $infoTienda['idTienda']?>/<?php echo $infoTienda['logoTienda']?>" width="50%"></center><br>
             <h4 class="text-center">
                 <strong><?php echo lang("text35")?></strong>
             </h4>
