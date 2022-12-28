@@ -1,3 +1,4 @@
+//cambios desde noviembre 16
 ALTER TABLE `app_tiendas` ADD `Plan` ENUM('movil','movil y web') NOT NULL AFTER `fechaCaducidad`;
 ALTER TABLE `app_tiendas` ADD `fechaInicioMembresia` DATETIME NOT NULL AFTER `estadoFunciona`;
 ALTER TABLE `app_tiendas` ADD `caduca` INT(1) NOT NULL DEFAULT '0' AFTER `Plan`;
