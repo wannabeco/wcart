@@ -129,7 +129,7 @@ class Membresia extends CI_Controller
                     $dataInserta['plan']            = "app1";
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                     $idTienda = $_SESSION['project']['info']['idTienda'];
-                    $updateTienda = $this->logica->updatePagoApp($idTienda);
+                    $updateTienda = $this->logica->updatemes($idTienda);
 
                 } else if($_GET['TX_VALUE']== (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
                     //insertar en la tabla
@@ -222,7 +222,7 @@ class Membresia extends CI_Controller
                         $dataInserta['ip']              = getIP();
                         $dataInserta['plan']            = "app1";
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $updateTienda = $this->logica->updateTienda($idTienda);
+                        $updateTienda = $this->logica->updatePagoApp($idTienda);
     
                     }else if($_GET['TX_VALUE']== (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
                         //insertar en la tabla
@@ -362,7 +362,7 @@ class Membresia extends CI_Controller
                         $dataInserta['plan']            = "web1";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $updatemes = $this->logica->updatemes($idTienda);
+                        $updatemes = $this->logica->updatePagoMesPro($idTienda);
                     }
                     else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
                         
@@ -385,7 +385,7 @@ class Membresia extends CI_Controller
                         $dataInserta['plan']            = "web2";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $updatemes = $this->logica->updatemes($idTienda);
+                        $updatemes = $this->logica->updatePagoAnoPro($idTienda);
                     }
                     
                 }

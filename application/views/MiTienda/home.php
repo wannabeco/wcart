@@ -28,9 +28,12 @@
                  Perfil de tienda
             </li>
             <li>
+                <!--@if _app_variablesglobales si el valor es 0 no se mostrara el boton-->
+            <?php if(_DESHABILITA_BOTON_TUTORIALES == 1){?>
                 <button type="button" class="btn">
                     <a href="" style="font-size: 18px; color:black; text-decoration:none; font-size: 14px;">Tutorial</a>
                 </button>
+            <?php } ?>
             </li>
         </ol>
         </div>

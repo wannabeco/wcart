@@ -73,3 +73,9 @@ CREATE TABLE wcart.app_pagos_eliminados (
 )
 ALTER TABLE wcart.app_pagos_eliminados ADD emilPago varchar(250) NULL;
 ALTER TABLE wcart.app_pagos_eliminados CHANGE emilPago emailPago varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+INSERT INTO app_variablesglobales (variable, valor) VALUES ('_DESHABILITA_BOTON_TUTORIALES','1');
+INSERT INTO app_variablesglobales (variable, valor) VALUES ('_PRECIO_PLAN_BASIC','39000');
+INSERT INTO app_variablesglobales (variable, valor) VALUES ('_PRECIO_PLAN_PRO','59900');
+INSERT INTO app_variablesglobales (variable, valor) VALUES ('_MESES_DE_COBRO_ANO_PLAN_BASIC','10');
+INSERT INTO app_variablesglobales (variable, valor) VALUES ('_MESES_DE_COBRO_ANO_PLAN_PRO','10');
+INSERT INTO app_variablesglobales (variable, valor) VALUES ('_URL_TIENDAS','https://wcartwebppage.herokuapp.com/tiendas/');

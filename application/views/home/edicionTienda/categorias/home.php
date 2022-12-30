@@ -24,8 +24,11 @@
                             <li role="separator" class="divider"></li><li class="dropdown-header"><?php echo lang("lblSeleccioneOpc") ?></li>
                             <li><a class="btn" ng-click="cargaPlantillaControl('',0)"><i class="fa fa-fw fa-plus"></i> <?php echo lang("text25")?></a></li>
                         </ul>
+                        <!--@if _app_variablesglobales si el valor es 0 no se mostrara el boton-->
+                        <?php if(_DESHABILITA_BOTON_TUTORIALES == 1){?>
                         <!--boton de modal-->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Tutorial</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Tutorial</button>
+                        <?php } ?> 
                     </div>
                 <?php } ?>
             </h1>

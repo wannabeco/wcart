@@ -26,9 +26,12 @@
                             <li><a class="btn" ng-click="cargaPlantillaControlSubcat('',0)"><i class="fa fa-fw fa-plus"></i> Nueva subcategoría</a></li>
                         </ul>
                          <!--boton de modal-->
-                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Tutorial</button>
+                         <!--@if _app_variablesglobales si el valor es 0 no se mostrara el boton-->
+                         <?php if(_DESHABILITA_BOTON_TUTORIALES == 1){?>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Tutorial</button>
+                        <?php } ?>    
                     </div>
-                <?php } ?>
+                <?php }?>
             </h1>
         <ol class="breadcrumb">
             <li>

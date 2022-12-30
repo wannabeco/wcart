@@ -28,9 +28,12 @@
                             <li><a class="btn" ng-click="cargaPlantillaCargaFotos('',1)" style="float:left;"><i class="fa fa-file-image-o"></i> Carga de imagenes</a></li>
                         </ul>
                         <!--boton de modal-->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Tutorial</button>
+                        <!--@if _app_variablesglobales si el valor es 0 no se mostrara el boton-->
+                        <?php if(_DESHABILITA_BOTON_TUTORIALES == 1){?>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Tutorial</button>
+                        <?php } ?> 
                     </div>
-                <?php } ?>
+                <?php }?>
             </h1>
         <ol class="breadcrumb">
             <li>

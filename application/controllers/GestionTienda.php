@@ -8,6 +8,7 @@ class GestionTienda extends CI_Controller
         $this->load->model("general/LogicaGeneral", "logica");
         $this->load->model("home/LogicaHome", "logicaHome");
         $this->load->model("tienda/LogicaTienda", "logicaTienda");
+		$this->load->model("MiTienda/LogicaMiTienda", "LogicaMiTienda");
        	$this->load->helper('language');//mantener siempre.
     }
 	public function categorias($idModulo)	
@@ -1026,11 +1027,14 @@ public function cargaPlantillaCargaFotos()
 				if(getPrivilegios()[0]['ver'] == 1)
 				{ 
 					//info Módulo
-					$infoModulo	      	   = $this->logica->infoModulo($idModulo);
-					$opc 				   = "home";
-					$salida['titulo']      = lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
-					$salida['centro'] 	   = "home/edicionTienda/bannerTienda/home";
-					$salida['infoModulo']  = $infoModulo[0];
+					$infoModulo	      	   			= $this->logica->infoModulo($idModulo);
+					$infoTienda	      	    		= $this->LogicaMiTienda->infoTienda($_SESSION['project']['info']['idTienda']);
+					$infoTipoTienda	      			= $this->LogicaMiTienda->infoTipoTienda();
+					$opc 				   			= "home";
+					$salida['infoTienda'] 	       	= $infoTienda[0];
+					$salida['titulo']     			= lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
+					$salida['centro'] 	   			= "home/edicionTienda/bannerTienda/home";
+					$salida['infoModulo']  			= $infoModulo[0];
 					$this->load->view("app/index",$salida);
 				}
 				else

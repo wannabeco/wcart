@@ -1225,6 +1225,7 @@ class LogicaGeneral  {
         $dataActualiza['fechaInicioMembresia']  = $fecha_actual;
         $dataActualiza['fechaCaducidad']        = $fechaMes;
         $dataActualiza['manteminiento']         = 0;
+        $dataActualiza['Plan']                  = 'movil';
         $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
         if($response > 0)
         {
@@ -1316,7 +1317,8 @@ class LogicaGeneral  {
     {
         $where['idTienda']                      = $tienda;
         $fecha_actual                           = date("Y-m-d");
-        $fechaMes                               = date("Y-m-d",strtotime($fecha_actual."+ 1 month"));
+        $fechaSemana                            = date("Y-m-d",strtotime($fecha_actual."+ 1 week"));
+        $fechaMes                               = date("Y-m-d",strtotime($fechaSemana."+ 2 month"));
         $dataActualiza['fechaCaducidad']        = $fechaMes;
         $dataActualiza['Plan']                  = 'movil';
         $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
@@ -1410,6 +1412,33 @@ class LogicaGeneral  {
         $fecha_actual                           = date('Y-m-d');
         $fechaSemana                            = date("Y-m-d",strtotime($fecha_actual."+ 1 week"));
         $fechaMes                               = date("Y-m-d",strtotime($fechaSemana."+ 2 month"));
+        $dataActualiza['fechaInicioMembresia']  = $fecha_actual;
+        $dataActualiza['fechaCaducidad']        = $fechaMes;
+        $dataActualiza['mesGratis']             = 1;
+        $dataActualiza['manteminiento']         = 0;
+        $dataActualiza['Plan']                  = 'movil y web';
+        //var_dump($dataActualiza);die();
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //cuando el usuario compra solo plan pro
+    public function updateTiendaMespro($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date('Y-m-d');
+        $fechaMes                               = date("Y-m-d",strtotime($fecha_actual."+ 1 month"));
         $dataActualiza['fechaInicioMembresia']  = $fecha_actual;
         $dataActualiza['fechaCaducidad']        = $fechaMes;
         $dataActualiza['mesGratis']             = 1;
