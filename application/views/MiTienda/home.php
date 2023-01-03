@@ -30,9 +30,28 @@
             <li>
                 <!--@if _app_variablesglobales si el valor es 0 no se mostrara el boton-->
             <?php if(_DESHABILITA_BOTON_TUTORIALES == 1){?>
-                <button type="button" class="btn">
-                    <a href="" style="font-size: 18px; color:black; text-decoration:none; font-size: 14px;">Tutorial</a>
-                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Tutorial</button>
+                <!-- modal-->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                            <h2 class="modal-title" id="myModalLabel" style="font-family: 'Roboto'; text-transform: uppercase;  color: #333;">Crear categorias</h2>
+                        </div>
+                        <div class="modal-body">
+                        <div class="panelPopUp" id="popPricing">
+                                <div class="panelInternoPop" >
+                                    <!--codigo del video-->
+                                <iframe width="100%" height="500" src="https://www.youtube.com/embed/eBEmEfQZo1Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="modal-footer"><br><br>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#ed540e; color:#fff; bottom: 20px;right: 20px;">CLOSE WINDOW</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
             <?php } ?>
             </li>
         </ol>
