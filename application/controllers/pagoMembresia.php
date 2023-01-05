@@ -13,7 +13,7 @@
    Este archivo es el controlador que realizara al cuál se harán los llamados desde las url en la página o en los procesos AJAX que se utilicen.
 */
 defined('BASEPATH') OR exit('No direct script access allowed');
-class pagoMembresia extends CI_Controller 
+class PagoMembresia extends CI_Controller 
 {
 	function __construct() 
     {
