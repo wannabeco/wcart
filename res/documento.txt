@@ -1,0 +1,11 @@
+crear query de insercion a la base de datos.
+
+variable global _DESHABILITA_BOTON_TUTORIALES si esta en 0 no dejara ver el boton de los tutoriales en general
+variable global _PRECIO_PLAN_BASIC pendiente para crearla en produccion
+variable global _PRECIO_PLAN_PRO pendiente para crearla en produccion
+variable global _URL_TIENDAS pendiente para crearla en produccion, escribir la url de las tiendas la que quedara en produccion
+variable global _MESES_DE_COBRO_ANO_PLAN_BASIC pendiente para crearla en produccion, la cual sirve par saber cuantos meses se van a cobrar al pagar el año
+variable global _MESES_DE_COBRO_ANO_PLAN_PRO pendiente para crearla en produccion, la cual sirve par saber cuantos meses se van a cobrar al pagar el año
+
+
+

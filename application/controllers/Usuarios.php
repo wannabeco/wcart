@@ -34,31 +34,47 @@ class Usuarios extends CI_Controller
 	{
 		//valido que haya una sesión de usuario, si no existe siempre lo enviaré al login
 		if(validaIngreso())
-		{
-			/*******************************************************************************************/
-			/* ESTA SECCIÓN DE CÓDIGO  ES MUY IMPORTANTE YA QUE ES LA QUE CONTROLARÁ EL MÓDULO VISITADO*/
-			/*******************************************************************************************/
-			//si no se declara está variable en cada inicio del módulo no se podrán consultar los privilegios
-			$_SESSION['moduloVisitado']		=	$idModulo;
-			//antes de pintar la plantilla del módulo valido si hay permisos de ver ese módulo para evitar que ingresen al módulo vía URL
-			if(getPrivilegios()[0]['ver'] == 1)
-			{ 
-				//info Módulo
-				$infoModulo	      	   = $this->logica->infoModulo($idModulo);
-				$opc 				   = "home";
-				$salida['titulo']      = lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
-				$salida['centro'] 	   = "admin/adminUsuarios/home";
-				$salida['tituloBoton'] = ($_SESSION['project']['info']['idPerfil'] == _PERFIL_ADMIN_VENTAS)?'Nuevo vendedor':'Nuevo usuario';
-				$salida['infoModulo']  = $infoModulo[0];
-				$this->load->view("app/index",$salida);
-			}
-			else
+		{	
+			$estadoTienda = estadoTiendaAdmin();
+			if($estadoTienda['mostrar'] == 1)
 			{
-				$opc 				   = "home";
-				$salida['titulo']      = lang("titulo")." - Área Restringida";
-				$salida['centro'] 	   = "error/areaRestringida";
+                /*******************************************************************************************/
+				/* ESTA SECCIÓN DE CÓDIGO  ES MUY IMPORTANTE YA QUE ES LA QUE CONTROLARÁ EL MÓDULO VISITADO*/
+				/*******************************************************************************************/
+				//si no se declara está variable en cada inicio del módulo no se podrán consultar los privilegios
+				$_SESSION['moduloVisitado']		=	$idModulo;
+				//antes de pintar la plantilla del módulo valido si hay permisos de ver ese módulo para evitar que ingresen al módulo vía URL
+				if(getPrivilegios()[0]['ver'] == 1)
+				{ 
+					//info Módulo
+					$infoModulo	      	   = $this->logica->infoModulo($idModulo);
+					$opc 				   = "home";
+					$salida['titulo']      = lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
+					$salida['centro'] 	   = "admin/adminUsuarios/home";
+					$salida['tituloBoton'] = ($_SESSION['project']['info']['idPerfil'] == _PERFIL_ADMIN_VENTAS)?'Nuevo vendedor':'Nuevo usuario';
+					$salida['infoModulo']  = $infoModulo[0];
+					$this->load->view("app/index",$salida);
+				}
+				else
+				{
+					$opc 				   = "home";
+					$salida['titulo']      = lang("titulo")." - Área Restringida";
+					$salida['centro'] 	   = "error/areaRestringida";
+					$this->load->view("app/index",$salida);
+				}
+            }
+            else
+            {
+                $idTienda 				= $_SESSION['project']['info']['idTienda'];
+				$infoTienda     		= $this->logica->getInfoTiendaNew($idTienda);
+				$opc 					= "home";
+				$salida['titulo'] 	  	= "Licencia expirada";
+				$salida['dataLicencia'] = $estadoTienda;
+				$salida['infoTienda']   = $infoTienda;
+				$salida['centro'] 		= "app/homeCaducidad";
 				$this->load->view("app/index",$salida);
-			}
+            }
+			
 		}
 		else
 		{

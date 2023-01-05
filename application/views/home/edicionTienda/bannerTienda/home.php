@@ -1,5 +1,5 @@
-<div class="container-fluid" ng-controller="gestionTienda" ng-init="initBanner()" id="contenedorUsuarios">
-
+<div class="container-fluid" ng-controller="gestionTienda" ng-init="initBanner()" id="contenedorUsuarios" data-infoTienda ='<?php json_encode($infoTienda);?>'>
+    <?php json_encode($infoTienda);?>
     <div id="modalUsuarios" class="modal fade" role="dialog"  data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content" id="modalCrea">
@@ -15,6 +15,7 @@
                 <?php echo $infoModulo['nombreModulo'] ?> <!--<small>Estructura de las áreas de su empresa</small>-->
                 <?php if(getPrivilegios()[0]['crear'] == 1){ ?>
                     <div class="btn-group" >
+                        <?php if($infoTienda['Plan']=="movil y web"){?>
                         <button type="button" class="btn dropdown-toggle"
                                 data-toggle="dropdown">
                           <?php echo lang("lblAcciones") ?> <span class="caret"></span>
@@ -23,6 +24,15 @@
                             <li role="separator" class="divider"></li><li class="dropdown-header"><?php echo lang("lblSeleccioneOpc") ?></li>
                             <li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> New Banner</a></li>
                         </ul>
+                        <?php } else if($infoTienda['Plan']=="movil"){?>
+                            <button type="button" class="btn dropdown-toggle"
+                                data-toggle="dropdown"> Tu plan no incluye pagina web.
+                            </button>
+                            <!--@if _app_variablesglobales si el valor es 0 no se mostrara el boton-->
+                        <?php } if(_DESHABILITA_BOTON_TUTORIALES == 1){?>
+                        <!--abrir boton modal-->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Tutorial</button>
+                        <?php } ?> 
                     </div>
                 <?php } ?>
             </h1>
@@ -95,3 +105,24 @@
     <!-- /.row -->
  </div>
 <!-- /.container-fluid -->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+            <h2 class="modal-title" id="myModalLabel" style="font-family: 'Roboto'; text-transform: uppercase;  color: #333;">Crear categorias</h2>
+          </div>
+          <div class="modal-body">
+          <div class="panelPopUp" id="popPricing">
+                <div class="panelInternoPop" >
+                    <!--codigo del video-->
+                <iframe width="100%" height="500" src="https://www.youtube.com/embed/eBEmEfQZo1Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+          </div>
+          <div class="modal-footer"><br><br>
+            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#ed540e; color:#fff; bottom: 20px;right: 20px;">CLOSE WINDOW</button>
+          </div>
+        </div>
+    </div>
+</div>

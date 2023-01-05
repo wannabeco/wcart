@@ -1098,4 +1098,436 @@ class LogicaGeneral  {
                               "datos"=>$resultado);   
         return $respuesta;
     }
+    // actualizacion automatica mantenimiento
+    public function caducarTiendas($idEstado){
+        //extract($_POST)
+        $where['idEstado']        = $idEstado;
+        $resultado = $this->ci->dbGeneral->caducarTiendas($where);
+        $respuesta = array("mensaje"=>"todas las tiendas obtenidas",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
+        return $respuesta;
+    }
+    //actualiza mantenimiento
+    public function actualizaMantenimiento($tienda)
+    {
+        $where = $tienda;
+        //var_dump($where);die();
+        $dataActualiza['manteminiento'] = 1;
+        $dataActualiza['caduca'] = 1;
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //informacion de todas las tiendas
+    public function getInfoTiendas($urlAmigable){
+        //extract($_POST)
+        $where['urlAmigable']        = $urlAmigable;
+        $resultado = $this->ci->dbGeneral->getInfoTiendas($where);
+        $respuesta = array("mensaje"=>"todas las tiendas obtenidas",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
+        return $respuesta;
+    }
+    //logica insert historial membrecia
+    public function insertdata($dataInserta){
+        //extract($_POST)
+        $resultado = $this->ci->dbGeneral->insertdata($dataInserta);
+        $respuesta = array("mensaje"=>"todas las tiendas obtenidas",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
+        return $respuesta;
+    }
+    //verificacion si email existe
+    public function getEmail($email){
+        //extract($_POST)
+        $where['email']        = $email;
+        $resultado = $this->ci->dbGeneral->getEmail($where);
+        $respuesta = array("mensaje"=>"todos los email obtenidos",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
+        return $respuesta;
+    }
+    //se obtienen los datos de creador de la tienda por el id
+    public function getCreadorTienda($idPersona){
+        // var_dump($idPersona);die();
+        $where['idPersona']        = $idPersona;
+        $resultado = $this->ci->dbGeneral->getCreadorTienda($where);
+        $respuesta = array("mensaje"=>"todos los datos obtenidos",
+                            "continuar"=>1,
+                            "datos"=>$resultado);   
+        return $respuesta;
+    }
+    //se obtiene informacion del login por el email
+    public function getLogin($usuario){
+        // var_dump($idPersona);die();
+        $where['usuario']        = $usuario;
+        $resultado = $this->ci->dbGeneral->getLogin($where);
+        $respuesta = array("mensaje"=>"todos los datos obtenidos",
+                            "continuar"=>1,
+                            "datos"=>$resultado);   
+        return $respuesta;
+    }
+    //inset pago de membresia
+    public function insertdatapago($where,$dataInserta){
+        //$where['codigoPago'] = $where;
+       //var_dump($where);die();
+        $resultado = $this->ci->dbGeneral->insertdatapago($where,$dataInserta);
+        $respuesta = array("mensaje"=>"Tienda actualizada",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
+        return $respuesta;
+    }
+    //actualiza fecha de membresia a 62 dias;
+    public function updateTienda($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date('Y-m-d');
+        $fechaSemana                            = date("Y-m-d",strtotime($fecha_actual."+ 1 week"));
+        $fechaMes                               = date("Y-m-d",strtotime($fechaSemana."+ 2 month"));
+        $dataActualiza['fechaInicioMembresia']  = date('Y-m-d');
+        $dataActualiza['fechaCaducidad']        = $fechaMes;
+        $dataActualiza['mesGratis']             = 1;
+        $dataActualiza['manteminiento']         = 0;
+        //var_dump($dataActualiza);die();
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //actualiza 30 dias de membresia
+    public function updatemes($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date('Y-m-d');
+        $fechaMes                               = date("Y-m-d",strtotime($fecha_actual."+ 1 month"));
+        $dataActualiza['fechaInicioMembresia']  = $fecha_actual;
+        $dataActualiza['fechaCaducidad']        = $fechaMes;
+        $dataActualiza['manteminiento']         = 0;
+        $dataActualiza['Plan']                  = 'movil';
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //actualiza membresia 12 meses
+    public function updateSoloAno($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date('Y-m-d');
+        $fechaSoloAno                           = date("Y-m-d",strtotime($fecha_actual."+ 12 month"));
+        $dataActualiza['fechaInicioMembresia']  = $fecha_actual;
+        $dataActualiza['fechaCaducidad']        = $fechaSoloAno;
+        $dataActualiza['manteminiento']         = 0;
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //actualiza el pago con el codigo de membresia
+    public function actualizaDatos($data,$where)
+    {
+        $actualizaPedido = $this->ci->dbGeneral->actualizaDatos($data,$where);
+    }
+    //info de la persona por el id de sesion
+    public function getInfoUsuario($idPersona)
+    {   
+        $where['idPersona'] = $idPersona;
+        $resultado          = $this->ci->dbGeneral->getInfoUsuario($where);
+        //var_dump($resultado);
+        return $resultado; 
+    }
+    //informacion de pedido por el id
+    public function getInfopedido($pedido)
+    {   
+        $where['idMembresia'] = $pedido;
+        $resultado          = $this->ci->dbGeneral->getInfopedido($where);
+        //var_dump($resultado);
+        return $resultado; 
+    }
+    //actualiza fecha de membresia a 13 meses y 7 dias dias;
+    public function updateAno($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date('Y-m-d');
+        $fechaSemana                            = date("Y-m-d",strtotime($fecha_actual."+ 1 week"));
+        $fechaAno                               = date("Y-m-d",strtotime($fechaSemana."+ 13 month"));
+        $dataActualiza['fechaInicioMembresia']  = $fecha_actual;
+        $dataActualiza['fechaCaducidad']        = $fechaAno;
+        $dataActualiza['mesGratis']             = 1;
+        $dataActualiza['manteminiento']         = 0;
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //update la fecha de aduca cuando el plan no ha caducado a un mes
+    public function updatePagoApp($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date("Y-m-d");
+        $fechaSemana                            = date("Y-m-d",strtotime($fecha_actual."+ 1 week"));
+        $fechaMes                               = date("Y-m-d",strtotime($fechaSemana."+ 2 month"));
+        $dataActualiza['fechaCaducidad']        = $fechaMes;
+        $dataActualiza['Plan']                  = 'movil';
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //update la fecha de aduca cuando el plan no ha caducado a un año
+    public function updatePagoAnoApp($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date("Y-m-d");
+        $fechaSoloAno                           = date("Y-m-d",strtotime($fecha_actual."+ 12 month"));
+        $dataActualiza['fechaCaducidad']        = $fechaSoloAno;
+        $dataActualiza['Plan']                  = 'movil';
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //update la fecha de aduca cuando el plan no ha caducado a un mes plan pro
+    public function updatePagoMesPro($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date("Y-m-d");
+        $fechaMes                               = date("Y-m-d",strtotime($fecha_actual."+ 1 month"));
+        $dataActualiza['fechaCaducidad']        = $fechaMes;
+        $dataActualiza['Plan']                  = 'movil y web';
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //update la fecha de aduca cuando el plan no ha caducado a un año plan pro
+    public function updatePagoAnoPro($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date("Y-m-d");
+        $fechaSoloAno                           = date("Y-m-d",strtotime($fecha_actual."+ 12 month"));
+        $dataActualiza['fechaCaducidad']        = $fechaSoloAno;
+        $dataActualiza['Plan']                  = 'movil y web';
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //cuando el usuario compra por primera vez plan pro mensual
+    public function updateTiendapro($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date('Y-m-d');
+        $fechaSemana                            = date("Y-m-d",strtotime($fecha_actual."+ 1 week"));
+        $fechaMes                               = date("Y-m-d",strtotime($fechaSemana."+ 2 month"));
+        $dataActualiza['fechaInicioMembresia']  = $fecha_actual;
+        $dataActualiza['fechaCaducidad']        = $fechaMes;
+        $dataActualiza['mesGratis']             = 1;
+        $dataActualiza['manteminiento']         = 0;
+        $dataActualiza['Plan']                  = 'movil y web';
+        //var_dump($dataActualiza);die();
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //cuando el usuario compra solo plan pro
+    public function updateTiendaMespro($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date('Y-m-d');
+        $fechaMes                               = date("Y-m-d",strtotime($fecha_actual."+ 1 month"));
+        $dataActualiza['fechaInicioMembresia']  = $fecha_actual;
+        $dataActualiza['fechaCaducidad']        = $fechaMes;
+        $dataActualiza['mesGratis']             = 1;
+        $dataActualiza['manteminiento']         = 0;
+        $dataActualiza['Plan']                  = 'movil y web';
+        //var_dump($dataActualiza);die();
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //actualiza fecha de membresia a 13 meses y 7 dias dias plan pro
+    public function updateAnoPro($tienda)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date('Y-m-d');
+        $fechaSemana                            = date("Y-m-d",strtotime($fecha_actual."+ 1 week"));
+        $fechaAno                               = date("Y-m-d",strtotime($fechaSemana."+ 13 month"));
+        $dataActualiza['fechaInicioMembresia']  = $fecha_actual;
+        $dataActualiza['fechaCaducidad']        = $fechaAno;
+        $dataActualiza['mesGratis']             = 1;
+        $dataActualiza['manteminiento']         = 0;
+        $dataActualiza['Plan']                  = 'movil y web';
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //inserta registro a la base de datos con datos de pagos, mientras termina la transaccion
+    public function insetCodigo($data, $email){
+        $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+        $dataInserta['codigoPago']      = $data;
+        $dataInserta['estadoPago']      = 0;
+        $dataInserta['ip']              = getIP();
+        $dataInserta['fechaPago']       = date('Y-m-d H:m:s');
+        $dataInserta['nombrePersona']   = $email;
+        $resultado = $this->ci->dbGeneral->insetCodigo($dataInserta);
+        $respuesta = array("mensaje"=>"data insert",
+                            "continuar"=>1,
+                            "datos"=>$resultado);   
+        return $respuesta;
+    }
+     // consulta automatica de pagos donde estadoPago=0
+     public function eliminaPagos($estadoPago){
+        //extract($_POST)
+        $where['estadoPago']      = $estadoPago;
+        $resultado = $this->ci->dbGeneral->eliminaPagos($where);
+        $respuesta = array("mensaje"=>"consultados para eliminar",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
+        return $respuesta;
+    }
+    //insert a la tabla eliminados
+    public function eliminados($dataInserta){
+        //extract($_POST)
+        $resultado = $this->ci->dbGeneral->eliminados($dataInserta);
+        $respuesta = array("mensaje"=>"se agrego a la tabla eliminados",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
+        return $respuesta;
+    }
+     // se elimina de la tabla 
+     public function eliminar($idMembresia){
+        //extract($_POST)
+        $where['idMembresia']      = $idMembresia;
+        $resultado = $this->ci->dbGeneral->eliminar($where);
+        $respuesta = array("mensaje"=>"registro eliminado exitosamente",
+                              "continuar"=>1,
+                              "datos"=>$resultado);   
+        return $respuesta;
+    }
  }

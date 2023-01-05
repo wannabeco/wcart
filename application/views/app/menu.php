@@ -14,11 +14,38 @@
                             <img src="<?php echo base_url() ?>res/img/favicon.png" width="7%" style="border-radius:50%" alt="Icono Wannabe.com.co"> 
                             <!-- <?php echo lang("titulo")?> --> Wcart
                             <?php if(count($infoTienda) > 0){?>
-                                / <?php echo $infoTienda['datos'][0]['nombreTienda'] ?>
+                                /   <?php echo $infoTienda['datos'][0]['nombreTienda'] ?>
                             <?php }?>
                         </strong>
                     </a>
-                <?php }else{?>
+                    <?php if(count($infoTienda) > 0){
+                        //si tiene solo plan de app, url de aplicacion para android y ios
+                        //var_dump($infoTienda['datos']);die();
+                            if($infoTienda['datos'][0]['Plan'] === 'movil'){ 
+                                if($infoTienda['datos'][0]['urlAppStore'] !="" ){
+                            ?>
+                            <a class="navbar-brand" href="<?php echo $infoTienda['datos'][0]['urlAppStore']; ?>" style="" target="_blank">
+                                <strong> Mi app Android</strong>
+                            </a>
+                            <?php } if($infoTienda['datos'][0]['urlAppIos'] !=""){ ?>
+                            <a class="navbar-brand" href="<?php echo $infoTienda['datos'][0]['urlAppIos']; ?>" style="" target="_blank">
+                                <strong> Mi app Ios</strong>
+                            </a>
+                         <?php //si tiene solo plan de app y web, url de aplicacion para android, ios y web 
+                               } } } if($infoTienda['datos'][0]['Plan'] === 'movil y web'){ ?>
+                            <a class="navbar-brand" href="<?php echo _URL_TIENDAS.$infoTienda['datos'][0]['urlAmigable']; ?>" style="" target="_blank">
+                                <strong> ver mi tienda</strong>
+                            </a>
+                            <?php if($infoTienda['datos'][0]['urlAppStore'] !=""){ ?>
+                            <a class="navbar-brand" href="<?php echo $infoTienda['datos'][0]['urlAppStore']; ?>" style="" target="_blank">
+                                <strong> Mi app Android</strong>
+                            </a>
+                            <?php } if($infoTienda['datos'][0]['urlAppIos'] !=""){?>
+                            <a class="navbar-brand" href="<?php echo $infoTienda['datos'][0]['urlAppIos']; ?>" style="" target="_blank">
+                                <strong> Mi app Ios</strong>
+                            </a>
+                    <?php  }}?>
+                <?php } else { ?>
                     <a class="navbar-brand" href="<?php echo base_url() ?>App" style="text-transform: capitalize">
                          <strong>
                             <img src="<?php echo base_url() ?>res/img/favicon.png" width="7%" style="border-radius:50%" alt="Icono Wannabe.com.co"> 

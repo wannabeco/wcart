@@ -39,7 +39,6 @@ class PerfilUsuario extends CI_Controller
 			$cesantias 	 	 	 = $this->logica->consultaCesantias(); 
 			$infoUsuario	     = $this->logicaUsuarios->infoUsuario($_SESSION['project']['info']['idPersona']);
 
-
 			$salida["selects"]   = array("tiposDoc"=>$tiposDoc,
 										  "sexo"=>$sexo,
 										  "profesiones"=>$profesiones,
@@ -50,7 +49,8 @@ class PerfilUsuario extends CI_Controller
 										  "eps"=>$eps,
 										  "afp"=>$afp,
 										  "cesantias"=>$cesantias);
-
+										  
+			//var_dump($infoUsuario[0]);die();
 			$opc 				   = "home";
 			$salida['titulo']      = lang("titulo")." - perfil del usuario";
 			$salida['centro'] 	   = "admin/perfilUsuario/home";

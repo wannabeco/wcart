@@ -1378,7 +1378,6 @@ class Api extends CI_Controller
         echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
     }
     //información de la tienda
-    
     public function infoTienda()
     {
         extract($_POST);
@@ -1515,6 +1514,7 @@ class Api extends CI_Controller
         if(validaInApp($movil))//esta validación me hará consultas más seguras
 		{
             extract($_POST);
+            $_FILES = $_POST['logoTienda'];
             $crearTienda         = $this->logicaTienda->crearTienda($_POST,$_FILES);
             echo json_encode($crearTienda, JSON_UNESCAPED_UNICODE);
 		}
@@ -1607,6 +1607,118 @@ class Api extends CI_Controller
                               "datos"=>""); 
         }
         echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+    }
+   //presentacion por id
+   public function getInfoPresentacionid()
+    {
+    	extract($_POST);
+    	//súper acceso a la app
+		if(isset($movil) && validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+			$where['pre.idPresentacion'] 	= $idPresentacion;
+            $where['pre.idEstado']          = $idEstado;
+            if(isset($idTienda))
+            {
+			     $where['pre.idTienda'] 	= $idTienda;
+            }
+			$productos = $this->logica->getInfoPresentacion($where);
+			echo json_encode($productos, JSON_UNESCAPED_UNICODE);
+		}
+		else
+		{
+			$respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+		}
+
+    }
+    //informacion de tiendas 
+    public function getInfoTiendas()
+    {
+    	extract($_POST);
+        //var_dump($_POST);die();
+    	//súper acceso a la app
+		if(isset($movil) && validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+            $where          = $_POST['urlAmigable'];
+			$productos = $this->logica->getInfoTiendas($where);
+			echo json_encode($productos, JSON_UNESCAPED_UNICODE);
+		}
+		else
+		{
+			$respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+		}
+    }
+    //se obtienen los email de personas
+    public function getEmail()
+    {
+    	extract($_POST);
+        //var_dump($_POST);die();
+    	//súper acceso a la app
+		if(isset($movil) && validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+            $where          = $_POST['email'];
+			$emailes = $this->logica->getEmail($where);
+			echo json_encode($emailes, JSON_UNESCAPED_UNICODE);
+		}
+		else
+		{
+			$respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+		}
+    }
+    // informacion del dueño de la tienda por id
+    public function getCreadorTienda()
+    {
+    	extract($_POST);
+        // var_dump($_POST);die();
+    	//súper acceso a la app
+		if(isset($movil) && validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+            $where 	        = $_POST['idPersona'];
+            $respuesta = $this->logica->getCreadorTienda($where);
+			echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
+		}
+		else
+		{
+			$respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+		}
+
+    }
+    //informacion de login con email
+    public function getLogin()
+    {
+    	extract($_POST);
+        // var_dump($_POST);die();
+    	//súper acceso a la app
+		if(isset($movil) && validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+            $where 	        = $_POST['usuario'];
+            $respuesta = $this->logica->getLogin($where);
+			echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
+		}
+		else
+		{
+			$respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+		}
+
     }
 }
 ?>

@@ -972,16 +972,6 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 
 	}
 
-	// $compile.initBannermodal =function ()
-	// {
-	// 	$scope.config 			=  configLogin;//configuración global
-	// 	$.material.init();
-
-	// 	$('#botonfoto3').click(function(){
-	// 		$('#fotoFile3').click();
-	// 	});
-	// }
-
 	//odenar banner
 	$scope.ordenaBanner = function(id,orden)
 	{
@@ -1180,6 +1170,26 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 
 			},'json');
 		});
+	}
+	//init caduca
+	//$scope.initCaduca = function()
+	//{
+		//$scope.config 			=  configLogin;//configuración global
+		//$.material.init();
+		//$scope.cargaPlantillainfoModal();
+
+	//}
+	//funcion para cargar modal de informacion compra
+	$scope.cargaPlantillainfoModal = function()
+	{	
+		$('#infoModal').modal("show");
+		var controlador = 	$scope.config.apiUrl+"GestionTienda/plantillaModalInfo";
+		//var parametros  = 	"edita="+edita+"&idBanner="+idBanner;
+		constantes.consultaApi(controlador,function(json){
+			$("#modalCrea").html(json);
+			//actualiza el DOM
+			$scope.compileAngularElement("#infoModal");
+		},'');
 	}
 
 });

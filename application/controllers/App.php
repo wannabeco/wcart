@@ -22,35 +22,44 @@ class App extends CI_Controller
     	//$this->lang->load('spanish');
     }
 	public function index()	
-	{
-		if(validaIngreso())
-		{
-			//pondre una variable en session para poner la url del sitio y poder usar en los pagos online
-			$_SESSION['base_url'] = base_url();
-			//sendSms('573114881738','573114881738','Hola, estoy probando los mensajes de texto desde la app Esmeralda.');
-			//var_dump($_SESSION['project']);
-			//consulto el total de producto que se haya cargado hasta el momento
-			$totalStockKilosDisp  	  = $this->logicaPedidos->sumaTotalInventario(array("movimiento"=>"entrada"));
-			$totalStockKilosVend  	  = $this->logicaPedidos->sumaTotalInventario(array("movimiento"=>"salida"));
-			//var_dump($totalStockKilosVend);
-			$cantidadDistri			  = $this->logica->getPersonas(array('idPerfil'=>_PERFIL_ADMIN_VENTAS,"estado"=>1,"eliminado"=>0));
-			$cantidadVend			  = $this->logica->getPersonas(array('idPerfil'=>_PERFIL_VENDEDOR,"estado"=>1,"eliminado"=>0));
-			$totalStock 			  =  $totalStockKilosDisp[0]['totalKilos'] - $totalStockKilosVend[0]['totalKilos'];
-			//listado de pedidos
-			$listaPedidos             = $this->logicaPedidos->misPedidosHome();
-			$opc = "home";
-			$salida['titulo'] 	  = lang("titulo");
-			$salida['totalStock'] = $totalStock;
-			$salida['pedidos'] 	  = $listaPedidos;
-			$salida['distri'] 	  = $cantidadDistri;
-			$salida['vend'] 	  = $totalStockKilosVend;
-			$salida['centro'] = "app/home";
-			$this->load->view("app/index",$salida);
-		}
-		else
-		{
-			header('Location:'.base_url()."login");
-		}
+	{	
+			$estadoTienda = estadoTiendaAdmin();
+			if($estadoTienda['mostrar'] == 1)
+			{
+				if(validaIngreso())
+				{
+				//pondre una variable en session para poner la url del sitio y poder usar en los pagos online
+				$_SESSION['base_url'] = base_url();
+				//sendSms('573114881738','573114881738','Hola, estoy probando los mensajes de texto desde la app Esmeralda.');
+				//var_dump($_SESSION['project']);
+				//consulto el total de producto que se haya cargado hasta el momento
+				$totalStockKilosDisp  	  = $this->logicaPedidos->sumaTotalInventario(array("movimiento"=>"entrada"));
+				$totalStockKilosVend  	  = $this->logicaPedidos->sumaTotalInventario(array("movimiento"=>"salida"));
+				//var_dump($totalStockKilosVend);
+				$cantidadDistri			  = $this->logica->getPersonas(array('idPerfil'=>_PERFIL_ADMIN_VENTAS,"estado"=>1,"eliminado"=>0));
+				$cantidadVend			  = $this->logica->getPersonas(array('idPerfil'=>_PERFIL_VENDEDOR,"estado"=>1,"eliminado"=>0));
+				$totalStock 			  =  $totalStockKilosDisp[0]['totalKilos'] - $totalStockKilosVend[0]['totalKilos'];
+				//listado de pedidos
+				$listaPedidos             = $this->logicaPedidos->misPedidosHome();
+				$opc = "home";
+				$salida['titulo'] 	  = lang("titulo");
+				$salida['totalStock'] = $totalStock;
+				$salida['pedidos'] 	  = $listaPedidos;
+				$salida['distri'] 	  = $cantidadDistri;
+				$salida['vend'] 	  = $totalStockKilosVend;
+				$salida['centro'] = "app/home";
+				$this->load->view("app/index",$salida);
+				}
+				else
+				{
+					header('Location:'.base_url()."login");
+				}
+			}
+			else
+			{	
+				header('Location:'.base_url()."pagoMembresia/pagoMembresia");
+			}
+		
 	}	
 	public function ajaxPedidos()
 	{

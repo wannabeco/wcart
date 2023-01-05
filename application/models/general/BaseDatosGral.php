@@ -76,6 +76,9 @@ class BaseDatosGral extends CI_Model {
         $this->tableComentarios         = "app_comentarios";
         $this->tableVotos               = "app_votos";
         $this->tipoTienda               = "app_tipo_tienda";
+        $this->historial                = "app_historial_membrecia";
+        $this->membresia                = "app_pago_membresia";
+        $this->eliminaPagos             = "app_pagos_eliminados";
     }
     public function getVariablesGlobales()
     {
@@ -846,6 +849,140 @@ class BaseDatosGral extends CI_Model {
         // print_r($this->db->last_query());die();
         return $id->result_array();
 
+    }
+    //actualizacion automatica mantenimiento
+    public function caducarTiendas($where)
+    {   
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tableTiendas);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+    //actualizar datos basicos
+    public function actualizaMiTienda($where,$dataActualiza)
+    {
+        $this->db->where($where);
+        $this->db->update($this->tableTiendas,$dataActualiza);
+        //print_r($this->db->last_query());die();
+        return $this->db->affected_rows();
+    }
+    //informacion de todas las tiendas
+    public function getInfoTiendas($where)
+    {   
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tableTiendas);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    
+    }
+    //inserta en la tabla historial membrecia
+    public function insertdata($dataInserta)
+    {
+        $this->db->insert($this->historial,$dataInserta);
+        //print_r($this->db->last_query());die();
+        return $this->db->insert_id();
+    }
+    //verificacion de usuarios por emial
+    public function getEmail($where)
+    {   
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tablePersonas);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+    // consulta de creador de la tienda por id
+    public function getCreadorTienda($where)
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tablePersonas);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+    // informacion de la tienda para mensaje de pago membresia
+    public function getLogin($where)
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tableLogin);
+        $id = $this->db->get();            
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+    //inserta en la tabla pago membresia
+    public function insertdatapago($where,$dataInserta)
+    {
+        $this->db->where($where);
+        $this->db->update($this->membresia,$dataInserta);
+        //print_r($this->db->last_query());die();
+        return $this->db->insert_id();
+    }
+    //se actualiza la compra de membresia por el codigo
+    public function actualizaDatos($dataInserta,$where)
+    {
+        $this->db->where($where);
+        $this->db->update($this->membresia,$dataInserta);
+        //print_r($this->db->last_query());die();
+        return $this->db->insert_id();
+    }
+    //consulta a db info usuaio por el id
+    public function getInfoUsuario($where)
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tablePersonas);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+    //informacion e pedido por id
+    public function getInfopedido($where)
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->membresia);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+    //se inserta el codigo
+    public function insetCodigo($dataInserta)
+    {
+        $this->db->insert($this->membresia,$dataInserta);
+        //print_r($this->db->last_query());die();
+        return $this->db->insert_id();
+    }
+    //actualizacion automatica mantenimiento
+    public function eliminaPagos($where)
+    {   
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->membresia);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
+    //inserta en la tabla pagos eliminados
+    public function eliminados($dataInserta)
+    {
+        $this->db->insert($this->eliminaPagos,$dataInserta);
+        //print_r($this->db->last_query());die();
+        return $this->db->insert_id();
+    }
+    //se elimina de la tabla
+    public function eliminar($where)
+    {
+        $this->db->where($where);
+        $this->db->delete($this->membresia);
+        //print_r($this->db->last_query());die();
+        return $this->db->insert_id();
     }
 }
 

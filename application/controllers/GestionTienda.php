@@ -8,6 +8,7 @@ class GestionTienda extends CI_Controller
         $this->load->model("general/LogicaGeneral", "logica");
         $this->load->model("home/LogicaHome", "logicaHome");
         $this->load->model("tienda/LogicaTienda", "logicaTienda");
+		$this->load->model("MiTienda/LogicaMiTienda", "LogicaMiTienda");
        	$this->load->helper('language');//mantener siempre.
     }
 	public function categorias($idModulo)	
@@ -44,9 +45,12 @@ class GestionTienda extends CI_Controller
 			}
 			else
 			{
-				$opc = "home";
+				$idTienda 				= $_SESSION['project']['info']['idTienda'];
+				$infoTienda     		= $this->logica->getInfoTiendaNew($idTienda);
+				$opc 					= "home";
 				$salida['titulo'] 	  	= "Licencia expirada";
 				$salida['dataLicencia'] = $estadoTienda;
+				$salida['infoTienda']   = $infoTienda;
 				$salida['centro'] 		= "app/homeCaducidad";
 				$this->load->view("app/index",$salida);
 			}
@@ -149,9 +153,12 @@ class GestionTienda extends CI_Controller
 			}
 			else
 			{
-				$opc = "home";
+				$idTienda 				= $_SESSION['project']['info']['idTienda'];
+				$infoTienda     		= $this->logica->getInfoTiendaNew($idTienda);
+				$opc 					= "home";
 				$salida['titulo'] 	  	= "Licencia expirada";
 				$salida['dataLicencia'] = $estadoTienda;
+				$salida['infoTienda']   = $infoTienda;
 				$salida['centro'] 		= "app/homeCaducidad";
 				$this->load->view("app/index",$salida);
 			}
@@ -199,11 +206,7 @@ class GestionTienda extends CI_Controller
 			}
 			else
 			{
-				$opc = "home";
-				$salida['titulo'] 	  	= "Licencia expirada";
-				$salida['dataLicencia'] = $estadoTienda;
-				$salida['centro'] 		= "app/homeCaducidad";
-				$this->load->view("app/index",$salida);
+				header('Location:'.base_url()."pagoMembresia/pagoMembresia");
 			}
 		}
 		else
@@ -1024,11 +1027,14 @@ public function cargaPlantillaCargaFotos()
 				if(getPrivilegios()[0]['ver'] == 1)
 				{ 
 					//info Módulo
-					$infoModulo	      	   = $this->logica->infoModulo($idModulo);
-					$opc 				   = "home";
-					$salida['titulo']      = lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
-					$salida['centro'] 	   = "home/edicionTienda/bannerTienda/home";
-					$salida['infoModulo']  = $infoModulo[0];
+					$infoModulo	      	   			= $this->logica->infoModulo($idModulo);
+					$infoTienda	      	    		= $this->LogicaMiTienda->infoTienda($_SESSION['project']['info']['idTienda']);
+					$infoTipoTienda	      			= $this->LogicaMiTienda->infoTipoTienda();
+					$opc 				   			= "home";
+					$salida['infoTienda'] 	       	= $infoTienda[0];
+					$salida['titulo']     			= lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
+					$salida['centro'] 	   			= "home/edicionTienda/bannerTienda/home";
+					$salida['infoModulo']  			= $infoModulo[0];
 					$this->load->view("app/index",$salida);
 				}
 				else
@@ -1041,11 +1047,7 @@ public function cargaPlantillaCargaFotos()
 			}
 			else
 			{
-				$opc = "home";
-				$salida['titulo'] 	  	= "Licencia expirada";
-				$salida['dataLicencia'] = $estadoTienda;
-				$salida['centro'] 		= "app/homeCaducidad";
-				$this->load->view("app/index",$salida);
+				header('Location:'.base_url()."pagoMembresia/pagoMembresia");
 			}
 		}
 		else
@@ -1227,5 +1229,13 @@ public function cargaPlantillaCargaFotos()
 		// $_POST['idBanner']
 		$categorias	     = $this->logicaHome->eliminaBanner($_POST);
 		echo json_encode($categorias);
+	}
+
+	public function plantillaModalInfo()
+	{
+			$salida["titulo"] 	 = lang("text25");
+			//$salida["persistencia"]  = 0;
+			$salida["labelBtn"]  = lang("reg_btn_crea");
+		echo $this->load->view("app/modalINfo",$salida,true);
 	}
 }

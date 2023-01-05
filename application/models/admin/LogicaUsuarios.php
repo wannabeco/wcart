@@ -26,8 +26,8 @@ class LogicaUsuarios  {
             $dataUsuario                  = $this->ci->dbUsuarios->getinfoUsuario($where);
         }
         else if ($_SESSION['project']['info']['idPerfil'] == 6 ){
-            $where['ped.idTienda'] = $_SESSION['project']['info']['idTienda'];
-            $dataUsuario                  = $this->ci->dbUsuarios->infoUsuario($where);
+            $idUsuario = $_SESSION['project']['info']['idPersona'];
+            $dataUsuario                  = $this->ci->dbUsuarios->getinformaUsuario($idUsuario);
         }
         if(count($dataUsuario) > 0)
         {
