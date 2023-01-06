@@ -36,7 +36,7 @@
         <tbody>
                 <tr>
                     <td></td>
-                    <td><?php $nombreTrans; ?></td>
+                    <td><?php echo $nombreTrans; ?></td>
                     <td class="text-center"></td>
                     <td class="text-right"><?php echo "$".number_format($precio);?></td>
                 </tr>
