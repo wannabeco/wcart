@@ -70,7 +70,7 @@
         <center>
             <form action="https://checkout.wompi.co/p/" method="GET">
                 <!-- OBLIGATORIOS -->
-                <input type="hidden" name="public-key" value="<?php echo base_url()._WOMPI_PUBLIC_KEY?>" />
+                <input type="hidden" name="public-key" value="<?php echo $infoTienda['wompi_public_key'] ?>" />
                 <input type="hidden" name="currency" value="COP" />
                 <input type="hidden" name="amount-in-cents" value="<?php echo number_format($infoPedido['valor'],0,'','')?>00" />
                 <input type="hidden" name="reference" value="<?php echo $referencia?>" />

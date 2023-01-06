@@ -105,6 +105,9 @@ class LogicaTienda  {
                         $dataInsertaTienda['fechaInicioMembresia']  = date('Y-m-d');
                         $dataInsertaTienda['fechaCaducidad']        = date('Y-m-d',strtotime($fecha_actual."- 1 days"));
                         $dataInsertaTienda['currency']              = "$";
+                        $dataInsertaTienda['pagoPayu']              = "no";
+                        $dataInsertaTienda['pagoWompi']             = "no";
+                        $dataInsertaTienda['pagoStripe']            = "no";
                         $dataInsertaTienda['mensajeMantenimiento']  = "En este momento nos encontramos trabajando para ti en unos momentos volveremos a estar al 100% gracias por tu comprensión";
                         $dataInsertaTienda['idEstado']              = 1;
                         //proceso a crear la tienda
