@@ -91,7 +91,7 @@ class LogicaTienda  {
                         $dataInsertaTienda['direccionTienda']       = $post['direccionTienda'];
                         $dataInsertaTienda['telefonoTienda']        = $post['telefonoTienda'];
                         $dataInsertaTienda['correoTienda']          = $post['correoTienda'];
-                        $dataInsertaTienda['celularTienda']         = $post['celularTienda'];
+                        $dataInsertaTienda['celularTienda']         = "+57".$post['celularTienda'];
                         $dataInsertaTienda['faviconTienda']         = "";
                         $dataInsertaTienda['logoTienda']            = "";
                         $dataInsertaTienda['urlAmigable']           = str_replace(' ', '-', $post['urlAmigable']);
