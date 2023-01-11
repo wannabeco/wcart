@@ -28,6 +28,7 @@ class BaseDatosUsuarios extends CI_Model {
         $this->tablePedidos              = "app_pedidos";
         $this->tableTiposDoc             = "app_tipos_doc";
         $this->tableTiendas              = "app_tiendas";
+        $this->taplePedidos              = "app_pedidos";              
 
     }
     public function agregaUsuario($dataInserta)
@@ -95,7 +96,7 @@ class BaseDatosUsuarios extends CI_Model {
         }
         $this->db->from($this->tablePersonas." u");
         $this->db->join($this->tablePerfiles." p","p.idPerfil=u.idPerfil","INNER");
-        $this->db->join($this->tableTiendas." t","t.idTienda=u.idTienda","INNER");
+        $this->db->join($this->tableTiendas." t","t.idTienda=u.idTienda","LEFT");
         $id = $this->db->get();
         //print_r($this->db->last_query());die();
         return $id->result_array();
@@ -104,12 +105,14 @@ class BaseDatosUsuarios extends CI_Model {
     //informacion de usuario por el id
     public function getinformaUsuario($idTienda)
     {   
-        $where['u.idTienda']=$idTienda;
-        $this->db->select("u.*,u.estado as estadoU,p.nombrePerfil,t.nombreTienda");
+        $where['p.idTienda']=$idTienda;
+        $this->db->select("pr.*,pr.nombre,pr.apellido,pf.nombrePerfil,t.nombreTienda");
         $this->db->where($where);
-        $this->db->from($this->tablePersonas." u");
-        $this->db->join($this->tablePerfiles." p","p.idPerfil=u.idPerfil","INNER");
-        $this->db->join($this->tableTiendas." t","t.idTienda=u.idTienda","INNER");
+        $this->db->from($this->taplePedidos." p");
+        $this->db->join($this->tablePersonas." pr","pr.idPersona=p.idPersona","INNER");
+        $this->db->join($this->tablePerfiles." pf","pf.idPerfil=pr.idPerfil","INNER");
+        $this->db->join($this->tableTiendas." t","t.idTienda=p.idTienda","LEFT");
+        $this->db->group_by('pr.idPersona');
         $id = $this->db->get();
         //print_r($this->db->last_query());die();
         return $id->result_array();
