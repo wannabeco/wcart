@@ -44,6 +44,7 @@
         </div>
     </div> 
     <!-- /.row -->
+    <!--
     <div class="row">
         <div class="col-lg-12">
             <form class="form-inline">
@@ -53,12 +54,12 @@
               </div>
             </form>
         </div>
-    </div>
+    </div>-->
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
-                <table class="table table-hover table-striped" ng-if="subCategorias.length > 0">
+                <table class="table table-hover table-striped" ng-if="subCategorias.length > 0" id="tableSubcategorias">
                     <thead>
                         <tr>
                             <!-- <th class="text-center">ID SUBCATEGORIA</th> -->

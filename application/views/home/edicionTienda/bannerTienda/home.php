@@ -47,7 +47,7 @@
         </div>
     </div> 
     <!-- /.row -->
-    <div class="row">
+    <!--<div class="row">
         <div class="col-lg-12">
             <form class="form-inline">
               <div class="form-group  label-floating">
@@ -56,12 +56,12 @@
               </div>
             </form>
         </div>
-    </div>
+    </div>-->
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
-                <table class="table table-hover table-striped" ng-if="Banners.length > 0">
+                <table class="table table-hover table-striped" ng-if="Banners.length > 0" id="tableBanner">
                     <thead>
                         <tr>
                             <!-- <th class="text-center">ID CATEGORÍA</th> -->

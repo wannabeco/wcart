@@ -135,7 +135,7 @@ class Membresia extends CI_Controller
                     //insertar en la tabla
                     $estadoTx = lang("trans_aprobada");
                     $claseLabel = "label-success";
-                    $where['codigoPago']                           = $idTransaccion;
+                    $where['codigoPago']            = $idTransaccion;
                     $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
                     $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
                     $dataInserta['estadoPago']      = $transactionState;

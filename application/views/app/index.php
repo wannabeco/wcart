@@ -39,6 +39,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>res/css/css_bootstrap-datetimepicker.css" media="">
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url()?>res/img/favicon.png" />
     <link href="<?php echo base_url()?>res/css/select2.min.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -88,6 +89,7 @@
     <script src='<?php echo base_url()?>res/js/fullcalendar.min.js'></script>
     <script src='<?php echo base_url()?>res/js/lang-all.js'></script>
     <script type="text/javascript" src="https://www.wannabe.com.co/js/kon.min.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     
     
     <?php 

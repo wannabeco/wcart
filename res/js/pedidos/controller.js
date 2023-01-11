@@ -12,6 +12,9 @@ project.controller('pedidos', function($scope,$http,$q,constantes,$compile)
 	$scope.misPedidosInit = function()
 	{
 		$scope.config = configLogin;
+		$(document).ready( function () {
+			$('#tablaPedido').DataTable() .order(0, 'desc').draw();;
+		} );
 	}
 	$scope.nuevoPedidoInit = function()
 	{

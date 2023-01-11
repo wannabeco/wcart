@@ -208,8 +208,13 @@
                         <div class="col col-lg-3">
                             <select name="estadoPago" class="form-control" id="estadoPago" style="padding: 5px 8px">
                                 <option value="">Estado del pago</option>
+                                <option value="4" <?php if($infoPedido['estadoPago'] == '4'){ ?> selected <?php }?> >Transacción aprobada</option>
                                 <option value="000" <?php if($infoPedido['estadoPago'] == '000'){ ?> selected <?php }?> >Esperando pago</option>
                                 <option value="998" <?php if($infoPedido['estadoPago'] == '998'){ ?> selected <?php }?> >Pago realizado</option>
+                                <option value="7" <?php if($infoPedido['estadoPago'] == '7'){ ?> selected <?php }?> >Transacción pendiente</option>
+                                <option value="6" <?php if($infoPedido['estadoPago'] == '6'){ ?> selected <?php }?> >Transacción rechazada</option>
+                                <option value="999" <?php if($infoPedido['estadoPago'] == '999'){ ?> selected <?php }?>>Pago no realizado</option>  
+                                <option value="1" <?php if($infoPedido['estadoPago'] == '1'){ ?> selected <?php }?>>Cancelado</option>  
                             </select>
                         </div>
                         <div class="col col-lg-3">

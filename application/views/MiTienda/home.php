@@ -611,40 +611,111 @@
             <div class="row">
                 <div class="col col-lg-12 col-md-12">
                     <div class="row">
-                    <center><H2><strong>Informacion de tu plan</strong></H2></center><br><br>
-                        <?php if($infoTienda['mesGratis'] == '0'){ ?>
+                    <div class="col-md-12">
+                        <center><H2><strong>Informacion de tu plan</strong></H2></center><br><br>
+                    </div>
+                                <!--columna de la derecha -->
+                        <div class="col-md-12">
+                        <?php $pagos= $infoPagos;$infoPago="";?>
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped" id="tablaPagos">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th class="text-center">ID</th> -->
+                                                <th class="text-center">Pago</th>
+                                                <th class="text-center">Email</th>
+                                                <th class="text-center">Estado</th>
+                                                <th class="text-center">Valor</th>
+                                                <th class="text-center">Codigo</th>
+                                                <th class="text-center">Fecha</th>
+                                                <th class="text-center">Plan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach($pagos as $infoPago){ 
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $infoPago['idMembresia']; ?></td> 
+                                                    <td><?php echo $infoPago['nombrePersona']; ?></td> 
+                                                    <td>
+                                                        <?php if( $infoPago['estadoPago'] == 0){?>
+                                                            <span class="label label-segundary">transacción cancelada</span>
+                                                        <?php }else if( $infoPago['estadoPago'] == 7){?>
+                                                            <span class="label label-clear">Transacción pendiente</span>
+                                                        <?php }else if( $infoPago['estadoPago'] == 104){?>
+                                                        <span class="label label-danger"> Error</span>
+                                                        <?php }else if( $infoPago['estadoPago'] == 4){?>                            
+                                                            <span class="label label-success">Transacción aprobada </span>
+                                                        <?php }else if( $infoPago['estadoPago'] == 998){?>                            
+                                                            <span class="label label-success">Pago realizado</span>
+                                                        <?php }else if( $infoPago['estadoPago'] == 6){?>                            
+                                                            <span class="label label-danger">trans_rechazada</span>
+                                                        <?php }else if( $infoPago['estadoPago'] == 999){?>                            
+                                                            <span class="label label-warning">Pago no realizado</span>
+                                                        <?php }else if( $infoPago['estadoPago'] == 000){?>                            
+                                                            <span class="label label-warning">Esperando pago</span>
+                                                        <?php }else if( $infoPago['estadoPago'] == "Otro estado"){?>                            
+                                                            <span class="label label-warning"></span>
+                                                        <?php }else{?>
+                                                            <span class="label label-default">Others</span>
+                                                        <?php }?>
+                                                    </td>
+                                                    <!-- <td>{{ulist.nombreArea}}</td>
+                                                    <td>{{ulist.nombreCargo}}</td> -->
+                                                    <!-- <td style="vertical-align: middle"></td> -->
+                                                    <td style="vertical-align: middle" align="center">$ <?php echo number_format($infoPago['valor'],0,',','.') ?></td>
+                                                    <td style="vertical-align: middle" align="center"><?php echo $infoPago['codigoPago'];?></td>
+                                                    <td style="vertical-align: middle" align="center"><?php  $fecha = $infoPago['fechaPago']; echo $fechas = date("Y-m-d", strtotime($fecha));?></td>
+                                                    <td style="vertical-align: middle" align="center">
+                                                        <?php if($infoPago['plan']=="web1"){ ?>
+                                                            <span class="label label-success">Pro mes</span>
+                                                        <?php } if($infoPago['plan']=="web2"){ ?>
+                                                            <span class="label label-success">Pro año</span>
+                                                        <?php } if($infoPago['plan']=="app1"){ ?>
+                                                            <span class="label label-primary">Basic mes</span>
+                                                        <?php } if($infoPago['plan']=="app2" ){ ?>
+                                                            <span class="label label-primary">Basic año</span>
+                                                        <?php } if($infoPago['plan']== ""){?>
+                                                            <span class="label label-danger">Sin pago</span>
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 p-5">
+                            <?php if($infoTienda['mesGratis'] == '0'){ ?>
                             <div class="col-md-12">
                                 <div class="alert alert-primary col-md-6" role="alert">
                                     No contamos con un plan disponible aun
                                 </div>
-                            <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px; top:100px;" ng-click="click()">Actualizar tu plan</button>
+                            <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px; top:50px;" ng-click="click()">Actualizar tu plan</button>
                             </div>
-                        <?php } else{ if($infoTienda['Plan'] == 'movil'){
+                            <?php } else{ if($infoTienda['Plan'] == 'movil'){
                             //var_dump($infoTienda);die();
                             ?>
                             <!--columna de la izquierda -->
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="alert alert-success" role="alert">
-                                    <h3>Actual mente cuentas con un plan de app movil, el cual tiene fecha de caducidad el dia: <?php  echo date('d,m,Y',strtotime( $infoTienda['fechaCaducidad'])); ?></h3>
+                                    <h5>Actual mente cuentas con un plan de app movil, el cual tiene fecha de caducidad el dia: <?php  echo date('d,m,Y',strtotime( $infoTienda['fechaCaducidad'])); ?></h5>
                                 </div>
                             </div>
                             <!--columna de la derecha -->
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px; top:100px;" ng-click="click()">Actualizar tu plan</button>
-                            </div>
+                                <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="click()">Actualizar tu plan</button>
                             <?php } if($infoTienda['Plan'] == 'movil y web'){ ?>
                                 <!--columna de la izquierda -->
-                                <div class="col-md-6">
-                                    <div class="alert alert-success" role="alert">
-                                        <h3>Actual mente cuentas con un plan de app movil y pagina web, el cual tiene fecha de caducidad el dia: <?php  echo date('d,m,Y',strtotime( $infoTienda['fechaCaducidad'])); ?></h3>
+                                <div class="col-md-12">
+                                    <div class="alert alert-success" role="alert" style="width: 100%;">
+                                        <h5>Actual mente cuentas con un plan de app movil y pagina web, el cual tiene fecha de caducidad el dia: <?php  echo date('d,m,Y',strtotime( $infoTienda['fechaCaducidad'])); ?></h5>
                                     </div>
-                                </div>
-                                <!--columna de la derecha -->
-                                <div class="col-md-6">
-                                    <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px; top:100px;" ng-click="click()">Actualizar tu plan</button>
-                                </div>
+                                </div> <br><br>
+                                    <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="click()">Actualizar tu plan</button>
                             <?php } }?>
-                    
+                        </div>
                     </div>
                 </div>
             </div>    

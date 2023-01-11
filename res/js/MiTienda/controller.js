@@ -89,6 +89,9 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 			  $('#pStripe').show();
 		  }
 		});
+		$(document).ready( function () {
+			$('#tablaPagos').DataTable().order(5, 'desc').order(0, 'desc').draw();
+		} );
 	}
 
 
