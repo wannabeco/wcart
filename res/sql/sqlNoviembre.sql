@@ -79,3 +79,5 @@ INSERT INTO app_variablesglobales (variable, valor) VALUES ('_PRECIO_PLAN_PRO','
 INSERT INTO app_variablesglobales (variable, valor) VALUES ('_MESES_DE_COBRO_ANO_PLAN_BASIC','10');
 INSERT INTO app_variablesglobales (variable, valor) VALUES ('_MESES_DE_COBRO_ANO_PLAN_PRO','10');
 INSERT INTO app_variablesglobales (variable, valor) VALUES ('_URL_TIENDAS','https://wcartwebppage.herokuapp.com/tiendas/');
+
+//poner codigo de aca en adelante para enero 2023
