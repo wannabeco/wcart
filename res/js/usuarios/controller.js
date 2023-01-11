@@ -22,6 +22,11 @@ project.controller('usuariosApp', function($scope,$http,$q,constantes)
 			$scope.usuarios  = json.datos;
 			$scope.$digest();
 		});
+		setTimeout(()=>{
+			$(document).ready( function () {
+				$('#tableUsuarios').DataTable();
+			});
+		},2000);
 	}
 	/*
 	* Me abre una plantilla que me permitira editar o crear los módulos

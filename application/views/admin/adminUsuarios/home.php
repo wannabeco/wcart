@@ -1,19 +1,19 @@
 <div class="container-fluid" ng-controller="usuariosApp" ng-init="initUsuarios()" id="contenedorUsuarios">
 
-<div id="modalUsuarios" class="modal fade" role="dialog"  data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content" id="modalCrea">
-            <!--Form de creación -->
+    <div id="modalUsuarios" class="modal fade" role="dialog"  data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content" id="modalCrea">
+                <!--Form de creación -->
+            </div>
         </div>
     </div>
-</div>
 
     <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
                 <?php echo $infoModulo['nombreModulo'] ?> <!--<small>Estructura de las áreas de su empresa</small>-->
-                <?php if ($_SESSION['project']['info']['idPerfil'] == 6){?>
+                <?php if ($_SESSION['project']['info']['idPerfil'] == 6 || $_SESSION['project']['info']['idPerfil'] == 1){?>
                 <button title="Exportar excel" ng-click="xportExcel()"><i class="fas fa-file-excel"></i></button><!-- boton exportar excel customers o usuarios en administrador-->
                 <?php } ?>
                 <?php if(getPrivilegios()[0]['crear'] == 1){ ?>
@@ -41,7 +41,7 @@
         </div>
     </div> 
     <!-- /.row -->
-    <div class="row">
+    <!--<div class="row">
         <div class="col-lg-12">
             <form class="form-inline">
               <div class="form-group  label-floating">
@@ -50,12 +50,12 @@
               </div>
             </form>
         </div>
-    </div>
+    </div>-->
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
-                <table class="table table-hover table-striped">
+                <table class="table table-hover table-striped" id="tableUsuarios">
                     <thead>
                         <tr>
                             <!-- <th class="text-left">DOCUMENTO</th> -->
@@ -63,6 +63,7 @@
                             <!-- <th>AREA</th> -->
                             <!-- <th>CARGO</th> -->
                             <th>PERFIL</th>
+                            <th>TIENDA</th>
                             <?php if ($_SESSION['project']['info']['idPerfil'] == 1 || $_SESSION['project']['info']['idPerfil'] == 2 ){?>
                              <th class="text-center">ACCESO</th>
                             <?php }?>
@@ -80,10 +81,10 @@
                             <td>{{ulist.nombreCargo}}</td> -->
                             
                             <td>{{ulist.nombrePerfil}}</td>
-                        
+                            <td>{{ulist.nombreTienda}}</td>
                             <?php if ($_SESSION['project']['info']['idPerfil'] == 1 || $_SESSION['project']['info']['idPerfil'] == 2 ){?>
                             <td class="text-center">
-                               <i class="material-icons" ng-if="ulist.clave != null" title="Este usuario posee datos de acceso a la plataforma. Usuario y clave">https</i>
+                               <i class="material-icons" title="Este usuario posee datos de acceso a la plataforma. Usuario y clave">https</i>
                             </td>
                             <?php }?>
                             <td align="center">

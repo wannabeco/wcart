@@ -257,6 +257,7 @@ class LogicaPedidos  {
             $envioFCM = sendFCM($tituloMensaje,$mensaje,$infoPedido[0]['FCMToken']);
             //registro la notificacion en la base de datos
             $datosNotificacion['idPersona'] = $infoPedido[0]['idPersona'];
+            $datosNotificacion['idTienda']  = $_SESSION['project']['info']['idTienda'];
             $datosNotificacion['tipo']      = 'mensaje';
             $datosNotificacion['titulo']    = 'Cambio de estado del pedido '.$infoPedido[0]['idPedido'];
             $datosNotificacion['mensaje']   = $mensaje;

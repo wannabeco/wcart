@@ -24,7 +24,7 @@
         </div>
     </div> 
     <!-- /.row -->
-    <div class="row">
+    <!--<div class="row">
         <div class="col-lg-12">
             <form class="form-inline">
               <div class="form-group  label-floating">
@@ -33,21 +33,23 @@
               </div>
             </form>
         </div>
-    </div>
+    </div>-->
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
-                <table class="table table-hover table-striped">
+                <table class="table table-hover table-striped" id="tablaPedido">
                     <thead>
                         <tr>
                             <!-- <th class="text-center">ID</th> -->
-                            <th>DATE</th>
-                            <th>CUSTOMER</th>
+                            <th class="text-center">Id Pedido</th>
+                            <th class="text-center">Codigo Pedido</th>
+                            <th class="text-center">DATE</th>
+                            <th class="text-center">CUSTOMER</th>
                             <th class="text-center">VALUE</th>
                             <th class="text-center">PAYMENT</th>
-                            <th class="text-center">ORDER STATUS</th>
                             <th class="text-center">PAY STATUS</th>
+                            <th class="text-center">ORDER STATUS</th>
                             <th class="text-center">ACTIONS</th>
                         </tr>
                     </thead>
@@ -55,18 +57,15 @@
                         <?php foreach($listaPedidos as $pedidos){ 
                             ?>
                             <tr>
-                                <!-- <td style="vertical-align: middle" class="text-center"><?php echo $pedidos['idPedido'] ?></td> -->
-                                <td style="vertical-align: middle"><?php echo $pedidos['fechaPedido'] ?> </td>
-                                <td style="vertical-align: middle"><?php echo $pedidos['nombre'] ?> <?php echo $pedidos['apellido'] ?></td>
+                                <td><?php echo $pedidos['idPedido'] ?></td> 
+                                <td><?php echo $pedidos['codigoPedido'] ?></td> 
+                                <td><?php echo $pedidos['fechaPedido'] ?> </td>
+                                <td><?php echo $pedidos['nombre'] ?> <?php echo $pedidos['apellido'] ?></td>
                                 <!-- <td>{{ulist.nombreArea}}</td>
                                 <td>{{ulist.nombreCargo}}</td> -->
                                 <!-- <td style="vertical-align: middle"></td> -->
-                                <td style="vertical-align: middle" align="center">
-                                    $ <?php echo number_format($pedidos['valor'],0,',','.') ?>
-                                </td>
-                                <td style="vertical-align: middle" class="text-center">
-                                  
-                                    
+                                <td style="vertical-align: middle" align="center">$ <?php echo number_format($pedidos['valor'],0,',','.') ?></td>
+                                <td>
                                     <?php if( $pedidos['formaPago'] == 1){?>
                                         <span class="label label-primary">Cash on delivery</span>
                                     <?php }else if( $pedidos['formaPago'] == 3){?>
@@ -84,17 +83,14 @@
                                     <?php }?>
                                     
                                 </td>
-                                <td style="vertical-align: middle" align="center" <?php if($pedidos['estadoPedido'] == 5){ ?> colspan="2"<?php }?>>
+                                <td style="vertical-align: middle" align="left">    
+                                    <span class="label <?php echo estadoPago($pedidos['estadoPago'])['label'] ?>"><?php echo estadoPago($pedidos['estadoPago'])['texto'] ?></span>
+                                </td>
+                                <td style="vertical-align: middle" align="center" <?php if($pedidos['estadoPedido'] == 5){ ?> colspan="1"<?php }?>>
                                     <span class="label <?php echo $pedidos['label'] ?>"><?php echo $pedidos['nombreEstadoPedido'] ?></span>
                                 </td>
-                                <?php if($pedidos['estadoPedido'] != 5){ ?>
-                                    <td style="vertical-align: middle" align="center">
-                                        
-                                        <span class="label <?php echo estadoPago($pedidos['estadoPago'])['label'] ?>"><?php echo estadoPago($pedidos['estadoPago'])['texto'] ?></span>
-                                    </td>
-                                <?php } ?>
-                                <td  class="text-center">
 
+                                <td  class="text-center">
                                     <!-- <?php if(getPrivilegios()[0]['editar'] == 1){ ?>
                                         <a ng-click="cargaPlantillaControl(ulist.idPersona,1)" title="Editar usuario" class="btn btn-primary btn-fab btn-fab-mini"><i class="material-icons">edit</i></a>
                                         <a ng-click="generaDatosAcceso(ulist.idPersona)" title="Generar datos de acceso" class="btn btn-primary btn-fab btn-fab-mini"><i class="material-icons">https</i></a>

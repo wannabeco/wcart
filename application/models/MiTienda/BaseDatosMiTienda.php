@@ -37,6 +37,7 @@ if (!defined('BASEPATH'))
             $this->tableDepartamentos       = "app_departamentos";
             $this->tableCiudades            = "app_ciudades";
             $this->categorias               = "app_productos";
+            $this->tablePagos               = "app_pago_membresia";
     
         }
         //copear y pegar este query las veces que sea necesario para hacer una inserción, recordar cambiar el nombre
@@ -145,6 +146,17 @@ if (!defined('BASEPATH'))
             $this->db->update($this->tableTiendas,$data);
             //print_r($this->db->last_query());die();
             return $this->db->affected_rows();
+        }
+        //informacion de pagos realizados por la tienda
+        public function infoPagos($where="")
+        {
+            $this->db->select("*");
+            $this->db->where($where);
+            $this->db->from($this->tablePagos);
+            //$this->db->order_by('idMembresia','DESC');
+            $id = $this->db->get();
+            //print_r($this->db->last_query());die();
+            return $id->result_array();
         }
     }
 

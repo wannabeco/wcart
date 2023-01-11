@@ -27,6 +27,7 @@ class BaseDatosUsuarios extends CI_Model {
         $this->tableRelPerfilModulo      = "app_rel_perfil_modulo";
         $this->tablePedidos              = "app_pedidos";
         $this->tableTiposDoc             = "app_tipos_doc";
+        $this->tableTiendas              = "app_tiendas";
 
     }
     public function agregaUsuario($dataInserta)
@@ -87,25 +88,28 @@ class BaseDatosUsuarios extends CI_Model {
     public function getinfoUsuario($where="")
     {
 
-        $this->db->select("u.*,u.estado as estadoU,p.nombrePerfil");
+        $this->db->select("u.*,u.estado as estadoU,p.nombrePerfil,t.nombreTienda");
         if(count($where) > 0)
         {
             $this->db->where($where);
         }
         $this->db->from($this->tablePersonas." u");
         $this->db->join($this->tablePerfiles." p","p.idPerfil=u.idPerfil","INNER");
+        $this->db->join($this->tableTiendas." t","t.idTienda=u.idTienda","INNER");
         $id = $this->db->get();
         //print_r($this->db->last_query());die();
         return $id->result_array();
         
     }
     //informacion de usuario por el id
-    public function getinformaUsuario($idUsuario)
+    public function getinformaUsuario($idTienda)
     {   
-        $where['idPersona']=$idUsuario;
-        $this->db->select("*");
+        $where['u.idTienda']=$idTienda;
+        $this->db->select("u.*,u.estado as estadoU,p.nombrePerfil,t.nombreTienda");
         $this->db->where($where);
-        $this->db->from($this->tablePersonas);
+        $this->db->from($this->tablePersonas." u");
+        $this->db->join($this->tablePerfiles." p","p.idPerfil=u.idPerfil","INNER");
+        $this->db->join($this->tableTiendas." t","t.idTienda=u.idTienda","INNER");
         $id = $this->db->get();
         //print_r($this->db->last_query());die();
         return $id->result_array();

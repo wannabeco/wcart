@@ -55,6 +55,7 @@ class MiTienda extends CI_Controller
 				$infopaises					   = $this->LogicaMiTienda->infopaises();
 				$infoDisenoTienda			   = $this->LogicaMiTienda->infoDisenoTienda();
 				$infocategorias			   	   = $this->LogicaMiTienda->infocategorias($_SESSION['project']['info']['idTienda']);
+				$infoPagos					   = $this->LogicaMiTienda->infoPagos($_SESSION['project']['info']['idTienda']);
 				$opc 				           = "home";
 				$salida['titulo']              = lang("titulo")." - ".$infoModulo[0]['nombreModulo'];
 				$salida['centro'] 	           = "MiTienda/home";
@@ -64,6 +65,7 @@ class MiTienda extends CI_Controller
 				$salida['infocategorias'] 	   = $infocategorias;
 				$salida['estadoTienda']		   = $estadoTienda['mostrar'];
 				$salida['infoDisenoTienda']	   = $infoDisenoTienda;
+				$salida['infoPagos']		   = $infoPagos;
 				$salida['infoModulo']          = $infoModulo[0];
 				$this->load->view("app/index",$salida);
 			}

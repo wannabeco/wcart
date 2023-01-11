@@ -140,4 +140,10 @@ class LogicaMiTienda  {
         }
         return $respuesta;
     }
+    //info pagos y planes adquiridos
+    public function infoPagos($idTienda){
+        $where['idTienda'] = $idTienda;
+        $infoPagos=$this->ci->dbMiTienda->infoPagos($where);
+        return $infoPagos;
+    }
 }

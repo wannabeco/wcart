@@ -35,7 +35,11 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 				}
 			});
 		},1000);
-			
+		setTimeout(()=>{
+			$(document).ready( function () {
+				$('#tableCategorias').DataTable();
+			} );
+		},500);
 
 	}
 
@@ -185,6 +189,11 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		$scope.config 			=  configLogin;//configuración global
 		$.material.init();
 		$scope.consultarSubCategorias();
+		setTimeout(()=>{
+			$(document).ready( function () {
+				$('#tableSubcategorias').DataTable();
+			} );
+		},1000);
 	}
     $scope.consultarSubCategorias = function()
 	{
@@ -304,6 +313,11 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		$('#botonfoto5').click(function(){
 			$('#fotoFile5').click();
 		});
+		setTimeout(()=>{
+			$(document).ready( function () {
+				$('#tableProductos').DataTable();
+			} );
+		},1000);
 	}
 	$scope.consultarProductos = function()
 	{
@@ -945,6 +959,9 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 	$scope.initBanner = function()
 	{
 		$scope.config 			=  configLogin;//configuración global
+		$(document).ready( function () {
+			$('#tablaPedido').DataTable();
+		} );
 		$.material.init();
 		$scope.getbanner();
 		$('#botonfoto3').click(function(){
@@ -969,7 +986,11 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 				}
 			});
 		},1000);
-
+		setTimeout(()=>{
+			$(document).ready( function () {
+				$('#tableBanner').DataTable();
+			} );
+		},500);
 	}
 
 	//odenar banner
