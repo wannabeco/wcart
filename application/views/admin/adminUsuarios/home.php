@@ -88,8 +88,8 @@
                             </td>
                             <?php }?>
                             <td align="center">
-                                <span class="label label-success" ng-if="ulist.estadoU==1" value="1" >ACTIVO</span>
-                                <span class="label label-default" ng-if="ulist.estadoU==0" value="0" >INACTIVO</span>
+                                <span class="label label-success" ng-if="ulist.estado==1" value="1" >ACTIVO</span>
+                                <span class="label label-default" ng-if="ulist.estado==0" value="0" >INACTIVO</span>
                             </td>
                             <?php if ($_SESSION['project']['info']['idPerfil'] == 1 || $_SESSION['project']['info']['idPerfil'] == 2 ){?>
                             <td class="text-center">
