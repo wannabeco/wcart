@@ -53,6 +53,7 @@ class BaseDatosPedidos extends CI_Model {
         $this->tableGanancias            = "app_estaditicas_vendedor";
         $this->tableInventario           = "app_inventario_producto";
         $this->tablePersonasEntrega      = "app_remitentes_limon";
+        $this->tablePaises               = "app_paises";
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -252,7 +253,7 @@ class BaseDatosPedidos extends CI_Model {
     ///listado de pedidos que Raul le hace a Esmeralda
     public function misPedidos($where=array())
     {
-        $this->db->select("*,p.direccion as direccionPedido, p.telefono as telefonoPedido ");
+        $this->db->select("*,p.direccion as direccionPedido, p.telefono as telefonoPedido,d.NOMBRE as nombreDepartamento, c.NOMBRE as nombreCiudad");
         if(count($where) > 0)
         {            
             $this->db->where($where);
@@ -260,8 +261,8 @@ class BaseDatosPedidos extends CI_Model {
         $this->db->from($this->tablePedidos." p");
         $this->db->join($this->tablePersonas." per","per.idPersona=p.idPersona",'INNER');
         $this->db->join($this->tableEstadoPedido." e","e.idEstadoPedido=p.estadoPedido",'INNER');
-        //$this->db->join($this->tableCiudadesVenta." ciu","ciu.idCiudad=p.idCiudad",'INNER');
-        $this->db->order_by("idPedido","DESC");
+        $this->db->join($this->tableDeptos." d","d.ID_DPTO=per.departamento",'INNER');
+        $this->db->join($this->tableCiudad." c","c.ID_CIUDAD=per.ciudad and c.ID_DPTO= per.departamento",'INNER');
         $id = $this->db->get();
         //print_r($this->db->last_query());die();
         return $id->result_array();

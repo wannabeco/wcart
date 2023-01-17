@@ -189,13 +189,45 @@ function traducirMes($mes) {
     }
     return $mes;
 }
-function formatoFechaEspanol($fechaDb) 
+function traduceDia($dia){
+	$diaSalida = "";
+	switch(strtolower($dia)){
+		case 'sun':
+			$diaSalida = "Domingo";
+		break;
+		case 'mon':
+			$diaSalida = "Lunes";
+		break;
+		case 'tue':
+			$diaSalida = "Martes";
+		break;
+		case 'wed':
+			$diaSalida = "Miércoles";
+		break;
+		case 'thu':
+			$diaSalida = "Jueves";
+		break;
+		case 'fri':
+			$diaSalida = "Viernes";
+		break;
+		case 'sat':
+			$diaSalida = "Sábado";
+		break;
+	}
+	return $diaSalida;
+}
+function formatoFechaEspanol($fechaDb,$salida=true)
 {
-    $dateUnix = strtotime($fechaDb);
-    $anoDoc = date("Y", $dateUnix);
-    $perDoc = date("m", $dateUnix);
-    $dia = date("d", $dateUnix);
-    echo $dia . " de " . TraducirMes($perDoc) . " del " . $anoDoc;
+	$dateUnix = strtotime($fechaDb);
+	$anoDoc = date("Y", $dateUnix);
+	$perDoc = date("m", $dateUnix);
+	$dia = date("d", $dateUnix);
+	if($salida == true){
+		echo $dia . " de " . TraducirMes($perDoc) . " del " . $anoDoc;
+	}
+	else{
+		return $dia . " de " . TraducirMes($perDoc) . " del " . $anoDoc;
+	}
 }
 function formatoFechaEspanolHora($fechaDb,$salida=true) {
     //echo $fechaDb."<hr>";

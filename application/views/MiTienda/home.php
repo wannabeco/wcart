@@ -612,7 +612,7 @@
                 <div class="col col-lg-12 col-md-12">
                     <div class="row">
                     <div class="col-md-12">
-                        <center><H2><strong>Informacion de tu plan</strong></H2></center><br><br>
+                        <center><H2><strong>Informacion de pagos</strong></H2></center><br><br>
                     </div>
                                 <!--columna de la derecha -->
                         <div class="col-md-12">
@@ -640,7 +640,7 @@
                                                     <td><?php echo $infoPago['nombrePersona']; ?></td> 
                                                     <td>
                                                         <?php if( $infoPago['estadoPago'] == 0){?>
-                                                            <span class="label label-segundary">transacción cancelada</span>
+                                                            <span class="label label-segundary">Transacción cancelada</span>
                                                         <?php }else if( $infoPago['estadoPago'] == 7){?>
                                                             <span class="label label-clear">Transacción pendiente</span>
                                                         <?php }else if( $infoPago['estadoPago'] == 104){?>
@@ -650,7 +650,7 @@
                                                         <?php }else if( $infoPago['estadoPago'] == 998){?>                            
                                                             <span class="label label-success">Pago realizado</span>
                                                         <?php }else if( $infoPago['estadoPago'] == 6){?>                            
-                                                            <span class="label label-danger">trans_rechazada</span>
+                                                            <span class="label label-danger">Transacción rechazada</span>
                                                         <?php }else if( $infoPago['estadoPago'] == 999){?>                            
                                                             <span class="label label-warning">Pago no realizado</span>
                                                         <?php }else if( $infoPago['estadoPago'] == 000){?>                            
@@ -696,21 +696,25 @@
                             <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px; top:50px;" ng-click="click()">Actualizar tu plan</button>
                             </div>
                             <?php } else{ if($infoTienda['Plan'] == 'movil'){
-                            //var_dump($infoTienda);die();
+                                $fecha = date("D", strtotime($infoTienda['fechaCaducidad'])); 
                             ?>
                             <!--columna de la izquierda -->
+                            <br><br>
                             <div class="col-md-12">
                                 <div class="alert alert-success" role="alert">
-                                    <h5>Actual mente cuentas con un plan de app movil, el cual tiene fecha de caducidad el dia: <?php  echo date('d,m,Y',strtotime( $infoTienda['fechaCaducidad'])); ?></h5>
+                                    <h5>Actual mente cuentas con un plan de app movil, el cual tiene fecha de caducidad el dia: <?php echo traduceDia($fecha).", ".formatoFechaEspanol($infoTienda['fechaCaducidad'],false); ?></h5>
                                 </div>
                             </div>
                             <!--columna de la derecha -->
                                 <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="click()">Actualizar tu plan</button>
-                            <?php } if($infoTienda['Plan'] == 'movil y web'){ ?>
+                            <?php } if($infoTienda['Plan'] == 'movil y web'){ 
+                                $fecha = date("D",strtotime($infoTienda['fechaCaducidad'])); 
+                            ?>
                                 <!--columna de la izquierda -->
+                                <br><br>
                                 <div class="col-md-12">
                                     <div class="alert alert-success" role="alert" style="width: 100%;">
-                                        <h5>Actual mente cuentas con un plan de app movil y pagina web, el cual tiene fecha de caducidad el dia: <?php  echo date('d,m,Y',strtotime( $infoTienda['fechaCaducidad'])); ?></h5>
+                                        <h5>Actual mente cuentas con un plan de app movil y pagina web, el cual tiene fecha de caducidad el dia: <?php echo traduceDia($fecha).", ".formatoFechaEspanol($infoTienda['fechaCaducidad'],false) ?></h5>
                                     </div>
                                 </div> <br><br>
                                     <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="click()">Actualizar tu plan</button>

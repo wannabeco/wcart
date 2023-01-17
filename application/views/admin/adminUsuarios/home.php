@@ -58,12 +58,15 @@
                 <table class="table table-hover table-striped" id="tableUsuarios">
                     <thead>
                         <tr>
-                            <!-- <th class="text-left">DOCUMENTO</th> -->
+                            <?php if ($_SESSION['project']['info']['idPerfil'] == 1 || $_SESSION['project']['info']['idPerfil'] == 2 ){ ?>
+                            <th class="text-left">id Persona</th>
+                            <?php }?>
                             <th>NOMBRE</th>
                             <!-- <th>AREA</th> -->
                             <!-- <th>CARGO</th> -->
                             <th>PERFIL</th>
-                            <th>TIENDA</th>
+                            <th>TELEFONO</th>
+                            <th>EMAIL</th>
                             <?php if ($_SESSION['project']['info']['idPerfil'] == 1 || $_SESSION['project']['info']['idPerfil'] == 2 ){?>
                              <th class="text-center">ACCESO</th>
                             <?php }?>
@@ -75,13 +78,17 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="ulist in usuarios  | filter:q as results" ng-if="ulist.idPersona != 1">
+                            <?php if ($_SESSION['project']['info']['idPerfil'] == 1 || $_SESSION['project']['info']['idPerfil'] == 2 ){ ?>
+                            <td class="text-left">{{ulist.idPersona}}</td>
+                            <?php }?>
                             <!-- <td class="text-center">{{ulist.nroDocumento}}</td> -->
                             <td>{{ulist.nombre}} {{ulist.apellido}}</td>
                             <!-- <td>{{ulist.nombreArea}}</td>
                             <td>{{ulist.nombreCargo}}</td> -->
                             
                             <td>{{ulist.nombrePerfil}}</td>
-                            <td>{{ulist.nombreTienda}}</td>
+                            <td>{{ulist.celular}}</td>
+                            <td>{{ulist.email}}</td>
                             <?php if ($_SESSION['project']['info']['idPerfil'] == 1 || $_SESSION['project']['info']['idPerfil'] == 2 ){?>
                             <td class="text-center">
                                <i class="material-icons" title="Este usuario posee datos de acceso a la plataforma. Usuario y clave">https</i>
