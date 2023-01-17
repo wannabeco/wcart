@@ -688,7 +688,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 p-5">
-                            <?php if($infoTienda['mesGratis'] == '0'){ ?>
+                            <?php if($infoTienda['fechaCaducidad'] > $infoTienda['fechaInicioMembresia']){ ?>
                             <div class="col-md-12">
                                 <div class="alert alert-primary col-md-6" role="alert">
                                     No contamos con un plan disponible aun
