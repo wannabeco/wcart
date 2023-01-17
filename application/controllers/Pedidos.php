@@ -69,7 +69,6 @@ class Pedidos extends CI_Controller
             $pdf->Cell(11,$off,  "$".number_format($pro["valorPresentacion"],0,".",",") ,0,0,"R");
             $pdf->setX(32);
             $pdf->Cell(11,$off,  "$ ".number_format($pro["cantidad"]*$pro["valorPresentacion"],0,".",",") ,0,0,"R");
-
             $total += $pro["cantidad"]*$pro["valorPresentacion"];
             $off+=6;
         }

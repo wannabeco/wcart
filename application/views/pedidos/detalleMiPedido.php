@@ -101,6 +101,14 @@
                         <span class="label <?php echo estadoPago($infoPedido['estadoPago'])['label'] ?>"><?php echo estadoPago($infoPedido['estadoPago'])['texto'] ?></span>
                     </div>
                     <div class="col col-lg-4 text-left" style="margin:0 0 2% 0">
+                        <strong>Departamento</strong><br>
+                        <?php echo $infoPedido['nombreDepartamento'] ?>
+                    </div>
+                    <div class="col col-lg-4 text-left" style="margin:0 0 2% 0">
+                        <strong>Ciudad</strong><br>
+                        <?php echo $infoPedido['nombreCiudad'] ?>
+                    </div>
+                    <div class="col col-lg-4 text-left" style="margin:0 0 2% 0">
                         <strong>Direccion</strong><br>
                         <?php echo $infoPedido['direccion'] ?>
                     </div>
@@ -229,10 +237,10 @@
                             <input type="hidden" id="idPedido" name="idPedido" value="<?php echo $infoPedido['idPedido'] ?>">
                             <input type="button" style="background: #03a9f4 !important;color: #fff !important" name="" ng-click="gestionaPedido()" value="GESTIONAR" class="btn btn-primary">
                         </div>
-                        <!-- boton imprimir factura
+                        <!-- boton imprimir factura-->
                         <div class="col col-lg-2"  style="margin:20px 0 0 0">
                                 <a class="btn" target="_blank" style="background: #333 !important;color: #fff !important" href="<?php echo base_url()?>Pedidos/imprimeFacturaTicket/<?php echo $infoPedido['idPedido']?>" class="btn btn-info">VER FACTURA<a>
-                        </div>-->
+                        </div>
                      </div>
         <?php } ?>
     </div>

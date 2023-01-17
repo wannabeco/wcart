@@ -24,7 +24,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 					if(json.continuar == 1)
 					{	
 						var ventana ="";
-						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/Appmes/'+json.datos, "pago_payu" , "width=400,height=680");
+						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/Appmes/'+json.datos, "pago_payu" , "width=600,height=880,left = 420");
 						var tiempo= 0;
 							var interval = setInterval(function(){
 								//Comprobamos que la ventana no este cerrada
@@ -54,7 +54,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 					if(json.continuar == 1)
 					{		
 						var ventana ="";
-						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/AppAno/'+json.datos, "pago_payu" , "width=400,height=680");
+						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/AppAno/'+json.datos, "pago_payu" , "width=600,height=880,left = 420");
 						var tiempo= 0;
 							var interval = setInterval(function(){
 								//Comprobamos que la ventana no este cerrada
@@ -84,7 +84,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 					if(json.continuar == 1)
 					{
 						var ventana ="";
-						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/WebMes/'+json.datos, "pago_payu" , "width=400,height=680");
+						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/WebMes/'+json.datos, "pago_payu" , "width=600,height=880,left = 420");
 						var tiempo= 0;
 							var interval = setInterval(function(){
 								//Comprobamos que la ventana no este cerrada
@@ -115,7 +115,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 					if(json.continuar == 1)
 					{	
 						var ventana ="";
-						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/WebAno/'+json.datos, "pago_payu" , "width=400,height=680");
+						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/WebAno/'+json.datos, "pago_payu" , "width=600,height=880,left = 420");
 						var tiempo= 0;
 							var interval = setInterval(function(){
 								//Comprobamos que la ventana no este cerrada
@@ -145,7 +145,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 					if(json.continuar == 1)
 					{	
 						var ventana ="";
-						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/Appmes/'+json.datos,"pago_payu" , "width=400,height=680");
+						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/Appmes/'+json.datos,"pago_payu" , "width=600,height=880,left = 420");
 						var tiempo= 0;
 							var interval = setInterval(function(){
 								//Comprobamos que la ventana no este cerrada
@@ -174,7 +174,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 					if(json.continuar == 1)
 					{
 						var ventana ="";
-						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/AppAno/'+json.datos, "pago_payu" , "width=400,height=680");
+						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/AppAno/'+json.datos, "pago_payu" , "width=600,height=880,left = 420");
 						var tiempo= 0;
 							var interval = setInterval(function(){
 								//Comprobamos que la ventana no este cerrada
@@ -202,7 +202,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 					if(json.continuar == 1)
 					{
 						var ventana ="";
-						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/WebMes/'+json.datos, "pago_payu" , "width=400,height=680");
+						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/WebMes/'+json.datos, "pago_payu" , "width=600,height=880,left = 420");
 						var tiempo= 0;
 							var interval = setInterval(function(){
 								//Comprobamos que la ventana no este cerrada
@@ -230,7 +230,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 					if(json.continuar == 1)
 					{
 						var ventana ="";
-						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/WebAno/'+json.datos, "pago_payu" , "width=400,height=680");
+						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/WebAno/'+json.datos, "pago_payu" , "width=600,height=880,left = 420");
 						var tiempo= 0;
 							var interval = setInterval(function(){
 								//Comprobamos que la ventana no este cerrada

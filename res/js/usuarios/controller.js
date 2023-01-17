@@ -26,7 +26,7 @@ project.controller('usuariosApp', function($scope,$http,$q,constantes)
 			$(document).ready( function () {
 				$('#tableUsuarios').DataTable();
 			});
-		},500);
+		},2000);
 	}
 	/*
 	* Me abre una plantilla que me permitira editar o crear los módulos
