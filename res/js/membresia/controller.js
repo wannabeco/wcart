@@ -15,7 +15,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 	}
 	$scope.AppMes= function()
 	{	
-		constantes.confirmacion("Atención","Esta apunto de realizar el pago de tu plan, desea continuar? Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
+		constantes.confirmacion("Atención","Esta apunto de realizar el pago de tu plan, ¿desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
 			//se abre ventana pop
 			var codigo = $("#codigoPago").val();
 				var controlador = $scope.config.apiUrl+"pagoMembresia/insetCodigo";
@@ -45,7 +45,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 	}
 	$scope.AppAno= function()
 	{	
-		constantes.confirmacion("Atención","Esta apunto de realizar el pago de tu plan, desea continuar? Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
+		constantes.confirmacion("Atención","Esta apunto de realizar el pago de tu plan, ¿desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
 			//se abre ventana pop
 			var codigo = $("#codigoPago").val();
 			var controlador = $scope.config.apiUrl+"pagoMembresia/insetCodigo";
@@ -75,7 +75,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 	}
 	$scope.WebMes= function()
 	{	
-		constantes.confirmacion("Atención","Esta apunto de realizar el pago de tu plan, desea continuar? Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
+		constantes.confirmacion("Atención","Esta apunto de realizar el pago de tu plan, ¿desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
 			//se abre ventana pop
 			var codigo = $("#codigoPago").val();
 			var controlador = $scope.config.apiUrl+"pagoMembresia/insetCodigo";
@@ -106,7 +106,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 	$scope.WebAno= function()
 	{	
 		
-		constantes.confirmacion("Atención","Esta apunto de realizar el pago de tu plan, desea continuar? Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
+		constantes.confirmacion("Atención","Esta apunto de realizar el pago de tu plan, ¿desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
 			//se abre ventana pop
 			var codigo = $("#codigoPago").val();
 			var controlador = $scope.config.apiUrl+"pagoMembresia/insetCodigo";
@@ -135,7 +135,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 		});
 	}
 	$scope.cambio = function (){
-		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actualmente tiene adquirido, el cual corresponte solo a la app movil, esta deguro que desea continuar? Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
+		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actualmente tiene adquirido, el cual corresponte solo a la app movil, ¿esta deguro que desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
 			
 			//se abre ventana pop
 			var codigo = $("#codigoPago").val();
@@ -165,7 +165,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 		});
 	}
 	$scope.cambio2 = function (){
-		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actualmente tiene adquirido, el cual corresponte solo a la app movil, esta deguro que desea continuar? Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
+		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actualmente tiene adquirido, el cual corresponte solo a la app movil, ¿esta deguro que desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
 			//se abre ventana pop
 			var codigo = $("#codigoPago").val();
 			var controlador = $scope.config.apiUrl+"pagoMembresia/insetCodigo";
@@ -194,7 +194,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 		});
 	}
 	$scope.bajar = function(){
-		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actualmente tiene adquirido, el cual corresponte a pagina web y app movil, esta deguro que desea continuar? Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
+		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actualmente tiene adquirido, el cual corresponte a pagina web y app movil, ¿esta deguro que desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
 			var codigo = $("#codigoPago").val();
 			var controlador = $scope.config.apiUrl+"pagoMembresia/insetCodigo";
 				var parametros  = $("#dataPago").serialize();
@@ -222,7 +222,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 		});
 	}
 	$scope.bajar2 = function(){
-		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actual mentetiene, el cual corresponte a pagina web y app movil, esta deguro que desea continuar? Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
+		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actual mentetiene, el cual corresponte a pagina web y app movil, ¿esta deguro que desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
 			var codigo = $("#codigoPago").val();
 			var controlador = $scope.config.apiUrl+"pagoMembresia/insetCodigo";
 				var parametros  = $("#dataPago").serialize();

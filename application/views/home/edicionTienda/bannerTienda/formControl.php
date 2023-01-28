@@ -34,6 +34,7 @@
       <div class="form-group label-floating">
           <label class="control-label" for="tipoLink">Tipo Banner</label>
           <select onchange="angular.element(document.getElementById('formulario')).scope().cambiaElemento()" name="tipoLink" id="tipoLink"  class="form-control">                               
+                  <option  selected disabled value="0">Selecciones el Tipo de banner</option>
                   <option <?php if(isset($datos['tipoLink']) && $datos['tipoLink'] == "producto"){ ?>selected<?php } ?>  value="producto">producto</option>
                   <option <?php if(isset($datos['tipoLink']) && $datos['tipoLink'] == "url"){ ?>selected<?php } ?>  value="url">url</option>
           </select>
