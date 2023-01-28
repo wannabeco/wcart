@@ -196,7 +196,7 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 		else
 		{
 
-			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, desea continuar?","info",function(){
+			constantes.confirmacion("Confirmación!","¿Los datos que acaba de ingresar son correctos?, ¿desea continuar?","info",function(){
 				var controlador = $scope.config.apiUrl+"MiTienda/procesaDataTienda";
 				var parametros  = $("#dataTienda").serialize();
 				constantes.consultaApi(controlador,parametros,function(json){
@@ -228,7 +228,7 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 		 }
 		
 		 else{
-			constantes.confirmacion("Confirmación!","Los colores que acaba de ingresar son correctos?, desea continuar?","info",function(){
+			constantes.confirmacion("Confirmación!","¿Los colores que acaba de ingresar son correctos?, ¿desea continuar?","info",function(){
 				
 				var controlador = $scope.config.apiUrl+"MiTienda/procesaDataGrafico";
 				var parametros  = $("#dataGraficos").serialize();
@@ -273,7 +273,7 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 			constantes.alerta("Atención","Debe de seleccionar una imagen para poder guardar	","info",function(){});
 		}
 		else{
-			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, desea continuar?","info",function(){
+			constantes.confirmacion("Confirmación!","¿Los datos que acaba de ingresar son correctos?, ¿desea continuar?","info",function(){
 			var idTienda	=   $('#idTienda').val();
 			
             var formData 	=   new FormData($("#datalogos")[0]);
@@ -340,7 +340,7 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 			constantes.alerta("Atención","Debe de seleccionar una imagen para poder guardar	","info",function(){});
 		}
 		else{
-			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, desea continuar?","info",function(){
+			constantes.confirmacion("Confirmación!","¿Los datos que acaba de ingresar son correctos?, ¿desea continuar?","info",function(){
 			var idTienda	=   $('#idTienda').val();
 			
             var formData 	=   new FormData($("#dataFavicon")[0]);
@@ -415,7 +415,7 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 			constantes.alerta("Atención","Debe de ingresar el Stripe key","info",function(){});
 		}
 		else{
-			constantes.confirmacion("Confirmación!","Las formas de pago que acaba de seleccionar son correctos?, desea continuar?","info",function(){
+			constantes.confirmacion("Confirmación!","Las formas de pago que acaba de seleccionar son correctos?, ¿desea continuar?","info",function(){
 				var variables = {idTienda:idTienda, pagoEfectivo:pagoEfectivo, pagoDatafono:pagoDatafono, pagoRecoger:pagoRecoger, pagoPayu:pagoPayu, payu_apikey:payu_apikey, payu_id_cuenta:payu_id_cuenta, payu_id_mercado:payu_id_mercado,pagoWompi:pagoWompi, wompi_public_key:wompi_public_key, pagoStripe:pagoStripe, stripe_key:stripe_key,nombreTransaccion:nombreTransaccion};
 				var controlador = $scope.config.apiUrl+"MiTienda/procesaDataPagos";
 				var parametros  = variables;
@@ -448,7 +448,7 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 		}
 		else{
 			if(manteminiento == '1'){
-				constantes.confirmacion("Confirmación!","Desea poner la aplicacion en modo off line?","info",function(){
+				constantes.confirmacion("Confirmación!","¿Desea poner la aplicacion en modo off line?","info",function(){
 					var variables = {idTienda:idTienda, manteminiento:manteminiento, mensajeMantenimiento:mensajeMantenimiento};
 					var controlador = $scope.config.apiUrl+"MiTienda/procesaDataMantenimiento";
 					var parametros  = variables;
@@ -467,7 +467,7 @@ project.controller('MiTienda', function($scope,$http,$q,constantes)
 				});
 			}
 			else{
-				constantes.confirmacion("Confirmación!","Desea poner la aplicacion en modo on line","info",function(){
+				constantes.confirmacion("Confirmación!","¿Desea poner la aplicacion en modo on line?","info",function(){
 					var variables = {idTienda:idTienda, manteminiento:manteminiento, mensajeMantenimiento:mensajeMantenimiento};
 					var controlador = $scope.config.apiUrl+"MiTienda/procesaDataMantenimiento";
 					var parametros  = variables;

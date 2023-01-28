@@ -78,7 +78,7 @@ project.controller('perfilUsuario', function($scope,$http,$q,constantes)
 		else
 		{
 
-			var texto = (edita==1)?"Está apunto de editar la información del usuario, desea continuar?":"Está a punto de insertar un nuevo usuario, desea continuar?";
+			var texto = (edita==1)?"Está apunto de editar la información del usuario, ¿desea continuar?":"Está a punto de insertar un nuevo usuario, ¿desea continuar?";
 			constantes.confirmacion("Confirmación",texto,'info',function(){
 				var controlador = 	$scope.config.apiUrl+"Usuarios/procesaUsuarios";
 				var parametros  = 	$("#dataUsuario").serialize()+"&edita="+edita;
@@ -103,7 +103,7 @@ project.controller('perfilUsuario', function($scope,$http,$q,constantes)
 	}
 	$scope.cambioFotoPerfil = function()
 	{
-		constantes.confirmacion("Confirmación","Está a punto de cargar una foto a su perfil, desea continuar?",'info',function()
+		constantes.confirmacion("Confirmación","Está a punto de cargar una foto a su perfil, ¿desea continuar?",'info',function()
 		{
 				var formData 	=   new FormData($("#formFotoPerfil")[0]);
 		        var controlador = 	$scope.config.apiUrl+"PerfilUsuario/cambiafotoPerfil"; 
@@ -170,7 +170,7 @@ project.controller('perfilUsuario', function($scope,$http,$q,constantes)
 		else
 		{
 
-			var texto = "Está a punto de actualizar su contraseña de ingreso, desea continuar?";
+			var texto = "Está a punto de actualizar su contraseña de ingreso, ¿desea continuar?";
 			constantes.confirmacion("Confirmación",texto,'info',function(){
 				var controlador = 	$scope.config.apiUrl+"PerfilUsuario/cambioClave";
 				var parametros  = 	$("#formCambioClave").serialize()+"&edita="+edita;

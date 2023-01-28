@@ -2,10 +2,13 @@
     <div class="row">
       <?php $referencia				= substr(md5(time()), 0, 16);?>
         <div class="col-lg-12">
-          <?php  if($infoTienda['datos'][0]['mesGratis'] == 0){ ?>
+          <?php $fechaActual = date('Y,m,d'); if($infoTienda['datos'][0]['mesGratis'] == 0){ ?>
               <h2>Para poder seguir utlizando los beneficios de nuestra aplicación debes activar un plan</h2>
               <p></p><br><br>
-           <?php } if($infoTienda['datos'][0]['mesGratis'] == 1){ ?> 
+            <?php } else if($infoTienda['datos'][0]['fechaCaducidad'] > $fechaActual){?>
+              <h2>Aun tienes una licencia activa</h2>
+              <p>pondrá realizar la actualización del plan actualmente obtenido</p><br><br>
+           <?php } else if($infoTienda['datos'][0]['mesGratis'] == 1){ ?> 
               <h2>Tu licencia ha caducado</h2>
               <p>Para poder seguir utlizando los beneficios de nuestra aplicación debes activar nuevamente un plan</p><br><br>
             <?php }?>

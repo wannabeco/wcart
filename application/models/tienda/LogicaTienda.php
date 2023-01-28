@@ -110,6 +110,7 @@ class LogicaTienda  {
                         $dataInsertaTienda['pagoStripe']            = "no";
                         $dataInsertaTienda['mensajeMantenimiento']  = "En este momento nos encontramos trabajando para ti en unos momentos volveremos a estar al 100% gracias por tu comprensión";
                         $dataInsertaTienda['idEstado']              = 1;
+                        $dataInsertaTienda['terminos']              = 1;
                         //proceso a crear la tienda
                         $idNuevaTienda = $this->ci->dbTienda->crearTienda($dataInsertaTienda);
                         if($idNuevaTienda > 0)//la tienda se crea
