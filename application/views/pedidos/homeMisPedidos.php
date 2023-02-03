@@ -44,13 +44,13 @@
                             <!-- <th class="text-center">ID</th> -->
                             <th class="text-center">Id Pedido</th>
                             <th class="text-center">Codigo Pedido</th>
-                            <th class="text-center">DATE</th>
-                            <th class="text-center">CUSTOMER</th>
-                            <th class="text-center">VALUE</th>
-                            <th class="text-center">PAYMENT</th>
-                            <th class="text-center">PAY STATUS</th>
-                            <th class="text-center">ORDER STATUS</th>
-                            <th class="text-center">ACTIONS</th>
+                            <th class="text-center"><?php echo lang("text19.17")?></th>
+                            <th class="text-center"><?php echo lang("lbl_not_5")?></th>
+                            <th class="text-center"><?php echo lang("text22")?></th>
+                            <th class="text-center"><?php echo lang("text40")?></th>
+                            <th class="text-center"><?php echo lang("text19.18")?></th>
+                            <th class="text-center"><?php echo lang("text19.19")?></th>
+                            <th class="text-center"><?php echo lang("lblAcciones")?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,9 +67,9 @@
                                 <td style="vertical-align: middle" align="center">$ <?php echo number_format($pedidos['valor'],0,',','.') ?></td>
                                 <td>
                                     <?php if( $pedidos['formaPago'] == 1){?>
-                                        <span class="label label-primary">Cash on delivery</span>
+                                        <span class="label label-primary"><?php echo lang("lbl_pago_1")?></span>
                                     <?php }else if( $pedidos['formaPago'] == 3){?>
-                                        <span class="label label-clear">Dataphone  on delivery</span>
+                                        <span class="label label-clear"><?php echo lang("lbl_pago_2")?></span>
                                     <?php }else if( $pedidos['formaPago'] == 2){?>
                                        <span class="label label-success"> PAYULatam</span>
                                     <?php }else if( $pedidos['formaPago'] == 4){?>                            
@@ -77,9 +77,9 @@
                                     <?php }else if( $pedidos['formaPago'] == 5){?>                            
                                         <span class="label label-danger">Stripe</span>
                                     <?php }else if( $pedidos['formaPago'] == 6){?>                            
-                                        <span class="label label-info">Payment on pick up</span>
+                                        <span class="label label-info"><?php echo lang("lbl_pago_3")?></span>
                                     <?php }else{?>
-                                        <span class="label label-default">Others</span>
+                                        <span class="label label-default"><?php echo lang("lbl_pago_4")?></span>
                                     <?php }?>
                                     
                                 </td>

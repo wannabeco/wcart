@@ -1,26 +1,26 @@
 <form role="form"  ng-controller="gestionTienda" ng-init="initBanner()" id="formulario"   ng-submit="procesaBanner(<?php echo $edita ?>,'<?php echo lang('lbl_confirm')?>')">    
   <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h2 class="modal-title">New Banner</h2>
+      <h2 class="modal-title"><?php echo lang("text19.13")?></h2>
       <p class="text-justify">
         <?php echo lang("text1")?>
       </p>
   </div>
 
   <div class="modal-body">  
-      <h3 style="margin:0 0 20px 0;font-weight:bold">Banner name</h3>
+      <h3 style="margin:0 0 20px 0;font-weight:bold"><?php echo lang("text19.14")?></h3>
       <div class="form-group  label-floating">
-          <label class="control-label" for="tituloBanner">Banner name</label>
+          <label class="control-label" for="tituloBanner"><?php echo lang("text19.14")?></label>
             <input style="text-transform: uppercase" tabindex="2" autocomplete="off" id="tituloBanner" name="tituloBanner"  class="form-control" value="<?php echo (isset($datos['tituloBanner']))?$datos['tituloBanner']:''; ?>" type="text">
         <p class="help-block"></p>
         <input type="hidden" name="idBanner" id="idBanner" value="<?php echo $idBanner?>" >
       </div>
     <!-- foto del banner -->
-      <h3 style="margin:0 0 20px 0;font-weight:bold">Banner Photo<small><br><?php echo lang("text19.2")?></small></h3>      
+      <h3 style="margin:0 0 20px 0;font-weight:bold"><?php echo lang("text19.15")?><small><br><?php echo lang("text19.2")?></small></h3>      
       <div class="form-group" style="position:relative">
           <div id="preloaderfoto3" style="display:none;position:absolute"><img src="<?php echo base_url()?>res/img/preloader.gif" alt="" width="100%"></div>
           <small>
-            <strong>Banner photo</strong>
+            <strong><?php echo lang("text19.15")?></strong>
           </small><br>
           <?php if(isset($datos['fotoBanner']) && $datos['fotoBanner'] != ""){?>
               <img style="cursor:pointer" src="<?php echo base_url()?>assets/uploads/files/<?php echo $_SESSION['project']['info']['idTienda'] ?>/<?php echo $datos['fotoBanner']?>" id="botonfoto3" width="20%"  alt="">

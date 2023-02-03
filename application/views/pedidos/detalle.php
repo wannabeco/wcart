@@ -110,7 +110,7 @@
                             <!-- <th>CARGO</th> -->
                             <!-- <th>VALOR PEDIDO</th> -->
                             <th class="text-center">CANTIDAD</th>
-                            <th class="text-center">VALOR KILO</th>
+                            <th class="text-center">VALOR</th>
                             <th class="text-center">SUBTOTAL</th>
                         </tr>
                     </thead>

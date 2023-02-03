@@ -63,20 +63,22 @@
                     <thead>
                         <tr>
                             <!-- <th class="text-center">ID SUBCATEGORIA</th> -->
-                            <th>SUBCATEGORY</th>
-                            <th>CATEGORY</th>
-                            <th class="text-center">STATUS</th>
-                            <th class="text-center">ACTIONS</th>
+                            <th><?php echo lang("text2");?></th>
+                            <th><?php echo lang("text3");?></th>
+                            <th class="text-center"><?php echo lang("lbl_status")?></th>
+                            <th class="text-center"><?php echo lang("lblAcciones")?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="subCat in subCategorias | filter:q as results">
                             <!-- <td class="text-center">{{subCat.idSubcategoria}}</td> -->
-                            <td>{{subCat.nombreSubcategoria}}</td>
                             <td>{{subCat.nombreProducto}}</td>
+                            <td>{{subCat.nombreSubcategoria}}</td>
                             <td align="center">
-                                <span class="label label-success" ng-if="subCat.idEstado==1" value="1" >ON</span>
-                                <span class="label label-default" ng-if="subCat.idEstado==0" value="0" >OFF</span>
+                                <!--<span class="label label-success" ng-if="subCat.idEstado==1" value="1" >ON</span>-->
+                                <span class="label label-success" ng-if="subCat.idEstado==1" value="1" >Activo</span>
+                                <!--<span class="label label-default" ng-if="subCat.idEstado==0" value="0" >OFF</span>-->
+                                <span class="label label-default" ng-if="subCat.idEstado==0" value="0" >Inactivo</span>
                             </td>
                             <td  class="text-center">
                                 <?php if(getPrivilegios()[0]['editar'] == 1){ ?>
