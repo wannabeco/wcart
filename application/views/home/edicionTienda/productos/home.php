@@ -63,13 +63,13 @@
                 <table class="table table-hover table-striped" ng-if="productosLista.length > 0" id="tableProductos">
                     <thead>
                         <tr>
-                            <th>PRODUCT</th>
-                            <th class="text-center">QUALIFICATION</th>
-                            <th class="text-center">FEATURES</th>
-                            <th class="text-center">CATEGORY</th>
-                            <th class="text-center">SUBCATEGORY</th>
-                            <th class="text-center">STATUS</th>
-                            <th class="text-center">ACTIONS</th>
+                            <th><?php echo lang("text4")?></th>
+                            <th class="text-center"><?php echo lang("text19.16")?></th>
+                            <th class="text-center"><?php echo lang("lbl_caracteristicas");?></th>
+                            <th class="text-center"><?php echo lang("text2");?></th>
+                            <th class="text-center"><?php echo lang("text3");?></th>
+                            <th class="text-center"><?php echo lang("lbl_status")?></th>
+                            <th class="text-center"><?php echo lang("lblAcciones")?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,8 +90,10 @@
                             <td style="vertical-align: middle" class="text-center">{{prod.nombreProducto}}</td>
                             <td style="vertical-align: middle" class="text-center">{{prod.nombreSubcategoria}}</td>
                             <td style="vertical-align: middle" align="center">
-                                <span class="label label-success" ng-if="prod.idEstado==1" value="1" >ON</span>
-                                <span class="label label-default" ng-if="prod.idEstado==0" value="0" >OFF</span>
+                                <!--<span class="label label-success" ng-if="prod.idEstado==1" value="1" >ON</span>-->
+                                <span class="label label-success" ng-if="prod.idEstado==1" value="1" >Activo</span>
+                                <!--<span class="label label-default" ng-if="prod.idEstado==0" value="0" >OFF</span>-->
+                                <span class="label label-default" ng-if="prod.idEstado==0" value="0" >Inactivo</span>
                             </td>
                             <td  class="text-center">
                                 <?php if(getPrivilegios()[0]['editar'] == 1){ ?>

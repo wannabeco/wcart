@@ -76,8 +76,10 @@
                                 {{cat.nombreProducto}}
                             </td>
                             <td align="center">
-                                <span class="label label-success" ng-if="cat.idEstado==1" value="1" >ON</span>
-                                <span class="label label-default" ng-if="cat.idEstado==0" value="0" >OFF</span>
+                                <!--<span class="label label-success" ng-if="cat.idEstado==1" value="1" >ON</span>-->
+                                <span class="label label-success" ng-if="cat.idEstado==1" value="1" >Activo</span>
+                                <!--<span class="label label-default" ng-if="cat.idEstado==0" value="0" >OFF</span>-->
+                                <span class="label label-default" ng-if="cat.idEstado==0" value="0" >Inactivo</span>
                             </td>
                             <td  class="text-center">
                                 <?php if(getPrivilegios()[0]['editar'] == 1){ ?>

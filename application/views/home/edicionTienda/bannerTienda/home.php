@@ -22,7 +22,8 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li role="separator" class="divider"></li><li class="dropdown-header"><?php echo lang("lblSeleccioneOpc") ?></li>
-                            <li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> New Banner</a></li>
+                            <!--<li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> New Banner</a></li>-->
+                            <li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> Nuevo Banner</a></li>
                         </ul>
                         <?php } else if($infoTienda['Plan']=="movil"){?>
                             <button type="button" class="btn dropdown-toggle"
@@ -65,8 +66,8 @@
                     <thead>
                         <tr>
                             <!-- <th class="text-center">ID CATEGORÍA</th> -->
-                            <th width="80px" class="text-center">POSITION</th>
-                            <th><?php echo strtoupper(lang("text2"))?></th>
+                            <th width="80px" class="text-center">POSICIÓN</th>
+                            <th><?php echo strtoupper(lang("text19.12"))?></th>
                             <th class="text-center"><?php echo lang("lbl_status")?></th>
                             <th class="text-center"><?php echo lang("lblAcciones")?></th>
                         </tr>
@@ -82,8 +83,10 @@
                                 {{cat.tituloBanner}}
                             </td>
                             <td align="center">
-                                <span class="label label-success" ng-if="cat.idEstado==1" value="1" >ON</span>
-                                <span class="label label-default" ng-if="cat.idEstado==0" value="0" >OFF</span>
+                                <!--<span class="label label-success" ng-if="cat.idEstado==1" value="1" >ON</span>-->
+                                <span class="label label-success" ng-if="cat.idEstado==1" value="1" >Activo</span>
+                                <!--<span class="label label-default" ng-if="cat.idEstado==0" value="0" >OFF</span>-->
+                                <span class="label label-default" ng-if="cat.idEstado==0" value="0" >Inactivo</span>
                             </td>
                             <td  class="text-center">
                                 <?php if(getPrivilegios()[0]['editar'] == 1){ ?>

@@ -63,8 +63,10 @@
                     <div class="form-group  label-floating">
                         <label class="control-label" for="nuevo"><?php echo lang("text7")?></label>
                           <select tabindex="2" id="nuevo" name="nuevo"  class="form-control">
-                            <option value="No" <?php if(isset($datos['nuevo']) && $datos['nuevo'] =='No'){ ?>selected<?php } ?>>NOT</option>
-                            <option value="Si" <?php if(isset($datos['nuevo']) && $datos['nuevo'] =='Si'){ ?>selected<?php } ?>>YES</option>
+                            <!--<option value="No" <?php if(isset($datos['nuevo']) && $datos['nuevo'] =='No'){ ?>selected<?php } ?>>NOT</option>-->
+                            <option value="No" <?php if(isset($datos['nuevo']) && $datos['nuevo'] =='No'){ ?>selected<?php } ?>>No</option>
+                            <!--<option value="Si" <?php if(isset($datos['nuevo']) && $datos['nuevo'] =='Si'){ ?>selected<?php } ?>>YES</option>-->
+                            <option value="Si" <?php if(isset($datos['nuevo']) && $datos['nuevo'] =='Si'){ ?>selected<?php } ?>>Si</option>
                           </select>
                     </div>
                  </div>
@@ -242,8 +244,10 @@
                         <div class="form-group  label-floating">
                             <label class="control-label" for="agotado"><?php echo lang("text19.11")?></label>
                               <select tabindex="2" id="agotado" name="agotado"  class="form-control">
-                                <option value="No" <?php if(isset($datos['agotado']) && $datos['agotado'] =='No'){ ?>selected<?php } ?>>NOT</option>
-                                <option value="Si" <?php if(isset($datos['agotado']) && $datos['agotado'] =='Si'){ ?>selected<?php } ?>>YES</option>
+                                <!--<option value="No" <?php if(isset($datos['agotado']) && $datos['agotado'] =='No'){ ?>selected<?php } ?>>NOT</option>-->
+                                <option value="No" <?php if(isset($datos['agotado']) && $datos['agotado'] =='No'){ ?>selected<?php } ?>>No</option>
+                                <!--<option value="Si" <?php if(isset($datos['agotado']) && $datos['agotado'] =='Si'){ ?>selected<?php } ?>>YES</option>-->
+                                <option value="Si" <?php if(isset($datos['agotado']) && $datos['agotado'] =='Si'){ ?>selected<?php } ?>>Si</option>
                               </select>
                         </div>
                     </div>

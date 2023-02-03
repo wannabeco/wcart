@@ -87,7 +87,7 @@
                         <?php }else if( $infoPedido['formaPago'] == 5){?>                            
                             Stripe (<?php echo $infoPedido['entidad']?>)
                         <?php }else if( $infoPedido['formaPago'] == 6){?>                            
-                            Payment on pick up
+                            Pago al recoger
                         <?php }else{?>
                             Otros
                         <?php }?>
@@ -147,7 +147,7 @@
                             <th>CATEGORIA</th>
                             <th>PEDIDO</th>
                             <th class="text-center">CANTIDAD</th>
-                            <th class="text-center">VALOR KILO</th>
+                            <th class="text-center">VALOR</th>
                             <th class="text-center">SUBTOTAL</th>
                         </tr>
                     </thead>

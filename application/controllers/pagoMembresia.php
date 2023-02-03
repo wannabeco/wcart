@@ -32,7 +32,7 @@ class PagoMembresia extends CI_Controller
     * y a continuación siempre se debe llamar la función del helper llamada getPrivilegios, la función está en el archivo helpers/funciones_helper.php
     * Tenga en cuenta que cada llamado ajax que haga a una plantilla gráfica que incluya botones de ver,editar, crear, borrar debe siempre llamar la función getPrivilegios.
     */
-	public function pagoMembresia()	
+	public function PagoMembresia()	
 	{
 		//valido que haya una sesión de usuario, si no existe siempre lo enviaré al login
 		if(validaIngreso())
