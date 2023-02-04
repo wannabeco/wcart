@@ -92,7 +92,7 @@ class LogicaGeneral  {
         }
         else
         {
-            $respuesta = array("mensaje"=>"No existen obs",
+            $respuesta = array("mensaje"=>"No existen banners",
                               "continuar"=>0,
                               "datos"=>array());    
 
@@ -110,7 +110,7 @@ class LogicaGeneral  {
         }
         else
         {
-            $respuesta = array("mensaje"=>"No existen ciudades",
+            $respuesta = array("mensaje"=>"No existen productos",
                               "continuar"=>0,
                               "datos"=>"");    
 
@@ -128,7 +128,7 @@ class LogicaGeneral  {
         }
         else
         {
-            $respuesta = array("mensaje"=>"No existen ciudades",
+            $respuesta = array("mensaje"=>"No existen subcategorias",
                               "continuar"=>0,
                               "datos"=>"");    
 
@@ -182,7 +182,7 @@ class LogicaGeneral  {
         }
         else
         {
-            $respuesta = array("mensaje"=>"No existen ciudades",
+            $respuesta = array("mensaje"=>"No existen solicitudes",
                               "continuar"=>0,
                               "datos"=>"");    
 
@@ -997,7 +997,8 @@ class LogicaGeneral  {
                 if($actualizaProducto > 0)
                 {
                     //actualizo el producto para sumarle los votos
-                    $respuesta = array("mensaje"=>"Your rating and comment have been successfully saved. Thank you very much!",
+                    //$respuesta = array("mensaje"=>"Your rating and comment have been successfully saved. Thank you very much!",
+                    $respuesta = array("mensaje"=>"Su calificación y comentario se han guardado con éxito. ¡Muchos gracias!",
                                         "continuar"=>1,
                                         "datos"=>array()); 
                 }  

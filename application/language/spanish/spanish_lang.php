@@ -314,6 +314,7 @@ $lang['lbl_cantidad']               = "Cantidad: ";
 $lang['lbl_total_pedido']           = "Total del pedido: ";
 //$lang['lbl_saludo_pedido']          = "Hello, a new product order has arrived with the following information: ";
 $lang['lbl_saludo_pedido']          = "Hola, me ha llegado un nuevo pedido de producto con la siguiente información: ";
+$lang['lbl_cant']               = "Cantidad";
 
 //modulo de notificaciones push
 //$lang['lbl_not_1']                  = "Send PUSH notifications to your clients cell phones";

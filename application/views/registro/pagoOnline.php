@@ -9,7 +9,7 @@
         <tr>
             <th style="background:#000;color:#fff" width="50px"></th>
             <th style="background:#000;color:#fff"><?php echo lang("text33")?></th>
-            <th style="background:#000;color:#fff" class="text-center">CANT</th>
+            <th style="background:#000;color:#fff" class="text-center"><?php echo lang("lbl_cant")?></th>
             <th style="background:#000;color:#fff" class="text-right"><?php echo lang("text34")?></th>
         </tr>
     </thead>
