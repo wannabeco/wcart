@@ -37,7 +37,11 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		},1000);
 		setTimeout(()=>{
 			$(document).ready( function () {
-				$('#tableCategorias').DataTable();
+				$('#tableCategorias').DataTable({
+					"language": {
+						"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+					  }
+				});
 			} );
 		},500);
 
@@ -191,7 +195,11 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		$scope.consultarSubCategorias();
 		setTimeout(()=>{
 			$(document).ready( function () {
-				$('#tableSubcategorias').DataTable();
+				$('#tableSubcategorias').DataTable({
+					"language": {
+						"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+					  }
+				});
 			} );
 		},1000);
 	}
@@ -315,7 +323,11 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		});
 		setTimeout(()=>{
 			$(document).ready( function () {
-				$('#tableProductos').DataTable();
+				$('#tableProductos').DataTable({
+					"language": {
+						"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+					  }
+				});
 			} );
 		},1000);
 	}
@@ -960,7 +972,11 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 	{
 		$scope.config 			=  configLogin;//configuración global
 		$(document).ready( function () {
-			$('#tablaPedido').DataTable();
+			$('#tablaPedido').DataTable({
+				"language": {
+					"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+				  }
+			});
 		} );
 		$.material.init();
 		$scope.getbanner();
@@ -988,7 +1004,11 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		},1000);
 		setTimeout(()=>{
 			$(document).ready( function () {
-				$('#tableBanner').DataTable();
+				$('#tableBanner').DataTable({
+					"language": {
+						"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+					  }
+				});
 			} );
 		},500);
 	}
