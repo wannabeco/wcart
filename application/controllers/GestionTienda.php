@@ -803,7 +803,7 @@ public function datosexcel(){
 			$cabecera = fgetcsv($openfile, 0,';');
 			//se limpia cabecera
 			$cabeceralimpia = $cabecera;
-			$ValidacionCabecera = array('codigoProducto','nombrePresentacion','marca','fotoPresentacion','foto2','foto3','foto4','foto5','descripcionpres','valorPresentacion','valorAntes','nuevo','descuento','agotado');
+			$ValidacionCabecera = array('codigoProducto','nombrePresentacion','marca','fotoPresentacion','foto2','foto3','foto4','foto5','descripcionPres','valorPresentacion','valorAntes','nuevo','descuento','agotado');
 			$errorcampos = 0;
 			$erroresdeCampos= "";
 			//recorre la cabecera y hace comparacion con validacion de cabecera
@@ -894,7 +894,7 @@ public function datosexcelmasivo(){
 				$table .= "<td>".$u['foto3']."</td>";
 				$table .= "<td>".$u['foto4']."</td>";
 				$table .= "<td>".$u['foto5']."</td>";
-				$table .= "<td>".$u['descripcionpres']."</td>";
+				$table .= "<td>".$u['descripcionPres']."</td>";
 				$table .= "<td>".$u['nuevo']."</td>";
 				$table .= "<td>".$u['descuento']."</td>";
 				$table .= "<td>".$u['agotado']."</td>";
