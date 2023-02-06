@@ -129,7 +129,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 	}
 	$scope.eliminaCategoria = function(idCategoria,confirm)
 	{
-		constantes.confirmacion(confirm,"","info",function()
+		constantes.confirmacion(confirm,"Esta apunto de eliminar una categoría, ¿Desea continuar?","info",function()
 		{
 			var parametros  = $("#formulario").serialize();
 			var controlador = 	$scope.config.apiUrl+"GestionTienda/eliminaCategoria";
@@ -411,7 +411,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 				else
 				{
 					$("#"+preloader).hide();
-					constantes.alerta("",json.mensaje,"info",function(){});
+					constantes.alerta("Atención",json.mensaje,"info",function(){});
 				}
 			},
 			//si ha ocurrido un error
@@ -1146,7 +1146,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 				else
 				{
 					$("#"+preloader).hide();
-					constantes.alerta("",json.mensaje,"info",function(){});
+					constantes.alerta("Atención",json.mensaje,"info",function(){});
 				}
 			},
 			//si ha ocurrido un error
