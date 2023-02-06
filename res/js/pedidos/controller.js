@@ -13,7 +13,11 @@ project.controller('pedidos', function($scope,$http,$q,constantes,$compile)
 	{
 		$scope.config = configLogin;
 		$(document).ready( function () {
-			$('#tablaPedido').DataTable() .order(0, 'desc').draw();;
+			$('#tablaPedido').DataTable({
+				"language": {
+					"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+				  }
+			}) .order(0, 'desc').draw();;
 		} );
 	}
 	$scope.nuevoPedidoInit = function()

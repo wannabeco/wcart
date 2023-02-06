@@ -24,7 +24,11 @@ project.controller('usuariosApp', function($scope,$http,$q,constantes)
 		});
 		setTimeout(()=>{
 			$(document).ready( function () {
-				$('#tableUsuarios').DataTable();
+				$('#tableUsuarios').DataTable({
+					"language": {
+						"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+					  }
+				});
 			});
 		},2000);
 	}
