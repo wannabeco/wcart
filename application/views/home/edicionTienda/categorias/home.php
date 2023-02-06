@@ -112,8 +112,8 @@
           <div class="panelPopUp" id="popPricing">
                 <div class="panelInternoPop" >
                     <!--codigo del video-->
-                <iframe width="100%" height="500" src="https://www.youtube.com/embed/eBEmEfQZo1Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
+                    <?php echo _TUTORIAL_CATEGORIAS?>
+                </div>
           </div>
           <div class="modal-footer"><br><br>
             <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#ed540e; color:#fff; bottom: 20px;right: 20px;">CLOSE WINDOW</button>

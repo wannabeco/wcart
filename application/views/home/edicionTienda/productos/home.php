@@ -130,7 +130,7 @@
           <div class="panelPopUp" id="popPricing">
                 <div class="panelInternoPop" >
                     <!--codigo del video-->
-                <iframe width="100%" height="500" src="https://www.youtube.com/embed/eBEmEfQZo1Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <?php echo _TUTORIAL_PRODUCTOS?>
               </div>
           </div>
           <div class="modal-footer"><br><br>
