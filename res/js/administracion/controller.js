@@ -35,7 +35,7 @@ project.controller('modulos', function($scope,$http,$q,constantes)
 	}
 	$scope.estadoCategoriaPrincipal = function(categoria,estadoActual)
 	{
-		var texto = (estadoActual == 1)?"Está a punto de apagar la categoría seleccionada, desea continuar":"Está a punto de encender la categoría, desea continuar?";
+		var texto = (estadoActual == 1)?"Está a punto de apagar la categoría seleccionada, ¿Desea continuar?":"Está a punto de encender la categoría, ¿Desea continuar?";
 		constantes.confirmacion("Confirmación",texto,'info',function(){
 			var controlador = 	$scope.config.apiUrl+"Admin/estadoCategoriaModulo";
 			var parametros  =   "idCategoria="+categoria+"&estadoActual="+estadoActual;
@@ -173,7 +173,7 @@ project.controller('modulosProcesador', function($scope,$http,$q,constantes)
 			//aquí se toma la decición de si se edita o se cre
 			if(accion == 1)//edita
 			{
-				constantes.confirmacion("Confirmación","Esta apunto de crear un nuevo módulo, desea continuar",'info',function(){
+				constantes.confirmacion("Confirmación","Esta apunto de crear un nuevo módulo, ¿Desea continuar",'info',function(){
 					var controlador = 	$scope.config.apiUrl+"Admin/editarModulo";
 					var parametros  = 	"edita="+accion+"&nombreModulo="+nombreModulo+"&urlModulo="+urlModulo+"&padre="+padre+"&idEditar="+idEditar+"&estado="+$("#estado").val();//quiere decir que va a crear uno nuevo
 					constantes.consultaApi(controlador,parametros,function(json){

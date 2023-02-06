@@ -194,7 +194,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 		});
 	}
 	$scope.bajar = function(){
-		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actualmente tiene adquirido, el cual corresponte a pagina web y app movil, ¿esta deguro que desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
+		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actualmente tiene adquirido, el cual corresponte a pagina web y app movil, ¿Esta deguro que desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
 			var codigo = $("#codigoPago").val();
 			var controlador = $scope.config.apiUrl+"pagoMembresia/insetCodigo";
 				var parametros  = $("#dataPago").serialize();
@@ -222,7 +222,7 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 		});
 	}
 	$scope.bajar2 = function(){
-		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actual mentetiene, el cual corresponte a pagina web y app movil, ¿esta deguro que desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
+		constantes.confirmacion("Atención","Esta apunto de cambiar el plan que actual mentetiene, el cual corresponte a pagina web y app movil, ¿Esta deguro que desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
 			var codigo = $("#codigoPago").val();
 			var controlador = $scope.config.apiUrl+"pagoMembresia/insetCodigo";
 				var parametros  = $("#dataPago").serialize();

@@ -128,7 +128,7 @@ $lang['txtPersona6']				= "Realice la búsqueda anteponiendo el caracter @. Ej: 
 
 //variables varias
 //$lang['lblAcciones']				= "Actions";
-$lang['lblAcciones']				= "Actiones";
+$lang['lblAcciones']				= "Acciones";
 //$lang['lblSeleccioneOpc']			= "Select an option";
 $lang['lblSeleccioneOpc']			= "Seleccione una opción";
 //$lang['lblagregarNueva']			= "Add new";

@@ -43,7 +43,7 @@ project.controller('pacientesApp', function($scope,$http,$q,constantes)
 
 	$scope.borraPaciente = function(idPaciente)
 	{
-		constantes.confirmacion("Confirmación","Está seguro que desea borrar el usuario seleccionado?",'info',function()
+		constantes.confirmacion("Confirmación","¿Está seguro que desea borrar el usuario seleccionado?",'info',function()
 		{
 			var controlador = 	$scope.config.apiUrl+"Pacientes/borraPaciente";
 			var parametros  = 	"idPaciente="+idPaciente;
@@ -64,7 +64,7 @@ project.controller('pacientesApp', function($scope,$http,$q,constantes)
 	}
 	$scope.generaDatosAcceso = function(idUsuario)
 	{
-		constantes.confirmacion("Confirmación","Está seguro que desea generar usuario y clave de acceso a este usuario?",'info',function()
+		constantes.confirmacion("Confirmación","¿Está seguro que desea generar usuario y clave de acceso a este usuario?",'info',function()
 		{
 			var controlador = 	$scope.config.apiUrl+"Usuarios/generaDatosAcceso";
 			var parametros  = 	"idUsuario="+idUsuario;
@@ -162,7 +162,7 @@ project.controller('pacientesApp', function($scope,$http,$q,constantes)
 		else
 		{
 
-			var texto = (edita==1)?"Está apunto de editar la información del usuario, desea continuar?":"Está a punto de insertar un nuevo usuario, desea continuar?";
+			var texto = (edita==1)?"Está apunto de editar la información del usuario, desea continuar?":"Está a punto de insertar un nuevo usuario, ¿Desea continuar?";
 			constantes.confirmacion("Confirmación",texto,'info',function(){
 				var controlador = 	$scope.config.apiUrl+"Usuarios/procesaUsuarios";
 				var parametros  = 	$("#formAgregaPersona").serialize()+"&edita="+edita;
@@ -345,7 +345,7 @@ project.controller('procesaGuardadoPac', function($scope,$http,$q,constantes)
 		else
 		{
 			//alert("dkfjdhsfkjh9");
-			var texto = (edita==1)?"Está apunto de editar la información del usuario, desea continuar?":"Está a punto de insertar un nuevo usuario, desea continuar?";
+			var texto = (edita==1)?"Está apunto de editar la información del usuario, desea continuar?":"Está a punto de insertar un nuevo usuario, ¿Desea continuar?";
 			constantes.confirmacion("Confirmación",texto,'info',function(){
 				var controlador = 	$scope.config.apiUrl+"Pacientes/procesaUsuarios";
 				var parametros  = 	$("#formAgregaPaciente").serialize()+"&edita="+edita;

@@ -176,7 +176,7 @@ project.controller('guardaVisitaPad',function($scope,$http,$q,constantes)
 		else
 		{
 			//alert(diagnostico);
-			var texto = (edita==1)?"Está a punto de actualizar la información del paciente y de paso asignar una visita, desea continuar?":"Está a punto de insertar un nuevo paciente y de paso asignar una visita, desea continuar?";
+			var texto = (edita==1)?"Está a punto de actualizar la información del paciente y de paso asignar una visita, desea continuar?":"Está a punto de insertar un nuevo paciente y de paso asignar una visita, ¿Desea continuar?";
 			constantes.confirmacion("Confirmación",texto,'info',function(){
 				var controlador = 	$scope.config.apiUrl+"Pad/procesaVisitas";
 				var parametros  = 	$("#formGuardaCita").serialize()+"&diag="+diagnostico+"&edita="+edita;
@@ -299,7 +299,7 @@ project.controller('detalleVisita',function($scope,$http,$q,constantes)
 		}
 		else
 		{
-			constantes.confirmacion("Confirmación","¿La información agregada en el formulario es correcta?, ¿desea continuar?",'info',function()
+			constantes.confirmacion("Confirmación","¿La información agregada en el formulario es correcta?, ¿Desea continuar?",'info',function()
 			{
 				var controlador = 	$scope.config.apiUrl+"Pad/guardaNotaEnfermeria";
 				var parametros  = 	$("#formNotas").serialize();

@@ -90,7 +90,7 @@ project.controller('procesaGuardadoListas', function($scope,$http,$q,constantes)
 		}
 		else
 		{
-			constantes.confirmacion("Confirmación","Está a punto de generar una lista a partir del archivo de excel seleccionado, esta acción puede tardar dependiendo la cantidad de registros del archivo excel, desea continuar?",'info',function()
+			constantes.confirmacion("Confirmación","Está a punto de generar una lista a partir del archivo de excel seleccionado, esta acción puede tardar dependiendo la cantidad de registros del archivo excel, ¿Desea continuar?",'info',function()
 			{
 					var formData 	=   new FormData($("#formAgregaListas")[0]);
 			        var controlador = 	$scope.config.apiUrl+"adminListas/procesaListas"; 
