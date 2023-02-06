@@ -15,20 +15,20 @@ project.controller('notificacionesApp', function($scope,$http,$q,constantes,$com
 		var mensajeNotificacion 	= $("#mensajeNotificacion").val();
 		if(tituloNotificacion == "")
 		{
-			constantes.alerta("Attention",$("#tituloNotificacion").data("validation"),'info',function(){});
+			constantes.alerta("Atención",$("#tituloNotificacion").data("validation"),'info',function(){});
 		}
 		else if(mensajeNotificacion == "")
 		{
-			constantes.alerta("Attention",$("#mensajeNotificacion").data("validation"),'info',function(){});
+			constantes.alerta("Atención",$("#mensajeNotificacion").data("validation"),'info',function(){});
 		}
 		else
 		{
-			constantes.confirmacion("Confirmación","Está a punto de enviar una notificación a todos los usuarios registrados, ¿desea continuar?",'info',function()
+			constantes.confirmacion("Confirmación","Está a punto de enviar una notificación a todos los usuarios registrados, ¿Desea continuar?",'info',function()
 			{
 				var controlador = 	$scope.config.apiUrl+"Notificaciones/sendNotificacionPush";
 				var parametros  = 	$("#formulario").serialize();
 				constantes.consultaApi(controlador,parametros,function(json){
-					constantes.alerta("Attention",json.mensaje,'success',function(){
+					constantes.alerta("Atención",json.mensaje,'success',function(){
 						location.reload();
 					});
 				},'json');

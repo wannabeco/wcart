@@ -125,7 +125,7 @@ project.controller('pedidos', function($scope,$http,$q,constantes,$compile)
 		{
 			if(formaPago == 1)//contra entrega, debo guardar el pedido nada mas
 			{
-				constantes.confirmacion("Confirmación","Está a punto de realizar un pedido con los productos seleccionados, luego de esto será enviado a la psarela de pagos, ¿desea continuar?",'info',function()
+				constantes.confirmacion("Confirmación","Está a punto de realizar un pedido con los productos seleccionados, luego de esto será enviado a la psarela de pagos, ¿Desea continuar?",'info',function()
 				{
 					var controlador = 	$scope.config.apiUrl+"pedidos/guardaPedido";
 					var parametros  = {
@@ -146,7 +146,7 @@ project.controller('pedidos', function($scope,$http,$q,constantes,$compile)
 			else//forma dos, guardo el pedido y voy a payu
 			{
 				//envio la data para procesar
-				constantes.confirmacion("Confirmación","Está a punto de realizar un pedido con los productos seleccionados, luego de esto será enviado a la psarela de pagos, ¿desea continuar?",'info',function()
+				constantes.confirmacion("Confirmación","Está a punto de realizar un pedido con los productos seleccionados, luego de esto será enviado a la psarela de pagos, ¿Desea continuar?",'info',function()
 				{
 					var controlador = 	$scope.config.apiUrl+"pedidos/guardaPedido";
 					var parametros  = {
@@ -198,7 +198,7 @@ project.controller('pedidos', function($scope,$http,$q,constantes,$compile)
 		}
 		else
 		{
-			constantes.confirmacion("Confirmación","Está a punto de cambiar el estado del pedido, ¿desea continuar?",'info',function()
+			constantes.confirmacion("Confirmación","Está a punto de cambiar el estado del pedido, ¿Desea continuar?",'info',function()
 			{
 				var controlador = $scope.config.apiUrl+"Pedidos/gestionPedidoAdmin";
 				var parametros  = {
@@ -320,7 +320,7 @@ project.controller('ingresoProducto', function($scope,$http,$q,constantes,$compi
 		}
 		else
 		{
-			constantes.confirmacion("Confirmación","Está a punto de realizar un ingreso de producto, ¿desea continuar?",'info',function()
+			constantes.confirmacion("Confirmación","Está a punto de realizar un ingreso de producto, ¿Desea continuar?",'info',function()
 			{
 				var controlador = 	$scope.config.apiUrl+"pedidos/registraIngresoStock";
 				var parametros = {

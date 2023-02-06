@@ -274,7 +274,7 @@ project.controller('registroEmpresas', function($scope,$http,$q,constantes)
 		}
 		else
 		{
-			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos, ¿desea continuar?","info",function(){
+			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos, ¿Desea continuar?","info",function(){
 				var controlador = $scope.config.apiUrl+"registro/insertaEmpresas";
 				var parametros  = $("#formRegEmpresas").serialize();
 				constantes.consultaApi(controlador,parametros,function(json){
@@ -356,7 +356,7 @@ project.controller('registroEmpresas', function($scope,$http,$q,constantes)
 		}
 		else
 		{
-			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos, ¿desea continuar?","info",function(){
+			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos, ¿Desea continuar?","info",function(){
 				var controlador = $scope.config.apiUrl+"registro/insertaPersonas";
 				var parametros  = $("#formRegEmpresas").serialize();
 				constantes.consultaApi(controlador,parametros,function(json){
@@ -431,7 +431,7 @@ project.controller('registroEmpresas', function($scope,$http,$q,constantes)
 	    }
 	    else
 	    {
-	    	constantes.confirmacion("Confirmación!","Está a punto de realizar un pedido para el usuario, ¿desea continuar?","info",function(){
+	    	constantes.confirmacion("Confirmación!","Está a punto de realizar un pedido para el usuario, ¿Desea continuar?","info",function(){
 				var controlador = $scope.config.apiUrl+"registro/procesaPedidoCallCenter";
 				var parametros  = {
 						idPersona:idPersona,
@@ -513,7 +513,7 @@ project.controller('registroEmpresas', function($scope,$http,$q,constantes)
 	    }
 	    else
 	    {
-	    	constantes.confirmacion("Confirmación!","Está a punto de guardar este seguimiento, ¿desea continuar?","info",function(){
+	    	constantes.confirmacion("Confirmación!","Está a punto de guardar este seguimiento, ¿Desea continuar?","info",function(){
 				var controlador = $scope.config.apiUrl+"registro/guardaSeguimiento";
 				var parametros  = $("#formAgregaModulo").serialize();
 				constantes.consultaApi(controlador,parametros,function(json){
@@ -576,7 +576,7 @@ project.controller('registroEmpresas', function($scope,$http,$q,constantes)
 	      }
 			else
 			{
-				constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos, ¿desea continuar?","info",function(){
+				constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos, ¿Desea continuar?","info",function(){
 					var controlador = $scope.config.apiUrl+"registro/editaPersonas";
 					var parametros  = $("#formAgregaModulo").serialize();
 					constantes.consultaApi(controlador,parametros,function(json){

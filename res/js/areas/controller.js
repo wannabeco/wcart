@@ -40,7 +40,7 @@ project.controller('areas', function($scope,$http,$q,constantes)
 		}
 		else
 		{
-			constantes.confirmacion("Atención","Está a punto de crear un área de servicio, desea continuar","info",function(){
+			constantes.confirmacion("Atención","Está a punto de crear un área de servicio, ¿Desea continuar?","info",function(){
 				//se inicia el login
 				var controlador = 	$scope.config.apiUrl+"Areas/creaNuevaArea";
 				var parametros  = 	$("#formAreas").serialize();
@@ -67,7 +67,7 @@ project.controller('areas', function($scope,$http,$q,constantes)
 	}
 	$scope.eliminaArea = function(results,index)
 	{
-		constantes.confirmacion("Atención","Está a punto de eliminar un área de servicio, desea continuar?","warning",function(){
+		constantes.confirmacion("Atención","Está a punto de eliminar un área de servicio, ¿Desea continuar?","warning",function(){
 			var areaBorrar = results[index].idArea;
 			//se inicia el login
 			var controlador = 	$scope.config.apiUrl+"Areas/borrarArea";

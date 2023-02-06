@@ -350,7 +350,7 @@ project.controller('ventanaCita', function($scope,$http,$q,constantes)
 		else
 		{
 			//alert("dkfjdhsfkjh9");
-			var texto = (edita==1)?"Está apunto de editar la información del usuario, desea continuar?":"Está a punto de insertar un nuevo usuario, desea continuar?";
+			var texto = (edita==1)?"Está apunto de editar la información del usuario, desea continuar?":"Está a punto de insertar un nuevo usuario, ¿Desea continuar?";
 			constantes.confirmacion("Confirmación",texto,'info',function(){
 				var controlador = 	$scope.config.apiUrl+"Pacientes/procesaUsuarios";
 				var parametros  = 	$("#dataPaciente").serialize()+"&edita="+edita;

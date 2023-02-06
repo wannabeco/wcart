@@ -113,7 +113,7 @@ project.controller('login', function($scope,$http,$q,constantes)
 		}
 		else
 		{
-			constantes.confirmacion("Confirmación","Está a punto de generar una nueva clave para el usuario, esta seguro que desea continuar?",'info',function(){
+			constantes.confirmacion("Confirmación","Está a punto de generar una nueva clave para el usuario, ¿Esta seguro que desea continuar?",'info',function(){
 				//se inicia el login
 				var controlador = 	$scope.config.apiUrl+"Login/cambioClave";
 				var parametros  = 	$("#formCambioClave").serialize();

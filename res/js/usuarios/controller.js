@@ -169,7 +169,7 @@ project.controller('usuariosApp', function($scope,$http,$q,constantes)
 		else
 		{
 
-			var texto = (edita==1)?"Está apunto de editar la información del usuario, ¿desea continuar?":"Está a punto de insertar un nuevo usuario, ¿desea continuar?";
+			var texto = (edita==1)?"Está apunto de editar la información del usuario, ¿desea continuar?":"Está a punto de insertar un nuevo usuario, ¿Desea continuar?";
 			constantes.confirmacion("Confirmación",texto,'info',function(){
 				var controlador = 	$scope.config.apiUrl+"Usuarios/procesaUsuarios";
 				var parametros  = 	$("#formAgregaPersona").serialize()+"&edita="+edita;
@@ -332,7 +332,7 @@ project.controller('procesaGuardado', function($scope,$http,$q,constantes)
 		else
 		{
 
-			var texto = (edita==1)?"Está apunto de editar la información del usuario, ¿desea continuar?":"Está a punto de insertar un nuevo usuario, ¿desea continuar?";
+			var texto = (edita==1)?"Está apunto de editar la información del usuario, ¿desea continuar?":"Está a punto de insertar un nuevo usuario, ¿Desea continuar?";
 			constantes.confirmacion("Confirmación",texto,'info',function(){
 				var controlador = 	$scope.config.apiUrl+"Usuarios/procesaUsuarios";
 				var parametros  = 	$("#formAgregaPersona").serialize()+"&edita="+edita;

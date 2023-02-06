@@ -36,13 +36,14 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 			});
 		},1000);
 		setTimeout(()=>{
-			$(document).ready( function () {
+			$(document).ready(function() {
 				$('#tableCategorias').DataTable({
 					"language": {
 						"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-					  }
+					  },
+					  "bDestroy": true,
 				});
-			} );
+			});
 		},500);
 
 	}
@@ -93,16 +94,16 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		var foto = $("#foto").val();
 		if(nombreCategoria == "")
 		{
-			constantes.alerta("Attention",$("#nombreProducto").data("validation"),"info",function(){});
+			constantes.alerta("Atención",$("#nombreProducto").data("validation"),"info",function(){});
 		}
 		else if(foto == "")
 		{
-			constantes.alerta("Attention",$("#foto").data("validation"),"info",function(){});
+			constantes.alerta("Atención",$("#foto").data("validation"),"info",function(){});
 		}
 		else
 		{
 			var mensajeConfirma = confirm;
-			constantes.confirmacion(confirm,"","info",function()
+			constantes.confirmacion(confirm,"Esta a punto de crear una categoría, ¿Desea continuar?","info",function()
 			{
 				var parametros  = $("#formulario").serialize();
 				var controlador = 	$scope.config.apiUrl+"GestionTienda/procesaCategoria";
@@ -110,13 +111,13 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 				constantes.consultaApi(controlador,parametros,function(json){
 					if(json.continuar == 1)
 					{
-						constantes.alerta("Attention",json.mensaje,"success",function(){
+						constantes.alerta("Atención",json.mensaje,"success",function(){
 							location.reload();
 						});
 					}	
 					else
 					{
-						constantes.alerta("Attention",json.mensaje,"danger",function(){
+						constantes.alerta("Atención",json.mensaje,"danger",function(){
 							//location.reload();
 						});
 					}
@@ -136,13 +137,13 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 			constantes.consultaApi(controlador,parametros,function(json){
 				if(json.continuar == 1)
 				{
-					constantes.alerta("Attention",json.mensaje,"success",function(){
+					constantes.alerta("Atención",json.mensaje,"success",function(){
 						location.reload();
 					});
 				}	
 				else
 				{
-					constantes.alerta("Attention",json.mensaje,"danger",function(){
+					constantes.alerta("Atención",json.mensaje,"danger",function(){
 						//location.reload();
 					});
 				}
@@ -198,7 +199,8 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 				$('#tableSubcategorias').DataTable({
 					"language": {
 						"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-					  }
+					  },
+					  "bDestroy": true,
 				});
 			} );
 		},1000);
@@ -231,16 +233,16 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		
 		if(idProducto == "")
 		{
-			constantes.alerta("Attention","Debe seleccionar una categoría para enlazar la nueva subcategoría","info",function(){});
+			constantes.alerta("Atención","Debe seleccionar una categoría para enlazar la nueva subcategoría","info",function(){});
 		}
 		else if(nombreSubcategoria == "")
 		{
-			constantes.alerta("Attention","Debe escribir un nombre para la subcategoría","info",function(){});
+			constantes.alerta("Atención","Debe escribir un nombre para la subcategoría","info",function(){});
 		}
 		else
 		{
 			var mensajeConfirma = (edita==1)?"Esta a punto de editar la información de la subcategoría, ¿Desea continuar?":"Esta a punto de crear una subcategoría, ¿Desea continuar?";
-			constantes.confirmacion("Attention",mensajeConfirma,"info",function()
+			constantes.confirmacion("Atención",mensajeConfirma,"info",function()
 			{
 				var parametros  = $("#formulario").serialize();
 				var controlador = 	$scope.config.apiUrl+"GestionTienda/procesaSubCategoria";
@@ -248,13 +250,13 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 				constantes.consultaApi(controlador,parametros,function(json){
 					if(json.continuar == 1)
 					{
-						constantes.alerta("Attention",json.mensaje,"success",function(){
+						constantes.alerta("Atención",json.mensaje,"success",function(){
 							location.reload();
 						});
 					}	
 					else
 					{
-						constantes.alerta("Attention",json.mensaje,"danger",function(){
+						constantes.alerta("Atención",json.mensaje,"danger",function(){
 							//location.reload();
 						});
 					}
@@ -266,7 +268,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 	}
 	$scope.eliminaSubCategoria = function(idSubCategoria)
 	{
-		constantes.confirmacion("Attention","Está a punto de eliminar la subcategoría seleccionada,¿Desea continuar?","info",function()
+		constantes.confirmacion("Atención","Está a punto de eliminar la subcategoría seleccionada,¿Desea continuar?","info",function()
 		{
 			var parametros  = $("#formulario").serialize();
 			var controlador = 	$scope.config.apiUrl+"GestionTienda/eliminaSubCategoria";
@@ -274,13 +276,13 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 			constantes.consultaApi(controlador,parametros,function(json){
 				if(json.continuar == 1)
 				{
-					constantes.alerta("Attention",json.mensaje,"success",function(){
+					constantes.alerta("Atención",json.mensaje,"success",function(){
 						location.reload();
 					});
 				}	
 				else
 				{
-					constantes.alerta("Attention",json.mensaje,"danger",function(){
+					constantes.alerta("Atención",json.mensaje,"danger",function(){
 						//location.reload();
 					});
 				}
@@ -326,7 +328,8 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 				$('#tableProductos').DataTable({
 					"language": {
 						"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-					  }
+					  },
+					  "bDestroy": true,
 				});
 			} );
 		},1000);
@@ -453,40 +456,40 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		//vallidacion de campos
 		if(idProducto == "")
 		{
-			constantes.alerta("Attention","Debe seleccionar una categoría para enlazar el producto","info",function(){});
+			constantes.alerta("Atención","Debe seleccionar una categoría para enlazar el producto","info",function(){});
 		}
 		else if(idSubcategoria == "")
 		{
-			constantes.alerta("Attention","Debe seleccionar una subcategoría para enlazar el producto","info",function(){});
+			constantes.alerta("Atención","Debe seleccionar una subcategoría para enlazar el producto","info",function(){});
 		}
 		else if(nombrePresentacion == "")
 		{
-			constantes.alerta("Attention","Por favor escriba el nombre del producto","info",function(){});
+			constantes.alerta("Atención","Por favor escriba el nombre del producto","info",function(){});
 		}
 		else if(marca == "")
 		{
-			constantes.alerta("Attention","Por favor la marca del producto","info",function(){});
+			constantes.alerta("Atención","Por favor la marca del producto","info",function(){});
 		}
 		else if(nuevo == "")
 		{
-			constantes.alerta("Attention","Por favor indique si es un nuevo producto","info",function(){});
+			constantes.alerta("Atención","Por favor indique si es un nuevo producto","info",function(){});
 		}
 		else if(descripcionCorta == "")
 		{
-			constantes.alerta("Attention","Escriba una descripción para el producto","info",function(){});
+			constantes.alerta("Atención","Escriba una descripción para el producto","info",function(){});
 		}
 		/*else if(variacion == undefined || variacion == "")
 		{
-			constantes.alerta("Attention","Indique si el producto tiene variación o no","info",function(){});
+			constantes.alerta("Atención","Indique si el producto tiene variación o no","info",function(){});
 		}
 		else if(variacion == 0 && valorPresentacion == "")
 		{
-			constantes.alerta("Attention","Escriba el precio de venta del producto","info",function(){});
+			constantes.alerta("Atención","Escriba el precio de venta del producto","info",function(){});
 		}*/
 		else
 		{
 			var mensajeConfirma = (edita == 1)?"Está a punto de modificar la información del producto, ¿Desea continuar?":"Está a punto de crear un nuevo producto, ¿Desea continuar?";
-			constantes.confirmacion("Attention",mensajeConfirma,"info",function(){
+			constantes.confirmacion("Atención",mensajeConfirma,"info",function(){
 				var formData 	=   new FormData($("#formulario")[0]);
 					formData.append("edita", edita);
 		        var controlador = 	$scope.config.apiUrl+"GestionTienda/procesaProductoNuevo"; 
@@ -508,13 +511,13 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		            {
 		            	if(json.continuar == 1)
 						{
-							constantes.alerta("Attention",json.mensaje,"success",function(){
+							constantes.alerta("Atención",json.mensaje,"success",function(){
 								location.reload();
 							})
 						}
 						else
 						{
-							constantes.alerta("Attention",json.mensaje,"warning",function(){})
+							constantes.alerta("Atención",json.mensaje,"warning",function(){})
 						}
 		            },
 		            //si ha ocurrido un error
@@ -594,7 +597,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 	{
 		var element = $("#panelVariacion"+idVariacion);
 		var nueva 	= $(element).data("nueva");
-		constantes.confirmacion("Attention","Está seguro que desea eliminar esta variación del producto","info",function(){
+		constantes.confirmacion("Atención","Está seguro que desea eliminar esta variación del producto","info",function(){
 			if(nueva == 1)//si es nueva solo elimino el panel
 			{
 				element.remove();
@@ -614,7 +617,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 					}
 					else
 					{
-						constantes.alerta("Attention!",json.mensaje,"danger",function(){});
+						constantes.alerta("Atención!",json.mensaje,"danger",function(){});
 					}
 
 				},'json');
@@ -625,20 +628,20 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 
 	$scope.eliminarProducto = function(idPresentacion)
 	{
-		constantes.confirmacion("Attention","Está a punto de eliminar el producto seleccionado, recuerde que esto también eliminará las variaciones que tenga,¿Desea continuar?","info",function(){
+		constantes.confirmacion("Atención","Está a punto de eliminar el producto seleccionado, recuerde que esto también eliminará las variaciones que tenga,¿Desea continuar?","info",function(){
 			var controlador = 	$scope.config.apiUrl+"GestionTienda/eliminaProducto";
 			var parametros  = 	{idPresentacion:idPresentacion}
 			constantes.consultaApi(controlador,parametros,function(json){
 				if(json.continuar == 1)
 				{
-					constantes.alerta("Attention!",json.mensaje,"success",function(){
+					constantes.alerta("Atención!",json.mensaje,"success",function(){
 						$scope.consultarProductos();
 						swal.close();
 					});
 				}
 				else
 				{
-					constantes.alerta("Attention!",json.mensaje,"danger",function(){
+					constantes.alerta("Atención!",json.mensaje,"danger",function(){
 						$scope.consultarProductos();
 						swal.close();
 					});
@@ -671,7 +674,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		if(error == 0)
 		{
 			var operados = 0;
-			constantes.confirmacion("Attention","Está a punto de guardar la información de las variaciones, ¿Desea continuar?","info",function(){
+			constantes.confirmacion("Atención","Está a punto de guardar la información de las variaciones, ¿Desea continuar?","info",function(){
 				$.each(element,function(e,ele){
 					var idVariacion 	= $(ele).data("idvariacion");
 					var nueva 			= $(ele).data("nueva");
@@ -693,7 +696,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 
 						if(operados == element.length)
 						{
-							constantes.alerta("Attention!","Product features have been processed correctly","success",function(){
+							constantes.alerta("Atención!","Product features have been processed correctly","success",function(){
 								$scope.variacionesProducto(idPresentacion);
 							});
 						}
@@ -706,7 +709,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		}
 		else
 		{
-			constantes.alerta("Attention!","You must check the name field of the characteristic or value of the characteristic since they are mandatory","info",function(){
+			constantes.alerta("Atención!","Debe marcar el campo nombre de la característica o valor de la característica ya que son obligatorios","info",function(){
 
 			});
 		}
@@ -747,19 +750,19 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 	//eliminar comentarios
 	$scope.eliminarComentario = function(idComentario,idPresentacion,votantes,puntos,calificacion)
 	{
-		constantes.confirmacion("Attention","Está a punto de eliminar el comentario,¿Desea continuar?","info",function(){
+		constantes.confirmacion("Atención","Está a punto de eliminar el comentario,¿Desea continuar?","info",function(){
 			var controlador = 	$scope.config.apiUrl+"GestionTienda/eliminarComentario";
 			var parametros  = 	{idComentario:idComentario, idPresentacion:idPresentacion, votantes:votantes, puntos:puntos, calificacion:calificacion}
 			constantes.consultaApi(controlador,parametros,function(json){
 				if(json.continuar == 1)
 				{
-					constantes.alerta("Attention!",json.mensaje,"success",function(){
+					constantes.alerta("Atención!",json.mensaje,"success",function(){
 						location.reload();
 					});
 				}
 				else
 				{
-					constantes.alerta("Attention!",json.mensaje,"danger",function(){
+					constantes.alerta("Atención!",json.mensaje,"danger",function(){
 					});
 				}
 			},'json');
@@ -848,16 +851,16 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		var idSubcategoria			= $('#idSubcategoria').val();
 		//console.log(csv_file);
 		if(idProducto == ''){
-			constantes.alerta("Attention!","Debe de seleccionar una categoria para el carge de los productos","info",function(){});
+			constantes.alerta("Atención!","Debe de seleccionar una categoria para el carge de los productos","info",function(){});
 		}
 		else if(idSubcategoria == ''){
-			constantes.alerta("Attention!","Debe de seleccionar una subcategoria para el carge de los productos","info",function(){});
+			constantes.alerta("Atención!","Debe de seleccionar una subcategoria para el carge de los productos","info",function(){});
 		}
 		else if(csv_file == ''){
 			constantes.alerta("Atención","Debe de seleccionar un archivo con extencion CSV para poder guardar","info",function(){});
 		}
 		else{
-			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, desea continuar?","info",function(){
+			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, ¿Desea continuar?","info",function(){
 			var idTienda				= $('#idTienda').val();
 			var idProducto				= $('#idProducto').val();
 			var idSubcategoria			= $('#idSubcategoria').val();
@@ -926,7 +929,7 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 			constantes.alerta("Atención","Debe de seleccionar una imagen para poder guardar	","info",function(){});
 		}
 		else{
-			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, desea continuar?","info",function(){
+			constantes.confirmacion("Confirmación!","Los datos que acaba de ingresar son correctos?, ¿Desea continuar?","info",function(){
 			var idTienda	=   $('#idTienda').val();
             var formData 	=   new FormData($("#formulario")[0]);
             var controlador = 	$scope.config.apiUrl+"GestionTienda/procesaDataimagenes"; 
@@ -975,7 +978,8 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 			$('#tablaPedido').DataTable({
 				"language": {
 					"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-				  }
+				  },
+				  "bDestroy": true,
 			});
 		} );
 		$.material.init();
@@ -1007,7 +1011,8 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 				$('#tableBanner').DataTable({
 					"language": {
 						"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-					  }
+					  },
+					  "bDestroy": true,
 				});
 			} );
 		},500);
@@ -1059,27 +1064,27 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 
 		if(tituloBanner == "")
 		{
-			constantes.alerta("Attention","El nombre del banner es requerido","info",function(){});
+			constantes.alerta("Atención","El nombre del banner es requerido","info",function(){});
 		}
 		// else if(fotoBanner == "" && fotoBanner2 == "")
 		// {
-		// 	constantes.alerta("Attention","por favor seleccione una foto para el banner","info",function(){});
+		// 	constantes.alerta("Atención","por favor seleccione una foto para el banner","info",function(){});
 		// }
 		else if(tipoLink === "")
 		{
-			constantes.alerta("Attention","Seleccione tipo de Banner","info",function(){});
+			constantes.alerta("Atención","Seleccione tipo de Banner","info",function(){});
 		}
 		else if(tipoLink === 'url' & linkBanner == ''){
-			constantes.alerta("Attention","La url a la cual pertenece el banner es requerido","info",function(){});
+			constantes.alerta("Atención","La url a la cual pertenece el banner es requerido","info",function(){});
 		}
 		else if(tipoLink === 'producto' & idPresentacion == ''){
-			constantes.alerta("Attention","Seleccione un producto","info",function(){});
+			constantes.alerta("Atención","Seleccione un producto","info",function(){});
 		}
 		
 		{
 			var mensajeConfirma = confirm;
 
-			constantes.confirmacion(confirm,"","info",function()
+			constantes.confirmacion(confirm,"Esta apunto de crar un banner, ¿Desea continuar?","info",function()
 			{
 				var controlador = configLogin.apiUrl+"GestionTienda/procesaBanner";
 				var parametros  = $("#formulario").serialize();
@@ -1087,13 +1092,13 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 				constantes.consultaApi(controlador,parametros,function(json){
 					if(json.continuar == 1)
 					{
-						constantes.alerta("Attention",json.mensaje,"success",function(){
+						constantes.alerta("Atención",json.mensaje,"success",function(){
 							location.reload();
 						});
 					}	
 					else
 					{
-						constantes.alerta("Attention",json.mensaje,"danger",function(){
+						constantes.alerta("Atención",json.mensaje,"danger",function(){
 							location.reload();
 						});
 					}
@@ -1198,13 +1203,13 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 			constantes.consultaApi(controlador,parametros,function(json){
 				if(json.continuar == 1)
 				{
-					constantes.alerta("Attention",json.mensaje,"success",function(){
+					constantes.alerta("Atención",json.mensaje,"success",function(){
 						location.reload();
 					});
 				}	
 				else
 				{
-					constantes.alerta("Attention",json.mensaje,"danger",function(){
+					constantes.alerta("Atención",json.mensaje,"danger",function(){
 						//location.reload();
 					});
 				}

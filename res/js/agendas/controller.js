@@ -53,7 +53,7 @@ project.controller('agendasApp', function($scope,$http,$q,constantes)
 		}
 		else
 		{
-			constantes.confirmacion("Confirmación","Se realizará una consulta con la información proporcionada, desea continuar?",'info',function(){
+			constantes.confirmacion("Confirmación","Se realizará una consulta con la información proporcionada, ¿Desea continuar?",'info',function(){
 				var idServicio 	=   $("#idServicio").val();
 				var controlador = 	$scope.config.apiUrl+"adminAgendas/consultaAgendaEspecialista";
 				var parametros  = 	"&idServicio="+idServicio+"&idPersona="+idPersona;
@@ -355,7 +355,7 @@ project.controller('procesaGuardadoConfigAgenda', function($scope,$http,$q,const
 		{
 			//procedo a guardar
 			var contadorInsertados	=	0;
-			constantes.confirmacion("Confirmación","Está a punto de asignar la disponibilidad seleccionada al usuario, desea continuar?",'info',function(){
+			constantes.confirmacion("Confirmación","Está a punto de asignar la disponibilidad seleccionada al usuario, ¿Desea continuar?",'info',function(){
 
 
 				var controlador2 = 	$scope.config.apiUrl+"adminAgendas/borraHorarios";
