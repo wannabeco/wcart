@@ -263,6 +263,7 @@ class BaseDatosPedidos extends CI_Model {
         $this->db->join($this->tableEstadoPedido." e","e.idEstadoPedido=p.estadoPedido",'INNER');
         $this->db->join($this->tableDeptos." d","d.ID_DPTO=per.departamento",'INNER');
         $this->db->join($this->tableCiudad." c","c.ID_CIUDAD=per.ciudad and c.ID_DPTO= per.departamento",'INNER');
+        $this->db->order_by("idPedido","DESC");
         $id = $this->db->get();
         //print_r($this->db->last_query());die();
         return $id->result_array();

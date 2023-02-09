@@ -44,11 +44,13 @@
     <div class="container">
         <?php //var_dump($infoPedido);?>
             <center>
-            <form method="post" id="theForm" action="https://gateway.payulatam.com/ppp-web-gateway/">
+            <form method="post" id="theForm" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+            <!--<form method="post" id="theForm" action="https://gateway.payulatam.com/ppp-web-gateway/">-->
                 <input name="merchantId" id="merchantId"    type="hidden"  value="<?php echo $infoTienda['payu_id_mercado']?>">
                 <input name="accountId"     type="hidden"  value="<?php echo $infoTienda['payu_id_cuenta']?>" >
                 <input name="description"   type="hidden"  value="<?php echo $infoTienda['nombreTransaccion']?>"  >
                 <input name="apKey" id="apKey"   type="hidden"  value="<?php echo $infoTienda['payu_apikey']?>"  >
+                <input name="secret"                            type="hidden"   value="pRRXKOl8ikMmt9u">
                 <input name="referenceCode" id="referenceCode" type="hidden"  value="<?php echo $referencia?>" >
                 <input name="amount"        type="hidden"  value="<?php echo $infoPedido['valor']?>"   >
                 <input name="tax"           type="hidden"  value="0"  >

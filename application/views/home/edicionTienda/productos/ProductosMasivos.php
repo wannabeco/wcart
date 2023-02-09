@@ -2,7 +2,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h2 class="modal-title">Carga productos masivos</h2>
-        <p class="text-justify">En este modulo se podra cargar productos al mismo tiempo</p>
+        <p class="text-justify">En este modulo se podra cargar productos al mismo tiempo.</p>
     </div>
     <div class="modal-body">    
         <p> Para realizar la el cargue masivo de productos, es necesario descargar el siguiente documento y ingrese los productos.
@@ -42,17 +42,24 @@
                             </button><br> 
                             <p class="col col-lg-12" style=" position:relative; float:left; left:20px;"> 
                             Antes de hacer el cargue de archivo, por favor verifique que los campos estén correctos y el formato de Excel este en <strong>.CSV</strong>.
-                            </p><br> 
-                            <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" id="cargaCSV" name="cargaCSV" ng-click="cargaCSV()">Cargar Productos</button>   
+                            </p><br>
+                            <p class="col col-lg-12" style=" position:relative; float:left; left:20px;">
+                              <i class="fa fa-windows" aria-hidden="true"></i> CSV (delimitado por comas) (*.csv).
+                            </p><br>
+                            <p class="col col-lg-12" style=" position:relative; float:left; left:20px;">
+                              <i class="fa fa-apple" aria-hidden="true"></i> Valores separados por comas (.csv).
+                            </p><br>
+                               
                         </div>
                     </div>
                     <input type="hidden" name="idTienda" value="<?php echo (isset($tableTiendas['idTienda']))?$tableTiendas['idTienda']:''; ?>">
                 </div>
     </div>
     <div class="modal-footer">
-        <button type="button"  data-dismiss="modal" class="btn  btn-info"><?php echo lang('reg_btn_cancelar') ?></button>
+        <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" id="cargaCSV" name="cargaCSV" ng-click="cargaCSV()">Cargar Productos</button>
+        <button type="button"  data-dismiss="modal" class="btn  btn-info" style="right:20px;"><?php echo lang('reg_btn_cancelar') ?></button>
     </div>
-</form>
+</form><br><br>
 <script type="text/javascript">
   <?php if($ver == 1){?>
     $(document).ready(function(){

@@ -124,16 +124,40 @@
         <div class="modal-content">
           <div class="modal-header">
             <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-            <h2 class="modal-title" id="myModalLabel" style="font-family: 'Roboto'; text-transform: uppercase;  color: #333;">Crear categorias</h2>
+            <h2 class="modal-title" id="myModalLabel" style="font-family: 'Roboto'; text-transform: uppercase;  color: #333;">Productos</h2>
           </div>
           <div class="modal-body">
           <div class="panelPopUp" id="popPricing">
                 <div class="panelInternoPop" >
                     <!--codigo del video-->
-                    <?php echo _TUTORIAL_PRODUCTOS?>
+                    <ul class="nav nav-pills nav-stacked col-md-3">
+                        <li class="active"><a data-toggle="pill" href="#home">Carga Productos</a></li>
+                        <li><a data-toggle="pill" href="#actualiza">Actualiza Productos</a></li>
+                        <li><a data-toggle="pill" href="#carga">Carga Productos</a></li>
+                        <li><a data-toggle="pill" href="#cargaimg">Carga imagenes</a></li>
+                    </ul>
+                    
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active col-md-9">
+                            <h3>Crear productos</h3>
+                            <?php echo _TUTORIAL_PRODUCTOS?>
+                        </div>
+                        <div id="actualiza" class="tab-pane fade col-md-9">
+                            <h3>Actualiza Productos</h3>
+                            <?php echo _TUTORIAL_ACTUALIZA_MASIVOS?>
+                        </div>
+                        <div id="carga" class="tab-pane fade col-md-9">
+                            <h3>Carga masiva de productos</h3>
+                            <?php echo _TUTORIAL_PRODUCTOS_MASIVOS?>
+                        </div>
+                        <div id="cargaimg" class="tab-pane fade col-md-9">
+                            <h3>Carga masiva de imágenes</h3>
+                            <?php echo _TUTORIAL_IMAGENES_MASIVOS?>
+                        </div>
+                    </div>
               </div>
           </div>
-          <div class="modal-footer"><br><br>
+          <div class="modal-footer"><br><br><br><br>
             <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#ed540e; color:#fff; bottom: 20px;right: 20px;">CLOSE WINDOW</button>
           </div>
         </div>
