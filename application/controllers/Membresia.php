@@ -101,6 +101,8 @@ class Membresia extends CI_Controller
         $lapPaymentMethod   = $_GET['lapPaymentMethod'];
         $transactionId      = $_GET['transactionId'];
 
+        
+
         if ($_GET['transactionState'] == 4 ) {
             
             $estadoTx = lang("trans_aprobada");

@@ -157,20 +157,237 @@ class LogicaTienda  {
                                         {
                                             $salida = array("mensaje"=>"La tienda ha sido creada de manera correcta","continuar"=>1,"datos"=>array("idTienda"=>$idNuevaTienda,"idTendero"=>$idTendero));
                                             $cargaLogo   = $this->cargaFotosTienda($files,"logoTienda",$idNuevaTienda,$idTendero);
+                                            //envio de email al usuario de registro de la tienda exitoso.
+                                            $para = $email;
+                                            $asunto ="Bienvenido a Wannabe Digital y a sus sistema Wcart.";
+                                            $mensaje ='
+                                            <!DOCTYPE html>
+                                                <html lang="en">
+                                                <head>
+                                                    <meta charset="UTF-8">
+                                                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+                                                </head>
+                                                <style>
+                                                    *{margin: 0%;padding: 0%;}
+                                                    .position{position:relative;top:120px;left: 35%;}
+                                                    .button {background-color: #ffc340; /* Green */border: none;color: white;padding: 16px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;-webkit-transition-duration: 0.4s; /* Safari */transition-duration: 0.4s;cursor: pointer;}
+                                                    .button1 {background-color: white; color: black; border: 2px solid #ffc340;}
+                                                    .button1:hover {background-color: #ffc340;color: white;}
+                                                </style>
+                                                <body>
+                                                    <div style="background-color:#ffc340; width:900px; height:260px;">
+                                                        <div style="width:200px; height:80px; position:relative; top:15%; left:40%;">
+                                                            <img src="logoApp.png" alt="" width="100%">
+                                                        </div>
+                                                    </div>
+                                                    <div style="background-color:#fff; width:640px; height:700px; position:absolute; 
+                                                                z-index:3; top:160px; left:140px; border-radius: 20px; box-shadow: 5px 10px 18px #8888a8;"> 
+                                                        <p style="position:relative; top:30px; left:100px; font-size:50px;">Bienvenido a wannabe</p>
+                                                        <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:70px;" > 
+                                                            Wannabe digital te da la bienvenida a nuestro software Wcart, en la cual podra iniciar a editar los datos de la tienda.
+                                                        </p>
+                                                        <a href="http://www.wcart.com.co/admin" target="_blank" class="position">
+                                                            <button class="button button1">Administrar</button>
+                                                        </a>
+                                                        <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:170px;" > 
+                                                            A continuación podra ver los datos de acceso, recuerda no compratirlos con nadie. <br><br><br>
+                                                            Usuario: '.$email.'<br><br>
+                                                            Contraseña:'.$rclave.' <br><br>
+                                                        </p>
+                                                        <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px; top:170px;"> 
+                                                            Recuerda crear las categorías, subcategorías y los productos, cambia los colores de la app movil a tu gusto. <br><br><br>
+                                                            Te saluda, Wannabe digital.
+                                                        </p>
+                                                    </div>
+                                                    <div style="background-color:#ffd792; width:640px; height:140px; position:absolute; 
+                                                                z-index:3; top:880px; left:140px; border-radius: 20px; box-shadow: 5px 10px 18px #8888a8;">
+                                                        <p style="position:relative; top:30px; left:170px; font-size:30px;">¿Necesitas información?</p>
+                                                        <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:50px; left:40%;"><a href="https://wannabe.com.co/contacto">Wannabe</a></p>
+                                                    </div>
+                                                    <div style="background-color:#eeee; border: 1px; width:900px; height:800px; position:relative;"></div>
+                                                </body>
+                                                </html>
+                                            ';
+                                            sendMail($para, $asunto, $mensaje);
+                                            //fin de mensaje.
                                             //si viene el banner lo cargo
                                             if(isset($files) && $files['bannerTienda']['name'] != "")
                                             {
                                                 $cargaBanner = $this->cargaFotosTienda($files,"bannerTienda",$idNuevaTienda,$idTendero);
+                                                $para = $email;
+                                                $asunto ="Bienvenido a Wannabe Digital y a sus sistema Wcart.";
+                                                $mensaje ='
+                                                <!DOCTYPE html>
+                                                    <html lang="en">
+                                                    <head>
+                                                        <meta charset="UTF-8">
+                                                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                                        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+                                                    </head>
+                                                    <style>
+                                                        *{margin: 0%;padding: 0%;}
+                                                        .position{position:relative;top:120px;left: 35%;}
+                                                        .button {background-color: #ffc340; /* Green */border: none;color: white;padding: 16px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;-webkit-transition-duration: 0.4s; /* Safari */transition-duration: 0.4s;cursor: pointer;}
+                                                        .button1 {background-color: white; color: black; border: 2px solid #ffc340;}
+                                                        .button1:hover {background-color: #ffc340;color: white;}
+                                                    </style>
+                                                    <body>
+                                                        <div style="background-color:#ffc340; width:900px; height:260px;">
+                                                            <div style="width:200px; height:80px; position:relative; top:15%; left:40%;">
+                                                                <img src="logoApp.png" alt="" width="100%">
+                                                            </div>
+                                                        </div>
+                                                        <div style="background-color:#fff; width:640px; height:700px; position:absolute; 
+                                                                    z-index:3; top:160px; left:140px; border-radius: 20px; box-shadow: 5px 10px 18px #8888a8;"> 
+                                                            <p style="position:relative; top:30px; left:100px; font-size:50px;">Bienvenido a wannabe</p>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:70px;" > 
+                                                                Wannabe digital te da la bienvenida a nuestro software Wcart, en la cual podra iniciar a editar los datos de la tienda.
+                                                            </p>
+                                                            <a href="http://www.wcart.com.co/admin" target="_blank" class="position">
+                                                                <button class="button button1">Administrar</button>
+                                                            </a>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:170px;" > 
+                                                                A continuación podra ver los datos de acceso, recuerda no compratirlos con nadie. <br><br><br>
+                                                                Usuario: '.$email.'<br><br>
+                                                                Contraseña:'.$rclave.' <br><br>
+                                                            </p>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px; top:170px;"> 
+                                                                Recuerda crear las categorías, subcategorías y los productos, cambia los colores de la app movil a tu gusto. <br><br><br>
+                                                                Te saluda, Wannabe digital.
+                                                            </p>
+                                                        </div>
+                                                        <div style="background-color:#ffd792; width:640px; height:140px; position:absolute; 
+                                                                    z-index:3; top:880px; left:140px; border-radius: 20px; box-shadow: 5px 10px 18px #8888a8;">
+                                                            <p style="position:relative; top:30px; left:170px; font-size:30px;">¿Necesitas información?</p>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:50px; left:40%;"><a href="https://wannabe.com.co/contacto">Wannabe</a></p>
+                                                        </div>
+                                                        <div style="background-color:#eeee; border: 1px; width:900px; height:800px; position:relative;"></div>
+                                                    </body>
+                                                    </html>
+                                                ';
+                                                sendMail($para, $asunto, $mensaje);
+                                                //fin de mensaje.
                                             }
                                             
                                             if($cargaLogo['continuar'] == 1)
                                             {
                                                 $salida = array("mensaje"=>"La tienda ha sido creada de manera correcta","continuar"=>1,"datos"=>array("idTienda"=>$idNuevaTienda,"idTendero"=>$idTendero));
+                                                $para = $email;
+                                                $asunto ="Bienvenido a Wannabe Digital y a sus sistema Wcart.";
+                                                $mensaje ='
+                                                <!DOCTYPE html>
+                                                    <html lang="en">
+                                                    <head>
+                                                        <meta charset="UTF-8">
+                                                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                                        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+                                                    </head>
+                                                    <style>
+                                                        *{margin: 0%;padding: 0%;}
+                                                        .position{position:relative;top:120px;left: 35%;}
+                                                        .button {background-color: #ffc340; /* Green */border: none;color: white;padding: 16px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;-webkit-transition-duration: 0.4s; /* Safari */transition-duration: 0.4s;cursor: pointer;}
+                                                        .button1 {background-color: white; color: black; border: 2px solid #ffc340;}
+                                                        .button1:hover {background-color: #ffc340;color: white;}
+                                                    </style>
+                                                    <body>
+                                                        <div style="background-color:#ffc340; width:900px; height:260px;">
+                                                            <div style="width:200px; height:80px; position:relative; top:15%; left:40%;">
+                                                                <img src="logoApp.png" alt="" width="100%">
+                                                            </div>
+                                                        </div>
+                                                        <div style="background-color:#fff; width:640px; height:700px; position:absolute; 
+                                                                    z-index:3; top:160px; left:140px; border-radius: 20px; box-shadow: 5px 10px 18px #8888a8;"> 
+                                                            <p style="position:relative; top:30px; left:100px; font-size:50px;">Bienvenido a wannabe</p>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:70px;" > 
+                                                                Wannabe digital te da la bienvenida a nuestro software Wcart, en la cual podra iniciar a editar los datos de la tienda.
+                                                            </p>
+                                                            <a href="http://www.wcart.com.co/admin" target="_blank" class="position">
+                                                                <button class="button button1">Administrar</button>
+                                                            </a>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:170px;" > 
+                                                                A continuación podra ver los datos de acceso, recuerda no compratirlos con nadie. <br><br><br>
+                                                                Usuario: '.$email.'<br><br>
+                                                                Contraseña:'.$rclave.' <br><br>
+                                                            </p>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px; top:170px;"> 
+                                                                Recuerda crear las categorías, subcategorías y los productos, cambia los colores de la app movil a tu gusto. <br><br><br>
+                                                                Te saluda, Wannabe digital.
+                                                            </p>
+                                                        </div>
+                                                        <div style="background-color:#ffd792; width:640px; height:140px; position:absolute; 
+                                                                    z-index:3; top:880px; left:140px; border-radius: 20px; box-shadow: 5px 10px 18px #8888a8;">
+                                                            <p style="position:relative; top:30px; left:170px; font-size:30px;">¿Necesitas información?</p>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:50px; left:40%;"><a href="https://wannabe.com.co/contacto">Wannabe</a></p>
+                                                        </div>
+                                                        <div style="background-color:#eeee; border: 1px; width:900px; height:800px; position:relative;"></div>
+                                                    </body>
+                                                    </html>
+                                                ';
+                                                sendMail($para, $asunto, $mensaje);
+                                                //fin de mensaje.
                                             }
                                             else
                                             {
                                                 $salida = array("mensaje"=>"La tienda ha sido creada de manera correcta","continuar"=>1,"datos"=>array("idTienda"=>$idNuevaTienda,"idTendero"=>$idTendero));
                                                 // $salida = $cargaLogo;
+                                                $para = $email;
+                                                $asunto ="Bienvenido a Wannabe Digital y a sus sistema Wcart.";
+                                                $mensaje ='
+                                                <!DOCTYPE html>
+                                                    <html lang="en">
+                                                    <head>
+                                                        <meta charset="UTF-8">
+                                                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                                        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+                                                    </head>
+                                                    <style>
+                                                        *{margin: 0%;padding: 0%;}
+                                                        .position{position:relative;top:120px;left: 35%;}
+                                                        .button {background-color: #ffc340; /* Green */border: none;color: white;padding: 16px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;-webkit-transition-duration: 0.4s; /* Safari */transition-duration: 0.4s;cursor: pointer;}
+                                                        .button1 {background-color: white; color: black; border: 2px solid #ffc340;}
+                                                        .button1:hover {background-color: #ffc340;color: white;}
+                                                    </style>
+                                                    <body>
+                                                        <div style="background-color:#ffc340; width:900px; height:260px;">
+                                                            <div style="width:200px; height:80px; position:relative; top:15%; left:40%;">
+                                                                <img src="logoApp.png" alt="" width="100%">
+                                                            </div>
+                                                        </div>
+                                                        <div style="background-color:#fff; width:640px; height:700px; position:absolute; 
+                                                                    z-index:3; top:160px; left:140px; border-radius: 20px; box-shadow: 5px 10px 18px #8888a8;"> 
+                                                            <p style="position:relative; top:30px; left:100px; font-size:50px;">Bienvenido a wannabe</p>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:70px;" > 
+                                                                Wannabe digital te da la bienvenida a nuestro software Wcart, en la cual podra iniciar a editar los datos de la tienda.
+                                                            </p>
+                                                            <a href="http://www.wcart.com.co/admin" target="_blank" class="position">
+                                                                <button class="button button1">Administrar</button>
+                                                            </a>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:170px;" > 
+                                                                A continuación podra ver los datos de acceso, recuerda no compratirlos con nadie. <br><br><br>
+                                                                Usuario: '.$email.'<br><br>
+                                                                Contraseña:'.$rclave.' <br><br>
+                                                            </p>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px; top:170px;"> 
+                                                                Recuerda crear las categorías, subcategorías y los productos, cambia los colores de la app movil a tu gusto. <br><br><br>
+                                                                Te saluda, Wannabe digital.
+                                                            </p>
+                                                        </div>
+                                                        <div style="background-color:#ffd792; width:640px; height:140px; position:absolute; 
+                                                                    z-index:3; top:880px; left:140px; border-radius: 20px; box-shadow: 5px 10px 18px #8888a8;">
+                                                            <p style="position:relative; top:30px; left:170px; font-size:30px;">¿Necesitas información?</p>
+                                                            <p style="position:relative; left:50px; font-size:21px; color:#aaa; width:540px;  top:50px; left:40%;"><a href="https://wannabe.com.co/contacto">Wannabe</a></p>
+                                                        </div>
+                                                        <div style="background-color:#eeee; border: 1px; width:900px; height:800px; position:relative;"></div>
+                                                    </body>
+                                                    </html>
+                                                ';
+                                                sendMail($para, $asunto, $mensaje);
+                                                //fin de mensaje.
                                             }
                                         }
                                         else
