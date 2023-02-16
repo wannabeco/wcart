@@ -226,8 +226,12 @@ class App extends CI_Controller
 		}
 	}
 	//funcion para realizar pruebas
-	public function pruebaMail(){
+	/*public function pruebaMail(){
 		$this->logicaTienda->pruebaLogica();
+	}*/
+	//prueba de envio pago membresia
+	public function pruebaEnvio(){
+		$this->logica->pruebaLogica();
 	}
 }
 ?>
