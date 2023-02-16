@@ -18,6 +18,7 @@ class App extends CI_Controller
         parent::__construct();
         $this->load->model("general/LogicaGeneral", "logica");
         $this->load->model("pedidos/LogicaPedidos", "logicaPedidos");
+        $this->load->model("tienda/LogicaTienda", "logicaTienda");
        	$this->load->helper('language');
     	//$this->lang->load('spanish');
     }
@@ -223,6 +224,10 @@ class App extends CI_Controller
 		{
 			header('Location:'.base_url()."login");
 		}
+	}
+	//funcion para realizar pruebas
+	public function pruebaMail(){
+		$this->logicaTienda->pruebaLogica();
 	}
 }
 ?>

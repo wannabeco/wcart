@@ -128,6 +128,40 @@ function sendMail($para,$asunto,$mensaje)
     return $estado;
 
 }
+//plantilla envio email
+function plantillaMail($mensaje)
+{
+    $plantilla = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+        $plantilla .= '<html xmlns="http://www.w3.org/1999/xhtml">';
+        $plantilla .= '<head> ';
+            $plantilla .= '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';	 
+            $plantilla .= '<title>Wcart</title>	'; 
+            $plantilla .= '<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	';
+        $plantilla .= '</head>';
+        $plantilla .= '<body style="margin: 0; padding: 0;">';
+            $plantilla .= '<br>';
+            $plantilla .= '<table align="left" border="0" border="1" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">';
+                $plantilla .= '<tr>';
+                    $plantilla .= '<td align="left" bgcolor="#eee" style="padding: 20px 0 20px 40px;">';
+                        $plantilla .= '<img src="'.base_url('res/img/logo.png').'" alt="Logo Wcart" width="200px" style="display: block;" />';
+                    $plantilla .= '</td>';
+                $plantilla .= '</tr>';
+                $plantilla .= '<tr>';
+                    $plantilla .= '<td bgcolor="#f6f6f6" style="color:#444;padding: 20px 30px 20px 30px;font-family: Arial, sans-serif; font-size: 20px; text-aligne:justify;line-height:25px; " colspan="2">';
+
+                        $plantilla .= $mensaje;
+
+                    $plantilla .= '</td>';
+                $plantilla .= '</tr>';
+                $plantilla .= '<tr>';
+                    $plantilla .= '<td bgcolor="#000" style="text-align:center;color:#fff;padding: 20px 20px 20px 20px;font-family: Arial, sans-serif; font-size: 25px;">No responder este mensaje';
+                    $plantilla .= '</td>';
+                $plantilla .= '</tr>';
+            $plantilla .= '</table>';
+        $plantilla .= '</body>';
+        $plantilla .= '</html>';
+        return $plantilla;
+}
 function generaHoras($desde,$hasta)
 {
     $salida =   array();
