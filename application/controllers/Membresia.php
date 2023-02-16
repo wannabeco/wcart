@@ -155,7 +155,8 @@ class Membresia extends CI_Controller
                     $dataInserta['plan']            = "app2";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                    $updateTienda = $this->logica->updatePagoAnoApp($idTienda);
+                    $codigo                         = $idTransaccion;
+                    $updateTienda = $this->logica->updatePagoAnoApp($idTienda, $codigo );
                 }
                 else if($_GET['TX_VALUE']== _PRECIO_PLAN_PRO){
                     //insertar en la tabla
@@ -178,8 +179,10 @@ class Membresia extends CI_Controller
                     $dataInserta['plan']            = "web1";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                    $updateTienda = $this->logica->updatePagoMesPro($idTienda);
-                }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
+                    $codigo                         = $idTransaccion;
+                    $updateTienda = $this->logica->updatePagoMesPro($idTienda,$codigo);
+                }
+                else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
                     //insertar en la tabla
                     $estadoTx = lang("trans_aprobada");
                     $claseLabel = "label-success";
@@ -200,7 +203,8 @@ class Membresia extends CI_Controller
                     $dataInserta['plan']            = "web2";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                    $updateTienda = $this->logica->updatePagoAnoPro($idTienda);
+                    $codigo                         = $idTransaccion;
+                    $updateTienda = $this->logica->updatePagoAnoPro($idTienda,$codigo);
                 }
             }
             else if($fechaCaducidad > $fehcaActual){
@@ -225,7 +229,8 @@ class Membresia extends CI_Controller
                         $dataInserta['ip']              = getIP();
                         $dataInserta['plan']            = "app1";
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $updateTienda = $this->logica->updatePagoApp($idTienda);
+                        $codigo                         = $idTransaccion;
+                        $updateTienda = $this->logica->updatePagoApp($idTienda,$codigo);
     
                     }else if($_GET['TX_VALUE']== (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
                         //insertar en la tabla
@@ -248,7 +253,8 @@ class Membresia extends CI_Controller
                         $dataInserta['plan']            = "app2";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $updateTienda = $this->logica->updateAno($idTienda);
+                        $codigo                         = $idTransaccion;
+                        $updateTienda = $this->logica->updateAno($idTienda,$codigo);
     
                     }else if($_GET['TX_VALUE']== _PRECIO_PLAN_PRO){
                         //insertar en la tabla
@@ -271,7 +277,8 @@ class Membresia extends CI_Controller
                         $dataInserta['plan']            = "web1";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $updateTienda = $this->logica->updateTiendapro($idTienda);
+                        $codigo                         = $idTransaccion;
+                        $updateTienda = $this->logica->updateTiendapro($idTienda,$codigo);
     
                     }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
                         //insertar en la tabla
@@ -294,7 +301,8 @@ class Membresia extends CI_Controller
                         $dataInserta['plan']            = "web2";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $updateTienda = $this->logica->updateAnoPro($idTienda);
+                        $codigo                         = $idTransaccion;
+                        $updateTienda = $this->logica->updateAnoPro($idTienda,$codigo);
     
                     }
                 }
@@ -319,7 +327,8 @@ class Membresia extends CI_Controller
                         $dataInserta['plan']            = "app1";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $updatemes = $this->logica->updatemes($idTienda);
+                        $codigo                         = $idTransaccion;
+                        $updatemes = $this->logica->updatemes($idTienda,$codigo);
                     }
                     else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
 
@@ -342,7 +351,8 @@ class Membresia extends CI_Controller
                         $dataInserta['plan']            = "app2";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $updatemes = $this->logica->updatemes($idTienda);
+                        $codigo                         = $idTransaccion;
+                        $updatemes = $this->logica->updatemes($idTienda,$codigo);
                     }
                     else if($_GET['TX_VALUE'] == _PRECIO_PLAN_PRO){
 
@@ -365,7 +375,8 @@ class Membresia extends CI_Controller
                         $dataInserta['plan']            = "web1";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $updatemes = $this->logica->updatePagoMesPro($idTienda);
+                        $codigo                         = $idTransaccion;
+                        $updatemes = $this->logica->updatePagoMesPro($idTienda,$codigo);
                     }
                     else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
                         
@@ -388,7 +399,8 @@ class Membresia extends CI_Controller
                         $dataInserta['plan']            = "web2";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $updatemes = $this->logica->updatePagoAnoPro($idTienda);
+                        $codigo                         = $idTransaccion;
+                        $updatemes = $this->logica->updatePagoAnoPro($idTienda,$codigo);
                     }
                     
                 }
