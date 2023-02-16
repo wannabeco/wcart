@@ -10,7 +10,7 @@
             <strong>Contraseña:</strong>  <?php echo $clave;?><br><br>
         </p>
 
-        <p style= width:100%;" > 
+        <p style= "width:100%;" > 
             Para acceder a la zona administrativa de su tienda haga <a href="http://www.wcart.com.co/admin" target="_blank" class="position">Click aquí</a>.
         </p>
 

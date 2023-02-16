@@ -130,8 +130,9 @@ class Membresia extends CI_Controller
                     $dataInserta['ip']              = getIP();
                     $dataInserta['plan']            = "app1";
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                    $idTienda = $_SESSION['project']['info']['idTienda'];
-                    $updateTienda = $this->logica->updatemes($idTienda);
+                    $idTienda                       = $_SESSION['project']['info']['idTienda'];
+                    $codigo                         = $idTransaccion;
+                    $updateTienda = $this->logica->updatemes($idTienda,$codigo);
 
                 } else if($_GET['TX_VALUE']== (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
                     //insertar en la tabla

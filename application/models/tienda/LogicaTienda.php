@@ -159,8 +159,8 @@ class LogicaTienda  {
                                             $cargaLogo   = $this->cargaFotosTienda($files,"logoTienda",$idNuevaTienda,$idTendero);
                                             //envio de email al usuario de registro de la tienda exitoso.
                                             $para = $email;
-                                            $asunto ="Bienvenido a Wannabe Digital y a sus sistema Wcart.";
-                                            $mensajeenviar = $this->maileRegistroTiendas($usuario, $clave);
+                                            $asunto ="Bienvenido a Wcart.";
+                                            $mensajeenviar = $this->mailRegistroTiendas($usuario, $clave);
                                             $mensaje = plantillaMail($mensajeenviar);
                                             sendMail($para, $asunto, $mensaje);
                                             //fin de mensaje.
