@@ -132,7 +132,8 @@ class Membresia extends CI_Controller
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                     $idTienda                       = $_SESSION['project']['info']['idTienda'];
                     $codigo                         = $idTransaccion;
-                    $updateTienda = $this->logica->updatemes($idTienda,$codigo);
+                    $mensajeMail                    =$_GET['buyerEmail'];
+                    $updateTienda = $this->logica->updatemes($idTienda,$codigo,$mensajeMail);
 
                 } else if($_GET['TX_VALUE']== (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
                     //insertar en la tabla
@@ -156,7 +157,8 @@ class Membresia extends CI_Controller
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                     $codigo                         = $idTransaccion;
-                    $updateTienda = $this->logica->updatePagoAnoApp($idTienda, $codigo );
+                    $mensajeMail                    =$_GET['buyerEmail'];
+                    $updateTienda = $this->logica->updatePagoAnoApp($idTienda, $codigo, $mensajeMail);
                 }
                 else if($_GET['TX_VALUE']== _PRECIO_PLAN_PRO){
                     //insertar en la tabla
@@ -180,7 +182,8 @@ class Membresia extends CI_Controller
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                     $codigo                         = $idTransaccion;
-                    $updateTienda = $this->logica->updatePagoMesPro($idTienda,$codigo);
+                    $mensajeMail                    =$_GET['buyerEmail'];
+                    $updateTienda = $this->logica->updatePagoMesPro($idTienda,$codigo,$mensajeMail);
                 }
                 else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
                     //insertar en la tabla
@@ -204,7 +207,8 @@ class Membresia extends CI_Controller
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                     $codigo                         = $idTransaccion;
-                    $updateTienda = $this->logica->updatePagoAnoPro($idTienda,$codigo);
+                    $mensajeMail                    =$_GET['buyerEmail'];
+                    $updateTienda = $this->logica->updatePagoAnoPro($idTienda,$codigo,$mensajeMail);
                 }
             }
             else if($fechaCaducidad > $fehcaActual){
@@ -230,7 +234,8 @@ class Membresia extends CI_Controller
                         $dataInserta['plan']            = "app1";
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
-                        $updateTienda = $this->logica->updatePagoApp($idTienda,$codigo);
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updateTienda = $this->logica->updatePagoApp($idTienda,$codigo,$mensajeMail);
     
                     }else if($_GET['TX_VALUE']== (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
                         //insertar en la tabla
@@ -254,7 +259,8 @@ class Membresia extends CI_Controller
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
-                        $updateTienda = $this->logica->updateAno($idTienda,$codigo);
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updateTienda = $this->logica->updateAno($idTienda,$codigo,$mensajeMail);
     
                     }else if($_GET['TX_VALUE']== _PRECIO_PLAN_PRO){
                         //insertar en la tabla
@@ -278,7 +284,8 @@ class Membresia extends CI_Controller
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
-                        $updateTienda = $this->logica->updateTiendapro($idTienda,$codigo);
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updateTienda = $this->logica->updateTiendapro($idTienda,$codigo,$mensajeMail);
     
                     }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
                         //insertar en la tabla
@@ -302,7 +309,8 @@ class Membresia extends CI_Controller
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
-                        $updateTienda = $this->logica->updateAnoPro($idTienda,$codigo);
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updateTienda = $this->logica->updateAnoPro($idTienda,$codigo,$mensajeMail);
     
                     }
                 }
@@ -328,7 +336,8 @@ class Membresia extends CI_Controller
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
-                        $updatemes = $this->logica->updatemes($idTienda,$codigo);
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updatemes = $this->logica->updatemes($idTienda,$codigo,$mensajeMail);
                     }
                     else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
 
@@ -352,7 +361,8 @@ class Membresia extends CI_Controller
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
-                        $updatemes = $this->logica->updatemes($idTienda,$codigo);
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updatemes = $this->logica->updatemes($idTienda,$codigo,$mensajeMail);
                     }
                     else if($_GET['TX_VALUE'] == _PRECIO_PLAN_PRO){
 
@@ -376,7 +386,8 @@ class Membresia extends CI_Controller
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
-                        $updatemes = $this->logica->updatePagoMesPro($idTienda,$codigo);
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updatemes = $this->logica->updatePagoMesPro($idTienda,$codigo,$mensajeMail);
                     }
                     else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
                         
@@ -400,7 +411,8 @@ class Membresia extends CI_Controller
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
-                        $updatemes = $this->logica->updatePagoAnoPro($idTienda,$codigo);
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updatemes = $this->logica->updatePagoAnoPro($idTienda,$codigo,$mensajeMail);
                     }
                     
                 }
