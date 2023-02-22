@@ -92,17 +92,17 @@ function sendMail($para,$asunto,$mensaje)
     $ci->load->library('email');
     $ci->load->model("general/baseDatosGral","baseGeneral");
     $ci->email->initialize(array(
-      'protocol' => 'mail',
-      'smtp_host' => 'mail.wannabe.com.co',
-      'smtp_user' => 'demoventas@wannabe.com.co',
-      'smtp_pass' => 'wannabeJg$E3D+u',
-      'smtp_port' => 587,
-      'crlf' => "\r\n",
-      //'smtp_crypto' => "ssl",
-      'newline' => "\r\n",
-      'mailtype'=>"html"
+        'protocol' => 'smtp',
+        'smtp_host' => 'smtp.gmail.com',
+        'smtp_user' => 'socialeswannabe@gmail.com',
+        'smtp_pass' => 'wannabe2022*',
+        'smtp_port' => 465,
+        'smtp_crypto' => "ssl",
+        'crlf' => "\r\n",
+        'newline' => "\r\n",
+        'mailtype'=>"html"
     ));
-    $ci->email->from('demoventas@wannabe.com.co', NOMBRE_APP);
+    $ci->email->from('socialeswannabe@gmail.com', NOMBRE_APP);
     $ci->email->to($para);
     //$ci->  email->cc('another@another-example.com');
     //$ci->  email->bcc('them@their-example.com');
