@@ -59,12 +59,12 @@
         ?>
         <div class="container">
             <center>
-                <form method="post" id="theForm" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+                <form method="post" id="theForm" action="https://checkout.payulatam.com/ppp-web-gateway-payu/">
                     <input name="merchantId"    id="merchantId"     type="hidden"   value="<?php echo _PAYU_ID_MERCADO?>">
                     <input name="accountId"                         type="hidden"   value="<?php echo _PAYU_ID_CUENTA?>">
                     <input name="description"                       type="hidden"   value="<?php echo $nombreTrans; ?>">
                     <input name="apiKey"         id="apKey"          type="hidden"  value="<?php echo _PAYU_API_KEY?>">
-                    <input name="secret"                            type="hidden"   value="pRRXKOl8ikMmt9u">
+                    <!--<input name="secret"                            type="hidden"   value="pRRXKOl8ikMmt9u">-->
                     <input name="referenceCode" id="referenceCode"  type="hidden"   value="<?php echo $referencia?>">
                     <input name="amount"                            type="hidden"   value="<?php echo sprintf('%.2f',$precio)?>">
                     <input name="tax"                               type="hidden"   value="0">
