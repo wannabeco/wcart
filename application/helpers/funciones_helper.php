@@ -101,12 +101,10 @@ function sendMail($para,$asunto,$mensaje)
         'newline' => "\r\n",
         'mailtype'=>"html",
         'wordwrap' => TRUE,
-        'charset'   => 'UTF-8'
+        'charset'   => 'utf-8'
     );
     $ci->load->library('email');
     $ci->email->initialize($config);
-    $ci->email->set_header('MIME-Version', '1.0; charset=utf-8');
-    $ci->email->set_header('Content-type', 'text/html');
     $ci->email->from('socialeswannabe@gmail.com', NOMBRE_APP);
     $ci->email->to($para);
     //$ci->  email->cc('another@another-example.com');
