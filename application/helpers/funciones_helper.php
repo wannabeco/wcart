@@ -93,14 +93,16 @@ function sendMail($para,$asunto,$mensaje)
     $ci->load->model("general/baseDatosGral","baseGeneral");
     $ci->email->initialize(array(
         'protocol' => 'smtp',
-        'smtp_host' => 'smtp.gmail.com',
+        //'smtp_host' => 'smtp.gmail.com',
+        'smtp_host' => 'ssl://smtp.googlemail.com',
+        'smtp_port' => 465,
         'smtp_user' => 'socialeswannabe@gmail.com',
         'smtp_pass' => 'wannabe2022*',
-        'smtp_port' => 465,
         'smtp_crypto' => "ssl",
         'crlf' => "\r\n",
         'newline' => "\r\n",
-        'mailtype'=>"html"
+        'mailtype'=>"html",
+        'charset'   => 'UTF-8'
     ));
     $ci->email->from('socialeswannabe@gmail.com', NOMBRE_APP);
     $ci->email->to($para);
