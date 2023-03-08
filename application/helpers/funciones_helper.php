@@ -90,6 +90,7 @@ function sendMail($para,$asunto,$mensaje)
 {
     $ci = get_instance();
     $ci->load->model("general/baseDatosGral","baseGeneral");
+    $ci->load->library('email');
    $config=array(
         'protocol' => 'smtp',
         'smtp_host' => 'smtp.gmail.com',
@@ -97,14 +98,15 @@ function sendMail($para,$asunto,$mensaje)
         'smtp_user' => 'socialeswannabe@gmail.com',
         'smtp_pass' => 'wannabe2022*',
         'smtp_crypto' => "ssl",
-        'crlf' => "\r\n",
-        'newline' => "\r\n",
+        //'crlf' => "\r\n",
+        //'newline' => "\r\n",
         'mailtype'=>"html",
-        'wordwrap' => TRUE,
+        //'wordwrap' => TRUE,
         'charset'   => 'utf-8'
     );
-    $ci->load->library('email');
     $ci->email->initialize($config);
+    $ci->email->set_mailtype("html");
+    $ci->email->set_newline("rn");
     $ci->email->from('socialeswannabe@gmail.com', NOMBRE_APP);
     $ci->email->to($para);
     //$ci->  email->cc('another@another-example.com');
