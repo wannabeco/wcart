@@ -89,7 +89,6 @@ function eliminaCaracteres($cadena)
 function sendMail($para,$asunto,$mensaje)
 {
     $ci = get_instance();
-    $ci->load->library('email');
     $ci->load->model("general/baseDatosGral","baseGeneral");
     $ci->email->initialize(array(
         'protocol' => 'smtp',
@@ -104,6 +103,9 @@ function sendMail($para,$asunto,$mensaje)
         'wordwrap' => TRUE,
         'charset'   => 'UTF-8'
     ));
+    $ci->load->library('email', $ci->email);
+    $ci->email->set_header('MIME-Version', '1.0; charset=utf-8');
+    $ci->email->set_header('Content-type', 'text/html');
     $ci->email->from('socialeswannabe@gmail.com', NOMBRE_APP);
     $ci->email->to($para);
     //$ci->  email->cc('another@another-example.com');
