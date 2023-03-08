@@ -90,7 +90,7 @@ function sendMail($para,$asunto,$mensaje)
 {
     $ci = get_instance();
     $ci->load->model("general/baseDatosGral","baseGeneral");
-   $config = array(
+   $config=array(
         'protocol' => 'smtp',
         'smtp_host' => 'smtp.gmail.com',
         'smtp_port' => 465,
@@ -105,6 +105,8 @@ function sendMail($para,$asunto,$mensaje)
     );
     $ci->load->library('email');
     $ci->email->initialize($config);
+    $ci->email->set_header('MIME-Version', '1.0; charset=utf-8');
+    $ci->email->set_header('Content-type', 'text/html');
     $ci->email->from('socialeswannabe@gmail.com', NOMBRE_APP);
     $ci->email->to($para);
     //$ci->  email->cc('another@another-example.com');
