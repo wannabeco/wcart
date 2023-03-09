@@ -89,26 +89,20 @@ function eliminaCaracteres($cadena)
 function sendMail($para,$asunto,$mensaje)
 {
     $ci = get_instance();
+    $ci->load->library('email');
     $ci->load->model("general/baseDatosGral","baseGeneral");
-    $config = array(
-        'protocol' => 'smtp',
-        'smtp_host' => 'smtp.googlemail.com',
-        'smtp_user' => 'desarrollo@wannabe.com.co',
-        'smtp_pass' => 'Jg$E3D+u',
-        'smtp_timeout' => '7',
-        'smtp_port' => 465,
-        'smtp_crypto' => "ssl",
-        /*'crlf' => "\r\n",
-        'newline' => "\r\n",*/
-        'mailtype'=>"html",
-        'wordwrap' => TRUE,
-        'charset'   => 'utf-8'
-    );
-    $ci->load->library('email',$config);
-    //$ci->email->initialize($config);
-    $ci->email->set_mailtype("html");
-    $ci->email->set_newline("rn");
-    $ci->email->from('desarrollo@wannabe.com.co', NOMBRE_APP);
+    $ci->email->initialize(array(
+      'protocol' => 'smtp',
+      'smtp_host' => 'mail.wannabe.com.co',
+      'smtp_user' => 'desarrollo@wannabe.com.co',
+      'smtp_pass' => 'wannabeJg$E3D+u',
+      'smtp_port' => 465,
+      'crlf' => "\r\n",
+      'smtp_crypto' => "ssl",
+      'newline' => "\r\n",
+      'mailtype'=>"html"
+    ));
+    $ci->email->from('noreply@wannabe.com.co', NOMBRE_APP);
     $ci->email->to($para);
     //$ci->  email->cc('another@another-example.com');
     //$ci->  email->bcc('them@their-example.com');
