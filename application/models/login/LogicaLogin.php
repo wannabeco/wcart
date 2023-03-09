@@ -149,6 +149,7 @@ class LogicaLogin  {
                     $mensaje                     =  "Se le ha generado una nueva clave de acceso ".lang("titulo")."<br><br>";
                     $mensaje                    .=  "Su nueva contraseña es: <br><h2>".$clave."</h2><br><br>";
                     $mensaje                    .=  "Recuerde que debe cambiar la contraseña una vez ingrese al sistema.";
+                    $mensaje = plantillaMail($mensajeenviar);
                     sendMail($usuario,"Olvido de contraseña - ".lang("titulo"),$mensaje);
 
                     //envio un mail al usuario con la nueva clave
