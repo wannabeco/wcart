@@ -146,9 +146,9 @@ class LogicaLogin  {
                     //inserto auditoría
                     auditoria("RECORDACIONCLAVEUSUARIO","Se ha generado una clave de acceso a la persona la persona | ".$infoUsuario[0]['idGeneral']);
                     //envio mail
-                    $mensaje                     =  "Se le ha generado una nueva clave de acceso ".lang("titulo")."<br><br>";
-                    $mensaje                    .=  "Su nueva contraseña es: <br><h2>".$clave."</h2><br><br>";
-                    $mensaje                    .=  "Recuerde que debe cambiar la contraseña una vez ingrese al sistema.";
+                    $mensajeenviar                     =  "Se le ha generado una nueva clave de acceso ".lang("titulo")."<br><br>";
+                    $mensajeenviar                    .=  "Su nueva contraseña es: <br><h2>".$clave."</h2><br><br>";
+                    $mensajeenviar                    .=  "Recuerde que debe cambiar la contraseña una vez ingrese al sistema.";
                     $mensaje = plantillaMail($mensajeenviar);
                     sendMail($usuario,"Olvido de contraseña - ".lang("titulo"),$mensaje);
 
