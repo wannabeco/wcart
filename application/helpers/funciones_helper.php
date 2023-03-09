@@ -94,20 +94,18 @@ function sendMail($para,$asunto,$mensaje)
    $config=array(
         'protocol' => 'smtp',
         'smtp_host' => 'smtp.gmail.com',
-        'smtp_port' => 465,
-        'smtp_user' => 'socialeswannabe@gmail.com',
-        'smtp_pass' => 'wannabe2022*',
-        'smtp_crypto' => "ssl",
-        //'crlf' => "\r\n",
-        //'newline' => "\r\n",
+        'smtp_user' => 'desarrollo@wannabe.com.co',
+        'smtp_pass' => 'Jg$E3D+u',
+        'smtp_port' => 587,
+        'smtp_crypto' => "tls",
+        'crlf' => "\r\n",
+        'newline' => "\r\n",
         'mailtype'=>"html",
-        //'wordwrap' => TRUE,
+        'wordwrap' => TRUE,
         'charset'   => 'utf-8'
     );
     $ci->email->initialize($config);
-    $ci->email->set_mailtype("html");
-    $ci->email->set_newline("rn");
-    $ci->email->from('socialeswannabe@gmail.com', NOMBRE_APP);
+    $ci->email->from('desarrollo@wannabe.com.co', NOMBRE_APP);
     $ci->email->to($para);
     //$ci->  email->cc('another@another-example.com');
     //$ci->  email->bcc('them@their-example.com');
