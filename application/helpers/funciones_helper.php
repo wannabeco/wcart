@@ -98,11 +98,11 @@ function sendMail($para,$asunto,$mensaje)
         'smtp_pass' => 'Jg$E3D+u',
         'smtp_port' => 587,
         'smtp_crypto' => "tls",
-        'crlf' => "\r\n",
+        /*'crlf' => "\r\n",
         'newline' => "\r\n",
         'mailtype'=>"html",
         'wordwrap' => TRUE,
-        'charset'   => 'utf-8'
+        'charset'   => 'utf-8'*/
     );
     $ci->email->initialize($config);
     $ci->email->from('desarrollo@wannabe.com.co', NOMBRE_APP);
