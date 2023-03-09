@@ -398,12 +398,12 @@ class LogicaPedidos  {
                                   "datos"=>$idPedido);   
 
                 $asuntoMensaje = "Nuevo pedido desde Esmeralda App";
-                $mensaje  = "Hola, ha llegado un nuevo pedido de producto con la siguiente información<br><br>";
+                $mensajeenviar  = "Hola, ha llegado un nuevo pedido de producto con la siguiente información<br><br>";
 
-                $mensaje .= "<h2>DATOS DEL CLIENTE</h2>";
-                $mensaje .= "Nombre: ".$informacionUsuario[0]['nombre']." ".$informacionUsuario[0]['apellido']."<br>";
-                $mensaje .= "Teléfonos: ".$informacionUsuario[0]['celular']."<br>";
-                $mensaje .= "<h2>PRODUCTOS SOLICITADOS</h2>";
+                $mensajeenviar .= "<h2>DATOS DEL CLIENTE</h2>";
+                $mensajeenviar .= "Nombre: ".$informacionUsuario[0]['nombre']." ".$informacionUsuario[0]['apellido']."<br>";
+                $mensajeenviar .= "Teléfonos: ".$informacionUsuario[0]['celular']."<br>";
+                $mensajeenviar .= "<h2>PRODUCTOS SOLICITADOS</h2>";
                 $sumaTotal  = 0;
                // echo "sdsdsdssdsdsd";
                 foreach($productosPedido as $prod2)
@@ -417,16 +417,17 @@ class LogicaPedidos  {
                     {
                         $sumaTotal += ($prod2['valorPresentacion'] * $prod2['cantidad']);
                     }
-                    $mensaje .= $prod2['nombrePresentacion']." Cantidad: ".$prod2['cantidad']."Kgs<br>";
+                    $mensajeenviar .= $prod2['nombrePresentacion']." Cantidad: ".$prod2['cantidad']."Kgs<br>";
 
                 }
                 //actualizo el valor del pedido
                 $dataActualiza2   = array("valor"=>$sumaTotal,"fechaEntrega"=>date("Y-m-d H:i:s"));
                 $actualizoPedido2 = $this->ci->dbPedidos->updatePedido(array('idPedido'=>$idPedido),$dataActualiza2);
 
-                $mensaje .= "<h2>TOTAL DEL PEDIDO</h2>";
-                $mensaje .= "<h4>$".number_format($sumaTotal,0,",",".")."</h4>";
+                $mensajeenviar .= "<h2>TOTAL DEL PEDIDO</h2>";
+                $mensajeenviar .= "<h4>$".number_format($sumaTotal,0,",",".")."</h4>";
                 //envio un mensaje al administrador general
+                $mensaje = plantillaMail($mensajeenviar);
                 sendMail(_ADMIN_PEDIDOS,$asuntoMensaje,$mensaje);
 
                 if($enviarNotificaciones == 1)//envios para RAUL unicamente
