@@ -92,7 +92,9 @@ class LogicaRegistro  {
                             $idPago                          =   $this->ci->dbRegistro->insertaPago($dataInsertDemo);
                             if($idPago)
                             {
-                                $envioMail                   =   sendMail($email,"Registro de empresa exitoso","Se ha realizado el registro de su empresa en la plataforma");
+                                $mensajeenviar = "Registro de empresa exitoso","Se ha realizado el registro de su empresa en la plataforma";
+                                $mensaje = plantillaMail($mensajeenviar);
+                                $envioMail                   =   sendMail($email, $mensaje);
                                 if($envioMail == 1)
                                 {
                                     $respuesta = array("mensaje"=>"La empresa se ha registrado exitosamente, por favor verifique su correo electrónico al cual llegarán instrucciones de activación de su cuenta.",

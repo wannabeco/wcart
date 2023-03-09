@@ -347,25 +347,26 @@ class LogicaGeneral  {
                               "datos"=>$idPedido);   
 
             $asuntoMensaje = "Nuevo pedido ".NOMBRE_APP;
-            $mensaje  = lang("lbl_saludo_pedido")."<br><br>";
+            $mensajeenviar  = lang("lbl_saludo_pedido")."<br><br>";
 
-            $mensaje .= "<h2>".lang("lbl_customer_data")."</h2>";
-            $mensaje .= lang("lbl_nombre")." ".$informacionUsuario[0]['nombre']." ".$informacionUsuario[0]['apellido']."<br>";
-            $mensaje .= lang("lbl_telefono")." ".$informacionUsuario[0]['celular']."<br>";
-            $mensaje .= lang("lbl_direccion")." ".$informacionUsuario[0]['direccion']."<br>";
-            $mensaje .= "<h2>".lang("lbl_productos_solicitados")."</h2>";
+            $mensajeenviar .= "<h2>".lang("lbl_customer_data")."</h2>";
+            $mensajeenviar .= lang("lbl_nombre")." ".$informacionUsuario[0]['nombre']." ".$informacionUsuario[0]['apellido']."<br>";
+            $mensajeenviar .= lang("lbl_telefono")." ".$informacionUsuario[0]['celular']."<br>";
+            $mensajeenviar .= lang("lbl_direccion")." ".$informacionUsuario[0]['direccion']."<br>";
+            $mensajeenviar .= "<h2>".lang("lbl_productos_solicitados")."</h2>";
             $sumaTotal  = 0;
            // echo "sdsdsdssdsdsd";
             foreach($productosTemporal as $prod2)
             {
                 $sumaTotal += ($prod2['valor'] * $prod2['cantidad']);
-                $mensaje .= $prod2['nombrePresentacion']." ".lang("lbl_cantidad").": ".$prod2['cantidad']."Kgs<br>";
+                $mensajeenviar .= $prod2['nombrePresentacion']." ".lang("lbl_cantidad").": ".$prod2['cantidad']."Kgs<br>";
 
             }
 
-            $mensaje .= "<h2>".lang("lbl_total_pedido")."</h2>";
-            $mensaje .= "<h4>".$infoTienda[0]['currency'].number_format($sumaTotal,0,",",".")."</h4>";
+            $mensajeenviar .= "<h2>".lang("lbl_total_pedido")."</h2>";
+            $mensajeenviar .= "<h4>".$infoTienda[0]['currency'].number_format($sumaTotal,0,",",".")."</h4>";
             //debo notificar al administrador de la plataforma que llegó un pedido
+            $mensaje = plantillaMail($mensajeenviar);
             sendMail($infoTienda[0]['correo_tienda'],$asuntoMensaje,$mensaje);
 
             //notifico a ester por medio de mensaje de texto
@@ -444,24 +445,25 @@ class LogicaGeneral  {
                               "datos"=>$idPedido);   
 
             $asuntoMensaje = "Nuevo pedido desde Esmeralda App";
-            $mensaje  = "Hola, ha llegado un nuevo pedido de producto con la siguiente información<br><br>";
+            $mensajeenviar  = "Hola, ha llegado un nuevo pedido de producto con la siguiente información<br><br>";
 
-            $mensaje .= "<h2>DATOS DEL CLIENTE</h2>";
-            $mensaje .= "Nombre: ".$informacionUsuario[0]['nombre']." ".$informacionUsuario[0]['apellido']."<br>";
-            $mensaje .= "Teléfonos: ".$informacionUsuario[0]['celular']."<br>";
-            $mensaje .= "<h2>PRODUCTOS SOLICITADOS</h2>";
+            $mensajeenviar .= "<h2>DATOS DEL CLIENTE</h2>";
+            $mensajeenviar .= "Nombre: ".$informacionUsuario[0]['nombre']." ".$informacionUsuario[0]['apellido']."<br>";
+            $mensajeenviar .= "Teléfonos: ".$informacionUsuario[0]['celular']."<br>";
+            $mensajeenviar .= "<h2>PRODUCTOS SOLICITADOS</h2>";
             $sumaTotal  = 0;
            // echo "sdsdsdssdsdsd";
             foreach($productosTemporal as $prod2)
             {
                 $sumaTotal += ($prod2['valor'] * $prod2['cantidad']);
-                $mensaje .= $prod2['nombrePresentacion']." Cantidad: ".$prod2['cantidad']."Kgs<br>";
+                $mensajeenviar .= $prod2['nombrePresentacion']." Cantidad: ".$prod2['cantidad']."Kgs<br>";
 
             }
 
-            $mensaje .= "<h2>TOTAL DEL PEDIDO</h2>";
-            $mensaje .= "<h4>$".number_format($sumaTotal,0,",",".")."</h4>";
+            $mensajeenviar .= "<h2>TOTAL DEL PEDIDO</h2>";
+            $mensajeenviar .= "<h4>$".number_format($sumaTotal,0,",",".")."</h4>";
             //envio un mensaje al administrador general
+            $mensaje = plantillaMail($mensajeenviar);
             sendMail(_ADMIN_PEDIDOS,$asuntoMensaje,$mensaje);
 
             if($enviarNotificaciones == 1)//envios para RAUL unicamente
@@ -555,25 +557,26 @@ class LogicaGeneral  {
                               "continuar"=>1,
                               "datos"=>$idPedido);            
             $asuntoMensaje = "Nuevo pedido de Esmeralda App";
-            $mensaje  = "Hola, ha llegado un nuevo pedido de producto con la siguiente información<br><br>";
+            $mensajeenviar  = "Hola, ha llegado un nuevo pedido de producto con la siguiente información<br><br>";
 
-            $mensaje .= "<h2>DATOS DEL CLIENTE</h2>";
-            $mensaje .= "Nombre: ".$informacionUsuario[0]['nombre']." ".$informacionUsuario[0]['apellido']."<br>";
-            $mensaje .= "Teléfonos: ".$informacionUsuario[0]['telefono']." - ".$informacionUsuario[0]['celular']."<br>";
-            $mensaje .= "<h2>PRODUCTOS SOLICITADOS</h2>";
+            $mensajeenviar .= "<h2>DATOS DEL CLIENTE</h2>";
+            $mensajeenviar .= "Nombre: ".$informacionUsuario[0]['nombre']." ".$informacionUsuario[0]['apellido']."<br>";
+            $mensajeenviar .= "Teléfonos: ".$informacionUsuario[0]['telefono']." - ".$informacionUsuario[0]['celular']."<br>";
+            $mensajeenviar .= "<h2>PRODUCTOS SOLICITADOS</h2>";
             $sumaTotal  = 0;
            // echo "sdsdsdssdsdsd";
             foreach($post['productos'] as $prod2)
             {
                 $infoProducto = $this->ci->dbGeneral->getPresentacionesProducto(array("pre.idProducto"=>$prod2['idProducto']));
                 $sumaTotal += ($infoProducto[0]['valorKilo'] * $prod2['cantidad']);
-                $mensaje .= $infoProducto[0]['nombreProducto']." Cantidad: ".$prod2['cantidad']."Kgs<br>";
+                $mensajeenviar .= $infoProducto[0]['nombreProducto']." Cantidad: ".$prod2['cantidad']."Kgs<br>";
 
             }
 
-            $mensaje .= "<h2>TOTAL DEL PEDIDO</h2>";
-            $mensaje .= "<h4>$".number_format($sumaTotal,0,",",".")."</h4>";
+            $mensajeenviar .= "<h2>TOTAL DEL PEDIDO</h2>";
+            $mensajeenviar .= "<h4>$".number_format($sumaTotal,0,",",".")."</h4>";
             //debo notificar al administrador de la plataforma que llegó un pedido
+            $mensaje = plantillaMail($mensajeenviar);
             sendMail(_ADMIN_PEDIDOS,$asuntoMensaje,$mensaje);
             //debo notificar a la respectiva ester
             sendMail($calculaMiEster[0]['email'],$asuntoMensaje,$mensaje);

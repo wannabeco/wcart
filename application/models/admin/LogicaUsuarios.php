@@ -219,8 +219,9 @@ class LogicaUsuarios  {
 
             if(count($cambioClaveProc) > 0)
             {
-                $mensaje                     =  "Se ha realizado el cambio de contraseña para acceder al aplicativo de ".lang("titulo")."<br><br>";
-                $mensaje                    .=  "Su nueva contraseña es: <h2>".$rClave."</h2>";
+                $mensajeenviar           =  "Se ha realizado el cambio de contraseña para acceder al aplicativo de ".lang("titulo")."<br><br>";
+                $mensajeenviar          .=  "Su nueva contraseña es: <h2>".$rClave."</h2>";
+                $mensaje = plantillaMail($mensajeenviar);
                 sendMail($_SESSION['project']['info']['email'],"Cambio de contraseña - ".lang("titulo"),$mensaje);
                 $respuesta = array("mensaje"=>"La contraseña se ha cambiado de manera exitosa.",
                                    "continuar"=>1,
