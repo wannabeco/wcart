@@ -85,7 +85,7 @@ function eliminaCaracteres($cadena)
     $cadena = str_replace(';',"",$cadena);
     return $cadena;
 }
-
+//envio email
 function sendMail($para,$asunto,$mensaje)
 {
     $ci = get_instance();
