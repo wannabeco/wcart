@@ -91,21 +91,18 @@ function sendMail($para,$asunto,$mensaje)
     $ci = get_instance();
     $ci->load->model("general/baseDatosGral","baseGeneral");
     $ci->load->library('email');
-   $config=array(
+    $ci->email->initialize(array(
         'protocol' => 'smtp',
-        'smtp_host' => 'smtp.gmail.com',
+        'smtp_host' => 'mail.wannabe.com.co',
         'smtp_user' => 'desarrollo@wannabe.com.co',
-        'smtp_pass' => 'Jg$E3D+u',
-        'smtp_port' => 587,
-        'smtp_crypto' => "tls",
+        'smtp_pass' => 'wannabeJg$E3D+u',
+        'smtp_port' => 465,
         'crlf' => "\r\n",
+        'smtp_crypto' => "ssl",
         'newline' => "\r\n",
-        'mailtype'=>"html",
-        'wordwrap' => TRUE,
-        'charset'   => 'utf-8'
-    );
-    $ci->email->initialize($config);
-    $ci->email->from('desarrollo@wannabe.com.co', NOMBRE_APP);
+        'mailtype'=>"html"
+      ));
+    $ci->email->from('noreply@wannabe.com.co', NOMBRE_APP);
     $ci->email->to($para);
     //$ci->  email->cc('another@another-example.com');
     //$ci->  email->bcc('them@their-example.com');
