@@ -162,7 +162,7 @@ class LogicaTienda  {
                                             $asunto ="Bienvenido a Wcart.";
                                             $mensajeenviar = $this->mailRegistroTiendas($usuario, $clave);
                                             $mensaje = plantillaMail($mensajeenviar);
-                                            sendMail($para, $asunto, $mensaje);
+                                            sendMail($para,$asunto,$mensaje);
                                             //fin de mensaje.
 
                                             //si viene el banner lo cargo
@@ -302,12 +302,12 @@ class LogicaTienda  {
 		return $this->ci->load->view("mailes/registroTiendas",$salida,true);
 		 
 	}
-    public function pruebaLogica(){
+    /*public function pruebaLogica(){
         $para = "gabiel.ramirez@gmail.com,farezprieeto@outlook.com";
         $asunto ="Bienvenido a Wannabe Digital y a sus sistema Wcart.";
         $mensajeenviar = $this->mailRegistroTiendas("prueba", "12345");
         $mensaje = plantillaMail($mensajeenviar);
         echo $mensaje;
         sendMail($para, $asunto, $mensaje);
-    }
+    }*/
  }
