@@ -1655,6 +1655,17 @@ class LogicaGeneral  {
 		return $this->ci->load->view("mailes/pagoMembresia",$salida,true);
 		 
 	}
+    //eliminar cuenta de la tienda
+    public function eliminaCuenta($usuario){
+        // var_dump($idPersona);die();
+        $where['idPersona']         = $usuario;
+        $dataInserta['eliminado']   = 1;
+        $resultado = $this->ci->dbGeneral->eliminaCuenta($where,$dataInserta);
+        $respuesta = array("mensaje"=>"Se eliminaron los datos",
+                            "continuar"=>1,
+                            "datos"=>$resultado);   
+        return $respuesta;
+    }
     /*public function pruebaLogica(){
         $para = "gabiel.ramirez@gmail.com,farezprieeto@outlook.com";
         $asunto ="Bienvenido a Wannabe Digital y a sus sistema Wcart.";

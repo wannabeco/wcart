@@ -984,6 +984,14 @@ class BaseDatosGral extends CI_Model {
         //print_r($this->db->last_query());die();
         return $this->db->insert_id();
     }
+    //eliminar cuenta
+    public function eliminaCuenta($where,$dataInserta)
+    {
+        $this->db->where($where);
+        $this->db->update($this->tablePersonas,$dataInserta);
+        //print_r($this->db->last_query());die();
+        return $this->db->insert_id();
+    }
 }
 
 ?>

@@ -255,7 +255,27 @@ class LogicaRegistro  {
         {
             //ahora verifico que el mail no este registrado como persona
             $verificoPersonaMail = $this->verificaEmpresa($email,"email","personas");
-            if(count($verificoPersonaMail) > 0 && $email != '')
+            $maile = $verificoPersonaMail[0];
+            //var_dump($maile["eliminado"]);die();
+            if($maile["eliminado"] == 1){
+                $dataActualiza["nombre"] = $data["nombre"];
+                $dataActualiza["apellido"] = $data["apellido"];
+                $dataActualiza["eliminado"] = 0;
+                $where["email"] = $email;
+                $actualizaPersona = $this->ci->dbRegistro->actualizaNuevo($dataActualiza,$where);
+                if($actualizaPersona >0){
+
+                    $respuesta = array("mensaje"=>"Su registro se ha llevado a cabo de manera exitosa.",
+                                        "continuar"=>1,
+                                        "datos"=>"");
+                }
+                else{
+                    $respuesta = array("mensaje"=>"Oops!! Esto es bastante embarazoso, ha habido un error interno que no ha permitido registrar la empresa, por favor intentelo de nuevo más tarde.",
+                                        "continuar"=>1,
+                                        "datos"=>"");
+                }
+            }
+            else if(count($verificoPersonaMail) > 0 && $email != '')
             {  
                 $respuesta = array("mensaje"=>"El correo electrónico que ingresó; ya se encuentra registrado, por favor verifíquelo o pruebe con otro.",
                             "continuar"=>0,
