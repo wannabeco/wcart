@@ -65,7 +65,21 @@ class Api extends CI_Controller
             $codigoTienda       = (isset($_POST['idTienda']))?$_POST['idTienda']:"";
 			//busco la foto con la palabra que envien
 			$logueo = $this->logicaLogin->getLoginUsuario($post,array(),$codigoTienda);
-			echo json_encode($logueo);
+            //var_dump($logueo["datos"]);die();
+            if($logueo["datos"]["eliminado"] == 0){
+
+                $respuesta = array("mensaje"=>"Bienvenido".$logueo['datos']['nombre']." ".$logueo['datos']['apellido'],
+                               "continuar"=>1,
+                               "datos"=>$logueo["datos"]); 
+                echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+            }
+            else{
+                $respuesta = array("mensaje"=>"Usuario o Contraseña son incorrectos",
+                               "continuar"=>0,
+                               "datos"=>""); 
+
+                echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+            }
 		}
 		else
 		{
@@ -1708,6 +1722,27 @@ class Api extends CI_Controller
 		{
             $where 	        = $_POST['usuario'];
             $respuesta = $this->logica->getLogin($where);
+			echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
+		}
+		else
+		{
+			$respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+		}
+
+    }
+    public function eliminaCuenta()
+    {
+    	extract($_POST);
+        // var_dump($_POST);die();
+    	//súper acceso a la app
+		if(isset($movil) && validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+            $where 	        = $_POST['idUsuario'];
+            $respuesta = $this->logica->eliminaCuenta($where);
 			echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
 		}
 		else

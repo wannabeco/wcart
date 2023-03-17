@@ -87,7 +87,14 @@ class BaseDatosRegistro extends CI_Model {
         //print_r($this->db->last_query());die();
         return $this->db->insert_id();
     }
+    //registro persona
+    public function actualizaNuevo($dataInserta,$where){
 
+        $this->db->where($where);
+        $this->db->update($this->tablePersonas,$dataInserta);
+        //print_r($this->db->last_query());die();
+        return $this->db->affected_rows();
+    }
     /*$this->db->where($where);
     $this->db->update($this->tableViviendaPersona,$info);
     //print_r($this->db->last_query());die();
