@@ -59,7 +59,7 @@
         ?>
         <div class="container">
             <center>
-                <form method="post" id="theForm" action="https://sandbox.api.payulatam.com/payments-api/4.0/service.cgi">
+                <form method="post" id="theForm" action="https://checkout.payulatam.com/ppp-web-gateway-payu/">
                 <!--<form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">-->
                     <input name="accountId"                         type="hidden"   value="<?php echo _PAYU_ID_CUENTA?>">
                     <!--<input name="accountId"                         type="hidden"   value="512321">-->
