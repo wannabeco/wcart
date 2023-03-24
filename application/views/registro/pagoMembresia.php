@@ -1,19 +1,19 @@
 <?php
     $referencia   = $infpedido[0]['codigoPago'];
 
-    if($proveedor == 'webMes'){
+    if($proveedor == 'Appmes'){
         $precio = _PRECIO_PLAN_BASIC;
         $nombreTrans="Pago memebresia plan basic 1 mes";
     }
-    else if($proveedor == 'webAno'){
+    else if($proveedor == 'AppAno'){
         $precio =  _PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC;
         $nombreTrans="Pago memebresia plan basic 1 año";
     }
-    else if($proveedor == 'proMes'){
+    else if($proveedor == 'WebMes'){
         $precio =  _PRECIO_PLAN_PRO;
         $nombreTrans="Pago memebresia plan pro 1 mes";
     }
-    else if($proveedor == 'proAno'){
+    else if($proveedor == 'WebAno'){
         $precio =  _PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO;
         $nombreTrans="Pago memebresia plan pro 1 año";
     }
@@ -59,12 +59,12 @@
         ?>
         <div class="container">
             <center>
-                <!--<form method="post" id="theForm" action="https://sandbox.api.payulatam.com/payments-api/4.0/service.cgi">-->
-                <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
-                    <!--<input name="accountId"                         type="hidden"   value="<?php echo _PAYU_ID_CUENTA?>">-->
-                    <input name="accountId"                         type="hidden"   value="512321">
-                    <!--<input name="merchantId"    id="merchantId"     type="hidden"   value="<?php echo _PAYU_ID_MERCADO?>">-->
-                    <input name="merchantId"    id="merchantId"     type="hidden"   value="508029">
+                <form method="post" id="theForm" action="https://sandbox.api.payulatam.com/payments-api/4.0/service.cgi">
+                <!--<form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">-->
+                    <input name="accountId"                         type="hidden"   value="<?php echo _PAYU_ID_CUENTA?>">
+                    <!--<input name="accountId"                         type="hidden"   value="512321">-->
+                    <input name="merchantId"    id="merchantId"     type="hidden"   value="<?php echo _PAYU_ID_MERCADO?>">
+                    <!--<input name="merchantId"    id="merchantId"     type="hidden"   value="508029">-->
                     <input name="description"                       type="hidden"   value="<?php echo $nombreTrans; ?>">
                     <!--<input name="secret"                            type="hidden"   value="pRRXKOl8ikMmt9u">-->
                     <input name="referenceCode" id="referenceCode"  type="hidden"   value="<?php echo $referencia?>">
