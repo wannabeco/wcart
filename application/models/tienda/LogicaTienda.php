@@ -103,7 +103,6 @@ class LogicaTienda  {
                         $dataInsertaTienda['estadoFunciona']        = 'normal';
                         $dataInsertaTienda['fechaIngreso']          = date('Y-m-d');
                         $dataInsertaTienda['fechaInicioMembresia']  = date('Y-m-d');
-                        $dataInsertaTienda['fechaCaducidad']        = date('Y-m-d',strtotime($fecha_actual."- 1 days"));
                         $dataInsertaTienda['currency']              = "$";
                         $dataInsertaTienda['pagoPayu']              = "no";
                         $dataInsertaTienda['pagoWompi']             = "no";
@@ -111,6 +110,17 @@ class LogicaTienda  {
                         $dataInsertaTienda['mensajeMantenimiento']  = "En este momento nos encontramos trabajando para ti en unos momentos volveremos a estar al 100% gracias por tu comprensión";
                         $dataInsertaTienda['idEstado']              = 1;
                         $dataInsertaTienda['terminos']              = 1;
+                        if($post["Plan"] = "web"){
+                            $fechaPlan                              = date('Y-m-d',strtotime($fecha_actual."1 month"));
+                            $Plan                                   = "web";
+                        }
+                        else if($post["Plan"] = "movil y web"){
+                            $fechaPlan                              = date('Y-m-d',strtotime($fecha_actual."- 1 days"));
+                            $Plan                                   = "movil y web";
+                        }
+                        $dataInsertaTienda['fechaCaducidad']        = $fechaPlan;
+                        $dataInsertaTienda['Plan']        = $Plan;
+
                         //proceso a crear la tienda
                         $idNuevaTienda = $this->ci->dbTienda->crearTienda($dataInsertaTienda);
                         if($idNuevaTienda > 0)//la tienda se crea

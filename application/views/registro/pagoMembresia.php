@@ -1,19 +1,19 @@
 <?php
     $referencia   = $infpedido[0]['codigoPago'];
 
-    if($proveedor == 'Appmes'){
+    if($proveedor == 'webMes'){
         $precio = _PRECIO_PLAN_BASIC;
         $nombreTrans="Pago memebresia plan basic 1 mes";
     }
-    else if($proveedor == 'AppAno'){
+    else if($proveedor == 'webAno'){
         $precio =  _PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC;
         $nombreTrans="Pago memebresia plan basic 1 año";
     }
-    else if($proveedor == 'WebMes'){
+    else if($proveedor == 'proMes'){
         $precio =  _PRECIO_PLAN_PRO;
         $nombreTrans="Pago memebresia plan pro 1 mes";
     }
-    else if($proveedor == 'WebAno'){
+    else if($proveedor == 'proAno'){
         $precio =  _PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO;
         $nombreTrans="Pago memebresia plan pro 1 año";
     }
@@ -59,11 +59,13 @@
         ?>
         <div class="container">
             <center>
-                <form method="post" id="theForm" action="https://checkout.payulatam.com/ppp-web-gateway-payu/">
-                    <input name="merchantId"    id="merchantId"     type="hidden"   value="<?php echo _PAYU_ID_MERCADO?>">
-                    <input name="accountId"                         type="hidden"   value="<?php echo _PAYU_ID_CUENTA?>">
+                <!--<form method="post" id="theForm" action="https://sandbox.api.payulatam.com/payments-api/4.0/service.cgi">-->
+                <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+                    <!--<input name="accountId"                         type="hidden"   value="<?php echo _PAYU_ID_CUENTA?>">-->
+                    <input name="accountId"                         type="hidden"   value="512321">
+                    <!--<input name="merchantId"    id="merchantId"     type="hidden"   value="<?php echo _PAYU_ID_MERCADO?>">-->
+                    <input name="merchantId"    id="merchantId"     type="hidden"   value="508029">
                     <input name="description"                       type="hidden"   value="<?php echo $nombreTrans; ?>">
-                    <input name="apiKey"         id="apKey"          type="hidden"  value="<?php echo _PAYU_API_KEY?>">
                     <!--<input name="secret"                            type="hidden"   value="pRRXKOl8ikMmt9u">-->
                     <input name="referenceCode" id="referenceCode"  type="hidden"   value="<?php echo $referencia?>">
                     <input name="amount"                            type="hidden"   value="<?php echo sprintf('%.2f',$precio)?>">

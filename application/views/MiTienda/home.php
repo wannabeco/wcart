@@ -695,14 +695,14 @@
                                 </div>
                             <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px; top:50px;" ng-click="click()">Actualizar tu plan</button>
                             </div>
-                            <?php } else{ if($infoTienda['Plan'] == 'movil'){
+                            <?php } else{ if($infoTienda['Plan'] == 'web'){
                                 $fecha = date("D", strtotime($infoTienda['fechaCaducidad'])); 
                             ?>
                             <!--columna de la izquierda -->
                             <br><br>
                             <div class="col-md-12">
                                 <div class="alert alert-success" role="alert">
-                                    <h5>Actual mente cuentas con un plan de app movil, el cual tiene fecha de caducidad el dia: <?php echo traduceDia($fecha).", ".formatoFechaEspanol($infoTienda['fechaCaducidad'],false); ?></h5>
+                                    <h5>Actual mente cuentas con un plan de tienda virtual, el cual tiene fecha de caducidad el dia: <?php echo traduceDia($fecha).", ".formatoFechaEspanol($infoTienda['fechaCaducidad'],false); ?></h5>
                                 </div>
                             </div>
                             <!--columna de la derecha -->

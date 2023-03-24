@@ -28,13 +28,13 @@
                       <div class="card-body" ng-if="membresiaApp=='mes'">
                         <h1 class="card-title pricing-card-title"><?php echo"$".number_format(_PRECIO_PLAN_BASIC);?><small class="text-muted">/ Mensual</small></h1>
                         <ul class="list-unstyled mt-3 lg-4">
-                          <li><span style="position:relative; float:left; left:50px;"> App movil, Android y apple</span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i>	</li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> Sitio web responsivo </span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i>	</li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> App movil, Android y apple</span><i class='fa fa-close iconClose' style="position:relative; float:right; right: 50px; color:red;"></i></li><br>
                           <li><span style="position:relative; float:left; left:50px;"> Productos ilimitados </span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i>	</li><br>
-                          <li><span style="position:relative; float:left; left:50px;"> Sitio web responsivo </span><i class='fa fa-close iconClose' style="position:relative; float:right; right: 50px; color:red;"></i></li><br>
-                          <li><span style="position:relative; float:left; left:50px;"> Ssl </span><i class='fa fa-close iconClose' style="position:relative; float:right; right: 50px; color:red;"></i></li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> Ssl </span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i>	</li><br>
                           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Más información</button>
                         </ul>
-                        <?php if($infoTienda['datos'][0]['Plan'] == 'movil'){ ?>
+                        <?php if($infoTienda['datos'][0]['Plan'] == 'web'){ ?>
                           <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
                               <input type="hidden" id="codigoPago" name="codigoPago" value="<?php echo $referencia;?>" />  
                               <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>
@@ -61,10 +61,10 @@
                       <div class="card-body" ng-if="membresiaApp=='ano'">
                         <h1 class="card-title pricing-card-title"><?php $precio=_PRECIO_PLAN_BASIC; $mes=_MESES_DE_COBRO_ANO_PLAN_BASIC; $calcula=$precio*$mes;echo"$".number_format($calcula);?> <small class="text-muted">/ Anual</small></h1>
                         <ul class="list-unstyled mt-3 lg-4">
-                          <li><span style="position:relative; float:left; left:50px;"> App movil, Android y apple </span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i>	</li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> Sitio web responsivo </span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i>	</li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> App movil, Android y apple</span><i class='fa fa-close iconClose' style="position:relative; float:right; right: 50px; color:red;"></i></li><br>
                           <li><span style="position:relative; float:left; left:50px;"> Productos ilimitados </span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i>	</li><br>
-                          <li><span style="position:relative; float:left; left:50px;"> Sitio web responsivo </span><i class='fa fa-close iconClose' style="position:relative; float:right; right: 50px; color:red;"></i></li><br>
-                          <li><span style="position:relative; float:left; left:50px;"> Ssl </span><i class='fa fa-close iconClose' style="position:relative; float:right; right: 50px; color:red;"></i></li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> Ssl </span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i>	</li><br>
                           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Más información</button>
                           <li>
                             <div class="alert alert-primary" role="alert" style="height:45px;">
@@ -74,7 +74,7 @@
                             </div> 
                           </li>
                         </ul>
-                          <?php if($infoTienda['datos'][0]['Plan'] == 'movil'){ ?>
+                          <?php if($infoTienda['datos'][0]['Plan'] == 'web'){ ?>
                             <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
                                 <input type="hidden" id="codigoPago" name="codigoPago" value="<?php $referencia; ?>" >  
                                 <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?> 
@@ -132,7 +132,7 @@
                                   Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                 <?php }?>
                             </form>
-                          <?php } else if($infoTienda['datos'][0]['Plan'] == 'movil') {?>
+                          <?php } else if($infoTienda['datos'][0]['Plan'] == 'web') {?>
                             <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
                                 <input type="hidden" id="codigoPago" name="codigoPago" value="<?php $referencia; ?>" >  
                                 <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>
@@ -172,7 +172,7 @@
                                   Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                 <?php }?>
                             </form>
-                          <?php } else if($infoTienda['datos'][0]['Plan'] == 'movil') {?>
+                          <?php } else if($infoTienda['datos'][0]['Plan'] == 'web') {?>
                             <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
                                 <input type="hidden" id="codigoPago" name="codigoPago" value="<?php $referencia; ?>" >  
                                 <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>
@@ -200,17 +200,17 @@
         <div class="modal-content">
           <div class="modal-header">
             <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-            <h2 class="modal-title" id="myModalLabel" style="font-family: 'Roboto'; text-transform: uppercase;  color: #333;">KNOW OUR PRICES</h2>
+            <h2 class="modal-title" id="myModalLabel" style="font-family: 'Roboto'; text-transform: uppercase;  color: #333;">CONOCE NUESTROS PRECIOS</h2>
           </div>
           <div class="modal-body">
           <div class="panelPopUp" id="popPricing">
                 <div class="panelInternoPop" >
                     <div class="row p-2">
                       <div class="col col-lg-8 col-sm-8 col-xs-8 tituloPopPlan" style="background:#316994; padding:8px; font-size:24px; font-family:inherit; height: 43px; padding-left: 0px; padding-right: 0px;">
-                        <h3 style="margin-top:0px; margin-left:20px; color:white;">Feature</h3>
+                        <h3 style="margin-top:0px; margin-left:20px; color:white;">Característica</h3>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center tituloPopPlan" style="background:#316994; padding:8px; font-size:24px; font-family:inherit; height: 43px; padding-left: 0px; padding-right: 0px;">
-                        <h3 style="margin-top:0px; margin-left:10px; color:white;">Basic</h3>
+                        <h3 style="margin-top:0px; margin-left:10px; color:white;">Basico</h3>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center tituloPopPlan" style="background:#316994; padding:8px; font-size:24px; font-family:inherit; height: 43px; padding-left: 0px; padding-right: 0px;">
                         <h3 style="margin-top:0px; margin-left:10px; color:white;">Pro</h3>
@@ -222,11 +222,11 @@
                       <div class="col col-lg-8 col-sm-8 col-xs-8 p-2" style="bottom: 10px;">
                         <strong>APP ANDROID</strong>
                       </div>
-                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:red; bottom: 10px;">
+                        <i class='fa fa-close iconClose'></i>					
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
+                        <i class='fa fa-check iconCheck'></i>					
                       </div>
                       <hr>
                     </div>
@@ -234,8 +234,8 @@
                       <div class="col col-lg-8 col-sm-8 col-xs-8 p-2" style="bottom: 10px;">
                         <strong>APP APPLE</strong>
                       </div>
-                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck'></i>					
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:red; bottom: 10px;">
+                        <i class='fa fa-close iconClose'></i>					
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
@@ -244,7 +244,7 @@
                     </div>
                     <div class="row filaCar">
                       <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
-                        <strong>UNLIMITED CATEGORIES</strong>
+                        <strong>CATEGORÍAS ILIMITADAS</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
@@ -256,7 +256,7 @@
                     </div>
                     <div class="row filaCar">
                       <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
-                        <strong>UNLIMITED SUBCATEGORIES</strong>
+                        <strong>SUBCATEGORÍAS ILIMITADAS</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
@@ -268,7 +268,7 @@
                     </div>
                     <div class="row filaCar">
                       <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
-                        <strong>UNLIMITED PRODUCTS</strong>
+                        <strong>PRODUCTOS ILIMITADOS</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
@@ -280,7 +280,7 @@
                     </div>
                     <div class="row filaCar">
                       <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
-                        <strong>USER REGISTRATION</strong>
+                        <strong>REGISTRO DE USUARIOS</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
@@ -292,7 +292,7 @@
                     </div>
                     <div class="row filaCar">
                       <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
-                        <strong>SHOPPING CART</strong>
+                        <strong>CARRITO DE COMPRAS</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck' ></i>					
@@ -304,7 +304,7 @@
                     </div>
                     <div class="row filaCar">
                       <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
-                        <strong style="float:left;">PAYMENT METHODS </strong><strong> <small style='color:#999; float:left; margin-left: 10px;' class='visible-lg'> (STRIPE, ON DELIVERY, PICK UP)</small></strong>
+                        <strong style="float:left;">METODOS DE PAGO </strong><strong> <small style='color:#999; float:left; margin-left: 10px;' class='visible-lg'> (STRIPE, PAGO CONTRA ENTREGA, PAGO EN TIENDA)</small></strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck' ></i>					
@@ -328,25 +328,25 @@
                     </div>
                     <div class="row filaCar">
                       <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
-                        <strong>RESPONSIVE WEB SITE</strong>
-                      </div>
-                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:red; bottom: 10px;">
-                        <i class='fa fa-close iconClose'></i>					
+                        <strong>SITIO WEB RESPONSIVO</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck'></i>					
+                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
+                      </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
+                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
                       </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
                       <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
-                        <strong>CUSTOM DOMAIN</strong>
-                      </div>
-                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:red; bottom: 10px;">
-                        <i class='fa fa-close iconClose'></i>					
+                        <strong>DOMINIO PERSONALIZADO</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck'></i>					
+                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
+                      </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
+                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
                       </div>
                       <hr>
                     </div>
@@ -354,11 +354,11 @@
                       <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
                         <strong>SSL</strong>
                       </div>
-                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:red; bottom: 10px;">
-                        <i class='fa fa-close iconClose'></i>					
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
+                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck'></i>					
+                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
                       </div>
                       <hr>
                     </div>
@@ -366,7 +366,7 @@
               </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#ed540e; color:#fff; bottom: 20px;right: 20px;">CLOSE WINDOW</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#ed540e; color:#fff; bottom: 20px;right: 20px;">CERRAR VENTANA</button>
           </div>
         </div>
     </div>
