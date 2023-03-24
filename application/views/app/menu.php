@@ -44,7 +44,12 @@
                             <a class="navbar-brand" href="<?php echo $infoTienda['datos'][0]['urlAppIos']; ?>" style="" target="_blank">
                                 <strong> Mi app Ios</strong>
                             </a>
+                            
                     <?php  }}?>
+                    <?php } if($infoTienda['datos'][0]['Plan'] === 'web'){?>
+                            <a class="navbar-brand" href="<?php echo _URL_TIENDAS.$infoTienda['datos'][0]['urlAmigable']; ?>" style="" target="_blank">
+                                <strong> ver mi tienda</strong>
+                            </a>
                 <?php } else { ?>
                     <a class="navbar-brand" href="<?php echo base_url() ?>App" style="text-transform: capitalize">
                          <strong>

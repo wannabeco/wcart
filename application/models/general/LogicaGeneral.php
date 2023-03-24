@@ -1229,7 +1229,7 @@ class LogicaGeneral  {
         $dataActualiza['fechaInicioMembresia']  = $fecha_actual;
         $dataActualiza['fechaCaducidad']        = $fechaMes;
         $dataActualiza['manteminiento']         = 0;
-        $dataActualiza['Plan']                  = 'movil';
+        $dataActualiza['Plan']                  = 'web';
         $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
         if($response > 0)
         {
@@ -1357,7 +1357,7 @@ class LogicaGeneral  {
         $fechaSemana                            = date("Y-m-d",strtotime($fecha_actual."+ 1 week"));
         $fechaMes                               = date("Y-m-d",strtotime($fechaSemana."+ 2 month"));
         $dataActualiza['fechaCaducidad']        = $fechaMes;
-        $dataActualiza['Plan']                  = 'movil';
+        $dataActualiza['Plan']                  = 'web';
         $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
         if($response > 0)
         {
@@ -1391,7 +1391,7 @@ class LogicaGeneral  {
         $fecha_actual                           = date("Y-m-d");
         $fechaSoloAno                           = date("Y-m-d",strtotime($fecha_actual."+ 12 month"));
         $dataActualiza['fechaCaducidad']        = $fechaSoloAno;
-        $dataActualiza['Plan']                  = 'movil';
+        $dataActualiza['Plan']                  = 'web';
         $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
         if($response > 0)
         {
