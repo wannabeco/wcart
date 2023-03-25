@@ -15,7 +15,7 @@
                 <?php echo $infoModulo['nombreModulo'] ?> <!--<small>Estructura de las áreas de su empresa</small>-->
                 <?php if(getPrivilegios()[0]['crear'] == 1){ ?>
                     <div class="btn-group" >
-                        <?php if($infoTienda['Plan']=="movil y web"){?>
+                        <?php if($infoTienda['Plan']=="web"){?>
                         <button type="button" class="btn dropdown-toggle"
                                 data-toggle="dropdown">
                           <?php echo lang("lblAcciones") ?> <span class="caret"></span>
@@ -25,9 +25,19 @@
                             <!--<li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> New Banner</a></li>-->
                             <li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> Nuevo Banner</a></li>
                         </ul>
-                        <?php } else if($infoTienda['Plan']=="movil"){?>
+                        <?php } else if($infoTienda['Plan']=="movil y web"){ ?>
                             <button type="button" class="btn dropdown-toggle"
-                                data-toggle="dropdown"> Tu plan no incluye pagina web.
+                                data-toggle="dropdown">
+                                <?php echo lang("lblAcciones") ?> <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li role="separator" class="divider"></li><li class="dropdown-header"><?php echo lang("lblSeleccioneOpc") ?></li>
+                                <!--<li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> New Banner</a></li>-->
+                                <li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> Nuevo Banner</a></li>
+                            </ul>
+                        <?php } else if($infoTienda['Plan']=="app"){?>
+                            <button type="button" class="btn dropdown-toggle"
+                                data-toggle="dropdown"> Tu plan incluye pagina web.
                             </button>
                             <!--@if _app_variablesglobales si el valor es 0 no se mostrara el boton-->
                         <?php } if(_DESHABILITA_BOTON_TUTORIALES == 1){?>
