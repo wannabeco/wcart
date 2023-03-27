@@ -113,13 +113,19 @@ class LogicaTienda  {
                         if($post["Plan"] = "web"){
                             $fechaPlan                              = date('Y-m-d',strtotime($fecha_actual."1 month"));
                             $Plan                                   = "web";
+                            $mesGratis                              = 1;
                         }
                         else if($post["Plan"] = "movil y web"){
                             $fechaPlan                              = date('Y-m-d',strtotime($fecha_actual."- 1 days"));
                             $Plan                                   = "movil y web";
                         }
+                        else if($post["Plan"] = "app"){
+                            $fechaPlan                              = date('Y-m-d',strtotime($fecha_actual."- 1 days"));
+                            $Plan                                   = "movil";
+                        }
                         $dataInsertaTienda['fechaCaducidad']        = $fechaPlan;
-                        $dataInsertaTienda['Plan']        = $Plan;
+                        $dataInsertaTienda['Plan']                  = $Plan;
+                        $dataInsertaTienda['mesGratis']             = $mesGratis;
 
                         //proceso a crear la tienda
                         $idNuevaTienda = $this->ci->dbTienda->crearTienda($dataInsertaTienda);

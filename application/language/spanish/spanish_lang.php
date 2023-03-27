@@ -11,7 +11,7 @@
 *  @version 1.0
 */
 
-$lang['titulo'] = "Wcart";
+$lang['titulo'] = "WabeShop";
 $lang['tituloLogin'] = "Bienvenido";
 
 //$lang['reg_btn_crea']			= "ADD NEW";

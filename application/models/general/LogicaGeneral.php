@@ -1313,7 +1313,7 @@ class LogicaGeneral  {
         return $resultado; 
     }
     //actualiza fecha de membresia a 13 meses y 7 dias dias;
-    public function updateAno($tienda, $codigo,$mensajeMail)
+    public function updateAnoApp($tienda, $codigo,$mensajeMail)
     {
         $where['idTienda']                      = $tienda;
         $fecha_actual                           = date('Y-m-d');
@@ -1357,7 +1357,7 @@ class LogicaGeneral  {
         $fechaSemana                            = date("Y-m-d",strtotime($fecha_actual."+ 1 week"));
         $fechaMes                               = date("Y-m-d",strtotime($fechaSemana."+ 2 month"));
         $dataActualiza['fechaCaducidad']        = $fechaMes;
-        $dataActualiza['Plan']                  = 'web';
+        $dataActualiza['Plan']                  = 'movil';
         $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
         if($response > 0)
         {
@@ -1385,7 +1385,7 @@ class LogicaGeneral  {
         return $respuesta;
     }
     //update la fecha de aduca cuando el plan no ha caducado a un año
-    public function updatePagoAnoApp($tienda, $codigo,$mensajeMail)
+    public function updatePagoAnoWeb($tienda, $codigo,$mensajeMail)
     {
         $where['idTienda']                      = $tienda;
         $fecha_actual                           = date("Y-m-d");
@@ -1666,6 +1666,110 @@ class LogicaGeneral  {
                             "datos"=>$resultado);   
         return $respuesta;
     }
+    //actualiza 30 dias de membresia solo app movil
+    public function updatemesApp($tienda,$codigo,$mensajeMail)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date('Y-m-d');
+        $fechaMes                               = date("Y-m-d",strtotime($fecha_actual."+ 1 month"));
+        $dataActualiza['fechaInicioMembresia']  = $fecha_actual;
+        $dataActualiza['fechaCaducidad']        = $fechaMes;
+        $dataActualiza['manteminiento']         = 0;
+        $dataActualiza['Plan']                  = 'movil';
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+            
+            $para = $mensajeMail;
+            $asunto ="Recibo de pago Wcart";
+            $fechaInicio = date('Y-m-d');
+            $fecaCaducidad = $fechaMes;
+            $pago = _PRECIO_PLAN_BASIC;
+            $codigo = $codigo;
+            $appMovil=0;
+            $mensajeenviar = $this->mailPagoMembresia($fechaInicio,$fecaCaducidad,$pago,$codigo,$appMovil);
+            $mensaje = plantillaMail($mensajeenviar);
+            sendMail($para, $asunto, $mensaje);
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }
+    //update la fecha de aduca cuando el plan no ha caducado a un año plan app movil
+    public function updatePagoAnoApp($tienda, $codigo,$mensajeMail)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date("Y-m-d");
+        $fechaSoloAno                           = date("Y-m-d",strtotime($fecha_actual."+ 12 month"));
+        $dataActualiza['fechaCaducidad']        = $fechaSoloAno;
+        $dataActualiza['Plan']                  = 'movil';
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+                               
+            $para = $mensajeMail;
+            $asunto ="Recibo de pago Wcart";
+            $fechaInicio = date('Y-m-d');
+            $fecaCaducidad = $fechaSoloAno;
+            $pago = _PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO;
+            $codigo = $codigo;
+            $appMovil =1;
+            $mensajeenviar = $this->mailPagoMembresia($fechaInicio,$fecaCaducidad,$pago,$codigo,$appMovil);
+            $mensaje = plantillaMail($mensajeenviar);
+            sendMail($para, $asunto, $mensaje);
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    } //update la fecha de aduca cuando el plan app no ha caducado a un mes
+    /*public function updatePagoApp($tienda, $codigo,$mensajeMail)
+    {
+        $where['idTienda']                      = $tienda;
+        $fecha_actual                           = date("Y-m-d");
+        $fechaSemana                            = date("Y-m-d",strtotime($fecha_actual."+ 1 week"));
+        $fechaMes                               = date("Y-m-d",strtotime($fechaSemana."+ 2 month"));
+        $dataActualiza['fechaCaducidad']        = $fechaMes;
+        $dataActualiza['Plan']                  = 'movil';
+        $response = $this->ci->dbGeneral->actualizaMiTienda($where,$dataActualiza);
+        if($response > 0)
+        {
+            $respuesta = array("mensaje"=>"La información ha sido modificada exitosamente",
+                               "continuar"=>1,
+                               "datos"=>"");
+
+            $para = $mensajeMail;
+            $asunto ="Recibo de pago Wcart";
+            $fechaInicio = date('Y-m-d');
+            $fecaCaducidad = $fechaMes ;
+            $pago = _PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC	;
+            $codigo = $codigo;
+            $appMovil =0;
+            $mensajeenviar = $this->mailPagoMembresia($fechaInicio,$fecaCaducidad,$pago,$codigo,$appMovil);
+            $mensaje = plantillaMail($mensajeenviar);
+            sendMail($para, $asunto, $mensaje);
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"La información no ha podido ser modificada, intente más tarde.",
+                               "continuar"=>0,
+                               "datos"=>"");
+        }
+        return $respuesta;
+    }*/
     /*public function pruebaLogica(){
         $para = "gabiel.ramirez@gmail.com,farezprieeto@outlook.com";
         $asunto ="Bienvenido a Wannabe Digital y a sus sistema Wcart.";

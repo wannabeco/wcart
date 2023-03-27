@@ -668,16 +668,20 @@
                                                     <td style="vertical-align: middle" align="center"><?php echo $infoPago['codigoPago'];?></td>
                                                     <td style="vertical-align: middle" align="center"><?php  $fecha = $infoPago['fechaPago']; echo $fechas = date("Y-m-d", strtotime($fecha));?></td>
                                                     <td style="vertical-align: middle" align="center">
-                                                        <?php if($infoPago['plan']=="web1"){ ?>
+                                                        <?php if($infoPago['plan']=="pro1"){ ?>
                                                             <span class="label label-success">Pro mes</span>
-                                                        <?php } if($infoPago['plan']=="web2"){ ?>
+                                                        <?php } if($infoPago['plan']=="pro2"){ ?>
                                                             <span class="label label-success">Pro año</span>
-                                                        <?php } if($infoPago['plan']=="app1"){ ?>
-                                                            <span class="label label-primary">Basic mes</span>
-                                                        <?php } if($infoPago['plan']=="app2" ){ ?>
-                                                            <span class="label label-primary">Basic año</span>
+                                                        <?php } if($infoPago['plan']=="web1"){ ?>
+                                                            <span class="label label-primary">web mes</span>
+                                                        <?php } if($infoPago['plan']=="web2" ){ ?>
+                                                            <span class="label label-primary">web año</span>
                                                         <?php } if($infoPago['plan']== ""){?>
                                                             <span class="label label-danger">Sin pago</span>
+                                                        <?php } if($infoPago['plan']=="app1"){?>
+                                                            <span class="label label-primary">app mes</span>
+                                                        <?php } if($infoPago['plan']=="app2"){?>
+                                                            <span class="label label-primary">app año</span>
                                                         <?php } ?>
                                                     </td>
                                                 </tr>
@@ -715,6 +719,17 @@
                                 <div class="col-md-12">
                                     <div class="alert alert-success" role="alert" style="width: 100%;">
                                         <h5>Actual mente cuentas con un plan de app movil y pagina web, el cual tiene fecha de caducidad el dia: <?php echo traduceDia($fecha).", ".formatoFechaEspanol($infoTienda['fechaCaducidad'],false) ?></h5>
+                                    </div>
+                                </div> <br><br>
+                                    <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="click()">Actualizar tu plan</button>
+                                    <?php } if($infoTienda['Plan'] == 'movil'){ 
+                                $fecha = date("D",strtotime($infoTienda['fechaCaducidad'])); 
+                            ?>
+                                <!--columna de la izquierda -->
+                                <br><br>
+                                <div class="col-md-12">
+                                    <div class="alert alert-success" role="alert" style="width: 100%;">
+                                        <h5>Actual mente cuentas con un plan de app movil, el cual tiene fecha de caducidad el dia: <?php echo traduceDia($fecha).", ".formatoFechaEspanol($infoTienda['fechaCaducidad'],false) ?></h5>
                                     </div>
                                 </div> <br><br>
                                     <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" ng-click="click()">Actualizar tu plan</button>

@@ -17,7 +17,7 @@
                 <div class="col col-lg-4 col-md-4">
                     <div class="card box-shadow">
                       <div class="card-header">
-                        <h2 class="my-0 font-weight-normal">Basic</h2>
+                        <h2 class="my-0 font-weight-normal">Web</h2>
                         <div class="col-md-8" style="margin-left:18%;">
                           <select class="form-control p-4" ng-model="membresiaApp">
                             <option value="mes">Mes</option>
@@ -56,6 +56,17 @@
                                 Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                               <?php }?>
                           </form>
+                          <?php } else if($infoTienda['datos'][0]['Plan'] == 'movil'){ ?>
+                            <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
+                              <input type="hidden" id="codigoPago" name="codigoPago" value="<?php  echo $referencia; ?>" >
+                              <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio()">
+                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
+                                Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
+                              <?php }?>
+                            </form>
                           <?php } ?>
                       </div>
                       <div class="card-body" ng-if="membresiaApp=='ano'">
@@ -95,6 +106,126 @@
                                 <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                   Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                 <?php }?>
+                            </form>
+                            <?php } else if($infoTienda['datos'][0]['Plan'] == 'movil'){ ?>
+                            <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
+                              <input type="hidden" id="codigoPago" name="codigoPago" value="<?php  echo $referencia; ?>" >
+                              <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio()">
+                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
+                                Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
+                              <?php }?>
+                            </form>
+                          <?php } ?>
+                      </div>
+                    </div>
+                </div>
+                <!-- app movil-->
+                <div class="col col-lg-4 col-md-4">
+                    <div class="card box-shadow">
+                      <div class="card-header">
+                        <h2 class="my-0 font-weight-normal">App</h2>
+                        <div class="col-md-8" style="margin-left:18%;">
+                          <select class="form-control p-4" ng-model="AppMovil">
+                            <option value="appMes">Mes</option>
+                            <option value="appAno">Año</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="card-body" ng-if="AppMovil=='appMes'">
+                        <h1 class="card-title pricing-card-title"><?php echo"$".number_format(_PRECIO_PLAN_APP);?><small class="text-muted">/ Mensual</small></h1>
+                        <ul class="list-unstyled mt-3 lg-4">
+                          <li><span style="position:relative; float:left; left:50px;"> App movil, Android y apple</span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i></li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> Sitio web responsivo </span><i class='fa fa-close iconClose' style="position:relative; float:right; right: 50px; color:red;"></i></li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> Productos ilimitados </span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i></li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> Ssl </span><i class='fa fa-close iconClose' style="position:relative; float:right; right: 50px; color:red;"></i></li><br>
+                          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Más información</button>
+                        </ul>
+                        <?php if($infoTienda['datos'][0]['Plan'] == 'web'){ ?>
+                          <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
+                              <input type="hidden" id="codigoPago" name="codigoPago" value="<?php echo $referencia;?>" />  
+                              <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="movilMes()">
+                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
+                                Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
+                              <?php }?>
+                          </form>
+                          <?php  } else if($infoTienda['datos'][0]['Plan'] == 'movil y web'){?>
+                            <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
+                              <input type="hidden" id="codigoPago" name="codigoPago" value="<?php  echo $referencia; ?>" >
+                              <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="bajar3()">
+                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
+                                Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
+                              <?php }?>
+                          </form>
+                          <?php } else if($infoTienda['datos'][0]['Plan'] == 'movil'){ ?>
+                            <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
+                              <input type="hidden" id="codigoPago" name="codigoPago" value="<?php  echo $referencia; ?>" >
+                              <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio()">
+                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
+                                Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
+                              <?php }?>
+                            </form>
+                          <?php } ?>
+                      </div>
+                      <div class="card-body" ng-if="AppMovil=='appAno'">
+                        <h1 class="card-title pricing-card-title"><?php $precio=_PRECIO_PLAN_APP; $mes=_MESES_DE_COBRO_ANO_PLAN_BASIC; $calcula=$precio*$mes;echo"$".number_format($calcula);?> <small class="text-muted">/ Anual</small></h1>
+                        <ul class="list-unstyled mt-3 lg-4">
+                          <li><span style="position:relative; float:left; left:50px;"> Sitio web responsivo </span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i>	</li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> App movil, Android y apple</span><i class='fa fa-close iconClose' style="position:relative; float:right; right: 50px; color:red;"></i></li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> Productos ilimitados </span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i>	</li><br>
+                          <li><span style="position:relative; float:left; left:50px;"> Ssl </span><i class='fa fa-check iconCheck' style="position:relative; float:right; right: 50px; color:green;"></i>	</li><br>
+                          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Más información</button>
+                          <li>
+                            <div class="alert alert-primary" role="alert" style="height:45px;">
+                               <h3 style="margin-top: -5px; margin-bottom: 15px;">
+                               Descuento  <a class="alert-link" style="cursor:pointer;"><?php $totalesApp=_PRECIO_PLAN_APP; $mostrar=($totalesApp*12)-$calcula; echo "$".number_format($mostrar);?></a>
+                               </h3> 
+                            </div> 
+                          </li>
+                        </ul>
+                          <?php if($infoTienda['datos'][0]['Plan'] == 'web'){ ?>
+                            <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
+                                <input type="hidden" id="codigoPago" name="codigoPago" value="<?php $referencia; ?>" >  
+                                <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?> 
+                                <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="movilAno()">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                                </button>
+                                <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
+                                  Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
+                                <?php }?>
+                            </form>
+                          <?php  } else if($infoTienda['datos'][0]['Plan'] == 'movil y web'){ ?>
+                            <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
+                                <input type="hidden" id="codigoPago" name="codigoPago" value="<?php $referencia; ?>" >  
+                                <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>
+                                <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="bajar4()">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                                </button>
+                                <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
+                                  Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
+                                <?php }?>
+                            </form>
+                            <?php } else if($infoTienda['datos'][0]['Plan'] == 'movil'){ ?>
+                            <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
+                              <input type="hidden" id="codigoPago" name="codigoPago" value="<?php  echo $referencia; ?>" >
+                              <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio()">
+                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
+                                Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
+                              <?php }?>
                             </form>
                           <?php } ?>
                       </div>
@@ -143,6 +274,17 @@
                                     Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                   <?php }?>
                             </form>
+                          <?php } else if($infoTienda['datos'][0]['Plan'] == 'movil'){ ?>
+                            <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
+                              <input type="hidden" id="codigoPago" name="codigoPago" value="<?php  echo $referencia; ?>" >
+                              <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio3()">
+                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
+                                Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
+                              <?php }?>
+                            </form>
                           <?php } ?>
                       </div>
                       <div class="card-body" ng-if="membresiaWeb=='ano'">
@@ -182,6 +324,17 @@
                                 <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                   Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                 <?php }?>
+                            </form>
+                            <?php } else if($infoTienda['datos'][0]['Plan'] == 'movil'){ ?>
+                            <form action="" name="dataPago" id="dataPago" ng-submit="dataPago()">
+                              <input type="hidden" id="codigoPago" name="codigoPago" value="<?php  echo $referencia; ?>" >
+                              <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio4()">
+                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
+                                Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
+                              <?php }?>
                             </form>
                           <?php } ?>
                       </div>
