@@ -67,12 +67,12 @@
         ?>
         <div class="container">
             <center>
-                <!--<form method="post" id="theForm" action="https://checkout.payulatam.com/ppp-web-gateway-payu/">-->
-                <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
-                    <!--<input name="accountId"                         type="hidden"   value="<?php echo _PAYU_ID_CUENTA?>">-->
-                    <input name="accountId"                         type="hidden"   value="512321">
-                    <!--<input name="merchantId"    id="merchantId"     type="hidden"   value="<?php echo _PAYU_ID_MERCADO?>">-->
-                    <input name="merchantId"    id="merchantId"     type="hidden"   value="508029">
+                <form method="post" id="theForm" action="https://checkout.payulatam.com/ppp-web-gateway-payu/">
+                <!--<form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">-->
+                    <input name="accountId"                         type="hidden"   value="<?php echo _PAYU_ID_CUENTA?>">
+                    <!--<input name="accountId"                         type="hidden"   value="512321">-->
+                    <input name="merchantId"    id="merchantId"     type="hidden"   value="<?php echo _PAYU_ID_MERCADO?>">
+                    <!--<input name="merchantId"    id="merchantId"     type="hidden"   value="508029">-->
                     <input name="description"                       type="hidden"   value="<?php echo $nombreTrans; ?>">
                     <!--<input name="secret"                            type="hidden"   value="pRRXKOl8ikMmt9u">-->
                     <input name="referenceCode" id="referenceCode"  type="hidden"   value="<?php echo $referencia?>">
