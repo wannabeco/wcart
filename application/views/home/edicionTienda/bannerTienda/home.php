@@ -15,16 +15,16 @@
                 <?php echo $infoModulo['nombreModulo'] ?> <!--<small>Estructura de las áreas de su empresa</small>-->
                 <?php if(getPrivilegios()[0]['crear'] == 1){ ?>
                     <div class="btn-group" >
-                        <?php if($infoTienda['Plan']=="web"){?>
-                        <button type="button" class="btn dropdown-toggle"
+                    <?php if($infoTienda['Plan']=="web"){ ?>
+                            <button type="button" class="btn dropdown-toggle"
                                 data-toggle="dropdown">
-                          <?php echo lang("lblAcciones") ?> <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li role="separator" class="divider"></li><li class="dropdown-header"><?php echo lang("lblSeleccioneOpc") ?></li>
-                            <!--<li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> New Banner</a></li>-->
-                            <li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> Nuevo Banner</a></li>
-                        </ul>
+                                <?php echo lang("lblAcciones") ?> <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li role="separator" class="divider"></li><li class="dropdown-header"><?php echo lang("lblSeleccioneOpc") ?></li>
+                                <!--<li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> New Banner</a></li>-->
+                                <li><a class="btn" ng-click="cargaPlantillaControlBanner('',0)"><i class="fa fa-fw fa-plus"></i> Nuevo Banner</a></li>
+                            </ul>
                         <?php } else if($infoTienda['Plan']=="movil y web"){ ?>
                             <button type="button" class="btn dropdown-toggle"
                                 data-toggle="dropdown">
@@ -37,7 +37,7 @@
                             </ul>
                         <?php } else if($infoTienda['Plan']=="app"){?>
                             <button type="button" class="btn dropdown-toggle"
-                                data-toggle="dropdown"> Tu plan incluye pagina web.
+                                data-toggle="dropdown"> Tu plan no incluye pagina web.
                             </button>
                             <!--@if _app_variablesglobales si el valor es 0 no se mostrara el boton-->
                         <?php } if(_DESHABILITA_BOTON_TUTORIALES == 1){?>
@@ -100,7 +100,7 @@
                             </td>
                             <td  class="text-center">
                                 <?php if(getPrivilegios()[0]['editar'] == 1){ ?>
-                                    <a ng-click="cargaPlantillaControlBanner(cat.idBanner,1)" title="<?php echo lang("lbl_boton_edita")?>" class="btn btn-primary btn-fab btn-fab-mini"><i class="material-icons">edit</i></a>
+                                    <a ng-click="cargaPlantillaControlBanner(cat.idBanner,1)" title="<?php echo lang("lbl_boton_edita")?>" class="btn btn-primary btn-fab btn-fab-mini" ><i class="material-icons">edit</i></a>
                                 <?php }?>
                                 <?php if(getPrivilegios()[0]['borrar'] == 1){ ?>
                                     <a ng-click="eliminaBanner(cat.idBanner,'<?php echo lang('lbl_confirm')?>')" title="<?php echo lang("lbl_boton_borra")?>"  class="btn btn-danger btn-fab btn-fab-mini btn-xs"><i class="material-icons">delete</i></a>
@@ -110,7 +110,7 @@
                     </tbody>
                 </table>
                 <div class="alert alert-info" ng-if="Banners.length == 0">
-                  <strong>Vaya!</strong> aún no has creado ningun banner. <button class="btn" style="background:#fff;color:#333" ng-click="cargaPlantillaControlBanner('',0)">CREAR MI PRIMERA BANNER</button>
+                  <strong>Vaya!</strong> aún no has creado ningun banner. <button class="btn" style="background:#fff;color:#333" ng-click="cargaPlantillaControlBanner('',0)">CREAR MI PRIMER BANNER</button>
                 </div>
             </div>
         </div>
@@ -134,7 +134,7 @@
               </div>
           </div>
           <div class="modal-footer"><br><br>
-            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#ed540e; color:#fff; bottom: 20px;right: 20px;">CLOSE WINDOW</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#ed540e; color:#fff; bottom: 20px;right: 20px;">Cerrar ventana</button>
           </div>
         </div>
     </div>

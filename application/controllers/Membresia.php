@@ -126,9 +126,8 @@ class Membresia extends CI_Controller
                     $dataInserta['entidad']         = $lapPaymentMethod;
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                     $dataInserta['codigopago']      = $referenceCode;
-                    //$dataInserta['Plan']            = "movil";
                     $dataInserta['ip']              = getIP();
-                    $dataInserta['plan']            = "app1";
+                    $dataInserta['plan']            = "web1";
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                     $idTienda                       = $_SESSION['project']['info']['idTienda'];
                     $codigo                         = $idTransaccion;
@@ -151,14 +150,13 @@ class Membresia extends CI_Controller
                     $dataInserta['entidad']         = $lapPaymentMethod;
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                     $dataInserta['codigopago']      = $referenceCode;
-                    //$dataInserta['Plan']            = "movil";
                     $dataInserta['ip']              = getIP();
-                    $dataInserta['plan']            = "app2";
+                    $dataInserta['plan']            = "web2";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                     $codigo                         = $idTransaccion;
                     $mensajeMail                    =$_GET['buyerEmail'];
-                    $updateTienda = $this->logica->updatePagoAnoApp($idTienda, $codigo, $mensajeMail);
+                    $updateTienda = $this->logica->updatePagoAnoWeb($idTienda, $codigo, $mensajeMail);
                 }
                 else if($_GET['TX_VALUE']== _PRECIO_PLAN_PRO){
                     //insertar en la tabla
@@ -176,9 +174,8 @@ class Membresia extends CI_Controller
                     $dataInserta['entidad']         = $lapPaymentMethod;
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                     $dataInserta['codigopago']      = $referenceCode;
-                    //$dataInserta['Plan']            = "movil y web";
                     $dataInserta['ip']              = getIP();
-                    $dataInserta['plan']            = "web1";
+                    $dataInserta['plan']            = "pro1";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                     $codigo                         = $idTransaccion;
@@ -201,19 +198,66 @@ class Membresia extends CI_Controller
                     $dataInserta['entidad']         = $lapPaymentMethod;
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                     $dataInserta['codigopago']      = $referenceCode;
-                    //$dataInserta['Plan']            = "movil y web";
                     $dataInserta['ip']              = getIP();
-                    $dataInserta['plan']            = "web2";
+                    $dataInserta['plan']            = "pro2";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                     $codigo                         = $idTransaccion;
                     $mensajeMail                    =$_GET['buyerEmail'];
                     $updateTienda = $this->logica->updatePagoAnoPro($idTienda,$codigo,$mensajeMail);
                 }
+                else if($_GET['TX_VALUE']== _PRECIO_PLAN_APP){
+                    //insertar en la tabla
+                    $estadoTx = lang("trans_aprobada");
+                    $claseLabel = "label-success";
+                    $where['codigoPago']                           = $idTransaccion;
+                    $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                    $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                    $dataInserta['estadoPago']      = $transactionState;
+                    $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                    $dataInserta['transactionid']   = $transactionId;
+                    $dataInserta['reference_pol']   = $reference_pol;
+                    $dataInserta['valor']           = $TX_VALUE;
+                    $dataInserta['moneda']          = $currency;
+                    $dataInserta['entidad']         = $lapPaymentMethod;
+                    $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                    $dataInserta['codigopago']      = $referenceCode;
+                    $dataInserta['ip']              = getIP();
+                    $dataInserta['plan']            = "app1";
+                    $idTienda = $_SESSION['project']['info']['idTienda'];
+                    $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                    $codigo                         = $idTransaccion;
+                    $mensajeMail                    =$_GET['buyerEmail'];
+                    $updateTienda = $this->logica->updatemesApp($idTienda,$codigo,$mensajeMail);
+                }
+                else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_APP * _MESES_DE_COBRO_ANO_PLAN_APP)){
+                    //insertar en la tabla
+                    $estadoTx = lang("trans_aprobada");
+                    $claseLabel = "label-success";
+                    $where['codigoPago']                           = $idTransaccion;
+                    $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                    $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                    $dataInserta['estadoPago']      = $transactionState;
+                    $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                    $dataInserta['transactionid']   = $transactionId;
+                    $dataInserta['reference_pol']   = $reference_pol;
+                    $dataInserta['valor']           = $TX_VALUE;
+                    $dataInserta['moneda']          = $currency;
+                    $dataInserta['entidad']         = $lapPaymentMethod;
+                    $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                    $dataInserta['codigopago']      = $referenceCode;
+                    $dataInserta['ip']              = getIP();
+                    $dataInserta['plan']            = "app2";
+                    $idTienda = $_SESSION['project']['info']['idTienda'];
+                    $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                    $codigo                         = $idTransaccion;
+                    $mensajeMail                    =$_GET['buyerEmail'];
+                    $updateTienda = $this->logica->updatePagoAnoApp($idTienda,$codigo,$mensajeMail);
+                }
             }
             else if($fechaCaducidad > $fehcaActual){
                 if($mes == 0){
-                    if($_GET['TX_VALUE'] == _PRECIO_PLAN_BASIC){
+                     if($_GET['TX_VALUE']== _PRECIO_PLAN_PRO){
                         //insertar en la tabla
                         $estadoTx = lang("trans_aprobada");
                         $claseLabel = "label-success";
@@ -229,58 +273,8 @@ class Membresia extends CI_Controller
                         $dataInserta['entidad']         = $lapPaymentMethod;
                         $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                         $dataInserta['codigopago']      = $referenceCode;
-                        //$dataInserta['Plan']            = "movil";
                         $dataInserta['ip']              = getIP();
-                        $dataInserta['plan']            = "app1";
-                        $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $codigo                         = $idTransaccion;
-                        $mensajeMail                    =$_GET['buyerEmail'];
-                        $updateTienda = $this->logica->updatePagoApp($idTienda,$codigo,$mensajeMail);
-    
-                    }else if($_GET['TX_VALUE']== (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
-                        //insertar en la tabla
-                        $estadoTx = lang("trans_aprobada");
-                        $claseLabel = "label-success";
-                        $where['codigoPago']                           = $idTransaccion;
-                        $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
-                        $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
-                        $dataInserta['estadoPago']      = $transactionState;
-                        $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
-                        $dataInserta['transactionid']   = $transactionId;
-                        $dataInserta['reference_pol']   = $reference_pol;
-                        $dataInserta['valor']           = $TX_VALUE;
-                        $dataInserta['moneda']          = $currency;
-                        $dataInserta['entidad']         = $lapPaymentMethod;
-                        $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
-                        $dataInserta['codigopago']      = $referenceCode;
-                        //$dataInserta['Plan']            = "movil";
-                        $dataInserta['ip']              = getIP();
-                        $dataInserta['plan']            = "app2";
-                        $idTienda = $_SESSION['project']['info']['idTienda'];
-                        $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-                        $codigo                         = $idTransaccion;
-                        $mensajeMail                    =$_GET['buyerEmail'];
-                        $updateTienda = $this->logica->updateAno($idTienda,$codigo,$mensajeMail);
-    
-                    }else if($_GET['TX_VALUE']== _PRECIO_PLAN_PRO){
-                        //insertar en la tabla
-                        $estadoTx = lang("trans_aprobada");
-                        $claseLabel = "label-success";
-                        $where['codigoPago']                           = $idTransaccion;
-                        $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
-                        $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
-                        $dataInserta['estadoPago']      = $transactionState;
-                        $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
-                        $dataInserta['transactionid']   = $transactionId;
-                        $dataInserta['reference_pol']   = $reference_pol;
-                        $dataInserta['valor']           = $TX_VALUE;
-                        $dataInserta['moneda']          = $currency;
-                        $dataInserta['entidad']         = $lapPaymentMethod;
-                        $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
-                        $dataInserta['codigopago']      = $referenceCode;
-                        //$dataInserta['Plan']            = "movil y web";
-                        $dataInserta['ip']              = getIP();
-                        $dataInserta['plan']            = "web1";
+                        $dataInserta['plan']            = "pro1";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
@@ -303,14 +297,62 @@ class Membresia extends CI_Controller
                         $dataInserta['entidad']         = $lapPaymentMethod;
                         $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                         $dataInserta['codigopago']      = $referenceCode;
-                        //$dataInserta['Plan']            = "movil y web";
                         $dataInserta['ip']              = getIP();
-                        $dataInserta['plan']            = "web2";
+                        $dataInserta['plan']            = "pro2";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
                         $mensajeMail                    =$_GET['buyerEmail'];
                         $updateTienda = $this->logica->updateAnoPro($idTienda,$codigo,$mensajeMail);
+    
+                    }
+                    else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_APP)){
+                        //insertar en la tabla
+                        $estadoTx = lang("trans_aprobada");
+                        $claseLabel = "label-success";
+                        $where['codigoPago']                           = $idTransaccion;
+                        $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                        $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                        $dataInserta['estadoPago']      = $transactionState;
+                        $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                        $dataInserta['transactionid']   = $transactionId;
+                        $dataInserta['reference_pol']   = $reference_pol;
+                        $dataInserta['valor']           = $TX_VALUE;
+                        $dataInserta['moneda']          = $currency;
+                        $dataInserta['entidad']         = $lapPaymentMethod;
+                        $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                        $dataInserta['codigopago']      = $referenceCode;
+                        $dataInserta['ip']              = getIP();
+                        $dataInserta['plan']            = "app1";
+                        $idTienda                       = $_SESSION['project']['info']['idTienda'];
+                        $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                        $codigo                         = $idTransaccion;
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updateTienda = $this->logica->updatePagoApp($idTienda,$codigo,$mensajeMail);
+    
+                    }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_APP * _MESES_DE_COBRO_ANO_PLAN_APP)){
+                        //insertar en la tabla
+                        $estadoTx = lang("trans_aprobada");
+                        $claseLabel = "label-success";
+                        $where['codigoPago']                           = $idTransaccion;
+                        $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                        $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                        $dataInserta['estadoPago']      = $transactionState;
+                        $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                        $dataInserta['transactionid']   = $transactionId;
+                        $dataInserta['reference_pol']   = $reference_pol;
+                        $dataInserta['valor']           = $TX_VALUE;
+                        $dataInserta['moneda']          = $currency;
+                        $dataInserta['entidad']         = $lapPaymentMethod;
+                        $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                        $dataInserta['codigopago']      = $referenceCode;
+                        $dataInserta['ip']              = getIP();
+                        $dataInserta['plan']            = "app2";
+                        $idTienda                       = $_SESSION['project']['info']['idTienda'];
+                        $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                        $codigo                         = $idTransaccion;
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updateTienda = $this->logica->updateAnoApp($idTienda,$codigo,$mensajeMail);
     
                     }
                 }
@@ -332,7 +374,7 @@ class Membresia extends CI_Controller
                         $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                         //$dataInserta['Plan']            = "movil y web";
                         $dataInserta['ip']              = getIP();
-                        $dataInserta['plan']            = "app1";
+                        $dataInserta['plan']            = "web1";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
@@ -357,7 +399,7 @@ class Membresia extends CI_Controller
                         $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                         //$dataInserta['Plan']            = "movil y web";
                         $dataInserta['ip']              = getIP();
-                        $dataInserta['plan']            = "app2";
+                        $dataInserta['plan']            = "web2";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
@@ -382,7 +424,7 @@ class Membresia extends CI_Controller
                         $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                         //$dataInserta['Plan']            = "movil y web";
                         $dataInserta['ip']              = getIP();
-                        $dataInserta['plan']            = "web1";
+                        $dataInserta['plan']            = "pro1";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
@@ -407,12 +449,60 @@ class Membresia extends CI_Controller
                         $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                         //$dataInserta['Plan']            = "movil y web";
                         $dataInserta['ip']              = getIP();
-                        $dataInserta['plan']            = "web2";
+                        $dataInserta['plan']            = "pro2";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                         $codigo                         = $idTransaccion;
                         $mensajeMail                    =$_GET['buyerEmail'];
                         $updatemes = $this->logica->updatePagoAnoPro($idTienda,$codigo,$mensajeMail);
+                    }
+                    else if($_GET['TX_VALUE']== _PRECIO_PLAN_APP){
+                        //insertar en la tabla
+                        $estadoTx = lang("trans_aprobada");
+                        $claseLabel = "label-success";
+                        $where['codigoPago']                           = $idTransaccion;
+                        $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                        $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                        $dataInserta['estadoPago']      = $transactionState;
+                        $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                        $dataInserta['transactionid']   = $transactionId;
+                        $dataInserta['reference_pol']   = $reference_pol;
+                        $dataInserta['valor']           = $TX_VALUE;
+                        $dataInserta['moneda']          = $currency;
+                        $dataInserta['entidad']         = $lapPaymentMethod;
+                        $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                        $dataInserta['codigopago']      = $referenceCode;
+                        $dataInserta['ip']              = getIP();
+                        $dataInserta['plan']            = "app1";
+                        $idTienda = $_SESSION['project']['info']['idTienda'];
+                        $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                        $codigo                         = $idTransaccion;
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updateTienda = $this->logica->updatemesApp($idTienda,$codigo,$mensajeMail);
+                    }
+                    else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_APP * _MESES_DE_COBRO_ANO_PLAN_APP)){
+                        //insertar en la tabla
+                        $estadoTx = lang("trans_aprobada");
+                        $claseLabel = "label-success";
+                        $where['codigoPago']                           = $idTransaccion;
+                        $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                        $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                        $dataInserta['estadoPago']      = $transactionState;
+                        $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                        $dataInserta['transactionid']   = $transactionId;
+                        $dataInserta['reference_pol']   = $reference_pol;
+                        $dataInserta['valor']           = $TX_VALUE;
+                        $dataInserta['moneda']          = $currency;
+                        $dataInserta['entidad']         = $lapPaymentMethod;
+                        $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                        $dataInserta['codigopago']      = $referenceCode;
+                        $dataInserta['ip']              = getIP();
+                        $dataInserta['plan']            = "app2";
+                        $idTienda = $_SESSION['project']['info']['idTienda'];
+                        $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                        $codigo                         = $idTransaccion;
+                        $mensajeMail                    =$_GET['buyerEmail'];
+                        $updateTienda = $this->logica->updatePagoAnoApp($idTienda,$codigo,$mensajeMail);
                     }
                     
                 }
@@ -439,7 +529,7 @@ class Membresia extends CI_Controller
                         $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                         //$dataInserta['Plan']            = "movil y web";
                         $dataInserta['ip']              = getIP();
-                        $dataInserta['plan']            = "app1";
+                        $dataInserta['plan']            = "web1";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                 }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
@@ -460,7 +550,7 @@ class Membresia extends CI_Controller
                         $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                         //$dataInserta['Plan']            = "movil y web";
                         $dataInserta['ip']              = getIP();
-                        $dataInserta['plan']            = "app2";
+                        $dataInserta['plan']            = "web2";
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                 }else if($_GET['TX_VALUE'] == _PRECIO_PLAN_PRO){
@@ -479,7 +569,7 @@ class Membresia extends CI_Controller
                         $dataInserta['moneda']          = $currency;
                         $dataInserta['entidad']         = $lapPaymentMethod;
                         $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
-                        $dataInserta['plan']            = "web1";
+                        $dataInserta['plan']            = "pro1";
                         $dataInserta['ip']              = getIP();
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
@@ -500,10 +590,51 @@ class Membresia extends CI_Controller
                         $dataInserta['moneda']          = $currency;
                         $dataInserta['entidad']         = $lapPaymentMethod;
                         $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
-                        $dataInserta['plan']            = "web2";
+                        $dataInserta['plan']            = "pro2";
                         $dataInserta['ip']              = getIP();
                         $idTienda = $_SESSION['project']['info']['idTienda'];
                         $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                }else if($_GET['TX_VALUE']== _PRECIO_PLAN_APP){
+                    //insertar en la tabla
+                    $estadoTx = lang("trans_rechazada");
+                    $claseLabel = "label-danger";
+                    $where['codigoPago']                           = $idTransaccion;
+                    $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                    $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                    $dataInserta['estadoPago']      = $transactionState;
+                    $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                    $dataInserta['transactionid']   = $transactionId;
+                    $dataInserta['reference_pol']   = $reference_pol;
+                    $dataInserta['valor']           = $TX_VALUE;
+                    $dataInserta['moneda']          = $currency;
+                    $dataInserta['entidad']         = $lapPaymentMethod;
+                    $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                    $dataInserta['codigopago']      = $referenceCode;
+                    $dataInserta['ip']              = getIP();
+                    $dataInserta['plan']            = "app1";
+                    $idTienda = $_SESSION['project']['info']['idTienda'];
+                    $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                }
+                else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_APP * _MESES_DE_COBRO_ANO_PLAN_APP)){
+                    //insertar en la tabla
+                    $estadoTx = lang("trans_rechazada");
+                    $claseLabel = "label-danger";
+                    $where['codigoPago']                           = $idTransaccion;
+                    $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                    $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                    $dataInserta['estadoPago']      = $transactionState;
+                    $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                    $dataInserta['transactionid']   = $transactionId;
+                    $dataInserta['reference_pol']   = $reference_pol;
+                    $dataInserta['valor']           = $TX_VALUE;
+                    $dataInserta['moneda']          = $currency;
+                    $dataInserta['entidad']         = $lapPaymentMethod;
+                    $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                    $dataInserta['codigopago']      = $referenceCode;
+                    $dataInserta['ip']              = getIP();
+                    $dataInserta['plan']            = "app2";
+                    $idTienda = $_SESSION['project']['info']['idTienda'];
+                    $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
                 }
             }
             else if ($_GET['transactionState'] == 104 ) {
@@ -528,10 +659,10 @@ class Membresia extends CI_Controller
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                     //$dataInserta['Plan']            = "movil y web";
                     $dataInserta['ip']              = getIP();
-                    $dataInserta['plan']            = "app1";
+                    $dataInserta['plan']            = "web1";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-            }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
+                }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
                     
                     $estadoTx = "Error";
                     $claseLabel = "label-danger";
@@ -549,10 +680,10 @@ class Membresia extends CI_Controller
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                     //$dataInserta['Plan']            = "movil y web";
                     $dataInserta['ip']              = getIP();
-                    $dataInserta['plan']            = "app2";
+                    $dataInserta['plan']            = "web2";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-            }else if($_GET['TX_VALUE'] == _PRECIO_PLAN_PRO){
+                }else if($_GET['TX_VALUE'] == _PRECIO_PLAN_PRO){
 
                     $estadoTx = "Error";
                     $claseLabel = "label-danger";
@@ -568,12 +699,12 @@ class Membresia extends CI_Controller
                     $dataInserta['moneda']          = $currency;
                     $dataInserta['entidad']         = $lapPaymentMethod;
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
-                    $dataInserta['plan']            = "web1";
+                    $dataInserta['plan']            = "pro1";
                     $dataInserta['ip']              = getIP();
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
 
-            }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
+                }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
 
                     $estadoTx = "Error";
                     $claseLabel = "label-danger";
@@ -589,11 +720,51 @@ class Membresia extends CI_Controller
                     $dataInserta['moneda']          = $currency;
                     $dataInserta['entidad']         = $lapPaymentMethod;
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
-                    $dataInserta['plan']            = "web2";
+                    $dataInserta['plan']            = "pro2";
                     $dataInserta['ip']              = getIP();
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-            }
+                }else if($_GET['TX_VALUE']== _PRECIO_PLAN_APP){
+                //insertar en la tabla
+                    $estadoTx = lang("Error");
+                    $claseLabel = "label-danger";
+                    $where['codigoPago']                           = $idTransaccion;
+                    $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                    $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                    $dataInserta['estadoPago']      = $transactionState;
+                    $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                    $dataInserta['transactionid']   = $transactionId;
+                    $dataInserta['reference_pol']   = $reference_pol;
+                    $dataInserta['valor']           = $TX_VALUE;
+                    $dataInserta['moneda']          = $currency;
+                    $dataInserta['entidad']         = $lapPaymentMethod;
+                    $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                    $dataInserta['codigopago']      = $referenceCode;
+                    $dataInserta['ip']              = getIP();
+                    $dataInserta['plan']            = "app1";
+                    $idTienda = $_SESSION['project']['info']['idTienda'];
+                    $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_APP * _MESES_DE_COBRO_ANO_PLAN_APP)){
+                    //insertar en la tabla
+                    $estadoTx = lang("Error");
+                    $claseLabel = "label-danger";
+                    $where['codigoPago']                           = $idTransaccion;
+                    $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                    $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                    $dataInserta['estadoPago']      = $transactionState;
+                    $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                    $dataInserta['transactionid']   = $transactionId;
+                    $dataInserta['reference_pol']   = $reference_pol;
+                    $dataInserta['valor']           = $TX_VALUE;
+                    $dataInserta['moneda']          = $currency;
+                    $dataInserta['entidad']         = $lapPaymentMethod;
+                    $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                    $dataInserta['codigopago']      = $referenceCode;
+                    $dataInserta['ip']              = getIP();
+                    $dataInserta['plan']            = "app2";
+                    $idTienda = $_SESSION['project']['info']['idTienda'];
+                    $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                }
             }
             else if ($_GET['transactionState'] == 7 ) {
                 $estadoTx = lang("trans_pendiente");
@@ -617,10 +788,10 @@ class Membresia extends CI_Controller
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                     //$dataInserta['Plan']            = "movil y web";
                     $dataInserta['ip']              = getIP();
-                    $dataInserta['plan']            = "app1";
+                    $dataInserta['plan']            = "web1";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-            }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
+                }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
                     
                     $estadoTx = lang("trans_pendiente");
                     $claseLabel = "label-warning";
@@ -638,10 +809,10 @@ class Membresia extends CI_Controller
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                     //$dataInserta['Plan']            = "movil y web";
                     $dataInserta['ip']              = getIP();
-                    $dataInserta['plan']            = "app2";
+                    $dataInserta['plan']            = "web2";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-            }else if($_GET['TX_VALUE'] == _PRECIO_PLAN_PRO){
+                }else if($_GET['TX_VALUE'] == _PRECIO_PLAN_PRO){
 
                     $estadoTx = lang("trans_pendiente");
                     $claseLabel = "label-warning";
@@ -657,12 +828,12 @@ class Membresia extends CI_Controller
                     $dataInserta['moneda']          = $currency;
                     $dataInserta['entidad']         = $lapPaymentMethod;
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
-                    $dataInserta['plan']            = "web1";
+                    $dataInserta['plan']            = "pro1";
                     $dataInserta['ip']              = getIP();
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
 
-            }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
+                }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_PRO * _MESES_DE_COBRO_ANO_PLAN_PRO)){
                     
                     $estadoTx = lang("trans_pendiente");
                     $claseLabel = "label-warning";
@@ -678,11 +849,51 @@ class Membresia extends CI_Controller
                     $dataInserta['moneda']          = $currency;
                     $dataInserta['entidad']         = $lapPaymentMethod;
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
-                    $dataInserta['plan']            = "web2";
+                    $dataInserta['plan']            = "pro2";
                     $dataInserta['ip']              = getIP();
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-            }
+                }else if($_GET['TX_VALUE']== _PRECIO_PLAN_APP){
+                    //insertar en la tabla
+                        $estadoTx = lang("trans_pendiente");
+                        $claseLabel = "label-warning";
+                        $where['codigoPago']                           = $idTransaccion;
+                        $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                        $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                        $dataInserta['estadoPago']      = $transactionState;
+                        $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                        $dataInserta['transactionid']   = $transactionId;
+                        $dataInserta['reference_pol']   = $reference_pol;
+                        $dataInserta['valor']           = $TX_VALUE;
+                        $dataInserta['moneda']          = $currency;
+                        $dataInserta['entidad']         = $lapPaymentMethod;
+                        $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                        $dataInserta['codigopago']      = $referenceCode;
+                        $dataInserta['ip']              = getIP();
+                        $dataInserta['plan']            = "app1";
+                        $idTienda = $_SESSION['project']['info']['idTienda'];
+                        $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                    }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_APP * _MESES_DE_COBRO_ANO_PLAN_APP)){
+                        //insertar en la tabla
+                        $estadoTx = lang("trans_pendiente");
+                        $claseLabel = "label-warning";
+                        $where['codigoPago']                           = $idTransaccion;
+                        $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                        $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                        $dataInserta['estadoPago']      = $transactionState;
+                        $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                        $dataInserta['transactionid']   = $transactionId;
+                        $dataInserta['reference_pol']   = $reference_pol;
+                        $dataInserta['valor']           = $TX_VALUE;
+                        $dataInserta['moneda']          = $currency;
+                        $dataInserta['entidad']         = $lapPaymentMethod;
+                        $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                        $dataInserta['codigopago']      = $referenceCode;
+                        $dataInserta['ip']              = getIP();
+                        $dataInserta['plan']            = "app2";
+                        $idTienda = $_SESSION['project']['info']['idTienda'];
+                        $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                    }
             }
             else {
                     $estadoTx=$_GET['mensaje'];
@@ -706,7 +917,7 @@ class Membresia extends CI_Controller
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                     //$dataInserta['Plan']            = "movil y web";
                     $dataInserta['ip']              = getIP();
-                    $dataInserta['plan']            = "app1";
+                    $dataInserta['plan']            = "web1";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
             }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_BASIC * _MESES_DE_COBRO_ANO_PLAN_BASIC)){
@@ -727,7 +938,7 @@ class Membresia extends CI_Controller
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
                     //$dataInserta['Plan']            = "movil y web";
                     $dataInserta['ip']              = getIP();
-                    $dataInserta['plan']            = "app2";
+                    $dataInserta['plan']            = "web2";
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
             }else if($_GET['TX_VALUE'] == _PRECIO_PLAN_PRO){
@@ -746,7 +957,7 @@ class Membresia extends CI_Controller
                     $dataInserta['moneda']          = $currency;
                     $dataInserta['entidad']         = $lapPaymentMethod;
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
-                    $dataInserta['plan']            = "web1";
+                    $dataInserta['plan']            = "pro1";
                     $dataInserta['ip']              = getIP();
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
@@ -767,11 +978,51 @@ class Membresia extends CI_Controller
                     $dataInserta['moneda']          = $currency;
                     $dataInserta['entidad']         = $lapPaymentMethod;
                     $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
-                    $dataInserta['plan']            = "web2";
+                    $dataInserta['plan']            = "pro2";
                     $dataInserta['ip']              = getIP();
                     $idTienda = $_SESSION['project']['info']['idTienda'];
                     $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
-            }
+            }else if($_GET['TX_VALUE']== _PRECIO_PLAN_APP){
+                //insertar en la tabla
+                    $estadoTx = $_GET['mensaje'];
+                    $claseLabel = "";
+                    $where['codigoPago']                           = $idTransaccion;
+                    $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                    $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                    $dataInserta['estadoPago']      = $transactionState;
+                    $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                    $dataInserta['transactionid']   = $transactionId;
+                    $dataInserta['reference_pol']   = $reference_pol;
+                    $dataInserta['valor']           = $TX_VALUE;
+                    $dataInserta['moneda']          = $currency;
+                    $dataInserta['entidad']         = $lapPaymentMethod;
+                    $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                    $dataInserta['codigopago']      = $referenceCode;
+                    $dataInserta['ip']              = getIP();
+                    $dataInserta['plan']            = "app1";
+                    $idTienda = $_SESSION['project']['info']['idTienda'];
+                    $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                }else if($_GET['TX_VALUE'] == (_PRECIO_PLAN_APP * _MESES_DE_COBRO_ANO_PLAN_APP)){
+                    //insertar en la tabla
+                    $estadoTx = $_GET['mensaje'];
+                    $claseLabel = "";
+                    $where['codigoPago']                           = $idTransaccion;
+                    $dataInserta['idTienda']        = $_SESSION['project']['info']['idTienda'];
+                    $dataInserta['nombrePersona']   = $_GET['buyerEmail'];
+                    $dataInserta['estadoPago']      = $transactionState;
+                    $dataInserta['formaPago']       = $_GET['lapPaymentMethodType'];
+                    $dataInserta['transactionid']   = $transactionId;
+                    $dataInserta['reference_pol']   = $reference_pol;
+                    $dataInserta['valor']           = $TX_VALUE;
+                    $dataInserta['moneda']          = $currency;
+                    $dataInserta['entidad']         = $lapPaymentMethod;
+                    $dataInserta['fechaPago']       = date("Y-m-d H:i:s");
+                    $dataInserta['codigopago']      = $referenceCode;
+                    $dataInserta['ip']              = getIP();
+                    $dataInserta['plan']            = "app2";
+                    $idTienda = $_SESSION['project']['info']['idTienda'];
+                    $updatePedido                   = $this->logica->insertdatapago($where,$dataInserta);
+                }
             }
         }
             

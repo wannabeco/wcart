@@ -9,10 +9,10 @@
                     <span class="icon-bar" style="color:#005064"></span>
                 </button>
                 <?php if($_SESSION['project']['info']['idPerfil'] == 6){?>
-                    <a class="navbar-brand" href="<?php echo base_url() ?>App" style="text-transform: capitalize">
+                    <a class="navbar-brand" href="<?php echo base_url() ?>App" style="text-transform: capitalize; width: 400px;">
                          <strong>
-                            <img src="<?php echo base_url() ?>res/img/favicon.png" width="7%" style="border-radius:50%" alt="Icono Wannabe.com.co"> 
-                            <!-- <?php echo lang("titulo")?> --> Wcart
+                            <img src="<?php echo base_url() ?>res/img/logoWabe-02.png" width="35%" style="border-radius:50%" alt="Icono Wannabe.com.co"> 
+                             <?php echo lang("titulo")?> 
                             <?php if(count($infoTienda) > 0){?>
                                 /   <?php echo $infoTienda['datos'][0]['nombreTienda'] ?>
                             <?php }?>
@@ -45,15 +45,14 @@
                                 <strong> Mi app Ios</strong>
                             </a>
                             
-                    <?php  }}?>
-                    <?php } if($infoTienda['datos'][0]['Plan'] === 'web'){?>
+                    <?php  }} if($infoTienda['datos'][0]['Plan'] === 'web'){ ?>
                             <a class="navbar-brand" href="<?php echo _URL_TIENDAS.$infoTienda['datos'][0]['urlAmigable']; ?>" style="" target="_blank">
                                 <strong> ver mi tienda</strong>
                             </a>
-                <?php } else { ?>
-                    <a class="navbar-brand" href="<?php echo base_url() ?>App" style="text-transform: capitalize">
+                <?php } }else { ?>
+                    <a class="navbar-brand" href="<?php echo base_url() ?>App" style="text-transform: capitalize; width: 530px;">
                          <strong>
-                            <img src="<?php echo base_url() ?>res/img/favicon.png" width="7%" style="border-radius:50%" alt="Icono Wannabe.com.co"> 
+                            <img src="<?php echo base_url() ?>res/img/logoWabe-02.png" width="25%" style="border-radius:50%" alt="Icono Wannabe.com.co"> 
                             <?php echo lang("titulo")?> / admin
                         </strong>
                     </a>
