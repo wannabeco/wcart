@@ -349,7 +349,7 @@
 </div>
 <!-- /.container-fluid -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
@@ -359,11 +359,14 @@
           <div class="panelPopUp" id="popPricing">
                 <div class="panelInternoPop" >
                     <div class="row p-2">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8 tituloPopPlan" style="background:#316994; padding:8px; font-size:24px; font-family:inherit; height: 43px; padding-left: 0px; padding-right: 0px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6 tituloPopPlan" style="background:#316994; padding:8px; font-size:24px; font-family:inherit; height: 43px; padding-left: 0px; padding-right: 0px;">
                         <h3 style="margin-top:0px; margin-left:20px; color:white;">Característica</h3>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center tituloPopPlan" style="background:#316994; padding:8px; font-size:24px; font-family:inherit; height: 43px; padding-left: 0px; padding-right: 0px;">
-                        <h3 style="margin-top:0px; margin-left:10px; color:white;">Basico</h3>
+                        <h3 style="margin-top:0px; margin-left:10px; color:white;">Web</h3>
+                      </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center tituloPopPlan" style="background:#316994; padding:8px; font-size:24px; font-family:inherit; height: 43px; padding-left: 0px; padding-right: 0px;">
+                        <h3 style="margin-top:0px; margin-left:10px; color:white;">App</h3>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center tituloPopPlan" style="background:#316994; padding:8px; font-size:24px; font-family:inherit; height: 43px; padding-left: 0px; padding-right: 0px;">
                         <h3 style="margin-top:0px; margin-left:10px; color:white;">Pro</h3>
@@ -372,7 +375,7 @@
                   <!--caracteristicas-->
 
                   <div class="row filaCar p-2" style="margin-top: 20px;">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8 p-2" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6 p-2" style="bottom: 10px;">
                         <strong>APP ANDROID</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:red; bottom: 10px;">
@@ -381,10 +384,13 @@
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
                       </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
+                        <i class='fa fa-check iconCheck'></i>					
+                      </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8 p-2" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6 p-2" style="bottom: 10px;">
                         <strong>APP APPLE</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:red; bottom: 10px;">
@@ -393,22 +399,28 @@
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
                       </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
+                        <i class='fa fa-check iconCheck'></i>					
+                      </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6" style="bottom: 10px;">
                         <strong>CATEGORÍAS ILIMITADAS</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
                       </div>
-                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center">
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
+                        <i class='fa fa-check iconCheck'></i>					
+                      </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
                       </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6" style="bottom: 10px;">
                         <strong>SUBCATEGORÍAS ILIMITADAS</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
@@ -417,10 +429,13 @@
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
                       </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
+                        <i class='fa fa-check iconCheck'></i>					
+                      </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6" style="bottom: 10px;">
                         <strong>PRODUCTOS ILIMITADOS</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
@@ -429,10 +444,13 @@
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
                       </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
+                        <i class='fa fa-check iconCheck'></i>					
+                      </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6" style="bottom: 10px;">
                         <strong>REGISTRO DE USUARIOS</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
@@ -441,10 +459,13 @@
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck'></i>					
                       </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
+                        <i class='fa fa-check iconCheck'></i>					
+                      </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6" style="bottom: 10px;">
                         <strong>CARRITO DE COMPRAS</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
@@ -453,10 +474,13 @@
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck' ></i>					
                       </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
+                        <i class='fa fa-check iconCheck'></i>					
+                      </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6" style="bottom: 10px;">
                         <strong style="float:left;">METODOS DE PAGO </strong><strong> <small style='color:#999; float:left; margin-left: 10px;' class='visible-lg'> (STRIPE, PAGO CONTRA ENTREGA, PAGO EN TIENDA)</small></strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
@@ -465,53 +489,68 @@
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck' ></i>					
                       </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
+                        <i class='fa fa-check iconCheck'></i>					
+                      </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6" style="bottom: 10px;">
                         <strong>HOSTING</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck' ></i>					
                       </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:red; bottom: 10px;">
+                        <i class='fa fa-close iconClose'></i>					
+                      </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
                         <i class='fa fa-check iconCheck' ></i>					
                       </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6" style="bottom: 10px;">
                         <strong>SITIO WEB RESPONSIVO</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
+                        <i class='fa fa-check iconCheck' ></i>					
+                      </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:red; bottom: 10px;">
+                        <i class='fa fa-close iconClose'></i>					
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
+                        <i class='fa fa-check iconCheck' ></i>					
                       </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6" style="bottom: 10px;">
                         <strong>DOMINIO PERSONALIZADO</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
+                        <i class='fa fa-check iconCheck' ></i>					
+                      </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:red; bottom: 10px;">
+                        <i class='fa fa-close iconClose'></i>					
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
+                        <i class='fa fa-check iconCheck' ></i>					
                       </div>
                       <hr>
                     </div>
                     <div class="row filaCar">
-                      <div class="col col-lg-8 col-sm-8 col-xs-8" style="bottom: 10px;">
+                      <div class="col col-lg-6 col-sm-6 col-xs-6" style="bottom: 10px;">
                         <strong>SSL</strong>
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
+                        <i class='fa fa-check iconCheck' ></i>					
+                      </div>
+                      <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:red; bottom: 10px;">
+                        <i class='fa fa-close iconClose'></i>					
                       </div>
                       <div class="col col-lg-2 col-sm-2 col-xs-2 text-center" style="color:green; bottom: 10px;">
-                        <i class='fa fa-check iconCheck' style="color:green;"></i>					
+                        <i class='fa fa-check iconCheck' ></i>					
                       </div>
                       <hr>
                     </div>
