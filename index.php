@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?phpsession_start();
 // ini_set("display_errors",0);
 date_default_timezone_set('America/Bogota');
 /**
