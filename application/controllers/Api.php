@@ -904,7 +904,7 @@ class Api extends CI_Controller
 		{
 			$post['idPersona'] 	= $idusuario;
 			//busco la foto con la palabra que envien
-			$logueo = $this->logicaUsuarios->infoUsuario($idusuario);
+			$logueo = $this->logicaUsuarios->infoUsuario($post);
 			echo json_encode($logueo);
 		}
 		else
