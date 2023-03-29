@@ -270,8 +270,8 @@ $lang['text39']				       = "Código de orden";
 //$lang['text40']				       = "Payment method";
 $lang['text40']				       = "Método de pago";
 $lang['text41']				       = "Total";
-//$lang['text42']				       = "You will be able to choose from your computer the necessary photographs to accompany your product. These photos must be in PNG, JPG or GIF format, must not exceed 5 MB and must keep the size ratio of 1920 X 600 exact (Perfect Square).";
-$lang['text42']				       = "Podrás elegir desde tu ordenador las fotografías necesarias para acompañar tu producto. Estas fotos deben estar en formato PNG, JPG o GIF, no deben exceder los 5 MB y deben mantener la relación de tamaño de 1920 X 600 exacto (Cuadrado Perfecto).";
+//$lang['text42']				       = "You will be able to choose from your computer the necessary photographs to accompany your product. These photos must be in PNG, JPG or GIF format, must not exceed 5 MB and must keep the size ratio of 1920 X 400 exact.";
+$lang['text42']				       = "Podrás elegir desde tu ordenador las fotografías necesarias para acompañar tu producto. Estas fotos deben estar en formato PNG, JPG o GIF, no deben exceder los 5 MB y deben mantener la relación de tamaño de 1920 X 400 exacto.";
 
 
 

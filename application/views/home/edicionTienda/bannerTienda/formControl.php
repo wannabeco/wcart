@@ -31,18 +31,21 @@
           <input type="hidden" name="fotoBanner" id="fotoBanner" value="<?php echo (isset($datos['fotoBanner']))?$datos['fotoBanner']:''; ?>"  data-validation="<?php echo lang("text29")?>">
       </div>
       <!-- tipo de banner -->
+      <h3 style="margin:0 0 20px 0;font-weight:bold">
+            <strong>Selecciona el tipo de Banner</strong>
+      </h3>
       <div class="form-group label-floating">
           <label class="control-label" for="tipoLink">Tipo Banner</label>
           <select onchange="angular.element(document.getElementById('formulario')).scope().cambiaElemento()" name="tipoLink" id="tipoLink"  class="form-control">                               
-                  <option  selected disabled value="0">Selecciones el Tipo de banner</option>
-                  <option <?php if(isset($datos['tipoLink']) && $datos['tipoLink'] == "producto"){ ?>selected<?php } ?>  value="producto">producto</option>
-                  <option <?php if(isset($datos['tipoLink']) && $datos['tipoLink'] == "url"){ ?>selected<?php } ?>  value="url">url</option>
+            <option  selected disabled value="0">Selecciones Tipo de banner</option>
+            <option <?php if(isset($datos['tipoLink']) && $datos['tipoLink'] == "producto"){ ?>selected<?php } ?>  value="producto">producto</option>
+            <option <?php if(isset($datos['tipoLink']) && $datos['tipoLink'] == "url"){ ?>selected<?php } ?>  value="url">url</option>
           </select>
       </div> 
 
       <div class="form-group  label-floating elementos link">
           <label class="control-label" for="linkBanner">link Banner</label>
-          <input style="text-transform: uppercase" tabindex="2" autocomplete="off" id="linkBanner" name="linkBanner"  class="form-control" value="<?php echo (isset($datos['linkBanner']))?$datos['linkBanner']:''; ?>" type="text">
+          <input style="text-transform: uppercase" tabindex="2" autocomplete="off" id="linkBanner" name="linkBanner"  class="form-control" value="<?php echo (isset($datos['linkBanner']))?$datos['linkBanner']:''; ?>" placeholder="https://www.url.com" type="text">
           <p class="help-block"></p>
       </div>
 

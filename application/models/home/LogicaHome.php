@@ -751,25 +751,53 @@ class LogicaHome  {
 
         // var_dump($post);die();
         if($edita == 0)//agrega
-        {
-            unset($post['edita']);
-            unset($post['idBanner']);
-            $post['idTienda']           = mb_strtoupper($post['idTienda']);
-            $post['tituloBanner']       = mb_strtoupper($post['tituloBanner']);
-            //var_dump($post);die();
-            $resultado = $this->ci->dbHome->procesaBanner($post);
-            if($resultado > 0)
-            {
-                $salida =   "";
-                $salida =   array("mensaje"=>lang("lbl_alert_exito"),
-                                "datos"=>$resultado,
-                                "continuar"=>1);
+        {   
+            if($post["idCategoria"]==""){
+                
+                //var_dump("aca",$post);die();
+                unset($post['edita']);
+                unset($post['idBanner']);
+                $post['idTienda']           = mb_strtoupper($post['idTienda']);
+                $post['tituloBanner']       = mb_strtoupper($post['tituloBanner']);
+                $post['idCategoria']        = 0;
+                $post['idSubcategoria']     = 0;
+                $post['idPresentacion']     = 0;
+                //var_dump($post);die();
+                $resultado = $this->ci->dbHome->procesaBanner($post);
+                if($resultado > 0)
+                {
+                    $salida =   "";
+                    $salida =   array("mensaje"=>lang("lbl_alert_exito"),
+                                    "datos"=>$resultado,
+                                    "continuar"=>1);
+                }
+                else
+                {
+                    $salida =   array("mensaje"=>"No se ha podido crear el banner, intente de nuevo más tarde",
+                                    "datos"=>array(),
+                                    "continuar"=>0);
+                }
             }
-            else
-            {
-                $salida =   array("mensaje"=>"No se ha podido crear el banner, intente de nuevo más tarde",
-                                "datos"=>array(),
-                                "continuar"=>0);
+            else if($post["idCategoria"] !=""){
+                unset($post['edita']);
+                unset($post['idBanner']);
+                $post['idTienda']           = mb_strtoupper($post['idTienda']);
+                $post['tituloBanner']       = mb_strtoupper($post['tituloBanner']);
+                //var_dump($post);die();
+                $resultado = $this->ci->dbHome->procesaBanner($post);
+                if($resultado > 0)
+                {
+                    $salida =   "";
+                    $salida =   array("mensaje"=>lang("lbl_alert_exito"),
+                                    "datos"=>$resultado,
+                                    "continuar"=>1);
+                }
+                else
+                {
+                    $salida =   array("mensaje"=>"No se ha podido crear el banner, intente de nuevo más tarde",
+                                    "datos"=>array(),
+                                    "continuar"=>0);
+                }
             }
         }
         else//actualiza
@@ -779,8 +807,8 @@ class LogicaHome  {
                 $where['idBanner']                  = $idBanner;
                 $dataActualiza['tituloBanner']      = mb_strtoupper($post['tituloBanner']);
                 $dataActualiza['fotoBanner']        = $post['fotoBanner'];   
-                $dataActualiza['tipoLink']          = $tipoLink;
-                $dataActualiza['linkBanner']        = $linkBanner;
+                $dataActualiza['tipoLink']          = $post['tipoLink'];
+                $dataActualiza['linkBanner']        = "";
                 $dataActualiza['idCategoria']       = $post['idCategoria'];
                 $dataActualiza['idSubcategoria']    = $post['idSubcategoria'];
                 $dataActualiza['idPresentacion']    = $post['idPresentacion'];
@@ -807,9 +835,9 @@ class LogicaHome  {
                 $dataActualiza['fotoBanner']        = $post['fotoBanner'];   
                 $dataActualiza['tipoLink']          = $post['tipoLink'];
                 $dataActualiza['linkBanner']        = $post['linkBanner'];
-                $dataActualiza['idCategoria']       = $idCategoria;
-                $dataActualiza['idSubcategoria']    = $idSubcategoria;
-                $dataActualiza['idPresentacion']    = $idPresentacion;
+                $dataActualiza['idCategoria']       = 0;
+                $dataActualiza['idSubcategoria']    = 0;
+                $dataActualiza['idPresentacion']    = 0;
                 $resultado = $this->ci->dbHome->actualizaBanner($where,$dataActualiza);
                 if($resultado > 0)
                 {

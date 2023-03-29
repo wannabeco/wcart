@@ -1164,9 +1164,9 @@ public function cargaPlantillaCargaFotos()
 	        $config['allowed_types'] 	= 'gif|jpg|png|webp';
 	        $config['max_size'] 	 	= '5000';
             $config['min_width']     	= '1920';
-            $config['min_height']    	= '600';
+            $config['min_height']    	= '400';
 			$config['max_width']  		= '1920';
-        	$config['max_height']  		= '600';
+        	$config['max_height']  		= '400';
 	        $config['encrypt_name']  	= TRUE;
 	        $file_element_name 		 	= $caja;	
 	        $this->load->library('upload', $config);

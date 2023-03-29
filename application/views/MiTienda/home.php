@@ -181,6 +181,12 @@
                                             <input autocomplete="off" id="urlFacebook" name="urlFacebook"  class="form-control" value="<?php echo (isset($infoTienda['urlFacebook']))?$infoTienda['urlFacebook']:''; ?>" type="text">
                                         </div>
                                     </div>
+                                    <div  class="col col-lg-3">
+                                        <div class="form-group  label-floating">
+                                            <label class="control-label" for="urlInstagram"><i class="fa fa-instagram"></i> Url Instagram</label>
+                                            <input autocomplete="off" id="urlInstagram" name="urlInstagram"  class="form-control" value="<?php echo (isset($infoTienda['urlInstagram']))?$infoTienda['urlInstagram']:''; ?>" type="text">
+                                        </div>
+                                    </div>
                                     <div  class="col col-lg-12">
                                         <?php if($estadoTienda == 1){ ?>
                                         <button type="submit" class="btn btn-raised btn-primary" style="position:relative; float:right; right:20px;" id="DatosBasicos" ng-click="getdatos()">ACTUALIZAR DATOS BASICOS</button>
