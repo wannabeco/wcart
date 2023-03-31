@@ -295,12 +295,12 @@ class LogicaAgendas  {
 
                         $citas          = $this->ci->dbAgendas->consultaAgendaEspecialista($whereCitas);
 
-                        $mensaje                     =  "Se ha realizado la asignación de la cita médica. A continuación se mostrará la información de su cita.<br><br>";
-                        $mensaje                    .=  "<strong>Especialista:</strong> ".$citas[0]['nombre']." ".$citas[0]['apellido']."<br>";
-                        $mensaje                    .=  "<strong>Fecha:</strong> ".$fechaCita."<br>";
-                        $mensaje                    .=  "<strong>Hora de la cita:</strong> ".$horaCita."<br><br>";
-                        $mensaje                    .=  "Recuerde que debe estar 15 minutos antes de la cita. Si desea cancelar su cita debe hacerlo con 8 horas de anticipación, comunicándose al teléfono: 404 8985 EXT 101 ó al celular 322 259 1710.";
-
+                        $mensajeenviar                     =  "Se ha realizado la asignación de la cita médica. A continuación se mostrará la información de su cita.<br><br>";
+                        $mensajeenviar                    .=  "<strong>Especialista:</strong> ".$citas[0]['nombre']." ".$citas[0]['apellido']."<br>";
+                        $mensajeenviar                    .=  "<strong>Fecha:</strong> ".$fechaCita."<br>";
+                        $mensajeenviar                    .=  "<strong>Hora de la cita:</strong> ".$horaCita."<br><br>";
+                        $mensajeenviar                    .=  "Recuerde que debe estar 15 minutos antes de la cita. Si desea cancelar su cita debe hacerlo con 8 horas de anticipación, comunicándose al teléfono: 404 8985 EXT 101 ó al celular 322 259 1710.";
+                        $mensaje = plantillaMail($mensajeenviar);
                         sendMail($post['email_paciente'],"Asignación cita de ".$citas[0]['des_servicios'],$mensaje);
 
                     }
@@ -339,12 +339,12 @@ class LogicaAgendas  {
 
                         $citas          = $this->ci->dbAgendas->consultaAgendaEspecialista($whereCitas);
 
-                        $mensaje                     =  "Se ha realizado la asignación de la cita médica. A continuación se mostrará la información de su cita.<br><br>";
-                        $mensaje                    .=  "<strong>Especialista:</strong> ".$citas[0]['nombre']." ".$citas[0]['apellido']."<br>";
-                        $mensaje                    .=  "<strong>Fecha:</strong> ".$fechaCita."<br>";
-                        $mensaje                    .=  "<strong>Hora de la cita:</strong> ".$horaCita."<br>";
-                        $mensaje                    .=  "Recuerde que debe estar 15 minutos antes de la cita. Si desea cancelar su cita debe hacerlo con 8 horas de anticipación, comunicándose al teléfono: 404 8985 EXT 101 ó al celular 322 259 1710.";
-
+                        $mensajeenviar                     =  "Se ha realizado la asignación de la cita médica. A continuación se mostrará la información de su cita.<br><br>";
+                        $mensajeenviar                    .=  "<strong>Especialista:</strong> ".$citas[0]['nombre']." ".$citas[0]['apellido']."<br>";
+                        $mensajeenviar                    .=  "<strong>Fecha:</strong> ".$fechaCita."<br>";
+                        $mensajeenviar                    .=  "<strong>Hora de la cita:</strong> ".$horaCita."<br>";
+                        $mensajeenviar                    .=  "Recuerde que debe estar 15 minutos antes de la cita. Si desea cancelar su cita debe hacerlo con 8 horas de anticipación, comunicándose al teléfono: 404 8985 EXT 101 ó al celular 322 259 1710.";
+                        $mensaje = plantillaMail($mensajeenviar);
                         sendMail($post['email_paciente'],"Asignación cita de ".$citas[0]['des_servicios'],$mensaje);
 
                     }

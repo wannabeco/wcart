@@ -1,5 +1,5 @@
 
-        <h2>Bienvenido a Wcart</h2>
+        <h2>Bienvenido a WabeShop</h2>
         <p style=" width:100%;" > 
             Una nueva forma de vender en linea.
         </p>
@@ -11,7 +11,7 @@
         </p>
 
         <p style= "width:100%;" > 
-            Para acceder a la zona administrativa de su tienda haga <a href="http://www.wcart.com.co/admin" target="_blank" class="position">Click aquí</a>.
+            Para acceder a la zona administrativa de su tienda haga <a href="http://www.wabeshop.com/admin" target="_blank" class="position">Click aquí</a>.
         </p>
 
         <p style= width:100%;"> 

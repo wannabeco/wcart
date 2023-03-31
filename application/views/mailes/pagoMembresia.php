@@ -43,12 +43,8 @@
         </tr>
         <?php if($appMovil = "0"){?>
         <tr>
-            <td>Aplicacion en App store</td>
-            <td style="margin-left: 50px;">7 dias</td>
-        </tr>
-        <tr>
-            <td>Aplicacion en Play store</td>
-            <td style="margin-left: 50px;">7 dias</td>
+            <td>Pagina Web</td>
+            <td style="margin-left: 50px;">ya disponible</td>
         </tr>
         <?php } if($appMovil = "1"){ ?>
         <tr>
@@ -66,7 +62,7 @@
         <?php } ?>
         <tr>
             <td>
-                Recuerda, para administrar tu tienda <a href="http://www.wcart.com.co/admin" target="_blank" class="position">Aquí</a>.    
+                Recuerda, para administrar tu tienda <a href="http://www.wabeshop.com/admin" target="_blank" class="position">Aquí</a>.    
             </td>
         </tr>
         
