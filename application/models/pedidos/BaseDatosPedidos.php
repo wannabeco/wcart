@@ -54,6 +54,7 @@ class BaseDatosPedidos extends CI_Model {
         $this->tableInventario           = "app_inventario_producto";
         $this->tablePersonasEntrega      = "app_remitentes_limon";
         $this->tablePaises               = "app_paises";
+        $this->tableClientes             = "app_clientes_tienda";
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -241,6 +242,7 @@ class BaseDatosPedidos extends CI_Model {
         }
         $this->db->from($this->tablePedidos." p");
         $this->db->join($this->tablePersonas." per","per.idPersona=p.idPersona",'INNER');
+        $this->db->join($this->tableClientes." cli","cli.idPersona=p.idPersona",'INNER');
         $this->db->join($this->tableEstadoPedido." e","e.idEstadoPedido=p.estadoPedido",'INNER');
         $this->db->join($this->tableConjuntos." c","c.idConjunto=per.idConjunto",'LEFT');
         //$this->db->join($this->tableCiudadesVenta." ciu","ciu.idCiudad=p.idCiudad",'INNER');
