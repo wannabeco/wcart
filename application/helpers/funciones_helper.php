@@ -135,7 +135,7 @@ function plantillaMail($mensaje)
         $plantilla .= '<html xmlns="http://www.w3.org/1999/xhtml">';
         $plantilla .= '<head> ';
             $plantilla .= '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';	 
-            $plantilla .= '<title>Wcart</title>	'; 
+            $plantilla .= '<title>WabeShop</title>	'; 
             $plantilla .= '<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	';
         $plantilla .= '</head>';
         $plantilla .= '<body style="margin: 0; padding: 0;">';
@@ -143,7 +143,7 @@ function plantillaMail($mensaje)
             $plantilla .= '<table align="left" border="0" border="1" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">';
                 $plantilla .= '<tr>';
                     $plantilla .= '<td align="left" bgcolor="#eee" style="padding: 20px 0 20px 40px; width:200px;">';
-                        $plantilla .= '<img src="'.base_url('res/img/logo.png').'" alt="Logo Wcart" width="40%" style="display: block;" />';
+                        $plantilla .= '<img src="'.base_url('res/img/logo.png').'" alt="Logo WabeShop" width="40%" style="display: block;" />';
                     $plantilla .= '</td>';
                 $plantilla .= '</tr>';
                 $plantilla .= '<tr>';

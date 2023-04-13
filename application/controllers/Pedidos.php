@@ -621,8 +621,9 @@ class Pedidos extends CI_Controller
         $condicion['codigoPedido']      = $reference_sale;
         $updatePedido                   = $this->logica->actualizaPedido($dataInserta,$condicion);
         //envia el mensaje al administrador de la tienda diciendo que el pedido llego
-        $mensajeMail  = "Confirmación de pago del pedido <strong>".$reference_sale."</strong><br><br>";
-        sendMail(_ADMIN_PEDIDOS,"Estado de pago del pedido ".$reference_sale,$mensajeMail);
+        $mensajeenviar  = "Confirmación de pago del pedido <strong>".$reference_sale."</strong><br><br>";
+        $mensaje = plantillaMail($mensajeenviar);
+        sendMail(_ADMIN_PEDIDOS,"Estado de pago del pedido ".$reference_sale,$mensaje);
     }
 
     public function confirmacionPagoWompi()
