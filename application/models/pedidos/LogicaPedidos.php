@@ -19,6 +19,7 @@ class LogicaPedidos  {
         $this->ci = &get_instance();
         $this->ci->load->model("pedidos/BaseDatosPedidos","dbPedidos");//reemplazar por el archivo de base de datos real
         $this->ci->load->model("general/BaseDatosGral","dbGeneral");//reemplazar por el archivo de base de datos real
+        $this->ci->load->model("MiTienda/LogicaMiTienda", "LogicaMiTienda");//logica mi tienda
     } 
     public function getPedidos($where=array())
     {
@@ -213,6 +214,7 @@ class LogicaPedidos  {
         $actualizoPedido = $this->ci->dbPedidos->updatePedido($wherePedido,$dataActualiza);
         $infoPedido      = $this->ci->dbPedidos->getPedidos(array("p.idPedido"=>$idPedido));
         $productosPedido = $this->ci->dbPedidos->productosPedidos(array("idPedido"=>$idPedido));
+        $infoTienda	     = $this->ci->LogicaMiTienda->infoTienda($_SESSION['project']['info']['idTienda']);
         //var_dump($infoPedido);
         //si el pedido es actualizado y el pago es realizado entonces descuento cantidad del stock, o mejor dicho agrego un movimiento de salida.
        /* if($estadoPago == _ID_ESTADO_PAGO)//realizo el moviento y todo lo que con el lleve. @todo _ID_ESTADO_PAGO esta en el modulo de variables globales
@@ -253,7 +255,7 @@ class LogicaPedidos  {
             {
                 $mensaje  = "El pedido número ".$infoPedido[0]['idPedido']." ha sido recibido.";
             }
-            $fcm_access_key_api = trim($infoTienda['datos'][0]['FCMkey']);
+            $fcm_access_key_api = trim($infoTienda[0]['FCMkey']);
             $envioFCM = sendFCM($tituloMensaje,$mensaje,$infoPedido[0]['FCMTokenTienda'],$fcm_access_key_api);
             //registro la notificacion en la base de datos
             $datosNotificacion['idPersona'] = $infoPedido[0]['idPersona'];
