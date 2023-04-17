@@ -253,7 +253,8 @@ class LogicaPedidos  {
             {
                 $mensaje  = "El pedido número ".$infoPedido[0]['idPedido']." ha sido recibido.";
             }
-            $envioFCM = sendFCM($tituloMensaje,$mensaje,$infoPedido[0]['FCMTokenTienda']);
+            $fcm_access_key_api = trim($infoTienda['datos'][0]['FCMkey']);
+            $envioFCM = sendFCM($tituloMensaje,$mensaje,$infoPedido[0]['FCMTokenTienda'],$fcm_access_key_api);
             //registro la notificacion en la base de datos
             $datosNotificacion['idPersona'] = $infoPedido[0]['idPersona'];
             $datosNotificacion['idTienda']  = $_SESSION['project']['info']['idTienda'];
