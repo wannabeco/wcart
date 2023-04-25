@@ -89,7 +89,7 @@
                             </td>
                             <!-- <td class="text-center">{{cat.idBanner}}</td> -->
                             <td>
-                            <img src="<?php echo base_url()?>assets/uploads/files/<?php echo $_SESSION['project']['info']['idTienda'] ?>/{{cat.fotoBanner}}" id="fotoBanner" name="fotoBanner" width="180px"alt=""> 
+                            <img src="<?php echo base_url()?>assets/uploads/files/<?php echo $_SESSION['project']['info']['idTienda'] ?>/{{cat.fotoBanner}}?<?php echo rand(1,1000)?>" id="fotoBanner" name="fotoBanner" width="180px"alt=""> 
                                 {{cat.tituloBanner}}
                             </td>
                             <td align="center">
