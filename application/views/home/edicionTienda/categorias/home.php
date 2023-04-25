@@ -72,7 +72,7 @@
                             <td class="text-center ordenador" data-idCont="{{cat.idProducto}}"><span class="glyphicon glyphicon-move seleccionador" title="Ordenar contenido" style="cursor:move"></span></td>
                             <!-- <td class="text-center">{{cat.idProducto}}</td> -->
                             <td>
-                                <img src="<?php echo base_url()?>assets/uploads/files/<?php echo $_SESSION['project']['info']['idTienda']?>/{{cat.foto}}" width="50px" alt=""> 
+                                <img src="<?php echo base_url()?>assets/uploads/files/<?php echo $_SESSION['project']['info']['idTienda']?>/{{cat.foto}}?<?php echo rand(1,1000)?>" width="50px" alt=""> 
                                 {{cat.nombreProducto}}
                             </td>
                             <td align="center">
