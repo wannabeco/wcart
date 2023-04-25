@@ -407,6 +407,8 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 					$("#"+caja).val(json.foto);
 					$("#"+preloader).hide();
 					$("#botonProcesar").removeAttr("disabled");
+					//activo el recortador de imagen.
+					constantes.recortador(1,json.idTienda,json.urlCompleta,json.foto,imagen);
 				}
 				else
 				{
@@ -1142,6 +1144,9 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 					$("#"+caja).val(json.foto);
 					$("#"+preloader).hide();
 					$("#botonProcesar").removeAttr("disabled");
+					
+					//activo el recortador de imagen.
+					constantes.recortador(2,json.idTienda,json.urlCompleta,json.foto,imagen);
 				}
 				else
 				{

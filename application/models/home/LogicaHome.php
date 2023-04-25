@@ -123,6 +123,7 @@ class LogicaHome  {
         {
             $where['idProducto']            = $idProducto;
             $dataActualiza['nombreProducto'] = mb_strtoupper($post['nombreProducto']);
+            $dataActualiza['foto']           = $post['foto'];
             $resultado = $this->ci->dbHome->actualizaCategoria($where,$dataActualiza);
             if($resultado > 0)
             {

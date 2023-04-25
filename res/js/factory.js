@@ -95,6 +95,75 @@ project.factory("constantes", function()
 					}
 				}
 			);
+		},
+		recortador:function(tipo,idtienda,urlImg,nombreImagen,vistaPrevia){
+			$("#panelRecorte").show();
+			//pongo la imagen en el lienzo para recortar
+			$("#imagenRecortar").attr("src",urlImg);
+			//pongo el id de la tienda
+			$("#idTiendarecorte").val(idtienda);
+			//inicializo el plugin de recorte de imagen
+			setTimeout(function(){
+				if(tipo == 1){//imagenes cuadradas
+					$("#imagenRecortar").rcrop({
+						minSize : [200,200],
+						//maxSize : [1000,1000],
+						preserveAspectRatio : true,
+						full : true
+					});
+				}
+				else if(tipo == 2){//banners
+					$("#imagenRecortar").rcrop({
+						minSize : [1000,300],
+						//maxSize : [1000,1000],
+						preserveAspectRatio : true,
+						full : true
+					});
+				}
+
+				$("#recortarBtn").click(function(){
+					var srcOriginal = $("#imagenRecortar").rcrop('getDataURL');
+					//actualizo la url de la nueva tienda para guardarla
+					$("#imagenRecortada").val(srcOriginal);
+					//proceso a enviar por Ajax la nueva imagen recortada
+					var formData 	=   new FormData();
+					formData.append("idtienda", idtienda);
+					formData.append("nombreImagen", nombreImagen);
+					formData.append("nuevaImagen", srcOriginal);
+					var controlador = 	configLogin.apiUrl+"GestionTienda/recortaFoto"; 
+					//hacemos la petición ajax  
+					parametros	=	formData;
+					$.ajax({
+						url: controlador,  
+						type: 'POST',
+						data: parametros,
+						dataType:"json",
+						cache: false,
+						contentType: false,
+						processData: false,
+						beforeSend: function(){
+							// $("#"+preloader).show();
+							// $("#botonProcesar").attr("disabled","disabled");
+									
+						},
+						//una vez finalizado correctamente
+						success: function(json){
+							$("#panelRecorte").hide();
+							$("#imagenRecortar").attr("src","");
+							$("#idTiendarecorte").val("");
+							$("#imagenRecortada").val("");
+						},
+						//si ha ocurrido un error
+						error: function(){
+							
+						}
+					});
+					//actualizo la vista previa
+					$('#'+vistaPrevia).attr('src',srcOriginal);
+				});
+
+
+			},500);
 		}
 	   
     }

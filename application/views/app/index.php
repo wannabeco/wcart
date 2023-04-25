@@ -54,6 +54,18 @@
     <?php }?>
 </head>
 <body class="ng-cloak " ng-cloak>
+
+    <div style='padding:2%;display:none;position:fixed;top:0;left:0;z-index:100000000;background:url(<?php echo base_url()?>res/img/trans.png);width:100%;height:100%' id='panelRecorte'>
+        <div class="container text-center" style="background:#fff;padding:2% 8%;">
+            <h2>Recorta la imagen al tamaño ideal</h2>
+            <p>Usamos este recortador para garantizar la mejor organización de las fotos en tu tienda y/o app móvil</p><br>
+            <img src="<?php echo base_url()?>res/img/cargaFoto.png" id="imagenRecortar" alt="" height="500px" style="border:2px solid #ccc"><br><br>
+            <input type="hidden" id="imagenRecortada">
+            <input type="hidden" id="idTiendarecorte">
+            <button class="btn btn-danger btn-raised" id="recortarBtn">RECORTAR</button>
+        </div>
+    </div>
+
     <div id="wrapper">
         <!-- Menú General Empresas-->
             <?php echo traerCabeza() ?>
@@ -120,5 +132,7 @@
 <?php } ?>
 
 <script src="https://kit.fontawesome.com/44485b0623.js" crossorigin="anonymous"></script>
+    <script src="<?php echo base_url()?>res/js/crop/rcrop.min.js" ></script>
+    <link href="<?php echo base_url()?>res/js/crop/rcrop.min.css" media="screen" rel="stylesheet" type="text/css">
 </body>
 </html>

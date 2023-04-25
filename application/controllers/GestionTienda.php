@@ -495,6 +495,7 @@ class GestionTienda extends CI_Controller
 	        {
 				$salida = array("mensaje"=>lang("text19.6"),
 								"continuar"=>0,
+								"idTienda"=>$idTienda,
 								"urlCompleta"=>"",
 								"foto"=>"",
 								"datos"=>"");  
@@ -509,6 +510,7 @@ class GestionTienda extends CI_Controller
 
 	            $salida = array("mensaje"=>lang("text19.7"),
             				    "continuar"=>1,
+								"idTienda"=>$idTienda,
 								"urlCompleta"=>base_url()."assets/uploads/files/".$idTienda."/".$data['file_name'],
 								"foto"=>$data['file_name'],
             				    "datos"=>$data['file_name']);  	
@@ -518,6 +520,7 @@ class GestionTienda extends CI_Controller
 	    {
 			$salida = array("mensaje"=>lang("text19.8"),
 							"continuar"=>0,
+							"idTienda"=>$idTienda,
 							"urlCompleta"=>"",
 							"foto"=>"",
 							"datos"=>""); 
@@ -1162,11 +1165,11 @@ public function cargaPlantillaCargaFotos()
 
 			$config['upload_path'] 	 	= 'assets/uploads/files/'.$idTienda.'/';
 	        $config['allowed_types'] 	= 'gif|jpg|png|webp';
-	        $config['max_size'] 	 	= '5000';
-            $config['min_width']     	= '1920';
-            $config['min_height']    	= '400';
-			$config['max_width']  		= '1920';
-        	$config['max_height']  		= '400';
+	       // $config['max_size'] 	 	= '5000';
+            //$config['min_width']     	= '1920';
+            //$config['min_height']    	= '400';
+			//$config['max_width']  		= '1920';
+        	//$config['max_height']  		= '400';
 	        $config['encrypt_name']  	= TRUE;
 	        $file_element_name 		 	= $caja;	
 	        $this->load->library('upload', $config);
@@ -1175,6 +1178,7 @@ public function cargaPlantillaCargaFotos()
 	        {
 				$salida = array("mensaje"=>lang("text42"),
 								"continuar"=>0,
+								"idTienda"=>$idTienda,
 								"urlCompleta"=>"",
 								"foto"=>"",
 								"datos"=>"");  
@@ -1189,6 +1193,7 @@ public function cargaPlantillaCargaFotos()
 
 	            $salida = array("mensaje"=>lang("text19.7"),
             				    "continuar"=>1,
+								"idTienda"=>$idTienda,
 								"urlCompleta"=>base_url()."assets/uploads/files/".$idTienda."/".$data['file_name'],
 								"foto"=>$data['file_name'],
             				    "datos"=>$data['file_name']);  	
@@ -1198,6 +1203,7 @@ public function cargaPlantillaCargaFotos()
 	    {
 			$salida = array("mensaje"=>lang("text19.8"),
 							"continuar"=>0,
+							"idTienda"=>$idTienda,
 							"urlCompleta"=>"",
 							"foto"=>"",
 							"datos"=>""); 
@@ -1237,5 +1243,23 @@ public function cargaPlantillaCargaFotos()
 			//$salida["persistencia"]  = 0;
 			$salida["labelBtn"]  = lang("reg_btn_crea");
 		echo $this->load->view("app/modalINfo",$salida,true);
+	}
+	public function recortaFoto(){
+		extract($_POST);
+		//var_dump($_POST);
+		$rutaImagen = 'assets/uploads/files/'.$idtienda.'/'.$nombreImagen;
+		$type = pathinfo($rutaImagen, PATHINFO_EXTENSION);
+		
+		$ifp = fopen($rutaImagen, 'wb'); 
+		// separo por comas, solo debe haber 1 coma
+		// $data[ 0 ] == "data:image/png;base64"
+		// $data[ 1 ] == <actual base64 string>
+		$data = explode( ',', $nuevaImagen );
+		// reescribo la imagen
+		fwrite( $ifp, base64_decode( $data[ 1 ] ) );
+		// clean up the file resource
+		fclose( $ifp ); 
+		$salida = array("continuar"=>1);
+		echo json_encode($salida);
 	}
 }
