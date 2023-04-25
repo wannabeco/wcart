@@ -100,6 +100,16 @@ project.factory("constantes", function()
 			$("#panelRecorte").show();
 			//pongo la imagen en el lienzo para recortar
 			$("#imagenRecortar").attr("src",urlImg);
+
+			if(tipo == 1){//imagenes cuadradas
+				$("#imagenRecortar").attr("width","100%");
+				$("#imagenRecortar").removeAttr("height");
+			}
+			else if(tipo == 2){//banners
+				$("#imagenRecortar").attr("width","100%");
+				$("#imagenRecortar").removeAttr("height");
+			}
+
 			//pongo el id de la tienda
 			$("#idTiendarecorte").val(idtienda);
 			//inicializo el plugin de recorte de imagen
