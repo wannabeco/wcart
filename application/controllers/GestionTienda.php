@@ -352,7 +352,7 @@ class GestionTienda extends CI_Controller
 
 			$config['upload_path'] 	 = 'assets/uploads/files/'.$idTienda.'/';
 	        $config['allowed_types'] = 'gif|jpg|png';
-	        $config['max_size'] 	 = 20000048;
+	        $config['max_size'] 	 = '2000';
             // $config['max_width']     = 800;
             // $config['max_height']    = 800;
 	        $config['encrypt_name']  = TRUE;
@@ -1165,7 +1165,7 @@ public function cargaPlantillaCargaFotos()
 
 			$config['upload_path'] 	 	= 'assets/uploads/files/'.$idTienda.'/';
 	        $config['allowed_types'] 	= 'gif|jpg|png|webp';
-	       // $config['max_size'] 	 	= '5000';
+	        $config['max_size'] 	 	= '2000';
             //$config['min_width']     	= '1920';
             //$config['min_height']    	= '400';
 			//$config['max_width']  		= '1920';
