@@ -484,7 +484,7 @@ class GestionTienda extends CI_Controller
 
 			$config['upload_path'] 	 = 'assets/uploads/files/'.$idTienda.'/';
 	        $config['allowed_types'] = 'gif|jpg|png|webp';
-	        $config['max_size'] 	 = 20000048;
+	        $config['max_size'] 	 = '2000';
             // $config['max_width']     = 800;
             // $config['max_height']    = 800;
 	        $config['encrypt_name']  = TRUE;
