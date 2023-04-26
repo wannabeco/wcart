@@ -1734,6 +1734,7 @@ class Api extends CI_Controller
 		}
 
     }
+    //eliminar cuenta
     public function eliminaCuenta()
     {
     	extract($_POST);
@@ -1743,6 +1744,28 @@ class Api extends CI_Controller
 		{
             $where 	        = $_POST['idUsuario'];
             $respuesta = $this->logica->eliminaCuenta($where);
+			echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
+		}
+		else
+		{
+			$respuesta = array("mensaje"=>"Acceso no admitido.",
+                              "continuar"=>0,
+                              "datos"=>""); 
+
+            echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
+		}
+
+    }
+    //verificar datos de usuario por id
+    public function verificaUsuario()
+    {
+    	extract($_POST);
+        // var_dump($_POST);die();
+    	//súper acceso a la app
+		if(isset($movil) && validaInApp($movil))//esta validación me hará consultas más seguras
+		{
+            $where 	        = $_POST['idUsuario'];
+            $respuesta = $this->logica->verificaUsuario($where);
 			echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
 		}
 		else

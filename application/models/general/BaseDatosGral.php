@@ -992,6 +992,16 @@ class BaseDatosGral extends CI_Model {
         //print_r($this->db->last_query());die();
         return $this->db->insert_id();
     }
+    //seleciona usuario por id
+    public function verificaUsuario($where)
+    {
+        $this->db->select("*");
+        $this->db->where($where);
+        $this->db->from($this->tablePersonas);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
 }
 
 ?>
