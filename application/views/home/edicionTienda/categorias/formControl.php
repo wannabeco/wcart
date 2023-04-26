@@ -35,7 +35,7 @@
       </div>
 
       <p class="text-justify">
-        <?php echo lang("text12")?><br><br>
+        <?php echo lang("text43")?><br><br>
       </p>
   </div>
 
