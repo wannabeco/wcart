@@ -364,7 +364,7 @@ class GestionTienda extends CI_Controller
 	            $status = 'error';
 	            $msg = $this->upload->display_errors();
 	            //var_dump($msg);
-	            $salida = array("mensaje"=>"No se ha podido realizar la carga de la foto de perfil, probablemente la falla sea porque ha superado el tamaño permitido de 2 MB ó no tenga el formato que se necesita: PNG, JPG ó GIF, supere. ".$msg,
+	            $salida = array("mensaje"=>"No se ha podido realizar la carga de la foto, probablemente la falla sea porque ha superado el tamaño permitido de 2 MB ó no tenga el formato que se necesita: PNG, JPG ó GIF, supere. ".$msg,
             				"continuar"=>0,
             				"datos"=>array());
 	        }

@@ -167,7 +167,7 @@ $lang['text10']				       = "Para reemplazar la foto actual, solo necesita carga
 //$lang['text11']				       = "Main photo";
 $lang['text11']				       = "Foto principal";
 //$lang['text12']				       = "You will be able to choose from your computer the necessary photographs to accompany your product. These photos must be in PNG, JPG or GIF format, must not exceed 2 MB and must keep the size ratio of 800 X 800 maximum (Perfect Square).";
-$lang['text12']				       = "Podrás elegir desde tu ordenador las fotografías necesarias para acompañar tu producto. Estas fotos deben estar en formato PNG, JPG o GIF, no deben exceder los 2 MB y deben mantener la relación de tamaño de 800 X 800 máximo (Cuadrado Perfecto)";
+$lang['text12']				       = "Podrás elegir desde tu ordenador las fotografías necesarias para acompañar tu producto. Estas fotos deben estar en formato PNG, JPG o GIF, no deben exceder los 2 MB.";
 //$lang['text13']				       = "Price of the product";
 $lang['text13']				       = "Precio del producto";
 //$lang['text14']				       = "Old price";
@@ -193,7 +193,7 @@ $lang['text19.4']				   = "3. Precio del producto";
 //$lang['text19.5']				   = "This value will appear crossed out";
 $lang['text19.5']				   = "Este valor aparecerá tachado";
 //$lang['text19.6']				   = "The profile photo could not be loaded, probably the failure is because it has exceeded the allowed size of 2 MB or does not have the required format: PNG, JPG or GIF.";
-$lang['text19.6']				   = "No se ha podido cargar la foto de perfil, probablemente el fallo se deba a que ha excedido el tamaño permitido de 2 MB o no tiene el formato requerido: PNG, JPG o GIF.";
+$lang['text19.6']				   = "No se ha podido cargar la foto, probablemente el fallo se deba a que ha excedido el tamaño permitido de 2 MB o no tiene el formato requerido: PNG, JPG o GIF.";
 //$lang['text19.7']				   = "Photo loads correctly";
 $lang['text19.7']				   = "La foto carga correctamente";
 //$lang['text19.8']				   = "There is no photo to upload, please select one.";
@@ -271,7 +271,8 @@ $lang['text39']				       = "Código de orden";
 $lang['text40']				       = "Método de pago";
 $lang['text41']				       = "Total";
 //$lang['text42']				       = "You will be able to choose from your computer the necessary photographs to accompany your product. These photos must be in PNG, JPG or GIF format, must not exceed 5 MB and must keep the size ratio of 1920 X 400 exact.";
-$lang['text42']				       = "Podrás elegir desde tu ordenador las fotografías necesarias para acompañar tu producto. Estas fotos deben estar en formato PNG, JPG o GIF, no deben exceder los 5 MB y deben mantener la relación de tamaño de 1920 X 400 exacto.";
+$lang['text42']				       = "Podrás elegir desde tu ordenador la fotografía necesaria para acompañar tu banner. Estas fotos deben estar en formato PNG, JPG o GIF, no deben exceder los 2 MB.";
+$lang['text43']				       = "Podrás elegir desde tu ordenador la fotografía necesaria para acompañar tu categoría. Estas fotos deben estar en formato PNG, JPG o GIF, no deben exceder los 2 MB.";
 
 
 
