@@ -1735,7 +1735,24 @@ class LogicaGeneral  {
                                "datos"=>"");
         }
         return $respuesta;
-    } //update la fecha de aduca cuando el plan app no ha caducado a un mes
+    } 
+    //se verifica usuario por id
+    public function verificaUsuario($usuario){
+        // var_dump($idPersona);die();
+        $where['idPersona']         = $usuario;
+        $resultado = $this->ci->dbGeneral->verificaUsuario($where);
+        $respuesta = array("mensaje"=>"Se eliminaron los datos",
+                            "continuar"=>1,
+                            "datos"=>$resultado);   
+        return $respuesta;
+    }
+    
+    
+    
+    
+    
+    
+    //update la fecha de aduca cuando el plan app no ha caducado a un mes
     /*public function updatePagoApp($tienda, $codigo,$mensajeMail)
     {
         $where['idTienda']                      = $tienda;
