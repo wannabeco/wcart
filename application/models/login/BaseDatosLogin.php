@@ -35,7 +35,7 @@ class BaseDatosLogin extends CI_Model {
     {
         $this->db->select("*, idGeneral as idusuario");
         $this->db->where($where);
-        $this->db->or_where(array("celular"=>$where['usuario']));
+        //$this->db->or_where(array("celular"=>$where['usuario']));
         if(isset($where['clave']))
         {
             $this->db->where(array("clave"=>$where['clave']));

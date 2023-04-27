@@ -64,9 +64,9 @@ class Api extends CI_Controller
 			$post['clave'] 		= $contrasena;
             $codigoTienda       = (isset($_POST['idTienda']))?$_POST['idTienda']:"";
 			//busco la foto con la palabra que envien
-			$logueo = $this->logicaLogin->getLoginUsuario($post,array(),$codigoTienda);
-            //var_dump($logueo["datos"]);die();
-            if($logueo["datos"]["eliminado"] == 0){
+			$logueo = $this->logicaLogin->LoginUsuario($post,$codigoTienda);
+            //var_dump($logueo);die();
+            if($logueo["continuar"] == 1){
 
                 $respuesta = array("mensaje"=>"Bienvenido".$logueo['datos']['nombre']." ".$logueo['datos']['apellido'],
                                "continuar"=>1,
@@ -74,7 +74,7 @@ class Api extends CI_Controller
                 echo json_encode($respuesta, JSON_UNESCAPED_UNICODE); 
             }
             else{
-                $respuesta = array("mensaje"=>"Usuario o Contraseña son incorrectos",
+                $respuesta = array("mensaje"=>"Usuario o clave incorrecto, por favor verifique e intente de nuevo.",
                                "continuar"=>0,
                                "datos"=>""); 
 
