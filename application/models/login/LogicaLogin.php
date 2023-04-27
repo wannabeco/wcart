@@ -72,6 +72,7 @@ class LogicaLogin  {
         }
         $select["usuario"]     =   trim($usuario);
         $select["clave"]       =   sha1(trim($clave));
+        var_dump($whereIn);die();
         //inserto los datos básicos de la empresa
         $dataLogin = $this->ci->dbLogin->verificaUsuarioyClave($select,$whereIn);
         //en primera instancia debo validar si esto retorno información
@@ -317,4 +318,55 @@ class LogicaLogin  {
 
         return $respuesta;
     }
+    //prueba login pagina webaShop
+    public function LoginUsuario($data,$idTienda="")
+    {
+        //extraigo el post en variables
+        extract($data);
+        //var_dump($data);die();
+        //verifico en la tabla de login el usuario y la clave
+        if(isset($idPerfil)){
+            $whereIn["p.idPerfil"]     =   trim($idPerfil);
+            
+        }else{
+            $whereIn["p.idPerfil !="]     =   trim(_PERFIL_COMPRADOR);
+
+        }
+        $select["usuario"]     =   trim($usuario);
+        $select["clave"]       =   sha1(trim($clave));
+        //var_dump($whereIn);die();
+        //inserto los datos básicos de la empresa
+        $dataLogin = $this->ci->dbLogin->verificaUsuarioyClave($select,$whereIn);
+        //en primera instancia debo validar si esto retorno información
+        //si retorna quiere decir que el usuario existe
+        if(count($dataLogin) > 0)
+        {
+            //cada vez que se realice un lógin lo voy a guardar por seguridad
+            $this->registraIngresoLogin($dataLogin[0]);
+            //ahora debo identificar el tipo de login que me ha retornado este query
+            if($dataLogin[0]['tipoLogin'] == 1)//empresa
+            {
+                $respuesta = $this->procesoEmpresas($dataLogin[0]);
+            }
+            elseif($dataLogin[0]['tipoLogin'] == 2)//usuario
+            {
+                $respuesta = $this->procesoPersonas($dataLogin[0],$idTienda);
+            }
+            else
+            {
+                $respuesta = array("mensaje"=>"El tipo de usuario no es válido",
+                                  "continuar"=>0,
+                                  "datos"=>""); 
+            }
+        }
+        else//no existe, así que notifico
+        {
+            $respuesta = array("mensaje"=>"Usuario o clave incorrecto, por favor verifique e intente de nuevo.",
+                                  "continuar"=>0,
+                                  "datos"=>""); 
+        }
+
+        return $respuesta;
+    }
+
  }
