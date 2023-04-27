@@ -72,7 +72,7 @@ class LogicaLogin  {
         }
         $select["usuario"]     =   trim($usuario);
         $select["clave"]       =   sha1(trim($clave));
-        var_dump($whereIn);die();
+        //var_dump($whereIn);die();
         //inserto los datos básicos de la empresa
         $dataLogin = $this->ci->dbLogin->verificaUsuarioyClave($select,$whereIn);
         //en primera instancia debo validar si esto retorno información
