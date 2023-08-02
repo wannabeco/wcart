@@ -23,7 +23,7 @@ class Pedidos extends CI_Controller
         $this->load->model("pedidos/LogicaPedidos", "logicaPedidos");
        	$this->load->helper('language');//mantener siempre.
     	$this->lang->load('spanish');//mantener siempre.
-        $this->load->library('Excel',"excel");
+        // $this->load->library('Excel',"excel");
         $this->load->library('Pdf');
         $this->load->library('HTML_fpdf');
     }

@@ -293,7 +293,7 @@ function txtentities($html){
             $this->tdbgcolor=false;
         }
         if($tag=='TR') { // TR-END
-            $this->Ln();
+            $this->Ln(4);
         }
         if($tag=='TABLE') { // TABLE-END
             $this->tableborder=0;

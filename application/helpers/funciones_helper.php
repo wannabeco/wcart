@@ -402,7 +402,7 @@ function getDepartamentos($idPais="057",$salida="ARRAY"){
 * int $salida Define si la respuesta es en Array o en Json
 * return string o array $listaDeptos
 */
-function getCiudades($idPais="057",$idDepto,$salida="ARRAY"){
+function getCiudades($idPais="057",$idDepto="",$salida="ARRAY"){
      $ci = get_instance();
      $ci->load->model("general/baseDatosGral","baseGeneral");
      $where['ID_PAIS']  =   $idPais;
