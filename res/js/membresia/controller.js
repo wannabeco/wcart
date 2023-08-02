@@ -45,6 +45,37 @@ project.controller('membresia', function($scope,$http,$q,constantes,$compile)
 				});
 		});
 	}
+	//coresponde a sitio web pago mes paypal
+	$scope.AppMesPaypal= function()
+	{	
+		constantes.confirmacion("Atención","Esta apunto de realizar el pago de tu plan, ¿Desea continuar?. Recuerde activar las ventanas emergentes antes de continuar.",'info',function(){
+			//se abre ventana pop
+			var codigo = $("#codigoPago").val();
+				var controlador = $scope.config.apiUrl+"pagoMembresia/insetCodigo";
+				var parametros  = $("#dataPago").serialize();
+				constantes.consultaApi(controlador,parametros,function(json){
+					if(json.continuar == 1)
+					{	
+						var ventana ="";
+						var ventana = window.open($scope.config.apiUrl+"Membresia"+'/procesoPagoOnline/'+"datos"+'/AppmesPaypal/'+json.datos, "paypal" , "width=600,height=880,left = 420");
+						var tiempo= 0;
+							var interval = setInterval(function(){
+								//Comprobamos que la ventana no este cerrada
+								if(ventana.closed !== false) {
+									window.clearInterval(interval);
+									window.location.assign($scope.config.apiUrl+"GestionTienda/categorias/45"); 
+								} else {
+									o +=1;
+								}
+							},1000)
+					}
+					else
+					{
+					constantes.alerta("Atención",json.mensaje,"error",function(){})
+					}
+				});
+		});
+	}
 	//coresponde a sitio web
 	$scope.AppAno= function()
 	{	

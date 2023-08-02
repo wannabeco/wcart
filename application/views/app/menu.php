@@ -12,7 +12,7 @@
                     <a class="navbar-brand" href="<?php echo base_url() ?>App" style="text-transform: capitalize; width: 400px;">
                          <strong>
                             <img src="<?php echo base_url() ?>res/img/logoWabe-02.png" width="35%" style="border-radius:50%" alt="Icono Wannabe.com.co"> 
-                             <?php echo lang("titulo")?> 
+                             <?php //echo lang("titulo")?> 
                             <?php if(count($infoTienda) > 0){?>
                                 /   <?php echo $infoTienda['datos'][0]['nombreTienda'] ?>
                             <?php }?>

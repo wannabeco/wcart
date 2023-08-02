@@ -1,89 +1,180 @@
-<?php
-/**
- * PHPExcel
- *
- * Copyright (C) 2006 - 2014 PHPExcel
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- *
- * @category   PHPExcel
- * @package    PHPExcel
- * @copyright  Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
- * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
- * @version    1.8.0, 2014-03-02
- */
+<?php 
+	include "conexion.php";
+	session_start();
+	date_default_timezone_set('UTC');
+	mysql_query("SET NAMES 'UTF8'");
+	$hoy = date("Y-m-d");
+	error_reporting('0');	$consulta = "SELECT concat(paterno,' ', materno, ' ' , nombre) AS alumno, fechanac, sexo, carrera FROM alumno ";
+	$consulta .= " INNER JOIN carrera ON alumno.idcarrera = carrera.idcarrera ORDER BY carrera, nombre";
+	$resultado = $conexion->query($consulta);
 
-/** Error reporting */
-error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
-date_default_timezone_set('Europe/London');
+	if($resultado->num_rows > 0 ){
+    	date_default_timezone_set('America/Mexico_City');  
 
-if (PHP_SAPI == 'cli')
-	die('This example should only be run from a Web Browser');
+    	if (PHP_SAPI == 'cli')
+        die('Este archivo solo se puede ver desde un navegador web');  
 
-/** Include PHPExcel */
-require_once dirname(__FILE__) . '/../Classes/PHPExcel.php';
+	  	/** Se agrega la libreria PHPExcel */
+	  	 require_once 'lib/PHPExcel/PHPExcel.php';
+	  	 
+	  	// Se crea el objeto PHPExcel
+	  	 $objPHPExcel = new PHPExcel();
 
+	  	 // Se asignan las propiedades del libro
+	$objPHPExcel->getProperties()->setCreator("Codedrinks") // Nombre del autor
+    ->setLastModifiedBy("Codedrinks") //Ultimo usuario que lo modificó
+    ->setTitle("Reporte Excel con PHP y MySQL") // Titulo
+    ->setSubject("Reporte Excel con PHP y MySQL") //Asunto
+    ->setDescription("Reporte de alumnos") //Descripción
+    ->setKeywords("reporte alumnos carreras") //Etiquetas
+    ->setCategory("Reporte excel"); //Categorias
 
-// Create new PHPExcel object
-$objPHPExcel = new PHPExcel();
+    $tituloReporte = "Relación de alumnos por carrera";
+	$titulosColumnas = array('NOMBRE', 'FECHA DE NACIMIENTO', 'SEXO', 'CARRERA');
 
-// Set document properties
-$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
-							 ->setLastModifiedBy("Maarten Balliauw")
-							 ->setTitle("Office 2007 XLSX Test Document")
-							 ->setSubject("Office 2007 XLSX Test Document")
-							 ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
-							 ->setKeywords("office 2007 openxml php")
-							 ->setCategory("Test result file");
+	// Se combinan las celdas A1 hasta D1, para colocar ahí el titulo del reporte
+	$objPHPExcel->setActiveSheetIndex(0)
+    ->mergeCells('A1:D1');
+ 
+	// Se agregan los titulos del reporte
+	$objPHPExcel->setActiveSheetIndex(0)
+    ->setCellValue('A1',$tituloReporte) // Titulo del reporte
+    ->setCellValue('A3',  $titulosColumnas[0])  //Titulo de las columnas
+    ->setCellValue('B3',  $titulosColumnas[1])
+    ->setCellValue('C3',  $titulosColumnas[2])
+    ->setCellValue('D3',  $titulosColumnas[3]);
 
+    //Se agregan los datos de los alumnos
+ 
+	 $i = 4; //Numero de fila donde se va a comenzar a rellenar
+	 while ($fila = $resultado->fetch_array()) {
+	     $objPHPExcel->setActiveSheetIndex(0)
+	         ->setCellValue('A'.$i, $fila['alumno'])
+	         ->setCellValue('B'.$i, $fila['fechanac'])
+	         ->setCellValue('C'.$i, $fila['sexo'])
+	         ->setCellValue('D'.$i, $fila['carrera']);
+	     $i++;
+	 }
 
-// Add some data
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'Hello')
-            ->setCellValue('B2', 'world!')
-            ->setCellValue('C1', 'Hello')
-            ->setCellValue('D2', 'world!');
+		 $estiloTituloReporte = array(
+	    'font' => array(
+	        'name'      => 'Verdana',
+	        'bold'      => true,
+	        'italic'    => false,
+	        'strike'    => false,
+	        'size' =>16,
+	        'color'     => array(
+	            'rgb' => 'FFFFFF'
+	        )
+	    ),
+	    'fill' => array(
+	        'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+	        'color' => array(
+	            'argb' => 'FF220835')
+	    ),
+	    'borders' => array(
+	        'allborders' => array(
+	            'style' => PHPExcel_Style_Border::BORDER_NONE
+	        )
+	    ),
+	    'alignment' => array(
+	        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+	        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+	        'rotation' => 0,
+	        'wrap' => TRUE
+	    )
+	);
+	 
+	$estiloTituloColumnas = array(
+	    'font' => array(
+	        'name'  => 'Arial',
+	        'bold'  => true,
+	        'color' => array(
+	            'rgb' => 'FFFFFF'
+	        )
+	    ),
+	    'fill' => array(
+	        'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
+	    'rotation'   => 90,
+	        'startcolor' => array(
+	            'rgb' => 'c47cf2'
+	        ),
+	        'endcolor' => array(
+	            'argb' => 'FF431a5d'
+	        )
+	    ),
+	    'borders' => array(
+	        'top' => array(
+	            'style' => PHPExcel_Style_Border::BORDER_MEDIUM ,
+	            'color' => array(
+	                'rgb' => '143860'
+	            )
+	        ),
+	        'bottom' => array(
+	            'style' => PHPExcel_Style_Border::BORDER_MEDIUM ,
+	            'color' => array(
+	                'rgb' => '143860'
+	            )
+	        )
+	    ),
+	    'alignment' =>  array(
+	        'horizontal'=> PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+	        'vertical'  => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+	        'wrap'      => TRUE
+	    )
+	);
+	 
+	$estiloInformacion = new PHPExcel_Style();
+	$estiloInformacion->applyFromArray( array(
+	    'font' => array(
+	        'name'  => 'Arial',
+	        'color' => array(
+	            'rgb' => '000000'
+	        )
+	    ),
+	    'fill' => array(
+	    'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+	    'color' => array(
+	            'argb' => 'FFd9b7f4')
+	    ),
+	    'borders' => array(
+	        'left' => array(
+	            'style' => PHPExcel_Style_Border::BORDER_THIN ,
+	        'color' => array(
+	                'rgb' => '3a2a47'
+	            )
+	        )
+	    )
+	));
 
-// Miscellaneous glyphs, UTF-8
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A4', 'Miscellaneous glyphs')
-            ->setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
+	$objPHPExcel->getActiveSheet()->getStyle('A1:D1')->applyFromArray($estiloTituloReporte);
+	$objPHPExcel->getActiveSheet()->getStyle('A3:D3')->applyFromArray($estiloTituloColumnas);
+	$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A4:D".($i-1));
 
-// Rename worksheet
-$objPHPExcel->getActiveSheet()->setTitle('Simple');
+	for($i = 'A'; $i <= 'D'; $i++){
+    $objPHPExcel->setActiveSheetIndex(0)->getColumnDimension($i)->setAutoSize(TRUE);
+	}
 
+	// Se asigna el nombre a la hoja
+	$objPHPExcel->getActiveSheet()->setTitle('Alumnos');
+ 
+	// Se activa la hoja para que sea la que se muestre cuando el archivo se abre
+	$objPHPExcel->setActiveSheetIndex(0);
+ 
+	// Inmovilizar paneles
+	//$objPHPExcel->getActiveSheet(0)->freezePane('A4');
+	$objPHPExcel->getActiveSheet(0)->freezePaneByColumnAndRow(0,4);
 
-// Set active sheet index to the first sheet, so Excel opens this as the first sheet
-$objPHPExcel->setActiveSheetIndex(0);
-
-
-// Redirect output to a client’s web browser (Excel5)
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="01simple.xls"');
-header('Cache-Control: max-age=0');
-// If you're serving to IE 9, then the following may be needed
-header('Cache-Control: max-age=1');
-
-// If you're serving to IE over SSL, then the following may be needed
-header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
-header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-header ('Pragma: public'); // HTTP/1.0
-
-$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-$objWriter->save('php://output');
-exit;
+	// Se manda el archivo al navegador web, con el nombre que se indica, en formato 2007
+	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+	header('Content-Disposition: attachment;filename="Reportedealumnos.xlsx"');
+	header('Cache-Control: max-age=0');
+	 
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+	$objWriter->save('php://output');
+	exit;
+	}
+	else{
+	    print_r('No hay resultados para mostrar');
+	}
+?>
