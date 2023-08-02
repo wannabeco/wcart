@@ -48,7 +48,7 @@ class Membresia extends CI_Controller
 		$salida['pedido']       = $pedido;
 		$salida['infpedido']    = $infpedido;
 		$salida['proveedor']    = $proveedor;
-		$this->load->view("registro/indexPago",$salida);
+		$this->load->view("registro/indexPago",$salida);    
     }
     //confirmacion de pago
 	public function confirmacionPago()

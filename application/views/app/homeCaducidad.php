@@ -39,7 +39,10 @@
                               <input type="hidden" id="codigoPago" name="codigoPago" value="<?php echo $referencia;?>" />  
                               <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>
                               <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="AppMes()">
-                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora payu
+                              </button>
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="AppMesPaypal()">
+                                  <i class="fa fa-paypal" aria-hidden="true"></i> Pagar Ahora paypal
                               </button>
                               <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                 Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
@@ -50,7 +53,10 @@
                               <input type="hidden" id="codigoPago" name="codigoPago" value="<?php  echo $referencia; ?>" >
                               <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
                               <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio()">
-                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                                  <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora payu
+                              </button>
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambioDos()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora payu
                               </button>
                               <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                 Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
@@ -62,6 +68,9 @@
                               <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
                               <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio()">
                                   <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambioDospayu()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora payu
                               </button>
                               <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                 Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
@@ -92,6 +101,9 @@
                                 <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="AppAno()">
                                     <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
                                 </button>
+                                <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="AppAnoPaypal()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora paypal
+                                </button>
                                 <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                   Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                 <?php }?>
@@ -103,6 +115,9 @@
                                 <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio2()">
                                     <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
                                 </button>
+                                <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambioDos()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora payu
+                              </button>
                                 <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                   Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                 <?php }?>
@@ -113,6 +128,9 @@
                               <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
                               <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio()">
                                   <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambioDos()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora payu
                               </button>
                               <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                 Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
@@ -150,6 +168,9 @@
                               <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="movilMes()">
                                   <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
                               </button>
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="movilMesPaypal()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora paypal
+                              </button>
                               <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                 Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                               <?php }?>
@@ -161,6 +182,9 @@
                               <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="bajar3()">
                                   <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
                               </button>
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="bajar3paypal()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora paypal
+                              </button>
                               <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                 Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                               <?php }?>
@@ -171,6 +195,9 @@
                               <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
                               <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio()">
                                   <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambioDos()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora payu
                               </button>
                               <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                 Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
@@ -201,6 +228,9 @@
                                 <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="movilAno()">
                                     <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
                                 </button>
+                                <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="movilAnopaypal()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora paypal
+                                </button>
                                 <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                   Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                 <?php }?>
@@ -212,6 +242,9 @@
                                 <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="bajar4()">
                                     <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
                                 </button>
+                                <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="bajar4paypal()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora paypal
+                                </button>
                                 <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                   Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                 <?php }?>
@@ -222,6 +255,9 @@
                               <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
                               <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio()">
                                   <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambioDos()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora payu
                               </button>
                               <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                 Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
@@ -259,6 +295,9 @@
                                   <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="WebMes()">
                                       <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
                                   </button>
+                                  <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="webPaypal()">
+                                    <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora paypal
+                                  </button>
                                 <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                   Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                 <?php }?>
@@ -270,6 +309,9 @@
                                   <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="bajar()">
                                       <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
                                   </button>
+                                  <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="bajarPaypal()">
+                                    <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora paypal
+                                  </button>
                                   <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                     Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                   <?php }?>
@@ -280,6 +322,9 @@
                               <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>  
                               <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio3()">
                                   <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                              </button>
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio3Paypal()">
+                                  <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora paypal
                               </button>
                               <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                 Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
@@ -310,6 +355,9 @@
                                   <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="WebAno()">
                                       <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
                                   </button>
+                                  <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="WebAnoPaypal()">
+                                    <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora paypal
+                                  </button>
                                 <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                   Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                                 <?php }?>
@@ -320,6 +368,9 @@
                                 <?php if(_APAGAR_PAGO_MEMBRESIA == 1){?>
                                   <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="bajar2()">
                                       <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
+                                  </button>
+                                  <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="bajar2Paypal()">
+                                    <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora paypal
                                   </button>
                                 <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                   Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
@@ -332,6 +383,9 @@
                               <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio4()">
                                   <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora
                               </button>
+                              <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="cambio4Paypal()">
+                                    <i class="fa fa-paypal" aria-hidden="true" style="margin-right:5px;"></i> Pagar Ahora paypal
+                                  </button>
                               <?php } else if (_APAGAR_PAGO_MEMBRESIA == 0){?>
                                 Por favor, hacer consignación a cuenta de ahorros de Bancolombia Nº 77500003015 y enviar soporte de consignación a desarrollo@wannabe.com.co
                               <?php }?>
