@@ -1,6 +1,7 @@
 <?php
     $referencia   = $infpedido[0]['codigoPago'];
     $payu = "";
+    $paypal = "";
     //var_dump($proveedor);die();
 
     if($proveedor == 'Appmes'){
@@ -106,7 +107,8 @@
             </center>
         </div>
 </div>
-<?php } if($paypal == 1){ ?>
+<?php } ?>
+<?php if($paypal == 1){ ?>
     <div class="container-fluid" ng-controller="membresia"  ng-init="initCaduca()">
     <div class="container"><br>
     <center><img src="<?php echo base_url()?>assets/uploads/files/logoApp.png" width="50%"></center><br>
