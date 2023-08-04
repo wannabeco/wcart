@@ -45,7 +45,7 @@
 <?php if($payu == 1) {?>
 <div class="container-fluid" ng-controller="membresia"  ng-init="initCaduca()">
     <div class="container"><br>
-    <center><img src="<?php echo base_url()?>assets/uploads/files/logoApp.png" width="50%"></center><br>
+    <center><img src="<?php echo base_url()?>assets/uploads/files/logoWabe.png" width="50%"></center><br>
     <h3 class="text-center"><strong>Pago de Membresia wannabe</strong></h3><br>
     <table class="table table-striped">
         <thead>
@@ -111,7 +111,7 @@
 <?php if($paypal == 1){ ?>
     <div class="container-fluid" ng-controller="membresia"  ng-init="initCaduca()">
     <div class="container"><br>
-    <center><img src="<?php echo base_url()?>assets/uploads/files/logoApp.png" width="50%"></center><br>
+    <center><img src="<?php echo base_url()?>assets/uploads/files/logoWabe.png" width="50%"></center><br>
     <h3 class="text-center"><strong>Pago de Membresia wannabe</strong></h3><br>
     <table class="table table-striped">
         <thead>
